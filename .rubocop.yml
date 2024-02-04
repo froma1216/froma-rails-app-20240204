@@ -1,6 +1,6 @@
 # NOTE: https://blog.to-ko-s.com/rubocop-setting/
 # 「.rubocop_todo.ymlに書いてある内容はルール違反してても無視して下さい」という意味。
-# inherit_from: .rubocop_todo.yml
+inherit_from: .rubocop_todo.yml
 
 # 追加でinstallしたgemのルールを適用する
 # require:

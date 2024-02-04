@@ -65,3 +65,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# rubyのlinter
+gem "rubocop"
+# erbフォーマッター
+gem 'htmlbeautifier'

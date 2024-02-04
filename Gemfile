@@ -70,6 +70,7 @@ end
 gem 'rubocop'
 # erbフォーマッター
 gem 'htmlbeautifier'
+gem 'erb_lint'
 
 # bootstrap
 # NOTE: https://qiita.com/devzooiiooz/items/262f71e737f94738debf

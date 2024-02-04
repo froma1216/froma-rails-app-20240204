@@ -1,0 +1,16 @@
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.0.0/gems/debug-1.9.1/ext/debug
+/home/shoudaisatoh/.anyenv/envs/rbenv/versions/3.0.6/bin/ruby -I /home/shoudaisatoh/.anyenv/envs/rbenv/versions/3.0.6/lib/ruby/3.0.0 -r ./siteconf20240204-167367-cfz78n.rb extconf.rb
+creating Makefile
+
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.0.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= clean
+
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.0.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\=
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.0.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20240204-167367-5fchc5/debug

@@ -4,11 +4,11 @@ class Slot < ApplicationRecord
 
   # 日時をフォーマットして表示
   def pdatetime
-    start_time.strftime("%Y年%m月%d日") + " " + ptime
+    "#{start_time.strftime("%Y年%m月%d日")} #{ptime}"
   end
 
   # 時間をフォーマットして表示
   def ptime
-    start_time.strftime("%H:%M") + " - " + end_time.strftime("%H:%M")
+    "#{start_time.strftime("%H:%M")} - #{end_time.strftime("%H:%M")}"
   end
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  conference: one
+  title: MyString
+  description: MyText
+  seq_no: MyString
+  integer: MyString
+
+two:
+  conference: two
+  title: MyString
+  description: MyText
+  seq_no: MyString
+  integer: MyString

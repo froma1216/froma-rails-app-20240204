@@ -1,0 +1,22 @@
+<h1><%= @day.title %> (<%= @day.pdate %>)</h1>
+<ul>
+  <% @day.tracks.each do |t| %>
+    <ul>
+      <% t.slots&.order(:start_time).each do |s| %>
+        <li>
+          <%= s.start_time.strftime("%H:%M") %> - <%= s.end_time.strftime("%H:%M") %>
+          <% if s.description == nil %>
+            <%= s.title %>
+            <p></p>
+          <% else %>
+            <%= link_to s.title, slot_path(s) %><br>
+            <% if s.lecturer != nil %>
+              発表者: <%= s.lecturer %>
+            <% end %>
+            <p><%= simple_format(s.description) %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>

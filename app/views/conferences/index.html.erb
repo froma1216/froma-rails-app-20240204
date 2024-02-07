@@ -1,0 +1,11 @@
+<h1>イベント一覧</h1>
+<ul>
+  <% @conferences&.each do |conf| %>
+    <li>
+      <%= link_to conf.name, conference_path(conf) %> ( <%= conf.start_date %>
+      <% if conf.duration > 1 %>
+        to <%= conf.start_date + conf.duration - 1 %>
+      <% end %>)
+    </li>
+  <% end %>
+</ul>

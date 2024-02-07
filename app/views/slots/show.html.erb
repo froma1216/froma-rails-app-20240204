@@ -1,0 +1,74 @@
+<h1>セッション紹介</h1>
+<div class="card border-primary">
+  <div class="card-header text-white bg-primary">
+    <%= @slot.title %>
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+      <tbody>
+        <tr>
+          <th scope="row" width="80 px">日時</th>
+          <td><%= @slot.pdatetime %></td>
+        </tr>
+        <tr>
+          <th scope="row">会場</th>
+          <td><%= @slot.track.title %></td>
+        </tr>
+        <% if @slot.description != '' %>
+          <tr>
+            <th scope="row">説明</th>
+            <td><%= simple_format(@slot.description) %></td>
+          </tr>
+        <% end %>
+        <% if @slot. organizer %>
+          <tr>
+            <th scope="row">担当</th>
+            <td><%= @slot.organizer %></td>
+          </tr>
+        <% end %>
+        <% if @slot. lecturer %>
+          <tr>
+            <th scope="row">発表者</th>
+            <td><%= @slot.lecturer %></td>
+          </tr>
+        <% end %>
+        <% if @slot.chair %>
+          <tr>
+            <th scope="row">座長</th>
+            <td> <%= @slot.chair %></td>
+          </tr>
+        <% end %>
+        <% if @slot. level %>
+          <tr>
+            <th scope="row">レベル</th>
+            <td><%= @slot.level %></td>
+          </tr>
+        <% end %>
+        <% if @slot.audience %>
+          <tr>
+            <th scope="row">対象者</th>
+            <td><%= @slot.audience %></td>
+          </tr>
+        <% end %>
+        <% if @slot.background %>
+          <tr>
+            <th scope="row">前提知識</th>
+            <td><%= @slot.background %></td>
+          </tr>
+        <% end %>
+        <% if @slot.category %>
+          <tr>
+            <th scope="row">カテゴリ</th>
+            <td><%= @slot.category %></td>
+          </tr>
+        <% end %>
+        <% if @slot.material %>
+          <tr>
+            <th scope="row">資料</th>
+            <td><%= link_ to @slot.material, @slot.mlinkurl %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

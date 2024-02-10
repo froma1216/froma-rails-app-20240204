@@ -9,6 +9,47 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+    <header>
+      <nav class="navbar navbar-dark bg-dark">
+        <% if user_signed_in? %>
+          <div class="btn btn-success">
+            <%= link_to "MyPage", mypage_user_path(current_user.id), class: "text-white" %>
+          </div>
+          <div class="text-white">
+            <%= current_user.fullname %>
+          </div>
+          <div class="btn btn-danger">
+            <%= link_to "logout", destroy_user_session_path, data: { turbo_method: :delete } %>
+          </div>
+        <% else %>
+          <div class="btn btn-primary">
+          <%= link_to "sign up", new_user_registration_path, class: "text-white" %>
+          </div>
+          <div class="text-white">OLiVES</div>
+          <div class="btn btn-success">
+            <%= link_to "login", new_user_session_path, class: "text-white" %>
+          </div>
+        <% end %>
+      </nav>
+    </header>
+    <% if notice %>
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <%= notice %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="dismiss">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= alert %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="dismiss">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    
     <div class="container">
       <%= yield %>
     </div>

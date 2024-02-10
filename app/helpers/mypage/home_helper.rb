@@ -1,0 +1,2 @@
+module Mypage::HomeHelper
+end

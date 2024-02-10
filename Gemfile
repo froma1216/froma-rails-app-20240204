@@ -77,3 +77,8 @@ gem 'erb_lint'
 gem 'bootstrap', '~> 5.0.2'
 # jquery
 gem 'jquery-rails'
+
+# ユーザー管理
+gem "devise"
+# deviseのメッセージを国際化
+gem "devise-i18n"

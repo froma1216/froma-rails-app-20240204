@@ -17,6 +17,11 @@
       <%= f.submit "イベントを変更", class: "btn btn-primary" %>
     <% end %>
   </p>
+  <p>参加予定のセッションをまとめて変更する
+    <p>
+      <%= link_to "セッションを登録（変更）", edit_mypage_user_path(@user), class: "btn btn-primary" %>
+    </p>
+  </p>
 <% else %>
   <p>
     <%= form_with model: [:mypage, @user] do |f| %>

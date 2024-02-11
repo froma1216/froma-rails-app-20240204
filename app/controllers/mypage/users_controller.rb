@@ -9,12 +9,31 @@ class Mypage::UsersController < ApplicationController
     @participations = Participation.where(user: @user).where(conference: @conference).includes(:slot).order("slots.start_time")
   end
 
-  def edit; end
+  def edit
+    @conference = current_user&.conference
+    if @conference.nil?
+      flash[:alert] = "まずイベントを登録してください"
+      redirect_to mypage_user_path(current_user)
+    else
+      @slots = @conference.days.map { |d| d.tracks.map(&:slots) }.flatten.sort_by { |s| [s.start_time, s.track.seq_no] }
+    end
+  end
 
   def update
     p = user_params
-    current_user.conference = Conference.find_by(name: p[:conference])
-    current_user.save
+    if p.nil?
+      p = params[:sessions] - ["-1"]
+      u = current_user
+      c = u.conference
+      Participation.where(conference: c).where(user: u).map(&:delete)
+      p.each do |sid|
+        Participation.create(user: u, slot: Slot.find(sid), conference: c)
+      end
+      flash[:notice] = "参加予定のセッションを変更しました。"
+    else
+      current_user.conference = Conference.find_by(name: p[:conference])
+      current_user.save
+    end
     redirect_to mypage_user_path(current_user)
   end
 
@@ -28,6 +47,6 @@ class Mypage::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:conference)
+    params.require(:user).permit(:conference) if params.include?("user")
   end
 end

@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
-  get 'participations/create'
-  get 'participations/destroy'
   # マイページ
   namespace :mypage do
-    # TODO: 不要？要確認
-    get "users/show"
-    get "users/edit"
-    get "users/update"
     root to: "home#index"
     resources :users, only: [:show, :update, :edit]
   end

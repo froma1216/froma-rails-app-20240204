@@ -23,6 +23,9 @@
                   <td>
                     <% if s.description != nil %>
                       <%= link_to s.title, slot_path(s) %>
+                      <% if current_user&.slots&.include?(s) %>
+                        <span class="text-danger">[登録済]</span>
+                      <% end %>
                     <% else %>
                       <%= s.title %>
                     <% end %>

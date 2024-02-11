@@ -1,6 +1,16 @@
 <h1><%= @user.fullname %> のマイページ</h1>
 <% if @conference != nil %>
   <p>参加予定のイベント：<%= link_to @conference.name, conference_path(@conference) %></p>
+  <p>参加予定のセッション：
+    <ul>
+      <% @participations&.each do |p| s = p.slot %>
+        <li>
+          <%= s.pdatetime %>
+          <%= link_to s.title, slot_path(s) %>
+        </li>
+      <% end %>
+    </ul>
+  </p>
   <p>参加予定のイベントを変更する
     <%= form_with model: [:mypage, @user] do |f| %>
       <%= f.hidden_field :conference, value: nil %>

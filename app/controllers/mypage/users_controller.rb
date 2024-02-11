@@ -6,6 +6,7 @@ class Mypage::UsersController < ApplicationController
   def show
     @conference = @user.conference
     @conferences = Conference.all.map(&:name) if @conference.nil?
+    @participations = Participation.where(user: @user).where(conference: @conference).includes(:slot).order("slots.start_time")
   end
 
   def edit; end

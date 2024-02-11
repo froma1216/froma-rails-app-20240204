@@ -17,7 +17,10 @@
             <%= s.title %>
             <p></p>
           <% else %>
-            <%= link_to s.title, slot_path(s) %><br>
+            <%= link_to s.title, slot_path(s) %>
+            <% if current_user&.slots&.include?(s) %>
+              <span class="text-danger">[登録済]</span>
+            <% end %><br>
             <% if s.lecturer != nil %>
               発表者: <%= s.lecturer %>
             <% end %>

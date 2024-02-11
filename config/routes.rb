@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'participations/create'
+  get 'participations/destroy'
   # マイページ
   namespace :mypage do
-    get 'users/show'
-    get 'users/edit'
-    get 'users/update'
+    # TODO: 不要？要確認
+    get "users/show"
+    get "users/edit"
+    get "users/update"
     root to: "home#index"
     resources :users, only: [:show, :update, :edit]
   end
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
   resources :conferences, only: [:show, :index]
   resources :days, only: [:show]
   resources :slots, only: [:show]
+  resources :participations, only: [:create, :destroy]
   # 試し用ページ
   get "home/index"
 end

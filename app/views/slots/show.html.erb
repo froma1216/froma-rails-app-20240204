@@ -59,6 +59,7 @@
             <td><%= @slot.audience %></td>
           </tr>
         <% end %>
+
         <% if @slot.background %>
           <tr>
             <th scope="row">前提知識</th>
@@ -77,7 +78,26 @@
             <td><%= link_ to @slot.material, @slot.mlinkurl %></td>
           </tr>
         <% end %>
+        <% if @user != nil %>
+          <tr>
+            <th scope="row">参加予定</th>
+            <td><%= @participation ? "登録済" : "未登録" %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
+  <% if @user != nil && @user.conference == @slot.track.day.conference %>
+    <div class="card-footer">
+      <% if @participation != nil %>
+        <%= link_to "登録をやめる", participation_path(@participation), data: { turbo_method: :delete }, class: "btn btn-danger" %>
+      <% else %>
+        <%= form_with model: Participation.new do |f| %>
+          <%= f.hidden_field :uid, {value: @user.id} %>
+          <%= f.hidden_field :sid, {value: @slot.id} %>
+          <%= f.submit "登録する", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

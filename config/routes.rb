@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   # マイページ
   namespace :mypage do
+    get 'users/show'
+    get 'users/edit'
+    get 'users/update'
     root to: "home#index"
     resources :users, only: [:show, :update, :edit]
   end

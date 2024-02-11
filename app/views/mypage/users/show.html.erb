@@ -1,5 +1,18 @@
-<h1>
-  Mypage::Users#show<br />
-  <%= @user.fullname %>
-</h1>
-<p>Find me in app/views/mypage/users/show.html.erb</p>
+<h1><%= @user.fullname %> のマイページ</h1>
+<% if @conference != nil %>
+  <p>参加予定のイベント：<%= link_to @conference.name, conference_path(@conference) %></p>
+  <p>参加予定のイベントを変更する
+    <%= form_with model: [:mypage, @user] do |f| %>
+      <%= f.hidden_field :conference, value: nil %>
+      <%= f.submit "イベントを変更", class: "btn btn-primary" %>
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= form_with model: [:mypage, @user] do |f| %>
+      <%= f.label "参加予定のイベント： " %>
+      <%= f.select :conference, @conferences, {include_blank: "イベント選択"}, class: "form-control" %>
+      <%= f.submit "登録", class: "btn btn-primary" %>
+    <% end %>
+  </p>
+<% end %>

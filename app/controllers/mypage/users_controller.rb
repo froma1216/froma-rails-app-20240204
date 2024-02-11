@@ -3,11 +3,19 @@ class Mypage::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :only_my_page_can_be_accessible!
 
-  def show; end
+  def show
+    @conference = @user.conference
+    @conferences = Conference.all.map(&:name) if @conference.nil?
+  end
 
   def edit; end
 
-  def update; end
+  def update
+    p = user_params
+    current_user.conference = Conference.find_by(name: p[:conference])
+    current_user.save
+    redirect_to mypage_user_path(current_user)
+  end
 
   private
 
@@ -16,5 +24,9 @@ class Mypage::UsersController < ApplicationController
     @user = User.find(params[:id])
     # マイページの所持者とログインユーザが異なれば、マイページへリダイレクトさせる
     redirect_to mypage_user_path(current_user) if @user != current_user
+  end
+
+  def user_params
+    params.require(:user).permit(:conference)
   end
 end

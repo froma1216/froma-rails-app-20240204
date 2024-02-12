@@ -10,28 +10,53 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-dark bg-dark">
-        <% if user_signed_in? %>
-          <div class="btn btn-success">
-            <%= link_to "MyPage", mypage_user_path(current_user.id), class: "text-white" %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <%# ロゴ %>
+          <%= link_to("ルート", root_path, class: "navbar-brand") %>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+            <%# パワプロ %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                パワプロ
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to("作成選手一覧", "#", class: "dropdown-item") %>
+                <%= link_to("新規選手作成", "#", class: "dropdown-item") %>
+              </div>
+            </li>
+            <%# エメラルド：バトルフロンティア %>
+            <li>
+              <%= link_to("エメラルド：バトルフロンティア", "#", class: "nav-link") %>
+            </li>
+            <% if user_signed_in? %>
+              <%# ログイン時 %>
+              <div class="btn btn-success">
+                <%= link_to "MyPage", mypage_user_path(current_user.id), class: "text-white" %>
+              </div>
+              <div class="text-white">
+                <%= current_user.fullname %>
+              </div>
+              <div class="btn btn-danger">
+                <%= link_to "logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-white" %>
+              </div>
+            <% else %>
+              <%# ログアウト時 %>
+              <div class="btn btn-primary">
+              <%= link_to "sign up", new_user_registration_path, class: "text-white" %>
+              </div>
+              <div class="text-white">OLiVES</div>
+              <div class="btn btn-success">
+                <%= link_to "login", new_user_session_path, class: "text-white" %>
+              </div>
+            <% end %>
+            </ul>
           </div>
-          <div class="text-white">
-            <%= current_user.fullname %>
-          </div>
-          <div class="btn btn-danger">
-            <%= link_to "logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-white" %>
-          </div>
-        <% else %>
-          <div class="btn btn-primary">
-          <%= link_to "sign up", new_user_registration_path, class: "text-white" %>
-          </div>
-          <div class="text-white">OLiVES</div>
-          <div class="btn btn-success">
-            <%= link_to "login", new_user_session_path, class: "text-white" %>
-          </div>
-        <% end %>
+        </div>
       </nav>
     </header>
+    <%# flashメッセージ %>
     <% if notice %>
       <div class="alert alert-info alert-dismissible fade show" role="alert">
         <%= notice %>
@@ -40,7 +65,6 @@
         </button>
       </div>
     <% end %>
-
     <% if alert %>
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <%= alert %>
@@ -49,7 +73,7 @@
         </button>
       </div>
     <% end %>
-    
+    <%# 各画面 %>
     <div class="container">
       <%= yield %>
     </div>

@@ -1,0 +1,2 @@
+module PawapuroHelper
+end

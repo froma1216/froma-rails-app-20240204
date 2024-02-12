@@ -19,6 +19,18 @@ Rails.application.routes.draw do
   resources :days, only: [:show]
   resources :slots, only: [:show]
   resources :participations, only: [:create, :destroy]
+
+  # パワプロ：選手作成メモ
+  resources :pawapuro, except: [:show] do
+    collection do
+      get "confirm", to: "pawapuro#confirm" # 選手作成確認画面
+    end
+    #  idを含むパス
+    member do
+      get "details", to: "pawapuro#details" # 選手詳細モーダル
+    end
+  end
+
   # 試し用ページ
   get "home/index"
 end

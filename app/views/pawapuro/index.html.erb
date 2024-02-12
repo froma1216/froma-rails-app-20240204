@@ -1,2 +1,111 @@
-<h1>Pawapuro#index</h1>
-<p>Find me in app/views/pawapuro/index.html.erb</p>
+<h1>パワプロ：作成選手一覧</h1>
+<%# 選手作成 %>
+<%= link_to '新規選手作成', new_pawapuro_path, class: 'btn btn-primary' %>
+<form class="mb-3">
+  <%# 投/野ラジオ %>
+  <label class="form-label">表示能力</label>
+  <div class="mb-3">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" name="formRadio" type="radio" id="formRadioPitcher">
+      <label class="form-check-label" for="formRadioPitcher">
+        投手
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" name="formRadio" type="radio" id="formRadioFielder" checked>
+      <label class="form-check-label" for="formRadioFielder">
+        野手
+      </label>
+    </div>
+  </div>
+  <%# 選手名 %>
+  <div class="mb-3">
+    <label for="name" class="form-label">選手名</label>
+    <input type="search" class="form-control" id="name" autocomplete="name">
+  </div>
+  <%# ポジション %>
+  <%# TODO: チェックボックスにし、全ポジション表示 %>
+  <div class="mb-3">
+    <label for="position" class="form-label">ポジション</label>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="subPositionSwitch">
+      <label class="form-check-label" for="subPositionSwitch">サブポジションを含む</label>
+    </div>
+    <input type="search" class="form-control" id="position" autocomplete="name">
+  </div>
+  <%# 検索ボタン %>
+  <input type="submit" class="btn btn-primary" value="検索">
+</form>
+
+<% 
+=begin
+%>
+
+<%# 一覧表示部 %>
+<table class="table table-striped caption-top">
+  <thead>
+    <tr>
+      <th scope="col" class="align-middle">#</th>
+      <th scope="col" class="align-middle">選手名</th>
+      <th scope="col" class="align-middle">守備位置</th>
+      <th scope="col" class="align-middle">投打</th>
+      <th scope="col" class="align-middle">弾道</th>
+      <th scope="col" class="align-middle">ミート</th>
+      <th scope="col" class="align-middle">パワー</th>
+      <th scope="col" class="align-middle">走力</th>
+      <th scope="col" class="align-middle">肩力</th>
+      <th scope="col" class="align-middle">守備力</th>
+      <th scope="col" class="align-middle">捕球</th>
+      <th scope="col" class="align-middle">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @players.each do |player| %>
+      <tr>
+        <th scope="row" class="align-middle">1</th>
+        <td class="align-middle"><%= player.player_name %></td>
+        <td class="align-middle"><%= display_positions(player) %></td>
+        <td class="align-middle"><%= display_left_and_right(player.throws) %>投<%= display_left_and_right(player.bats) %>打</td>
+        <td class="align-middle">
+          <span class="me-2 h5"><%= display_trajectory(player.pawapuro_fielder.trajectory) %></span>
+          <%= player.pawapuro_fielder.trajectory %>
+        </td>
+        <td class="align-middle">
+          <%= display_alphabet(player.pawapuro_fielder.meat) %>
+          <%= player.pawapuro_fielder.meat %>
+        </td>
+        <td class="align-middle">
+          <%= display_alphabet(player.pawapuro_fielder.power) %>
+          <%= player.pawapuro_fielder.power %>
+        </td>
+        <td class="align-middle">
+          <%= display_alphabet(player.pawapuro_fielder.running) %>
+          <%= player.pawapuro_fielder.running %>
+        </td>
+        <td class="align-middle">
+          <%= display_alphabet(player.pawapuro_fielder.arm_strength) %>
+          <%= player.pawapuro_fielder.arm_strength %>
+        </td>
+        <td class="align-middle">
+          <%= display_alphabet(player.pawapuro_fielder.defense) %>
+          <%= player.pawapuro_fielder.defense %>
+        </td>
+        <td class="align-middle">
+          <%= display_alphabet(player.pawapuro_fielder.catching) %>
+          <%= player.pawapuro_fielder.catching %>
+        </td>
+        <td class="align-middle">
+          <%# <button type="button" id="my_button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerDetailsModal">
+            詳細
+          </button> %>
+          <%= link_to '詳細modal', details_pawapuro_path(player), remote: true, class: 'btn btn-primary details-button', id: "details_#{player.id}", data: { turbo: false, toggle: 'modal', target: '#playerDetailsModal' } %>
+          <button type="button" class="btn btn-danger">削除</button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%
+=end
+%>

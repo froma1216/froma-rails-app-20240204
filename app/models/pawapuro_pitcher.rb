@@ -1,0 +1,2 @@
+class PawapuroPitcher < ApplicationRecord
+end

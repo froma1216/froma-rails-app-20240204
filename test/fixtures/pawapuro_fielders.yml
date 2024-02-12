@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trajectory: 1
+  meat: 1
+  power: 1
+  running: 1
+  arm_strength: 1
+  defense: 1
+  catching: 1
+  chance: 1
+  taihidaritousyu: 1
+  catcher: 1
+  tourui: 1
+  sourui: 1
+  soukyuu: 1
+  other_special_abilities: MyString
+  created_by: MyString
+  updated_by: MyString
+
+two:
+  trajectory: 1
+  meat: 1
+  power: 1
+  running: 1
+  arm_strength: 1
+  defense: 1
+  catching: 1
+  chance: 1
+  taihidaritousyu: 1
+  catcher: 1
+  tourui: 1
+  sourui: 1
+  soukyuu: 1
+  other_special_abilities: MyString
+  created_by: MyString
+  updated_by: MyString

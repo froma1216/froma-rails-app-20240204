@@ -76,6 +76,7 @@
     <%# 各画面 %>
     <div class="container">
       <%= yield %>
+      <%= turbo_frame_tag "pawapuro_details_modal" %>
     </div>
   </body>
 </html>

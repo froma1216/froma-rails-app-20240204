@@ -95,6 +95,7 @@
             詳細
           </button> %>
           <%= link_to '詳細modal', details_pawapuro_path(player), remote: true, class: 'btn btn-primary details-button', id: "details_#{player.id}", data: { turbo: false, toggle: 'modal', target: '#playerDetailsModal' } %>
+          <%= link_to '詳細modal', details_pawapuro_path(player), class: 'btn btn-primary details-button', data: { turbo_frame: "pawapuro_details_modal" } %>
           <button type="button" class="btn btn-danger">削除</button>
         </td>
       </tr>

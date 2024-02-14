@@ -1,0 +1,64 @@
+<%# 野手基礎能力部 %>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">弾道</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="pawa-text-a me-2 h5"><%= display_trajectory(@player.pawapuro_fielder.trajectory) %></span>
+    <span class="h5"><%= @player.pawapuro_fielder.trajectory %></span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">ミート</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.meat) %></span>
+    <span class="h5"><%= @player.pawapuro_fielder.meat %></span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">パワー</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.power) %></span>
+    <span class="h5"><%= @player.pawapuro_fielder.power %></span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">走力</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.running) %></span>
+    <span class="h5"><%= @player.pawapuro_fielder.running %></span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">肩力</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.arm_strength) %></span>
+    <span class="h5"><%= @player.pawapuro_fielder.arm_strength %></span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">守備力</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.defense) %></span>
+    <span class="h5"><%= @player.pawapuro_fielder.defense %></span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">捕球</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.catching) %></span>
+    <span class="h5"><%= @player.pawapuro_fielder.catching %></span>
+  </div>
+</div>

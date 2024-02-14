@@ -1,9 +1,75 @@
+<%# 選手詳細モーダル %>
 <%= turbo_frame_tag "pawapuro_details_modal" do %>
   <div class="modal fade" tabindex="-1" aria-hidden="true" data-controller="pawapuro-details-modal">
     <div class="modal-dialog modal-xl">
       <div class="modal-content pawa-bg-main">
+        <%# タブ %>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#playerBasic">選手能力</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#playerPitcher">投手能力</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#playerFielder">野手能力</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#playerPromotion">守備・起用</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#playerProfile">プロフィール</a>
+          </li>
+        </ul>
         <div class="modal-body">
-          <div>hello!</div>
+          <div class="d-flex justify-content-between">
+            <%# TODO: メインポジションによって色を変える %>
+            <h5 class="pawa-bg-sa-outfielder pawa-border-outfielder rounded px-4 py-1 mb-2 text-center h3" id="playerDetails"><%= @player.player_name %></h5>
+            <div class="d-flex align-items-center pawa-text-main">
+              <div class="p-0">
+                <div class="pawa-ability-label">守備位置</div>
+              </div>
+              <span class="ms-1">
+                <%= display_positions(@player) %>
+              </span>
+            </div>
+            <div class="d-flex align-items-center pawa-text-main">
+              <div class="p-0">
+                <div class="pawa-ability-label">投打</div>
+              </div>
+              <span class="ms-1">
+                <strong><%= display_left_and_right(@player.throws) %>投<%= display_left_and_right(@player.bats) %>打</strong>
+              </span>
+            </div>
+          </div>
+          <%# 能力部 %>
+          <div class="tab-content container-fluid pawa-bg-sub rounded">
+            <%# 選手能力 %>
+            <div class="tab-pane fade show active" id="playerBasic">
+              <%# TODO: メインポジションが投手か野手によって、表示を分ける %>
+              <%= render 'player_datails_fielder' %>
+            </div>
+            <%# 投手能力 %>
+            <div class="tab-pane fade" id="playerPitcher">
+              <%= render 'player_datails_pitcher' %>
+            </div>
+            <%# 野手能力 %>
+            <div class="tab-pane fade" id="playerFielder">
+              <%= render 'player_datails_fielder' %>
+            </div>
+            <%# 守備・起用 %>
+            <div class="tab-pane fade" id="playerPromotion">
+              <%= render 'player_datails_promotion' %>
+            </div>
+            <%# プロフィール %>
+            <div class="tab-pane fade" id="playerProfile">
+              <%= render 'player_datails_profile' %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= link_to '編集', edit_pawapuro_path(1), class: 'btn btn-primary' %>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
         </div>
       </div>
     </div>

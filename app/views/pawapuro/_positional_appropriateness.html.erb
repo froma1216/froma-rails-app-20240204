@@ -1,0 +1,37 @@
+<%# ポジション適正表示 %>
+<% 
+# ポジション名 を ポジションNo に変換
+case position_name
+  when "捕"
+    positio_no = 2
+  when "一"
+    positio_no = 3
+  when "二"
+    positio_no = 4
+  when "三"
+    positio_no = 5
+  when "遊"
+    positio_no = 6
+  when "外"
+    positio_no = 7
+  else
+    positio_no = 1
+  end
+
+# 倍率変換
+case @player.send("p#{positio_no}_proper")
+  when 3
+    coefficient, add_text_class = 1, ""
+  when 2
+    coefficient, add_text_class = 0.8, ""
+  when 1
+    coefficient, add_text_class = 0.7, ""
+  else
+    coefficient, add_text_class = 0, "pawa-text-neutral"
+  end
+%>
+<span class="me-2 h5 <%= "#{add_text_class}" %>"><%= position_name %></span>
+<span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.defense * coefficient) %></span>
+<span class="h5 <%= "#{add_text_class}" %>">
+  <%= ((@player.pawapuro_fielder.defense * coefficient).to_i).nonzero? || '--' %>
+</span>

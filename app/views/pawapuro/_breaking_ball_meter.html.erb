@@ -1,0 +1,22 @@
+<%# 変化球メーター %>
+<%# 第二球種名 %>
+<% second_pitch_type = @player.pawapuro_pitcher.send("second_#{breaking_ball_type}_type_pitch") %>
+<%# 変化球名 %>
+<div class="pawa-breaking-font">
+  <%= @player.pawapuro_pitcher.send("#{breaking_ball_type}_type_pitch") %>
+  <% if second_pitch_type.present? %>
+    ・<%= second_pitch_type %>
+  <% end %>
+</div>
+<div class="ms-3">
+  <%# 第一球種 %>
+  <div class="row">
+    <%= breaking_ball_blocks(@player.pawapuro_pitcher, breaking_ball_type) %>
+  </div>
+  <%# 第二球種 %>
+  <% if second_pitch_type.present? %>
+    <div class="row">
+      <%= breaking_ball_blocks(@player.pawapuro_pitcher, "second_#{breaking_ball_type}") %>
+    </div>
+  <% end %>
+</div>

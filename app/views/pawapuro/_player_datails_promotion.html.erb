@@ -1,0 +1,126 @@
+<%# 守備・起用 %>
+<div class="row p-2">
+  <%# 基礎能力部 %>
+  <div class="col-3 pe-4 pawa-text-main">
+    <div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+      <div class="col-5 p-0">
+        <div class="pawa-ability-label">走力</div>
+      </div>
+      <div class="col-7 ps-3 py-2">
+        <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.running) %></span>
+        <span class="h5"><%= @player.pawapuro_fielder.running %></span>
+      </div>
+    </div>
+    <div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+      <div class="col-5 p-0">
+        <div class="pawa-ability-label">肩力</div>
+      </div>
+      <div class="col-7 ps-3 py-2">
+        <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.arm_strength) %></span>
+        <span class="h5"><%= @player.pawapuro_fielder.arm_strength %></span>
+      </div>
+    </div>
+    <%# 各ポジション適正 %>
+    <div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+      <div class="col-6 d-flex align-items-center p-0">
+        <div class="col-5 p-0">
+          <div class="pawa-ability-label">守備力</div>
+        </div>
+      </div>
+      <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0">
+        <span class="pawa-text-neutral me-2 h5">投</span>
+        <span class="h5 pawa-text-neutral">--</span>
+        <%# TODO: 投手ポジション適正を追加 %>
+        <%#= render partial: 'positional_appropriateness', locals: { position_name:"投" } %>
+      </div>
+      <div class="col-6 ps-3 py-3 pawa-border-main border-bottom-0 border-end-0">
+        <%= render partial: 'positional_appropriateness', locals: { position_name:"捕" } %>
+      </div>
+      <div class="col-6 ps-3 py-3 pawa-border-main border-bottom-0">
+        <%= render partial: 'positional_appropriateness', locals: { position_name:"一" } %>
+      </div>
+      <div class="col-6 ps-3 py-3 pawa-border-main border-bottom-0 border-end-0">
+        <%= render partial: 'positional_appropriateness', locals: { position_name:"二" } %>
+      </div>
+      <div class="col-6 ps-3 py-3 pawa-border-main border-bottom-0">
+        <%= render partial: 'positional_appropriateness', locals: { position_name:"三" } %>
+      </div>
+      <div class="col-6 ps-3 py-2 pawa-border-main border-end-0">
+        <%= render partial: 'positional_appropriateness', locals: { position_name:"遊" } %>
+      </div>
+      <div class="col-6 ps-3 py-2 pawa-border-main">
+        <%= render partial: 'positional_appropriateness', locals: { position_name:"外" } %>
+      </div>
+    </div>
+    <div class="d-flex justify-content-start row border border-3 border-white rounded p-1 pawa-bg-main">
+      <div class="col-5 p-0">
+        <div class="pawa-ability-label">捕球</div>
+      </div>
+      <div class="col-7 ps-3 py-2">
+        <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.catching) %></span>
+        <span class="h5"><%= @player.pawapuro_fielder.catching %></span>
+      </div>
+    </div>
+  </div>
+  <%# 特殊能力部 %>
+  <div class="col-9 bg-light border border-3 border-white rounded">
+    <div class="row">
+      <div class="col fs-3 bg-white pawa-border-main-in rounded">
+        <div class="row pt-1 pb-1 ps-1 text-center">
+          <span class="col-12 ps-2 pawa-text-main">起用</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+    </div>
+    <%# 値なし %>
+    <%# FIXME: 部分テンプレートに切り出し %>
+    <% abilities_array = @player.pawapuro_fielder.other_special_abilities.present? ? @player.pawapuro_fielder.other_special_abilities.split(',') : [] %>
+    <% 6.times do |row| %>
+      <div class="row">
+        <% (row*4...row*4+4).each do |index| %>
+          <% if abilities_array[index] %>
+            <%= render partial: 'special_ability_no_value_box', locals: { ability: abilities_array[index] } %>
+          <% else %>
+            <%= render partial: 'special_ability_no_value_box', locals: { ability: '' } %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

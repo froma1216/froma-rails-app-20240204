@@ -141,7 +141,7 @@ pawapuro_fielder = PawapuroFielder.create(
   tourui: -1,
   sourui: 2,
   soukyuu: 1,
-  other_special_abilities: "パワーヒッター,初球○,満塁男,レーザービーム,三振",
+  other_special_abilities: "パワーヒッター,初球◯,満塁男,レーザービーム,三振",
   created_by: "master",
   updated_by: "master"
 )

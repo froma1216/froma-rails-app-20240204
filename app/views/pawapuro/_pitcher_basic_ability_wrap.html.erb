@@ -1,0 +1,67 @@
+<%# 投手基礎能力部 %>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">球速</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-1 h5"><%= @player.pawapuro_pitcher.pace %></span>
+    <span>km/h</span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">コントロール</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_pitcher.control) %></span>
+    <span class="h5"><%= @player.pawapuro_pitcher.control %></span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-5 p-0">
+    <div class="pawa-ability-label">スタミナ</div>
+  </div>
+  <div class="col-7 ps-3 py-2">
+    <span class="me-2 h5"><%= display_alphabet(@player.pawapuro_pitcher.stamina) %></span>
+    <span class="h5"><%= @player.pawapuro_pitcher.stamina %></span>
+  </div>
+</div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
+  <div class="col-12 ps-3 pb-2">
+    <%# TODO: ストレート球種名のカラム追加 %>
+    <%# ストレート %>
+    <div class="pawa-breaking-font">ストレート・<%= @player.pawapuro_pitcher.second_fastball_type %></div>
+    <div class="ms-3">
+      <%# 第一ストレート %>
+      <div class="row">
+        <div class="col-1 pawa-breaking-block-exist"></div>
+      </div>
+      <%# 第二ストレート %>
+      <div class="row">
+        <% if @player.pawapuro_pitcher.second_fastball_type.present? %>
+          <div class="col-1 pawa-breaking-block-exist"></div>
+        <% end %>
+      </div>
+    </div>
+    <%# スライダー系 %>
+    <% if @player.pawapuro_pitcher.slider_type_pitch.present? %>
+      <%= render partial: 'breaking_ball_meter', locals: { breaking_ball_type:"slider" } %>
+    <% end %>
+    <%# カーブ系 %>
+    <% if @player.pawapuro_pitcher.curveball_type_pitch.present? %>
+      <%= render partial: 'breaking_ball_meter', locals: { breaking_ball_type:"curveball" } %>
+    <% end %>
+    <%# シュート系 %>
+    <% if @player.pawapuro_pitcher.shootball_type_pitch.present? %>
+      <%= render partial: 'breaking_ball_meter', locals: { breaking_ball_type:"shootball" } %>
+    <% end %>
+    <%# シンカー系 %>
+    <% if @player.pawapuro_pitcher.sinker_type_pitch.present? %>
+      <%= render partial: 'breaking_ball_meter', locals: { breaking_ball_type:"sinker" } %>
+    <% end %>
+    <%# フォーク系 %>
+    <% if @player.pawapuro_pitcher.forkball_type_pitch.present? %>
+      <%= render partial: 'breaking_ball_meter', locals: { breaking_ball_type:"forkball" } %>
+    <% end %>
+  </div>
+</div>

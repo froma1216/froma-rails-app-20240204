@@ -7,6 +7,9 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%# モーダルブラウザバックに対応 %>
+    <%# NOTE: https://blog.to-ko-s.com/tubo-bootstrap-caution/ %>
+    <meta name="turbo-cache-control" content="no-cache">
   </head>
   <body>
     <header>

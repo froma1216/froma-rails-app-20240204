@@ -91,11 +91,7 @@
           <%= player.pawapuro_fielder.catching %>
         </td>
         <td class="align-middle">
-          <%# <button type="button" id="my_button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerDetailsModal">
-            詳細
-          </button> %>
-          <%= link_to '詳細modal', details_pawapuro_path(player), remote: true, class: 'btn btn-primary details-button', id: "details_#{player.id}", data: { turbo: false, toggle: 'modal', target: '#playerDetailsModal' } %>
-          <%= link_to '詳細modal', details_pawapuro_path(player), class: 'btn btn-primary details-button', data: { turbo_frame: "pawapuro_details_modal" } %>
+          <%= link_to '詳細', details_pawapuro_path(player), class: 'btn btn-primary details-button', data: { turbo_frame: "pawapuro_details_modal" } %>
           <button type="button" class="btn btn-danger">削除</button>
         </td>
       </tr>

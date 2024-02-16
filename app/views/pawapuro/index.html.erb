@@ -1,6 +1,11 @@
 <h1>パワプロ：作成選手一覧</h1>
 <%# 選手作成 %>
 <%= link_to '新規選手作成', new_pawapuro_path, class: 'btn btn-primary' %>
+
+<% 
+=begin
+%>
+
 <form class="mb-3">
   <%# 投/野ラジオ %>
   <label class="form-label">表示能力</label>
@@ -36,6 +41,10 @@
   <%# 検索ボタン %>
   <input type="submit" class="btn btn-primary" value="検索">
 </form>
+
+<%
+=end
+%>
 
 <%# 一覧表示部 %>
 <table class="table table-striped caption-top">

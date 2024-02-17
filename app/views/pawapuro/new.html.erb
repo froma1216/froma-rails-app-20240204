@@ -1,2 +1,2377 @@
-<h1>Pawapuro#new</h1>
-<p>Find me in app/views/pawapuro/new.html.erb</p>
+<div class="container">
+  <h1>パワプロ：選手新規作成</h1>
+  <%# NOTE: https://qiita.com/snskOgata/items/44d32a06045e6a52d11c %>
+  <%= form_with model: @player, url: pawapuro_index_path, local: true do |f| %>
+    <form class="mb-3">
+      <%# プロフィール %>
+      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+        プロフィール
+      </div>
+      <div class="row">
+        <%# 名字 %>
+        <div class="col-6">
+          <%= f.label :last_name, "姓", class: "form-label" %>
+          <%= f.text_field :last_name, class: "form-control", placeholder: "佐藤", autocomplete: "name" %>
+        </div>
+        <%# 名前 %>
+        <div class="col-6">
+          <%= f.label :first_name, "名", class: "form-label" %>
+          <%= f.text_field :first_name, class: "form-control", placeholder: "太郎", autocomplete: "name" %>
+        </div>
+      </div>
+      <%# 選手名 %>
+      <div>
+        <%= f.label :player_name, "選手名", class: "form-label" %>
+        <%= f.text_field :player_name, class: "form-control", placeholder: "佐藤太", autocomplete: "name" %>
+      </div>
+      <div class="row">
+        <%# 背ネーム %>
+        <div class="col-6">
+          <%= f.label :back_name, "背ネーム", class: "form-label" %>
+          <%= f.text_field :back_name, class: "form-control", placeholder: "SATO", autocomplete: "name" %>
+        </div>
+        <%# 生年月日 %>
+        <div class="col-6">
+          <%= f.label :birthday, "生年月日", class: "pt-2 pr-2" %>
+          <%= f.date_field :birthday, class: "form-control" %>
+        </div>
+      </div>
+      <%# 投打 %>
+      <div>
+        <%= f.label :throws, "投打", class: "form-label" %>
+        <div class="mb-3">
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :throws, "right", class: "form-check-input", checked: true %>
+            <%= f.label :throws_right, "右投げ" %>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :throws, "left", class: "form-check-input" %>
+            <%= f.label :throws_left, "左投げ" %>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :bats, "right", class: "form-check-input", checked: true %>
+            <%= f.label :bats_right, "右打ち" %>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :bats, "left", class: "form-check-input" %>
+            <%= f.label :bats_left, "左打ち" %>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :bats, "both", class: "form-check-input" %>
+            <%= f.label :bats_both, "両打ち" %>
+          </div>
+        </div>
+      </div>
+      <%# ポジション %>
+      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+        ポジション
+      </div>
+      <%# メイン %>
+      <div class="mb-3">
+        <%= f.label :main_position, "メインポジション", class: "form-label" %>
+        <%= f.select :main_position, [["先発", 10], ["中継ぎ", 11], ["抑え", 12], ["捕手", 2], ["一塁手", 3], ["二塁手", 4], ["三塁手", 5], ["遊撃手", 6], ["外野手", 7]], {include_blank: "選択して下さい"}, {class: "form-select"} %>
+      </div>
+      <%# サブ %>
+      <div class="mb-3">
+        <label class="form-label">サブポジション</label>
+        <%# FIXME: メインポジションで選択しているポジションは、自動で3を入力 %>
+        <%# 投手 %>
+        <%= f.fields_for :pawapuro_pitcher do |pitcher_f| %>
+          <div class="row">
+            <div class="col-4">
+              <%= pitcher_f.label :starter_proper, "先発", class: "form-label small" %>
+              <%= pitcher_f.number_field :starter_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+            </div>
+            <div class="col-4">
+              <%= pitcher_f.label :reliever_proper, "中継ぎ", class: "form-label small" %>
+              <%= pitcher_f.number_field :reliever_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+            </div>
+            <div class="col-4">
+              <%= pitcher_f.label :closer_proper, "抑え", class: "form-label small" %>
+              <%= pitcher_f.number_field :closer_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+            </div>
+          </div>
+        <% end %>
+        <%# 野手 %>
+        <div class="row">
+          <div class="col">
+            <%= f.label :sub_position_2, "捕手", class: "form-label small" %>
+            <%= f.number_field :sub_position_2, class: "form-control", value: 0, min: 0, max: 3 %>
+          </div>
+          <div class="col">
+            <%= f.label :sub_position_3, "一塁手", class: "form-label small" %>
+            <%= f.number_field :sub_position_3, class: "form-control", value: 0, min: 0, max: 3 %>
+          </div>
+          <div class="col">
+            <%= f.label :sub_position_4, "二塁手", class: "form-label small" %>
+            <%= f.number_field :sub_position_4, class: "form-control", value: 0, min: 0, max: 3 %>
+          </div>
+          <div class="col">
+            <%= f.label :sub_position_5, "三塁手", class: "form-label small" %>
+            <%= f.number_field :sub_position_5, class: "form-control", value: 0, min: 0, max: 3 %>
+          </div>
+          <div class="col">
+            <%= f.label :sub_position_6, "遊撃手", class: "form-label small" %>
+            <%= f.number_field :sub_position_6, class: "form-control", value: 0, min: 0, max: 3 %>
+          </div>
+          <div class="col">
+            <%= f.label :sub_position_7, "外野手", class: "form-label small" %>
+            <%= f.number_field :sub_position_7, class: "form-control", value: 0, min: 0, max: 3 %>
+          </div>
+        </div>
+      </div>
+      <%# 共通特殊能力 %>
+      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+        共通特殊能力
+      </div>
+      <div class="mb-3">
+        <div class="row mb-2">
+          <div class="col row">
+            <div class="col-4 d-flex align-items-center">
+              <%# TODO: アイコンつけて、注意文言を表示「金特「ガソリンタンク」は投手にのみ影響します。」 %>
+              <%= f.label :kaifuku, "回復", class: "form-label small mb-0" %>
+            </div>
+            <div class="col-8">
+              <%= f.select :kaifuku, 
+                options_for_select([
+                    ["ガソリンタンク", 4, {class: "pawa-bg-sa-sp2"}],
+                    ["A", 3, {class: "pawa-bg-sa-g2"}],
+                    ["B", 2, {class: "pawa-bg-sa-g2"}],
+                    ["C", 1, {class: "bg-white"}],
+                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["E", -1, {class: "bg-white"}],
+                    ["F", -2, {class: "pawa-bg-sa-b2"}],
+                    ["G", -3, {class: "pawa-bg-sa-b2"}]
+                ]), 
+                {}, 
+                { class: "form-select", id: "kaifuku-select" } 
+              %>
+            </div>
+          </div>
+          <div class="col row">
+            <div class="col-4 d-flex align-items-center">
+              <%= f.label :kegasinikusa, "ケガしにくさ", class: "form-label small mb-0" %>
+            </div>
+            <div class="col-8">
+              <%= f.select :kegasinikusa, 
+                options_for_select([
+                    ["鉄人", 4, {class: "pawa-bg-sa-sp2"}],
+                    ["A", 3, {class: "pawa-bg-sa-g2"}],
+                    ["B", 2, {class: "pawa-bg-sa-g2"}],
+                    ["C", 1, {class: "bg-white"}],
+                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["E", -1, {class: "bg-white"}],
+                    ["F", -2, {class: "pawa-bg-sa-b2"}],
+                    ["G", -3, {class: "pawa-bg-sa-b2"}]
+                ]), 
+                {}, 
+                { class: "form-select", id: "kegasinikusa-select" } 
+              %>
+            </div>
+          </div>
+          <div class="col row"></div>
+        </div>
+        <%# １行目 %>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="tubamekiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="tubamekiller">
+                ツバメキラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="yokohamakiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="yokohamakiller">
+                横浜キラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="hannsinnkiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="hannsinnkiller">
+                阪神キラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kyojinnkiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="kyojinnkiller">
+                巨人キラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="hirosimakiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="hirosimakiller">
+                広島キラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="tyuunitikiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="tyuunitikiller">
+                中日キラー
+              </label>
+            </div>
+          </div>
+        </div>
+        <%# ２行目 %>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="orixkiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="orixkiller">
+                オリックスキラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="hawkskiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="hawkskiller">
+                ホークスキラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="leokiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="leokiller">
+                レオキラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="rakutennkiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="rakutennkiller">
+                楽天キラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="lottekiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="lottekiller">
+                ロッテキラー
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="nipponhamukiller">
+              <label class="form-check-label pawa-text-good fw-bold" for="nipponhamukiller">
+                日本ハムキラー
+              </label>
+            </div>
+          </div>
+        </div>
+        <%# ３行目 %>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kokusaitaikaimaru">
+              <label class="form-check-label pawa-text-good fw-bold" for="kokusaitaikaimaru">
+                国際大会◯
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="kokusaitaikaibatu">
+              <label class="form-check-label pawa-text-bad fw-bold" for="kokusaitaikaibatu">
+                国際大会✕
+              </label>
+            </div>
+          </div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+      </div>
+      <%= f.fields_for :pawapuro_pitcher do |pitcher_f| %>
+        <%# 投手基本能力 %>
+        <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+          投手基本能力
+        </div>
+        <div class="mb-3">
+          <%# 基本能力 %>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-4">
+                <%= pitcher_f.label :pace, "球速", class: "form-label" %>
+                <div class="input-group">
+                  <%= pitcher_f.number_field :pace, class: "form-control", value: 120, min: 120, max: 170 %>
+                  <span class="input-group-text">km/h</span>
+                </div>
+              </div>
+              <div class="col-4">
+                <%= pitcher_f.label :control, "コントロール", class: "form-label" %>
+                <div class="input-group">
+                  <%= pitcher_f.number_field :control, class: "form-control", id:"control-input", value: 1, min: 1, max: 100 %>
+                  <span class="input-group-text text-white pawa-bg-g" id="control-alphabet-display">G</span>
+                </div>
+              </div>
+              <div class="col-4">
+                <%= pitcher_f.label :stamina, "スタミナ", class: "form-label" %>
+                <div class="input-group">
+                  <%= pitcher_f.number_field :stamina, class: "form-control", id:"stamina-input", value: 1, min: 1, max: 100 %>
+                  <span class="input-group-text text-white pawa-bg-g" id="stamina-alphabet-display">G</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%# 変化球 %>
+          <div>
+            <%# ストレート系 %>
+            <div class="row mb-2">
+              <%# 第一 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">ストレート系</label>
+              </div>
+              <div class="col-5">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="ストレート">ストレート</option>
+                  <%# TODO: オリジナルを選択時、球種名入力欄を表示 %>
+                  <option value="オリジナル">オリジナル</option>
+                </select>
+              </div>
+              <%# 第二 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">第二ストレート系</label>
+              </div>
+              <div class="col-5">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="ツーシームファースト">ツーシームファースト</option>
+                  <option value="ムービングファースト">ムービングファースト</option>
+                  <option value="超スローボール">超スローボール</option>
+                  <option value="オリジナル">オリジナル</option>
+                </select>
+              </div>
+            </div>
+            <%# スライダー系 %>
+            <div class="row mb-2">
+              <%# 第一 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">スライダー系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="スライダー">スライダー</option>
+                  <option value="Hスライダー">Hスライダー</option>
+                  <option value="カットボール">カットボール</option>
+                  <option value="オリジナル">オリジナル</option>
+                </select>
+              </div>
+              <%# FIXME: なしが選ばれたときは、非活性にする %>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+              <%# 第二 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">第二スライダー系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="スライダー">スライダー</option>
+                  <option value="Hスライダー">Hスライダー</option>
+                  <option value="カットボール">カットボール</option>
+                  <option value="オリジナル">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+            </div>
+            <%# カーブ系 %>
+            <div class="row mb-2">
+              <%# 第一 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">カーブ系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="カーブ">カーブ</option>
+                  <option value="スローカーブ">スローカーブ</option>
+                  <option value="ドロップ">ドロップ</option>
+                  <option value="ドロップカーブ">ドロップカーブ</option>
+                  <option value="スラーブ">スラーブ</option>
+                  <option value="ナックルカーブ">ナックルカーブ</option>
+                  <option value="パワーカーブ">パワーカーブ</option>
+                  <option value="オリジナル">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+              <%# 第二 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">第二カーブ系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="カーブ">カーブ</option>
+                  <option value="スローカーブ">スローカーブ</option>
+                  <option value="ドロップ">ドロップ</option>
+                  <option value="ドロップカーブ">ドロップカーブ</option>
+                  <option value="スラーブ">スラーブ</option>
+                  <option value="ナックルカーブ">ナックルカーブ</option>
+                  <option value="パワーカーブ">パワーカーブ</option>
+                  <option value="">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+            </div>
+            <%# フォーク系 %>
+            <div class="row mb-2">
+              <%# 第一 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">フォーク系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="フォーク">フォーク</option>
+                  <option value="パーム">パーム</option>
+                  <option value="チェンジアップ">チェンジアップ</option>
+                  <option value="Vスライダー">Vスライダー</option>
+                  <option value="ナックル">ナックル</option>
+                  <option value="SFF">SFF</option>
+                  <option value="オリジナル">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+              <%# 第二 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">第二フォーク系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="フォーク">フォーク</option>
+                  <option value="パーム">パーム</option>
+                  <option value="チェンジアップ">チェンジアップ</option>
+                  <option value="Vスライダー">Vスライダー</option>
+                  <option value="ナックル">ナックル</option>
+                  <option value="SFF">SFF</option>
+                  <option value="">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+            </div>
+            <%# シンカー系 %>
+            <div class="row mb-2">
+              <%# 第一 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">シンカー系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <%# TODO: 左投げの場合はスクリュー。Hスクリューがあるか確認 %>
+                  <option value="シンカー">シンカー</option>
+                  <option value="Hシンカー">Hシンカー</option>
+                  <option value="サークルチェンジ">サークルチェンジ</option>
+                  <option value="オリジナル">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+              <%# 第二 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">第二シンカー系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="シンカー">シンカー</option>
+                  <option value="Hシンカー">Hシンカー</option>
+                  <option value="サークルチェンジ">サークルチェンジ</option>
+                  <option value="">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+            </div>
+            <%# シュート系 %>
+            <div class="row mb-2">
+              <%# 第一 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">シュート系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="シュート">シュート</option>
+                  <option value="Hシュート">Hシュート</option>
+                  <option value="シンキングツーシーム">シンキングツーシーム</option>
+                  <option value="オリジナル">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+              <%# 第二 %>
+              <div class="col-1 d-flex align-items-center">
+                <label class="form-label small mb-0">第二シュート系</label>
+              </div>
+              <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected>なし</option>
+                  <option value="シュート">シュート</option>
+                  <option value="Hシュート">Hシュート</option>
+                  <option value="シンキングツーシーム">シンキングツーシーム</option>
+                  <option value="">オリジナル</option>
+                </select>
+              </div>
+              <div class="col-1">
+                <input type="number" class="form-control" value="0">
+              </div>
+            </div>
+          </div>
+        </div>
+        <%# 投手特殊能力 %>
+        <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+          投手特殊能力
+        </div>
+        <div class="mb-3">
+          <%# 数値あり %>
+          <div class="row mb-2">
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= pitcher_f.label :taipinch, "対ピンチ", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= pitcher_f.select :taipinch, 
+                  options_for_select([
+                      ["強心臓", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                      ["ノミの心臓", -4, {class: "pawa-bg-sa-b2"}]
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "taipinch-select" } 
+                %>
+              </div>
+            </div>
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= pitcher_f.label :taihidaridasya, "対左打者", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= pitcher_f.select :taihidaridasya, 
+                  options_for_select([
+                      ["左キラー", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "taihidaridasya-select" } 
+                %>
+              </div>
+            </div>
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= pitcher_f.label :utarezuyosa, "打たれ強さ", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= pitcher_f.select :utarezuyosa, 
+                  options_for_select([
+                      ["不屈の魂", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                      ["ガラスのハート", -4, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "utarezuyosa-select" } 
+                %>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= pitcher_f.label :nobi, "ノビ", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= pitcher_f.select :nobi, 
+                  options_for_select([
+                      ["怪童", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "nobi-select" } 
+                %>
+              </div>
+            </div>
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= pitcher_f.label :quick, "クイック", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= pitcher_f.select :quick, 
+                  options_for_select([
+                      ["走者釘付", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "quick-select" } 
+                %>
+              </div>
+            </div>
+            <div class="col row"></div>
+          </div>
+          <%# 数値なし %>
+          <div class="mb-3">
+            <%# FIXME: 片方のみ選択できるようにしたい %>
+            <%# １行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kire">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kire">
+                    キレ◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kyouinokireaji">
+                  <label class="form-check-label pawa-text-special fw-bold" for="kyouinokireaji">
+                    脅威の切れ味
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="jairoboru">
+                  <label class="form-check-label pawa-text-good fw-bold" for="jairoboru">
+                    ジャイロボール
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="haisupinnjairo">
+                  <label class="form-check-label pawa-text-special fw-bold" for="haisupinnjairo">
+                    ハイスピンジャイロ
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="omoitama">
+                  <label class="form-check-label pawa-text-good fw-bold" for="omoitama">
+                    重い球
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="karuitama">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="karuitama">
+                    軽い球
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kaibutukyuui">
+                  <label class="form-check-label pawa-text-special fw-bold" for="kaibutukyuui">
+                    怪物球威
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ２行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="nigedama">
+                  <label class="form-check-label pawa-text-good fw-bold" for="nigedama">
+                    逃げ球
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="ippatu">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="ippatu">
+                    一発
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="honnruidagennkinn">
+                  <label class="form-check-label pawa-text-special fw-bold" for="honnruidagennkinn">
+                    本塁打厳禁
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="giatyennji">
+                  <label class="form-check-label pawa-text-special fw-bold" for="giatyennji">
+                    ギアチェンジ
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="siriagari">
+                  <label class="form-check-label pawa-text-good fw-bold" for="siriagari">
+                    尻上がり
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="syuubannryoku">
+                  <label class="form-check-label pawa-text-special fw-bold" for="syuubannryoku">
+                    終盤力
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="datusannsinn">
+                  <label class="form-check-label pawa-text-good fw-bold" for="datusannsinn">
+                    奪三振
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ３行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="doctor-k">
+                  <label class="form-check-label pawa-text-special fw-bold" for="doctor-k">
+                    ドクターK
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kennsei">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kennsei">
+                    牽制◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="release">
+                  <label class="form-check-label pawa-text-good fw-bold" for="release">
+                    リリース◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="dakyuuhannnou">
+                  <label class="form-check-label pawa-text-good fw-bold" for="dakyuuhannnou">
+                    打球反応◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="katiunn">
+                  <label class="form-check-label pawa-text-good fw-bold" for="katiunn">
+                    勝ち運
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="makeunn">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="makeunn">
+                    負け運
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="syourinohosi">
+                  <label class="form-check-label pawa-text-special fw-bold" for="syourinohosi">
+                    勝利の星
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ４行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="tousi">
+                  <label class="form-check-label pawa-text-good fw-bold" for="tousi">
+                    闘志
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="toukonn">
+                  <label class="form-check-label pawa-text-special fw-bold" for="toukonn">
+                    闘魂
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="iatukanntousyu">
+                  <label class="form-check-label pawa-text-good fw-bold" for="iatukanntousyu">
+                    威圧感(投手)
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="konnjyou">
+                  <label class="form-check-label pawa-text-good fw-bold" for="konnjyou">
+                    根性◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="dokonnjyou">
+                  <label class="form-check-label pawa-text-special fw-bold" for="dokonnjyou">
+                    ド根性
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="crossfire">
+                  <label class="form-check-label pawa-text-good fw-bold" for="crossfire">
+                    クロスファイヤー
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="crosscannon">
+                  <label class="form-check-label pawa-text-special fw-bold" for="crosscannon">
+                    クロスキャノン
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ５行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="tamamoti">
+                  <label class="form-check-label pawa-text-good fw-bold" for="tamamoti">
+                    球持ち◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="delayedarm">
+                  <label class="form-check-label pawa-text-special fw-bold" for="delayedarm">
+                    ディレイドアーム
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="hikume">
+                  <label class="form-check-label pawa-text-good fw-bold" for="hikume">
+                    低め◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="seimitukikai">
+                  <label class="form-check-label pawa-text-special fw-bold" for="seimitukikai">
+                    精密機械
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kannkyuu">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kannkyuu">
+                    緩急◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="henngennjizai">
+                  <label class="form-check-label pawa-text-special fw-bold" for="henngennjizai">
+                    変幻自在
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="taikyoudasya">
+                  <label class="form-check-label pawa-text-good fw-bold" for="taikyoudasya">
+                    対強打者◯
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ６行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="syuhoukiller">
+                  <label class="form-check-label pawa-text-special fw-bold" for="syuhoukiller">
+                    主砲キラー
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kinnkyuutoubann">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kinnkyuutoubann">
+                    緊急登板◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kyuusokuanntei">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kyuusokuanntei">
+                    球速安定
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="naikakuzeme">
+                  <label class="form-check-label pawa-text-good fw-bold" for="naikakuzeme">
+                    内角攻め
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="naikakumusou">
+                  <label class="form-check-label pawa-text-special fw-bold" for="naikakumusou">
+                    内角無双
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kaimatagi">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kaimatagi">
+                    回またぎ◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="toudayakudou">
+                  <label class="form-check-label pawa-text-good fw-bold" for="toudayakudou">
+                    投打躍動
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ７行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="tyoutoudayakudou">
+                  <label class="form-check-label pawa-text-special fw-bold" for="tyoutoudayakudou">
+                    超投打躍動
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-gb" type="checkbox" value="" id="flyballpitcher">
+                  <label class="form-check-label pawa-text-gb fw-bold tighter-letter-spacing" for="flyballpitcher">
+                    フライボールピッチャー
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-gb" type="checkbox" value="" id="goropitcher">
+                  <label class="form-check-label pawa-text-gb fw-bold" for="goropitcher">
+                    ゴロピッチャー
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-gb" type="checkbox" value="" id="pokerface">
+                  <label class="form-check-label pawa-text-gb fw-bold" for="pokerface">
+                    ポーカーフェイス
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="naturalshoot">
+                  <label class="form-check-label pawa-text-good fw-bold" for="naturalshoot">
+                    ナチュラルシュート
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="shootkaitenn">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="shootkaitenn">
+                    シュート回転
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="sunnzenn">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="sunnzenn">
+                    寸前✕
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ８行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-gb" type="checkbox" value="" id="aredama">
+                  <label class="form-check-label pawa-text-gb fw-bold" for="aredama">
+                    荒れ球
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="abaredama">
+                  <label class="form-check-label pawa-text-special fw-bold" for="abaredama">
+                    暴れ球
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="sikyuu">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="sikyuu">
+                    四球
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-gb" type="checkbox" value="" id="zennkai">
+                  <label class="form-check-label pawa-text-gb fw-bold" for="zennkai">
+                    全開
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kannzennnennsyou">
+                  <label class="form-check-label pawa-text-special fw-bold" for="kannzennnennsyou">
+                    完全燃焼
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="tairannermaru">
+                  <label class="form-check-label pawa-text-good fw-bold" for="tairannermaru">
+                    対ランナー◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="tairannerbatu">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="tairannerbatu">
+                    対ランナー✕
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ９行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="tatiagari">
+                  <label class="form-check-label pawa-text-good fw-bold" for="tatiagari">
+                    立ち上がり◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="slowstarter">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="slowstarter">
+                    スロースターター
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="topgear">
+                  <label class="form-check-label pawa-text-special fw-bold" for="topgear">
+                    トップギア
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="tannki">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="tannki">
+                    短期
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-gb" type="checkbox" value="" id="tikarahaibunn">
+                  <label class="form-check-label pawa-text-gb fw-bold" for="tikarahaibunn">
+                    力配分
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="massura">
+                  <label class="form-check-label pawa-text-good fw-bold" for="massura">
+                    真っスラ
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="yousyo">
+                  <label class="form-check-label pawa-text-good fw-bold" for="yousyo">
+                    要所◯
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# 10行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="ranntyou">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="ranntyou">
+                    乱調
+                  </label>
+                </div>
+              </div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%= f.fields_for :pawapuro_fielder do |fielder_f| %>
+        <%# 野手基本能力 %>
+        <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+          野手基本能力
+        </div>
+        <div class="mb-3">
+          <div class="mb-3">
+            <%# 基本能力 %>
+            <div class="mb-3">
+              <div class="row">
+                <div class="col">
+                  <%= fielder_f.label :trajectory, "弾道", class: "form-label" %>
+                  <div class="input-group">
+                    <%= fielder_f.number_field :trajectory, class: "form-control", id:"trajectory-input", value: 1, min: 1, max: 4 %>
+                    <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" style="transform: rotate(-10deg);"></i></span>
+                  </div>
+                </div>
+                <div class="col">
+                  <%= fielder_f.label :meat, "ミート", class: "form-label" %>
+                  <div class="input-group">
+                    <%= fielder_f.number_field :meat, class: "form-control", id:"meat-input", value: 1, min: 1, max: 100 %>
+                    <span class="input-group-text text-white pawa-bg-g" id="meat-alphabet-display">G</span>
+                  </div>
+                </div>
+                <div class="col">
+                  <%= fielder_f.label :power, "パワー", class: "form-label" %>
+                  <div class="input-group">
+                    <%= fielder_f.number_field :power, class: "form-control", id:"power-input", value: 1, min: 1, max: 100 %>
+                    <span class="input-group-text text-white pawa-bg-g" id="power-alphabet-display">G</span>
+                  </div>
+                </div>
+                <div class="col">
+                  <%= fielder_f.label :running, "走力", class: "form-label" %>
+                  <div class="input-group">
+                    <%= fielder_f.number_field :running, class: "form-control", id:"running-input", value: 1, min: 1, max: 100 %>
+                    <span class="input-group-text text-white pawa-bg-g" id="running-alphabet-display">G</span>
+                  </div>
+                </div>
+                <div class="col">
+                  <%= fielder_f.label :arm_strength, "肩力", class: "form-label" %>
+                  <div class="input-group">
+                    <%= fielder_f.number_field :arm_strength, class: "form-control", id:"arm_strength-input", value: 1, min: 1, max: 100 %>
+                    <span class="input-group-text text-white pawa-bg-g" id="arm_strength-alphabet-display">G</span>
+                  </div>
+                </div>
+                <div class="col">
+                  <%= fielder_f.label :defense, "守備力", class: "form-label" %>
+                  <div class="input-group">
+                    <%= fielder_f.number_field :defense, class: "form-control", id:"defense-input", value: 1, min: 1, max: 100 %>
+                    <span class="input-group-text text-white pawa-bg-g" id="defense-alphabet-display">G</span>
+                  </div>
+                </div>
+                <div class="col">
+                  <%= fielder_f.label :catching, "捕球", class: "form-label" %>
+                  <div class="input-group">
+                    <%= fielder_f.number_field :catching, class: "form-control", id:"catching-input", value: 1, min: 1, max: 100 %>
+                    <span class="input-group-text text-white pawa-bg-g" id="catching-alphabet-display">G</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%# 野手特殊能力 %>
+        <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+          野手特殊能力
+        </div>
+        <div class="mb-3">
+          <%# 数値あり %>
+          <div class="row mb-2">
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= fielder_f.label :chance, "チャンス", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= fielder_f.select :chance, 
+                  options_for_select([
+                      ["勝負師", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "chance-select" } 
+                %>
+              </div>
+            </div>
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= fielder_f.label :taihidaritousyu, "対左投手", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= fielder_f.select :taihidaritousyu, 
+                  options_for_select([
+                      ["左腕キラー", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "taihidaritousyu-select" } 
+                %>
+              </div>
+            </div>
+            <%# TODO: ポジション（サブポジ含む）にキャッチャーがない場合は非活性 %>
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= fielder_f.label :catcher, "キャッチャー", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= fielder_f.select :catcher, 
+                  options_for_select([
+                      ["球界の頭脳", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "catcher-select" } 
+                %>
+              </div>
+            </div>
+            <%# <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <label class="form-label small mb-0">キャッチャー</label>
+              </div>
+              <div class="col-8">
+                <select class="form-select" aria-label="Default select example" disabled>
+                  <option value="4" class="pawa-bg-sa-sp2">球界の頭脳</option>
+                  <option value="3" class="pawa-bg-sa-g2">A</option>
+                  <option value="2" class="pawa-bg-sa-g2">B</option>
+                  <option value="1" class="bg-white">C</option>
+                  <option value="0" class="bg-white" selected>D</option>
+                  <option value="-1" class="bg-white">E</option>
+                  <option value="-2" class="pawa-bg-sa-b2">F</option>
+                  <option value="-3" class="pawa-bg-sa-b2">G</option>
+                </select>
+              </div>
+            </div> %>
+          </div>
+          <div class="row mb-2">
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= fielder_f.label :tourui, "盗塁", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= fielder_f.select :tourui, 
+                  options_for_select([
+                      ["電光石火", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "tourui-select" } 
+                %>
+              </div>
+            </div>
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= fielder_f.label :sourui, "走塁", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= fielder_f.select :sourui, 
+                  options_for_select([
+                      ["高速ベースラン", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "sourui-select" } 
+                %>
+              </div>
+            </div>
+            <div class="col row">
+              <div class="col-4 d-flex align-items-center">
+                <%= fielder_f.label :soukyuu, "送球", class: "form-label small mb-0" %>
+              </div>
+              <div class="col-8">
+                <%= fielder_f.select :soukyuu, 
+                  options_for_select([
+                      ["ストライク送球", 4, {class: "pawa-bg-sa-sp2"}],
+                      ["A", 3, {class: "pawa-bg-sa-g2"}],
+                      ["B", 2, {class: "pawa-bg-sa-g2"}],
+                      ["C", 1, {class: "bg-white"}],
+                      ["D", 0, {class: "bg-white", selected: true}],
+                      ["E", -1, {class: "bg-white"}],
+                      ["F", -2, {class: "pawa-bg-sa-b2"}],
+                      ["G", -3, {class: "pawa-bg-sa-b2"}],
+                  ]), 
+                  {}, 
+                  { class: "form-select", id: "soukyuu-select" } 
+                %>
+              </div>
+            </div>
+          </div>
+          <%# 数値なし %>
+          <div class="mb-3">
+            <%# FIXME: 片方のみ選択できるようにしたい %>
+            <%# １行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="sasayakisennjyutu">
+                  <label class="form-check-label pawa-text-special fw-bold" for="sasayakisennjyutu">
+                    ささやき戦術
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="bazookasoukyuu">
+                  <label class="form-check-label pawa-text-special fw-bold" for="bazookasoukyuu">
+                    バズーカ送球
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="averagehitter">
+                  <label class="form-check-label pawa-text-good fw-bold" for="averagehitter">
+                    アベレージヒッター
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="anndaseizouki">
+                  <label class="form-check-label pawa-text-special fw-bold" for="anndaseizouki">
+                    安打製造機
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="powerhitter">
+                  <label class="form-check-label pawa-text-good fw-bold" for="powerhitter">
+                    パワーヒッター
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="artist">
+                  <label class="form-check-label pawa-text-special fw-bold" for="artist">
+                    アーチスト
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="linedrive">
+                  <label class="form-check-label pawa-text-good fw-bold" for="linedrive">
+                    ラインドライブ
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ２行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="koukakudahou">
+                  <label class="form-check-label pawa-text-good fw-bold" for="koukakudahou">
+                    広角打法
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="koukakuhou">
+                  <label class="form-check-label pawa-text-special fw-bold" for="koukakuhou">
+                    広角砲
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="pullhitter">
+                  <label class="form-check-label pawa-text-good fw-bold" for="pullhitter">
+                    プルヒッター
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="hippariya">
+                  <label class="form-check-label pawa-text-special fw-bold" for="hippariya">
+                    引っ張り屋
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="nagasiuti">
+                  <label class="form-check-label pawa-text-good fw-bold" for="nagasiuti">
+                    流し打ち
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="geijyututekinagasiuti">
+                  <label class="form-check-label pawa-text-special fw-bold" for="geijyututekinagasiuti">
+                    芸術的流し打ち
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="katameuti">
+                  <label class="form-check-label pawa-text-good fw-bold" for="katameuti">
+                    固め打ち
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ３行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="mettauti">
+                  <label class="form-check-label pawa-text-special fw-bold" for="mettauti">
+                    メッタ打ち
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="nebariuti">
+                  <label class="form-check-label pawa-text-good fw-bold" for="nebariuti">
+                    粘り打ち
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="sannsinn">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="sannsinn">
+                    三振
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="sennpuuki">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="sennpuuki">
+                    扇風機
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="bunt">
+                  <label class="form-check-label pawa-text-good fw-bold" for="bunt">
+                    バント◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="buntsyokuninn">
+                  <label class="form-check-label pawa-text-good fw-bold" for="buntsyokuninn">
+                    バント職人
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="naiyaannda">
+                  <label class="form-check-label pawa-text-good fw-bold" for="naiyaannda">
+                    内野安打◯
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ４行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="rocketstart">
+                  <label class="form-check-label pawa-text-special fw-bold" for="rocketstart">
+                    ロケットスタート
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="syokyuu">
+                  <label class="form-check-label pawa-text-good fw-bold" for="syokyuu">
+                    初球◯
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="ikkyuunyuukonn">
+                  <label class="form-check-label pawa-text-special fw-bold" for="ikkyuunyuukonn">
+                    一球入魂
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="chancemaker">
+                  <label class="form-check-label pawa-text-good fw-bold" for="chancemaker">
+                    チャンスメーカー
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kirikomitaityou">
+                  <label class="form-check-label pawa-text-special fw-bold" for="kirikomitaityou">
+                    切り込み隊長
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="gyakkyou">
+                  <label class="form-check-label pawa-text-good fw-bold" for="gyakkyou">
+                    逆境〇
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kajibanobakajikara">
+                  <label class="form-check-label pawa-text-special fw-bold" for="kajibanobakajikara">
+                    火事場の馬鹿力
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ５行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="daida">
+                  <label class="form-check-label pawa-text-good fw-bold" for="daida">
+                    代打〇
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="daidanokamisama">
+                  <label class="form-check-label pawa-text-special fw-bold" for="daidanokamisama">
+                    代打の神様
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="highballhitter">
+                  <label class="form-check-label pawa-text-good fw-bold" for="highballhitter">
+                    ハイボールヒッター
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="koukyuuhituda">
+                  <label class="form-check-label pawa-text-special fw-bold" for="koukyuuhituda">
+                    高球必打
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="lowballhitter">
+                  <label class="form-check-label pawa-text-good fw-bold" for="lowballhitter">
+                    ローボールヒッター
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="teikyuuhituda">
+                  <label class="form-check-label pawa-text-special fw-bold" for="teikyuuhituda">
+                    低球必打
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="ibusiginn">
+                  <label class="form-check-label pawa-text-good fw-bold" for="ibusiginn">
+                    いぶし銀
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ６行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="syubisyokuninn">
+                  <label class="form-check-label pawa-text-good fw-bold" for="syubisyokuninn">
+                    守備職人
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="majyutusi">
+                  <label class="form-check-label pawa-text-special fw-bold" for="majyutusi">
+                    魔術師
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="moodmaru">
+                  <label class="form-check-label pawa-text-good fw-bold" for="moodmaru">
+                    ムード〇
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="moodbatu">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="moodbatu">
+                    ムード×
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="seisinntekisityuu">
+                  <label class="form-check-label pawa-text-special fw-bold" for="seisinntekisityuu">
+                    精神的支柱
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="igaisei">
+                  <label class="form-check-label pawa-text-good fw-bold" for="igaisei">
+                    意外性
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="oobannkuruwase">
+                  <label class="form-check-label pawa-text-special fw-bold" for="oobannkuruwase">
+                    大番狂わせ
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ７行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="taiace">
+                  <label class="form-check-label pawa-text-good fw-bold" for="taiace">
+                    対エース〇
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="acekiller">
+                  <label class="form-check-label pawa-text-special fw-bold" for="acekiller">
+                    エースキラー
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="hometotunyuu">
+                  <label class="form-check-label pawa-text-good fw-bold" for="hometotunyuu">
+                    ホーム突入
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="jyuusennsya">
+                  <label class="form-check-label pawa-text-special fw-bold" for="jyuusennsya">
+                    重戦車
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="pressurerun">
+                  <label class="form-check-label pawa-text-good fw-bold" for="pressurerun">
+                    プレッシャーラン
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kakurann">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kakurann">
+                    かく乱
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="trickstar">
+                  <label class="form-check-label pawa-text-special fw-bold" for="trickstar">
+                    トリックスター
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ８行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="incoursehitter">
+                  <label class="form-check-label pawa-text-good fw-bold" for="incoursehitter">
+                    インコースヒッター
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="naikakuhituda">
+                  <label class="form-check-label pawa-text-special fw-bold" for="naikakuhituda">
+                    内角必打
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="outcoursehitter">
+                  <label class="form-check-label pawa-text-good fw-bold tighter-letter-spacing" for="outcoursehitter">
+                    アウトコースヒッター
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="gaikakuhituda">
+                  <label class="form-check-label pawa-text-special fw-bold" for="gaikakuhituda">
+                    外角必打
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="taihennkakyuu">
+                  <label class="form-check-label pawa-text-good fw-bold" for="taihennkakyuu">
+                    対変化球〇
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="dameosi">
+                  <label class="form-check-label pawa-text-good fw-bold" for="dameosi">
+                    ダメ押し
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="iatukannyasyu">
+                  <label class="form-check-label pawa-text-good fw-bold" for="iatukannyasyu">
+                    威圧感(野手)
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# ９行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-gb" type="checkbox" value="" id="akkyuuuti">
+                  <label class="form-check-label pawa-text-gb fw-bold" for="akkyuuuti">
+                    悪球打ち
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="error">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="error">
+                    エラー
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="omaturiotoko">
+                  <label class="form-check-label pawa-text-good fw-bold" for="omaturiotoko">
+                    お祭り男
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="cututi">
+                  <label class="form-check-label pawa-text-good fw-bold" for="cututi">
+                    カット打ち
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kyuuti">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kyuuti">
+                    窮地〇
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="heatup">
+                  <label class="form-check-label pawa-text-special fw-bold" for="heatup">
+                    ヒートアップ
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kessyuouda">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kessyuouda">
+                    決勝打
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# 10行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="konnsinnnokessyouda">
+                  <label class="form-check-label pawa-text-special fw-bold" for="konnsinnnokessyouda">
+                    渾身の決勝打
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kousokucharge">
+                  <label class="form-check-label pawa-text-good fw-bold" for="kousokucharge">
+                    高速チャージ
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="sayonaraotokoannda">
+                  <label class="form-check-label pawa-text-good fw-bold" for="sayonaraotokoannda">
+                    サヨナラ男(安打)
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="sayonaraotokohonnruida">
+                  <label class="form-check-label pawa-text-good fw-bold tighter-letter-spacing" for="sayonaraotokohonnruida">
+                    サヨナラ男(本塁打)
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="dennsetunosayonaraotoko">
+                  <label class="form-check-label pawa-text-special fw-bold" for="dennsetunosayonaraotoko">
+                    伝説のサヨナラ男
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="taistraight">
+                  <label class="form-check-label pawa-text-good fw-bold" for="taistraight">
+                    対ストレート〇
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="heisatu">
+                  <label class="form-check-label pawa-text-bad fw-bold" for="heisatu">
+                    併殺
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# 11行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="headsliding">
+                  <label class="form-check-label pawa-text-good fw-bold tighter-letter-spacing" for="headsliding">
+                    ヘッドスライディング
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kihakuhead">
+                  <label class="form-check-label pawa-text-special fw-bold" for="kihakuhead">
+                    気迫ヘッド
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="homesisyu">
+                  <label class="form-check-label pawa-text-good fw-bold" for="homesisyu">
+                    ホーム死守
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="terunokabe">
+                  <label class="form-check-label pawa-text-special fw-bold" for="terunokabe">
+                    鉄の壁
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="mulchdann">
+                  <label class="form-check-label pawa-text-good fw-bold" for="mulchdann">
+                    マルチ弾
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="mannruiotokoannda">
+                  <label class="form-check-label pawa-text-good fw-bold" for="mannruiotokoannda">
+                    満塁男(安打)
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="mannruiotokohonnruida">
+                  <label class="form-check-label pawa-text-good fw-bold" for="mannruiotokohonnruida">
+                    満塁男(本塁打)
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# 12行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kyoufunomannruiotoko">
+                  <label class="form-check-label pawa-text-special fw-bold" for="kyoufunomannruiotoko">
+                    恐怖の満塁男
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="revenge">
+                  <label class="form-check-label pawa-text-good fw-bold" for="revenge">
+                    リベンジ
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="gyakusyuu">
+                  <label class="form-check-label pawa-text-special fw-bold" for="gyakusyuu">
+                    逆襲
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="laserbeam">
+                  <label class="form-check-label pawa-text-good fw-bold" for="laserbeam">
+                    レーザービーム
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kousokulaser">
+                  <label class="form-check-label pawa-text-special fw-bold" for="kousokulaser">
+                    高速レーザー
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="haruotoko">
+                  <label class="form-check-label pawa-text-good fw-bold" for="haruotoko">
+                    春男
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="hatuotoko">
+                  <label class="form-check-label pawa-text-good fw-bold" for="hatuotoko">
+                    夏男
+                  </label>
+                </div>
+              </div>
+            </div>
+            <%# 13行目 %>
+            <div class="row">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="akiotoko">
+                  <label class="form-check-label pawa-text-good fw-bold" for="akiotoko">
+                    秋男
+                  </label>
+                </div>
+              </div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%# COM操作起用法特殊能力 %>
+      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+        COM操作起用法特殊能力
+      </div>
+      <%# １行目 %>
+      <div class="mb-3">
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="meettayou">
+              <label class="form-check-label pawa-text-sub fw-bold" for="meettayou">
+                ミート多用
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="kyousinntayou">
+              <label class="form-check-label pawa-text-sub fw-bold" for="kyousinntayou">
+                強振多用
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="sekkyokudahou">
+              <label class="form-check-label pawa-text-sub fw-bold" for="sekkyokudahou">
+                積極打法
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="sinntyoudahou">
+              <label class="form-check-label pawa-text-sub fw-bold" for="sinntyoudahou">
+                慎重打法
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="sekkyokutourui">
+              <label class="form-check-label pawa-text-sub fw-bold" for="sekkyokutourui">
+                積極盗塁
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="sinntyoutourui">
+              <label class="form-check-label pawa-text-sub fw-bold" for="sinntyoutourui">
+                慎重盗塁
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="sekkyokusyubi">
+              <label class="form-check-label pawa-text-sub fw-bold" for="sekkyokusyubi">
+                積極守備
+              </label>
+            </div>
+          </div>
+        </div>
+        <%# ２行目 %>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="sekkyokusourui">
+              <label class="form-check-label pawa-text-sub fw-bold" for="sekkyokusourui">
+                積極走塁
+              </label>
+            </div>
+          </div>
+          <%# TODO: 選球眼のみ？（他にもないか確認）、野手テーブルに保存。 %>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="sennkyuugann">
+              <label class="form-check-label pawa-text-sub fw-bold" for="sennkyuugann">
+                選球眼
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="sokyuutyuusinn">
+              <label class="form-check-label pawa-text-sub fw-bold" for="sokyuutyuusinn">
+                速球中心
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="hennkakyuutyuusinn">
+              <label class="form-check-label pawa-text-sub fw-bold" for="hennkakyuutyuusinn">
+                変化球中心
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="teamplaymaru">
+              <label class="form-check-label pawa-text-sub fw-bold" for="teamplaymaru">
+                チームプレイ◯
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="teamplaybatu">
+              <label class="form-check-label pawa-text-sub fw-bold" for="teamplaybatu">
+                チームプレイ✕
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="tyousianntei">
+              <label class="form-check-label pawa-text-sub fw-bold" for="tyousianntei">
+                調子安定
+              </label>
+            </div>
+          </div>
+        </div>
+        <%# ３行目 %>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="tyousikyokutann">
+              <label class="form-check-label pawa-text-sub fw-bold" for="tyousikyokutann">
+                調子極端
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="tetuwann">
+              <%# TODO: アイコンつけて、注意文言を表示「投手にのみ影響します。」 %>
+              <label class="form-check-label pawa-text-special fw-bold" for="tetuwann">
+                鉄腕
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="tempo">
+              <label class="form-check-label pawa-text-sub fw-bold" for="tempo">
+                テンポ◯
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="tousyuitihidari">
+              <label class="form-check-label pawa-text-sub fw-bold" for="tousyuitihidari">
+                投手位置左
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="tousyuitimigi">
+              <label class="form-check-label pawa-text-sub fw-bold" for="tousyuitimigi">
+                投手位置右
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="ninnkimono">
+              <label class="form-check-label pawa-text-sub fw-bold" for="ninnkimono">
+                人気者
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input pawa-checkbox-sb" type="checkbox" value="" id="furusyutujyou">
+              <label class="form-check-label pawa-text-sub fw-bold" for="furusyutujyou">
+                フル出場
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%# その他 %>
+      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+        その他
+      </div>
+      <div class="mb-3">
+        <%= f.label :note, '備考', class: 'form-label' %>
+        <%= f.text_area :note, rows: 3, class: 'form-control', id: 'bikou' %>
+      </div>
+      <%# 検索ボタン %>
+      <%# <input type="submit" class="btn btn-primary" value="登録する"> %>
+      <%= f.submit '登録する', class: "btn btn-primary" %>
+      <%# TODO: 登録前に確認画面に遷移させる %>
+      <%#= link_to '入力内容確認画面へ', confirm_pawapuro_index_path, class: 'btn btn-primary' %>
+      <%# TODO: クリアボタン %>
+    </form>
+  <% end %>
+</div>

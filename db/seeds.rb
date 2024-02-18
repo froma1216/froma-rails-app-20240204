@@ -121,7 +121,7 @@ pawapuro_pitcher = PawapuroPitcher.create(
   utarezuyosa: 0,
   nobi: -1,
   quick: 1,
-  other_special_abilities: "キレ○,奪三振,球速安定,投打躍動",
+  other_special_abilities: "キレ◯,奪三振,球速安定,投打躍動",
   created_by: "master",
   updated_by: "master"
 )

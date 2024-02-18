@@ -110,7 +110,7 @@
     </div>
     <%# 値なし %>
     <%# FIXME: 部分テンプレートに切り出し %>
-    <% abilities_array = @player.pawapuro_fielder.other_special_abilities.present? ? @player.pawapuro_fielder.other_special_abilities.split(',') : [] %>
+    <% abilities_array = @player.other_special_abilities.present? ? @player.other_special_abilities.split(',') : [] %>
     <% 6.times do |row| %>
       <div class="row">
         <% (row*4...row*4+4).each do |index| %>

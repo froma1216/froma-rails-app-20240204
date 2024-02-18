@@ -32,7 +32,7 @@ class CreatePawapuroPitchers < ActiveRecord::Migration[7.1]
       t.integer :utarezuyosa
       t.integer :nobi
       t.integer :quick
-      t.integer :other_special_abilities
+      t.string :other_special_abilities
       t.string :created_by
       t.string :updated_by
 

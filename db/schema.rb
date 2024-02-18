@@ -98,7 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_112308) do
     t.integer "utarezuyosa"
     t.integer "nobi"
     t.integer "quick"
-    t.integer "other_special_abilities"
+    t.string "other_special_abilities"
     t.string "created_by"
     t.string "updated_by"
     t.datetime "created_at", null: false

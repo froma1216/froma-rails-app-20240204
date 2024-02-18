@@ -1,0 +1,16 @@
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+/home/shoudaisatoh/.anyenv/envs/rbenv/versions/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20240217-345198-r4sms sitelibdir\=./.gem.20240217-345198-r4sms clean
+
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20240217-345198-r4sms sitelibdir\=./.gem.20240217-345198-r4sms
+make: Nothing to be done for 'all'.
+
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20240217-345198-r4sms sitelibdir\=./.gem.20240217-345198-r4sms install
+
+current directory: /home/shoudaisatoh/froma-rails-app-20240204/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20240217-345198-r4sms sitelibdir\=./.gem.20240217-345198-r4sms clean

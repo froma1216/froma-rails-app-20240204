@@ -34,7 +34,11 @@ class PawapuroController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    @player = PawapuroPlayer.find(params[:id])
+    @player.destroy
+    redirect_to pawapuro_index_path, notice: "「選手名：#{@player.player_name}」は削除されました"
+  end
 
   private
 

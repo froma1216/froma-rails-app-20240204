@@ -1434,18 +1434,14 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" name="pawapuro_player[pawapuro_fielder_attributes][other_special_abilities][]" value="ささやき戦術" id="sasayakisennjyutu">
-                  <label class="form-check-label pawa-text-special fw-bold" for="sasayakisennjyutu">
-                    ささやき戦術
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "sasayakisennjyutu" }, "ささやき戦術", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ささやき戦術", class: "form-check-label pawa-text-special fw-bold", for: "sasayakisennjyutu" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" name="pawapuro_player[pawapuro_fielder_attributes][other_special_abilities][]" value="バズーカ送球" id="bazookasoukyuu">
-                  <label class="form-check-label pawa-text-special fw-bold" for="bazookasoukyuu">
-                    バズーカ送球
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "bazookasoukyuu" }, "バズーカ送球", nil %>
+                  <%= fielder_f.label :other_special_abilities, "バズーカ送球", class: "form-check-label pawa-text-special fw-bold", for: "bazookasoukyuu" %>
                 </div>
               </div>
               <div class="col">

@@ -20,6 +20,13 @@ class PawapuroController < ApplicationController
   # 選手作成アクション
   def create
     @player = PawapuroPlayer.new(player_params)
+
+    # pawapuro_fielder_attributesのother_special_abilitiesを連結
+    if params[:pawapuro_player][:pawapuro_fielder_attributes].present? && params[:pawapuro_player][:pawapuro_fielder_attributes][:other_special_abilities].present?
+      other_special_abilities = params[:pawapuro_player][:pawapuro_fielder_attributes][:other_special_abilities].join(",")
+      @player.pawapuro_fielder[:other_special_abilities] = other_special_abilities
+    end
+
     if @player.save
       # 成功時の処理（例：リダイレクト）
       # redirect_to some_path, notice: 'Player was successfully created.'

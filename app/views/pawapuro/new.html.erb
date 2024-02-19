@@ -1446,42 +1446,32 @@
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="averagehitter">
-                  <label class="form-check-label pawa-text-good fw-bold" for="averagehitter">
-                    アベレージヒッター
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "averagehitter" }, "アベレージヒッター", nil %>
+                  <%= fielder_f.label :other_special_abilities, "アベレージヒッター", class: "form-check-label pawa-text-good fw-bold", for: "averagehitter" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="anndaseizouki">
-                  <label class="form-check-label pawa-text-special fw-bold" for="anndaseizouki">
-                    安打製造機
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "anndaseizouki" }, "安打製造機", nil %>
+                  <%= fielder_f.label :other_special_abilities, "安打製造機", class: "form-check-label pawa-text-special fw-bold", for: "anndaseizouki" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="powerhitter">
-                  <label class="form-check-label pawa-text-good fw-bold" for="powerhitter">
-                    パワーヒッター
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "powerhitter" }, "パワーヒッター", nil %>
+                  <%= fielder_f.label :other_special_abilities, "パワーヒッター", class: "form-check-label pawa-text-good fw-bold", for: "powerhitter" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="artist">
-                  <label class="form-check-label pawa-text-special fw-bold" for="artist">
-                    アーチスト
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "artist" }, "アーチスト", nil %>
+                  <%= fielder_f.label :other_special_abilities, "アーチスト", class: "form-check-label pawa-text-special fw-bold", for: "artist" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="linedrive">
-                  <label class="form-check-label pawa-text-good fw-bold" for="linedrive">
-                    ラインドライブ
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "linedrive" }, "ラインドライブ", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ラインドライブ", class: "form-check-label pawa-text-good fw-bold", for: "linedrive" %>
                 </div>
               </div>
             </div>
@@ -1489,58 +1479,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="koukakudahou">
-                  <label class="form-check-label pawa-text-good fw-bold" for="koukakudahou">
-                    広角打法
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "koukakudahou" }, "広角打法", nil %>
+                  <%= fielder_f.label :other_special_abilities, "広角打法", class: "form-check-label pawa-text-good fw-bold", for: "koukakudahou" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="koukakuhou">
-                  <label class="form-check-label pawa-text-special fw-bold" for="koukakuhou">
-                    広角砲
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "koukakuhou" }, "広角砲", nil %>
+                  <%= fielder_f.label :other_special_abilities, "広角砲", class: "form-check-label pawa-text-special fw-bold", for: "koukakuhou" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="pullhitter">
-                  <label class="form-check-label pawa-text-good fw-bold" for="pullhitter">
-                    プルヒッター
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "pullhitter" }, "プルヒッター", nil %>
+                  <%= fielder_f.label :other_special_abilities, "プルヒッター", class: "form-check-label pawa-text-good fw-bold", for: "pullhitter" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="hippariya">
-                  <label class="form-check-label pawa-text-special fw-bold" for="hippariya">
-                    引っ張り屋
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "hippariya" }, "引っ張り屋", nil %>
+                  <%= fielder_f.label :other_special_abilities, "引っ張り屋", class: "form-check-label pawa-text-special fw-bold", for: "hippariya" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="nagasiuti">
-                  <label class="form-check-label pawa-text-good fw-bold" for="nagasiuti">
-                    流し打ち
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "nagasiuti" }, "流し打ち", nil %>
+                  <%= fielder_f.label :other_special_abilities, "流し打ち", class: "form-check-label pawa-text-good fw-bold", for: "nagasiuti" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="geijyututekinagasiuti">
-                  <label class="form-check-label pawa-text-special fw-bold" for="geijyututekinagasiuti">
-                    芸術的流し打ち
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "geijyututekinagasiuti" }, "芸術的流し打ち", nil %>
+                  <%= fielder_f.label :other_special_abilities, "芸術的流し打ち", class: "form-check-label pawa-text-special fw-bold", for: "geijyututekinagasiuti" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="katameuti">
-                  <label class="form-check-label pawa-text-good fw-bold" for="katameuti">
-                    固め打ち
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "katameuti" }, "固め打ち", nil %>
+                  <%= fielder_f.label :other_special_abilities, "固め打ち", class: "form-check-label pawa-text-good fw-bold", for: "katameuti" %>
                 </div>
               </div>
             </div>
@@ -1548,58 +1524,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="mettauti">
-                  <label class="form-check-label pawa-text-special fw-bold" for="mettauti">
-                    メッタ打ち
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "mettauti" }, "メッタ打ち", nil %>
+                  <%= fielder_f.label :other_special_abilities, "メッタ打ち", class: "form-check-label pawa-text-special fw-bold", for: "mettauti" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="nebariuti">
-                  <label class="form-check-label pawa-text-good fw-bold" for="nebariuti">
-                    粘り打ち
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "nebariuti" }, "粘り打ち", nil %>
+                  <%= fielder_f.label :other_special_abilities, "粘り打ち", class: "form-check-label pawa-text-good fw-bold", for: "nebariuti" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="sannsinn">
-                  <label class="form-check-label pawa-text-bad fw-bold" for="sannsinn">
-                    三振
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "sannsinn" }, "三振", nil %>
+                  <%= fielder_f.label :other_special_abilities, "三振", class: "form-check-label pawa-text-bad fw-bold", for: "sannsinn" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="sennpuuki">
-                  <label class="form-check-label pawa-text-bad fw-bold" for="sennpuuki">
-                    扇風機
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "sennpuuki" }, "扇風機", nil %>
+                  <%= fielder_f.label :other_special_abilities, "扇風機", class: "form-check-label pawa-text-bad fw-bold", for: "sennpuuki" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="bunt">
-                  <label class="form-check-label pawa-text-good fw-bold" for="bunt">
-                    バント◯
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "bunt" }, "バント◯", nil %>
+                  <%= fielder_f.label :other_special_abilities, "バント◯", class: "form-check-label pawa-text-good fw-bold", for: "bunt" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="buntsyokuninn">
-                  <label class="form-check-label pawa-text-good fw-bold" for="buntsyokuninn">
-                    バント職人
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "buntsyokuninn" }, "バント職人", nil %>
+                  <%= fielder_f.label :other_special_abilities, "バント職人", class: "form-check-label pawa-text-good fw-bold", for: "buntsyokuninn" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="naiyaannda">
-                  <label class="form-check-label pawa-text-good fw-bold" for="naiyaannda">
-                    内野安打◯
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "naiyaannda" }, "内野安打◯", nil %>
+                  <%= fielder_f.label :other_special_abilities, "内野安打◯", class: "form-check-label pawa-text-good fw-bold", for: "naiyaannda" %>
                 </div>
               </div>
             </div>
@@ -1607,58 +1569,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="rocketstart">
-                  <label class="form-check-label pawa-text-special fw-bold" for="rocketstart">
-                    ロケットスタート
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "rocketstart" }, "ロケットスタート", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ロケットスタート", class: "form-check-label pawa-text-special fw-bold", for: "rocketstart" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="syokyuu">
-                  <label class="form-check-label pawa-text-good fw-bold" for="syokyuu">
-                    初球◯
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "syokyuu" }, "初球◯", nil %>
+                  <%= fielder_f.label :other_special_abilities, "初球◯", class: "form-check-label pawa-text-good fw-bold", for: "syokyuu" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="ikkyuunyuukonn">
-                  <label class="form-check-label pawa-text-special fw-bold" for="ikkyuunyuukonn">
-                    一球入魂
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "ikkyuunyuukonn" }, "一球入魂", nil %>
+                  <%= fielder_f.label :other_special_abilities, "一球入魂", class: "form-check-label pawa-text-special fw-bold", for: "ikkyuunyuukonn" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="chancemaker">
-                  <label class="form-check-label pawa-text-good fw-bold" for="chancemaker">
-                    チャンスメーカー
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "chancemaker" }, "チャンスメーカー", nil %>
+                  <%= fielder_f.label :other_special_abilities, "チャンスメーカー", class: "form-check-label pawa-text-good fw-bold", for: "chancemaker" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kirikomitaityou">
-                  <label class="form-check-label pawa-text-special fw-bold" for="kirikomitaityou">
-                    切り込み隊長
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kirikomitaityou" }, "切り込み隊長", nil %>
+                  <%= fielder_f.label :other_special_abilities, "切り込み隊長", class: "form-check-label pawa-text-special fw-bold", for: "kirikomitaityou" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="gyakkyou">
-                  <label class="form-check-label pawa-text-good fw-bold" for="gyakkyou">
-                    逆境〇
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "gyakkyou" }, "逆境〇", nil %>
+                  <%= fielder_f.label :other_special_abilities, "逆境〇", class: "form-check-label pawa-text-good fw-bold", for: "gyakkyou" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kajibanobakajikara">
-                  <label class="form-check-label pawa-text-special fw-bold" for="kajibanobakajikara">
-                    火事場の馬鹿力
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kajibanobakajikara" }, "火事場の馬鹿力", nil %>
+                  <%= fielder_f.label :other_special_abilities, "火事場の馬鹿力", class: "form-check-label pawa-text-special fw-bold", for: "kajibanobakajikara" %>
                 </div>
               </div>
             </div>
@@ -1666,58 +1614,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="daida">
-                  <label class="form-check-label pawa-text-good fw-bold" for="daida">
-                    代打〇
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "daida" }, "代打〇", nil %>
+                  <%= fielder_f.label :other_special_abilities, "代打〇", class: "form-check-label pawa-text-good fw-bold", for: "daida" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="daidanokamisama">
-                  <label class="form-check-label pawa-text-special fw-bold" for="daidanokamisama">
-                    代打の神様
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "daidanokamisama" }, "代打の神様", nil %>
+                  <%= fielder_f.label :other_special_abilities, "代打の神様", class: "form-check-label pawa-text-special fw-bold", for: "daidanokamisama" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="highballhitter">
-                  <label class="form-check-label pawa-text-good fw-bold" for="highballhitter">
-                    ハイボールヒッター
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "highballhitter" }, "ハイボールヒッター", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ハイボールヒッター", class: "form-check-label pawa-text-good fw-bold", for: "highballhitter" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="koukyuuhituda">
-                  <label class="form-check-label pawa-text-special fw-bold" for="koukyuuhituda">
-                    高球必打
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "koukyuuhituda" }, "高球必打", nil %>
+                  <%= fielder_f.label :other_special_abilities, "高球必打", class: "form-check-label pawa-text-special fw-bold", for: "koukyuuhituda" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="lowballhitter">
-                  <label class="form-check-label pawa-text-good fw-bold" for="lowballhitter">
-                    ローボールヒッター
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "lowballhitter" }, "ローボールヒッター", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ローボールヒッター", class: "form-check-label pawa-text-good fw-bold", for: "lowballhitter" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="teikyuuhituda">
-                  <label class="form-check-label pawa-text-special fw-bold" for="teikyuuhituda">
-                    低球必打
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "teikyuuhituda" }, "低球必打", nil %>
+                  <%= fielder_f.label :other_special_abilities, "低球必打", class: "form-check-label pawa-text-special fw-bold", for: "teikyuuhituda" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="ibusiginn">
-                  <label class="form-check-label pawa-text-good fw-bold" for="ibusiginn">
-                    いぶし銀
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "ibusiginn" }, "いぶし銀", nil %>
+                  <%= fielder_f.label :other_special_abilities, "いぶし銀", class: "form-check-label pawa-text-good fw-bold", for: "ibusiginn" %>
                 </div>
               </div>
             </div>
@@ -1725,58 +1659,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="syubisyokuninn">
-                  <label class="form-check-label pawa-text-good fw-bold" for="syubisyokuninn">
-                    守備職人
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "syubisyokuninn" }, "守備職人", nil %>
+                  <%= fielder_f.label :other_special_abilities, "守備職人", class: "form-check-label pawa-text-good fw-bold", for: "syubisyokuninn" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="majyutusi">
-                  <label class="form-check-label pawa-text-special fw-bold" for="majyutusi">
-                    魔術師
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "majyutusi" }, "魔術師", nil %>
+                  <%= fielder_f.label :other_special_abilities, "魔術師", class: "form-check-label pawa-text-special fw-bold", for: "majyutusi" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="moodmaru">
-                  <label class="form-check-label pawa-text-good fw-bold" for="moodmaru">
-                    ムード〇
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "moodmaru" }, "ムード〇", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ムード〇", class: "form-check-label pawa-text-good fw-bold", for: "moodmaru" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="moodbatu">
-                  <label class="form-check-label pawa-text-bad fw-bold" for="moodbatu">
-                    ムード×
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "moodbatu" }, "ムード×", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ムード×", class: "form-check-label pawa-text-bad fw-bold", for: "moodbatu" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="seisinntekisityuu">
-                  <label class="form-check-label pawa-text-special fw-bold" for="seisinntekisityuu">
-                    精神的支柱
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "seisinntekisityuu" }, "精神的支柱", nil %>
+                  <%= fielder_f.label :other_special_abilities, "精神的支柱", class: "form-check-label pawa-text-special fw-bold", for: "seisinntekisityuu" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="igaisei">
-                  <label class="form-check-label pawa-text-good fw-bold" for="igaisei">
-                    意外性
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "igaisei" }, "意外性", nil %>
+                  <%= fielder_f.label :other_special_abilities, "意外性", class: "form-check-label pawa-text-good fw-bold", for: "igaisei" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="oobannkuruwase">
-                  <label class="form-check-label pawa-text-special fw-bold" for="oobannkuruwase">
-                    大番狂わせ
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "oobannkuruwase" }, "大番狂わせ", nil %>
+                  <%= fielder_f.label :other_special_abilities, "大番狂わせ", class: "form-check-label pawa-text-special fw-bold", for: "oobannkuruwase" %>
                 </div>
               </div>
             </div>
@@ -1784,58 +1704,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="taiace">
-                  <label class="form-check-label pawa-text-good fw-bold" for="taiace">
-                    対エース〇
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "taiace" }, "対エース〇", nil %>
+                  <%= fielder_f.label :other_special_abilities, "対エース〇", class: "form-check-label pawa-text-good fw-bold", for: "taiace" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="acekiller">
-                  <label class="form-check-label pawa-text-special fw-bold" for="acekiller">
-                    エースキラー
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "acekiller" }, "エースキラー", nil %>
+                  <%= fielder_f.label :other_special_abilities, "エースキラー", class: "form-check-label pawa-text-special fw-bold", for: "acekiller" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="hometotunyuu">
-                  <label class="form-check-label pawa-text-good fw-bold" for="hometotunyuu">
-                    ホーム突入
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "hometotunyuu" }, "ホーム突入", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ホーム突入", class: "form-check-label pawa-text-good fw-bold", for: "hometotunyuu" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="jyuusennsya">
-                  <label class="form-check-label pawa-text-special fw-bold" for="jyuusennsya">
-                    重戦車
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "jyuusennsya" }, "重戦車", nil %>
+                  <%= fielder_f.label :other_special_abilities, "重戦車", class: "form-check-label pawa-text-special fw-bold", for: "jyuusennsya" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="pressurerun">
-                  <label class="form-check-label pawa-text-good fw-bold" for="pressurerun">
-                    プレッシャーラン
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "pressurerun" }, "プレッシャーラン", nil %>
+                  <%= fielder_f.label :other_special_abilities, "プレッシャーラン", class: "form-check-label pawa-text-good fw-bold", for: "pressurerun" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kakurann">
-                  <label class="form-check-label pawa-text-good fw-bold" for="kakurann">
-                    かく乱
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kakurann" }, "かく乱", nil %>
+                  <%= fielder_f.label :other_special_abilities, "かく乱", class: "form-check-label pawa-text-good fw-bold", for: "kakurann" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="trickstar">
-                  <label class="form-check-label pawa-text-special fw-bold" for="trickstar">
-                    トリックスター
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "trickstar" }, "トリックスター", nil %>
+                  <%= fielder_f.label :other_special_abilities, "トリックスター", class: "form-check-label pawa-text-special fw-bold", for: "trickstar" %>
                 </div>
               </div>
             </div>
@@ -1843,58 +1749,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="incoursehitter">
-                  <label class="form-check-label pawa-text-good fw-bold" for="incoursehitter">
-                    インコースヒッター
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "incoursehitter" }, "インコースヒッター", nil %>
+                  <%= fielder_f.label :other_special_abilities, "インコースヒッター", class: "form-check-label pawa-text-good fw-bold", for: "incoursehitter" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="naikakuhituda">
-                  <label class="form-check-label pawa-text-special fw-bold" for="naikakuhituda">
-                    内角必打
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "naikakuhituda" }, "内角必打", nil %>
+                  <%= fielder_f.label :other_special_abilities, "内角必打", class: "form-check-label pawa-text-special fw-bold", for: "naikakuhituda" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="outcoursehitter">
-                  <label class="form-check-label pawa-text-good fw-bold tighter-letter-spacing" for="outcoursehitter">
-                    アウトコースヒッター
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "outcoursehitter" }, "アウトコースヒッター", nil %>
+                  <%= fielder_f.label :other_special_abilities, "アウトコースヒッター", class: "form-check-label pawa-text-good fw-bold", for: "outcoursehitter" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="gaikakuhituda">
-                  <label class="form-check-label pawa-text-special fw-bold" for="gaikakuhituda">
-                    外角必打
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "gaikakuhituda" }, "外角必打", nil %>
+                  <%= fielder_f.label :other_special_abilities, "外角必打", class: "form-check-label pawa-text-special fw-bold", for: "gaikakuhituda" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="taihennkakyuu">
-                  <label class="form-check-label pawa-text-good fw-bold" for="taihennkakyuu">
-                    対変化球〇
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "taihennkakyuu" }, "対変化球〇", nil %>
+                  <%= fielder_f.label :other_special_abilities, "対変化球〇", class: "form-check-label pawa-text-good fw-bold", for: "taihennkakyuu" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="dameosi">
-                  <label class="form-check-label pawa-text-good fw-bold" for="dameosi">
-                    ダメ押し
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "dameosi" }, "ダメ押し", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ダメ押し", class: "form-check-label pawa-text-good fw-bold", for: "dameosi" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="iatukannyasyu">
-                  <label class="form-check-label pawa-text-good fw-bold" for="iatukannyasyu">
-                    威圧感(野手)
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "iatukannyasyu" }, "威圧感(野手)", nil %>
+                  <%= fielder_f.label :other_special_abilities, "威圧感(野手)", class: "form-check-label pawa-text-good fw-bold", for: "iatukannyasyu" %>
                 </div>
               </div>
             </div>
@@ -1902,58 +1794,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-gb" type="checkbox" value="" id="akkyuuuti">
-                  <label class="form-check-label pawa-text-gb fw-bold" for="akkyuuuti">
-                    悪球打ち
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "akkyuuuti" }, "悪球打ち", nil %>
+                  <%= fielder_f.label :other_special_abilities, "悪球打ち", class: "form-check-label pawa-text-gb fw-bold", for: "akkyuuuti" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="error">
-                  <label class="form-check-label pawa-text-bad fw-bold" for="error">
-                    エラー
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "error" }, "エラー", nil %>
+                  <%= fielder_f.label :other_special_abilities, "エラー", class: "form-check-label pawa-text-bad fw-bold", for: "error" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="omaturiotoko">
-                  <label class="form-check-label pawa-text-good fw-bold" for="omaturiotoko">
-                    お祭り男
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "omaturiotoko" }, "お祭り男", nil %>
+                  <%= fielder_f.label :other_special_abilities, "お祭り男", class: "form-check-label pawa-text-good fw-bold", for: "omaturiotoko" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="cututi">
-                  <label class="form-check-label pawa-text-good fw-bold" for="cututi">
-                    カット打ち
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "cututi" }, "カット打ち", nil %>
+                  <%= fielder_f.label :other_special_abilities, "カット打ち", class: "form-check-label pawa-text-good fw-bold", for: "cututi" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kyuuti">
-                  <label class="form-check-label pawa-text-good fw-bold" for="kyuuti">
-                    窮地〇
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kyuuti" }, "窮地〇", nil %>
+                  <%= fielder_f.label :other_special_abilities, "窮地〇", class: "form-check-label pawa-text-good fw-bold", for: "kyuuti" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="heatup">
-                  <label class="form-check-label pawa-text-special fw-bold" for="heatup">
-                    ヒートアップ
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "heatup" }, "ヒートアップ", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ヒートアップ", class: "form-check-label pawa-text-special fw-bold", for: "heatup" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kessyuouda">
-                  <label class="form-check-label pawa-text-good fw-bold" for="kessyuouda">
-                    決勝打
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kessyuouda" }, "決勝打", nil %>
+                  <%= fielder_f.label :other_special_abilities, "決勝打", class: "form-check-label pawa-text-good fw-bold", for: "kessyuouda" %>
                 </div>
               </div>
             </div>
@@ -1961,58 +1839,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="konnsinnnokessyouda">
-                  <label class="form-check-label pawa-text-special fw-bold" for="konnsinnnokessyouda">
-                    渾身の決勝打
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "konnsinnnokessyouda" }, "渾身の決勝打", nil %>
+                  <%= fielder_f.label :other_special_abilities, "渾身の決勝打", class: "form-check-label pawa-text-special fw-bold", for: "konnsinnnokessyouda" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kousokucharge">
-                  <label class="form-check-label pawa-text-good fw-bold" for="kousokucharge">
-                    高速チャージ
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kousokucharge" }, "高速チャージ", nil %>
+                  <%= fielder_f.label :other_special_abilities, "高速チャージ", class: "form-check-label pawa-text-good fw-bold", for: "kousokucharge" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="sayonaraotokoannda">
-                  <label class="form-check-label pawa-text-good fw-bold" for="sayonaraotokoannda">
-                    サヨナラ男(安打)
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "sayonaraotokoannda" }, "サヨナラ男(安打)", nil %>
+                  <%= fielder_f.label :other_special_abilities, "サヨナラ男(安打)", class: "form-check-label pawa-text-good fw-bold", for: "sayonaraotokoannda" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="sayonaraotokohonnruida">
-                  <label class="form-check-label pawa-text-good fw-bold tighter-letter-spacing" for="sayonaraotokohonnruida">
-                    サヨナラ男(本塁打)
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "sayonaraotokohonnruida" }, "サヨナラ男(本塁打)", nil %>
+                  <%= fielder_f.label :other_special_abilities, "サヨナラ男(本塁打)", class: "form-check-label pawa-text-good fw-bold", for: "sayonaraotokohonnruida" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="dennsetunosayonaraotoko">
-                  <label class="form-check-label pawa-text-special fw-bold" for="dennsetunosayonaraotoko">
-                    伝説のサヨナラ男
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "dennsetunosayonaraotoko" }, "伝説のサヨナラ男", nil %>
+                  <%= fielder_f.label :other_special_abilities, "伝説のサヨナラ男", class: "form-check-label pawa-text-special fw-bold", for: "dennsetunosayonaraotoko" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="taistraight">
-                  <label class="form-check-label pawa-text-good fw-bold" for="taistraight">
-                    対ストレート〇
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "taistraight" }, "対ストレート〇", nil %>
+                  <%= fielder_f.label :other_special_abilities, "対ストレート〇", class: "form-check-label pawa-text-good fw-bold", for: "taistraight" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-b" type="checkbox" value="" id="heisatu">
-                  <label class="form-check-label pawa-text-bad fw-bold" for="heisatu">
-                    併殺
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "heisatu" }, "併殺", nil %>
+                  <%= fielder_f.label :other_special_abilities, "併殺", class: "form-check-label pawa-text-bad fw-bold", for: "heisatu" %>
                 </div>
               </div>
             </div>
@@ -2020,58 +1884,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="headsliding">
-                  <label class="form-check-label pawa-text-good fw-bold tighter-letter-spacing" for="headsliding">
-                    ヘッドスライディング
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "headsliding" }, "ヘッドスライディング", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ヘッドスライディング", class: "form-check-label pawa-text-good fw-bold", for: "headsliding" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kihakuhead">
-                  <label class="form-check-label pawa-text-special fw-bold" for="kihakuhead">
-                    気迫ヘッド
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kihakuhead" }, "気迫ヘッド", nil %>
+                  <%= fielder_f.label :other_special_abilities, "気迫ヘッド", class: "form-check-label pawa-text-special fw-bold", for: "kihakuhead" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="homesisyu">
-                  <label class="form-check-label pawa-text-good fw-bold" for="homesisyu">
-                    ホーム死守
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "homesisyu" }, "ホーム死守", nil %>
+                  <%= fielder_f.label :other_special_abilities, "ホーム死守", class: "form-check-label pawa-text-good fw-bold", for: "homesisyu" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="terunokabe">
-                  <label class="form-check-label pawa-text-special fw-bold" for="terunokabe">
-                    鉄の壁
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "terunokabe" }, "鉄の壁", nil %>
+                  <%= fielder_f.label :other_special_abilities, "鉄の壁", class: "form-check-label pawa-text-special fw-bold", for: "terunokabe" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="mulchdann">
-                  <label class="form-check-label pawa-text-good fw-bold" for="mulchdann">
-                    マルチ弾
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "mulchdann" }, "マルチ弾", nil %>
+                  <%= fielder_f.label :other_special_abilities, "マルチ弾", class: "form-check-label pawa-text-good fw-bold", for: "mulchdann" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="mannruiotokoannda">
-                  <label class="form-check-label pawa-text-good fw-bold" for="mannruiotokoannda">
-                    満塁男(安打)
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "mannruiotokoannda" }, "満塁男(安打)", nil %>
+                  <%= fielder_f.label :other_special_abilities, "満塁男(安打)", class: "form-check-label pawa-text-good fw-bold", for: "mannruiotokoannda" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="mannruiotokohonnruida">
-                  <label class="form-check-label pawa-text-good fw-bold" for="mannruiotokohonnruida">
-                    満塁男(本塁打)
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "mannruiotokohonnruida" }, "満塁男(本塁打)", nil %>
+                  <%= fielder_f.label :other_special_abilities, "満塁男(本塁打)", class: "form-check-label pawa-text-good fw-bold", for: "mannruiotokohonnruida" %>
                 </div>
               </div>
             </div>
@@ -2079,58 +1929,44 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kyoufunomannruiotoko">
-                  <label class="form-check-label pawa-text-special fw-bold" for="kyoufunomannruiotoko">
-                    恐怖の満塁男
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kyoufunomannruiotoko" }, "恐怖の満塁男", nil %>
+                  <%= fielder_f.label :other_special_abilities, "恐怖の満塁男", class: "form-check-label pawa-text-special fw-bold", for: "kyoufunomannruiotoko" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="revenge">
-                  <label class="form-check-label pawa-text-good fw-bold" for="revenge">
-                    リベンジ
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "revenge" }, "リベンジ", nil %>
+                  <%= fielder_f.label :other_special_abilities, "リベンジ", class: "form-check-label pawa-text-good fw-bold", for: "revenge" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="gyakusyuu">
-                  <label class="form-check-label pawa-text-special fw-bold" for="gyakusyuu">
-                    逆襲
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "gyakusyuu" }, "逆襲", nil %>
+                  <%= fielder_f.label :other_special_abilities, "逆襲", class: "form-check-label pawa-text-special fw-bold", for: "gyakusyuu" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="laserbeam">
-                  <label class="form-check-label pawa-text-good fw-bold" for="laserbeam">
-                    レーザービーム
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "laserbeam" }, "レーザービーム", nil %>
+                  <%= fielder_f.label :other_special_abilities, "レーザービーム", class: "form-check-label pawa-text-good fw-bold", for: "laserbeam" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kousokulaser">
-                  <label class="form-check-label pawa-text-special fw-bold" for="kousokulaser">
-                    高速レーザー
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kousokulaser" }, "高速レーザー", nil %>
+                  <%= fielder_f.label :other_special_abilities, "高速レーザー", class: "form-check-label pawa-text-special fw-bold", for: "kousokulaser" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="haruotoko">
-                  <label class="form-check-label pawa-text-good fw-bold" for="haruotoko">
-                    春男
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "haruotoko" }, "春男", nil %>
+                  <%= fielder_f.label :other_special_abilities, "春男", class: "form-check-label pawa-text-good fw-bold", for: "haruotoko" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="hatuotoko">
-                  <label class="form-check-label pawa-text-good fw-bold" for="hatuotoko">
-                    夏男
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "natuotoko" }, "夏男", nil %>
+                  <%= fielder_f.label :other_special_abilities, "夏男", class: "form-check-label pawa-text-good fw-bold", for: "natuotoko" %>
                 </div>
               </div>
             </div>
@@ -2138,10 +1974,8 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="akiotoko">
-                  <label class="form-check-label pawa-text-good fw-bold" for="akiotoko">
-                    秋男
-                  </label>
+                  <%= fielder_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "akiotoko" }, "秋男", nil %>
+                  <%= fielder_f.label :other_special_abilities, "秋男", class: "form-check-label pawa-text-good fw-bold", for: "akiotoko" %>
                 </div>
               </div>
               <div class="col"></div>

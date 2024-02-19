@@ -173,18 +173,14 @@
         <div class="row">
           <div class="col">
             <div class="form-check">
-              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="tubamekiller">
-              <label class="form-check-label pawa-text-good fw-bold" for="tubamekiller">
-                ツバメキラー
-              </label>
+              <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tubamekiller" }, "ツバメキラー", nil %>
+              <%= f.label :other_special_abilities, "ツバメキラー", class: "form-check-label pawa-text-good fw-bold", for: "tubamekiller" %>
             </div>
           </div>
           <div class="col">
             <div class="form-check">
-              <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="yokohamakiller">
-              <label class="form-check-label pawa-text-good fw-bold" for="yokohamakiller">
-                横浜キラー
-              </label>
+              <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "yokohamakiller" }, "横浜キラー", nil %>
+              <%= f.label :other_special_abilities, "横浜キラー", class: "form-check-label pawa-text-good fw-bold", for: "yokohamakiller" %>
             </div>
           </div>
           <div class="col">

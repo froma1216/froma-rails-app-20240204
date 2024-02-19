@@ -21,10 +21,16 @@ class PawapuroController < ApplicationController
   def create
     @player = PawapuroPlayer.new(player_params)
 
-    # pawapuro_fielder_attributesのother_special_abilitiesを連結
+    # 選手特殊能力のチェックを連結して格納
+    if params[:pawapuro_player].present? && params[:pawapuro_player][:other_special_abilities].present?
+      player_other_special_abilities = params[:pawapuro_player][:other_special_abilities].join(",")
+      @player[:other_special_abilities] = player_other_special_abilities
+    end
+
+    # 野手特殊能力のチェックを連結して格納
     if params[:pawapuro_player][:pawapuro_fielder_attributes].present? && params[:pawapuro_player][:pawapuro_fielder_attributes][:other_special_abilities].present?
-      other_special_abilities = params[:pawapuro_player][:pawapuro_fielder_attributes][:other_special_abilities].join(",")
-      @player.pawapuro_fielder[:other_special_abilities] = other_special_abilities
+      fielder_other_special_abilities = params[:pawapuro_player][:pawapuro_fielder_attributes][:other_special_abilities].join(",")
+      @player.pawapuro_fielder[:other_special_abilities] = fielder_other_special_abilities
     end
 
     if @player.save

@@ -112,8 +112,10 @@ module PawapuroHelper
   # 年齢計算
   def calculate_age(birthday)
     now = Time.zone.today
-    age = now.year - birthday.year
-    age -= 1 if now.yday < birthday.yday
-    age
+    if birthday.present?
+      age = now.year - birthday.year
+      age -= 1 if now.yday < birthday.yday
+      age
+    end
   end
 end

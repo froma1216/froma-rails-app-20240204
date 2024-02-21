@@ -28,6 +28,12 @@ class PawapuroController < ApplicationController
     end
 
     # 野手特殊能力のチェックを連結して格納
+    if params[:pawapuro_player][:pawapuro_pitcher_attributes].present? && params[:pawapuro_player][:pawapuro_pitcher_attributes][:other_special_abilities].present?
+      pitcher_other_special_abilities = params[:pawapuro_player][:pawapuro_pitcher_attributes][:other_special_abilities].join(",")
+      @player.pawapuro_pitcher[:other_special_abilities] = pitcher_other_special_abilities
+    end
+
+    # 野手特殊能力のチェックを連結して格納
     if params[:pawapuro_player][:pawapuro_fielder_attributes].present? && params[:pawapuro_player][:pawapuro_fielder_attributes][:other_special_abilities].present?
       fielder_other_special_abilities = params[:pawapuro_player][:pawapuro_fielder_attributes][:other_special_abilities].join(",")
       @player.pawapuro_fielder[:other_special_abilities] = fielder_other_special_abilities

@@ -641,18 +641,14 @@
             <div class="row">
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-g" type="checkbox" value="" id="kire">
-                  <label class="form-check-label pawa-text-good fw-bold" for="kire">
-                    キレ◯
-                  </label>
+                  <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kire" }, "キレ◯", nil %>
+                  <%= pitcher_f.label :other_special_abilities, "キレ◯", class: "form-check-label pawa-text-good fw-bold", for: "kire" %>
                 </div>
               </div>
               <div class="col">
                 <div class="form-check">
-                  <input class="form-check-input pawa-checkbox-sp" type="checkbox" value="" id="kyouinokireaji">
-                  <label class="form-check-label pawa-text-special fw-bold" for="kyouinokireaji">
-                    脅威の切れ味
-                  </label>
+                  <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kyouinokireaji" }, "驚異の切れ味", nil %>
+                  <%= pitcher_f.label :other_special_abilities, "驚異の切れ味", class: "form-check-label pawa-text-special fw-bold", for: "kyouinokireaji" %>
                 </div>
               </div>
               <div class="col">

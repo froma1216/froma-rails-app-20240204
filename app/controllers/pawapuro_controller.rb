@@ -53,7 +53,6 @@ class PawapuroController < ApplicationController
 
     if @player.save
       # 成功時の処理（例：リダイレクト）
-      # redirect_to some_path, notice: 'Player was successfully created.'
       redirect_to pawapuro_index_path, notice: "「選手名：#{@player.player_name}」が作成されました"
     else
       # 失敗時の処理
@@ -61,9 +60,19 @@ class PawapuroController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @player = PawapuroPlayer.find(params[:id])
+  end
 
-  def update; end
+  # 選手更新アクション
+  def update
+    @player = PawapuroPlayer.find(params[:id])
+    if @player.update(player_params)
+      redirect_to pawapuro_index_path, notice: "「選手名：#{@player.player_name}」が更新されました"
+    else
+      render :edit
+    end
+  end
 
   def destroy
     @player = PawapuroPlayer.find(params[:id])

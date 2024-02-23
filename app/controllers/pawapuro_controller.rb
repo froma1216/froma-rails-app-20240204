@@ -39,10 +39,22 @@ class PawapuroController < ApplicationController
       @player.pawapuro_fielder[:other_special_abilities] = fielder_other_special_abilities
     end
 
+    # ログインユーザを created_by に設定、現在の時刻を updated_by に設定
+    @player.created_by = current_user.username || ""
+    @player.updated_by = Time.current
+    if @player.pawapuro_pitcher.present?
+      @player.pawapuro_pitcher.created_by = current_user.username || ""
+      @player.pawapuro_pitcher.updated_by = Time.current
+    end
+    if @player.pawapuro_fielder.present?
+      @player.pawapuro_fielder.created_by = current_user.username || ""
+      @player.pawapuro_fielder.updated_by = Time.current
+    end
+
     if @player.save
       # 成功時の処理（例：リダイレクト）
       # redirect_to some_path, notice: 'Player was successfully created.'
-      redirect_to pawapuro_index_path, notice: "Player was successfully created."
+      redirect_to pawapuro_index_path, notice: "「選手名：#{@player.player_name}」が作成されました"
     else
       # 失敗時の処理
       render :new
@@ -68,10 +80,5 @@ class PawapuroController < ApplicationController
       pawapuro_pitcher_attributes: [:pace, :control, :stamina, :fastball_type, :second_fastball_type, :slider_type_pitch, :slider_type_movement, :second_slider_type_pitch, :second_slider_type_movement, :curveball_type_pitch, :curveball_type_movement, :second_curveball_type_pitch, :second_curveball_type_movement, :shootball_type_pitch, :shootball_type_movement, :second_shootball_type_pitch, :second_shootball_type_movement, :sinker_type_pitch, :sinker_type_movement, :second_sinker_type_pitch, :second_sinker_type_movement, :forkball_type_pitch, :forkball_type_movement, :second_forkball_type_pitch, :second_forkball_type_movement, :original_pitch, :taipinch, :taihidaridasya, :utarezuyosa, :nobi, :quick, :other_special_abilities, :created_by, :updated_by],
       pawapuro_fielder_attributes: [:trajectory, :meat, :power, :running, :arm_strength, :defense, :catching, :chance, :taihidaritousyu, :catcher, :tourui, :sourui, :soukyuu, :other_special_abilities, :created_by, :updated_by]
     )
-    # params.require(:pawapuro_player).permit(
-    #   :last_name, :first_name, :player_name, :back_name, :birthday, :main_position, :p11_proper, :p12_proper, :p13_proper, :p2_proper, :p3_proper, :p4_proper, :p5_proper, :p6_proper, :p7_proper, :throws, :bats, :kaifuku, :kegasinikusa, :other_special_abilities, :note, :created_by, :updated_by,
-    #   pawapuro_pitcher_attributes: [:id, :pace, :control, :stamina, :fastball_type, :second_fastball_type, :slider_type_pitch, :slider_type_movement, :second_slider_type_pitch, :second_slider_type_movement, :curveball_type_pitch, :curveball_type_movement, :second_curveball_type_pitch, :second_curveball_type_movement, :shootball_type_pitch, :shootball_type_movement, :second_shootball_type_pitch, :second_shootball_type_movement, :sinker_type_pitch, :sinker_type_movement, :second_sinker_type_pitch, :second_sinker_type_movement, :forkball_type_pitch, :forkball_type_movement, :second_forkball_type_pitch, :second_forkball_type_movement, :original_pitch, :taipinch, :taihidaridasya, :utarezuyosa, :nobi, :quick, :other_special_abilities, :created_by, :updated_by],
-    #   pawapuro_fielder_attributes: [:id, :trajectory, :meat, :power, :running, :arm_strength, :defense, :catching, :chance, :taihidaritousyu, :catcher, :tourui, :sourui, :soukyuu, :other_special_abilities, :created_by, :updated_by]
-    # )
   end
 end

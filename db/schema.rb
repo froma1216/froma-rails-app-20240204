@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_12_112308) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_24_072253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,6 +64,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_112308) do
     t.string "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "pawapuro_player_id", null: false
+    t.index ["pawapuro_player_id"], name: "index_pawapuro_fielders_on_pawapuro_player_id"
   end
 
   create_table "pawapuro_pitchers", force: :cascade do |t|
@@ -103,6 +105,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_112308) do
     t.string "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "pawapuro_player_id", null: false
+    t.index ["pawapuro_player_id"], name: "index_pawapuro_pitchers_on_pawapuro_player_id"
   end
 
   create_table "pawapuro_players", force: :cascade do |t|
@@ -123,8 +127,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_112308) do
     t.integer "p7_proper"
     t.string "throws"
     t.string "bats"
-    t.bigint "pawapuro_pitcher_id", null: false
-    t.bigint "pawapuro_fielder_id", null: false
     t.integer "kaifuku"
     t.integer "kegasinikusa"
     t.string "other_special_abilities"
@@ -133,8 +135,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_112308) do
     t.string "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pawapuro_fielder_id"], name: "index_pawapuro_players_on_pawapuro_fielder_id"
-    t.index ["pawapuro_pitcher_id"], name: "index_pawapuro_players_on_pawapuro_pitcher_id"
   end
 
   create_table "presentations", force: :cascade do |t|
@@ -201,8 +201,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_112308) do
   add_foreign_key "participations", "conferences"
   add_foreign_key "participations", "slots"
   add_foreign_key "participations", "users"
-  add_foreign_key "pawapuro_players", "pawapuro_fielders"
-  add_foreign_key "pawapuro_players", "pawapuro_pitchers"
+  add_foreign_key "pawapuro_fielders", "pawapuro_players"
+  add_foreign_key "pawapuro_pitchers", "pawapuro_players"
   add_foreign_key "presentations", "slots"
   add_foreign_key "slots", "tracks"
   add_foreign_key "tracks", "days"

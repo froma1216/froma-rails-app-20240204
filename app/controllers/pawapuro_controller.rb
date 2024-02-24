@@ -40,14 +40,14 @@ class PawapuroController < ApplicationController
     end
 
     # ログインユーザを created_by に設定、現在の時刻を updated_by に設定
-    @player.created_by = current_user.username || ""
+    @player.created_by = current_user&.username || ""
     @player.updated_by = Time.current
     if @player.pawapuro_pitcher.present?
-      @player.pawapuro_pitcher.created_by = current_user.username || ""
+      @player.pawapuro_pitcher.created_by = current_user&.username || ""
       @player.pawapuro_pitcher.updated_by = Time.current
     end
     if @player.pawapuro_fielder.present?
-      @player.pawapuro_fielder.created_by = current_user.username || ""
+      @player.pawapuro_fielder.created_by = current_user&.username || ""
       @player.pawapuro_fielder.updated_by = Time.current
     end
 

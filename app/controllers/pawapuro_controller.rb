@@ -39,17 +39,11 @@ class PawapuroController < ApplicationController
       @player.pawapuro_fielder[:other_special_abilities] = fielder_other_special_abilities
     end
 
-    # ログインユーザを created_by に設定、現在の時刻を updated_by に設定
+    # ログインユーザを created_by に設定
     @player.created_by = current_user&.username || ""
-    @player.updated_by = Time.current
-    if @player.pawapuro_pitcher.present?
-      @player.pawapuro_pitcher.created_by = current_user&.username || ""
-      @player.pawapuro_pitcher.updated_by = Time.current
-    end
-    if @player.pawapuro_fielder.present?
-      @player.pawapuro_fielder.created_by = current_user&.username || ""
-      @player.pawapuro_fielder.updated_by = Time.current
-    end
+    # FIXME: pawapuro_pitcher,pawapuro_fielderに反映されていない
+    @player.pawapuro_pitcher.created_by = current_user&.username || "" if @player.pawapuro_pitcher.present?
+    @player.pawapuro_fielder.created_by = current_user&.username || "" if @player.pawapuro_fielder.present?
 
     if @player.save
       # 成功時の処理（例：リダイレクト）
@@ -67,6 +61,12 @@ class PawapuroController < ApplicationController
   # 選手更新アクション
   def update
     @player = PawapuroPlayer.find(params[:id])
+    # ログインユーザを updated_by に設定
+    @player.updated_by = current_user&.username || ""
+    # FIXME: pawapuro_pitcher,pawapuro_fielderに反映されていない
+    @player.pawapuro_pitcher.updated_by = current_user&.username
+    @player.pawapuro_fielder.updated_by = current_user&.username
+
     if @player.update(player_params)
       redirect_to pawapuro_index_path, notice: "「選手名：#{@player.player_name}」が更新されました"
     else

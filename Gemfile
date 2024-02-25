@@ -83,3 +83,6 @@ gem "devise"
 # deviseのメッセージを国際化
 gem "devise-i18n"
 gem "ruby-lsp"
+
+# 検索機能
+gem "ransack"

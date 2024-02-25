@@ -68,6 +68,9 @@ class PawapuroController < ApplicationController
 
   # 選手更新アクション
   def update
+    # player_paramsから受け取ったパラメータを@playerオブジェクトに適用
+    @player.assign_attributes(player_params)
+
     # 選手特殊能力のチェックを連結して格納
     if params[:pawapuro_player].present? && params[:pawapuro_player][:other_special_abilities].present?
       player_other_special_abilities = params[:pawapuro_player][:other_special_abilities].join(",")

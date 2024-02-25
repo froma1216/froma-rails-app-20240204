@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # ルーティング
+  root to: "home#index"
+
   # マイページ
   namespace :mypage do
     root to: "home#index"
@@ -11,8 +14,6 @@ Rails.application.routes.draw do
     passwords: "users/passwords",
     registrations: "users/registrations"
   }
-  # ルーティング
-  root to: "conferences#index"
 
   # オンラインイベント支援システム
   resources :conferences, only: [:show, :index]
@@ -30,7 +31,4 @@ Rails.application.routes.draw do
       get "details", to: "pawapuro#details" # 選手詳細モーダル
     end
   end
-
-  # 試し用ページ
-  get "home/index"
 end

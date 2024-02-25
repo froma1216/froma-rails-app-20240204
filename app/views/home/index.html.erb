@@ -1,22 +1,22 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<button type ="button" class ="btn btn-primary">Primary</button >
-<button type ="button" class ="btn btn-secondary">Secondary</button>
-<button type ="button" class ="btn btn-success">Success</button>
-<button type ="button" class ="btn btn-danger">Danger</button>
-<button type ="button" class ="btn btn-warning">Warning</button>
-<button type ="button" class ="btn btn-info">Info</button>
-<button type ="button" class ="btn btn-light">Light</button>
-<button type ="button" class ="btn btn-dark">Dark</button>
-<div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Action
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="#">Separated link</a></li>
-  </ul>
+<h1>当サイトの説明</h1>
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex justify-content-between">
+      <h5 class="mb-1">エメラルド：バトルフロンティア</h5>
+    </div>
+    <p class="mb-1">
+      対象ソフト：ポケットモンスターエメラルド<br>
+      バトルファクトリーで選出されるポケモンの検索ができる。
+    </p>
+  </a>
+  <a href="<%= pawapuro_index_path %>" class="list-group-item list-group-item-action">
+    <div class="d-flex justify-content-between">
+      <h5 class="mb-1">パワプロ：選手作成メモ</h5>
+    </div>
+    <p class="mb-1">
+      対象ソフト：実況パワフルプロ野球2023<br>
+      選手を擬似作成し、メモとして保存できる。
+    </p>
+    <small class="text-body-secondary">※ログイン時のみ。</small>
+  </a>
 </div>

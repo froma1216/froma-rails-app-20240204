@@ -67,47 +67,53 @@
   </thead>
   <tbody>
     <% @players.each do |player| %>
-      <tr>
-        <th scope="row" class="align-middle">1</th>
-        <td class="align-middle"><%= player.player_name %></td>
-        <td class="align-middle"><%= display_positions(player) %></td>
-        <td class="align-middle"><%= display_left_and_right(player.throws) %>投<%= display_left_and_right(player.bats) %>打</td>
-        <td class="align-middle">
-          <span class="me-2 h5"><%= display_trajectory(player.pawapuro_fielder.trajectory) %></span>
-          <%= player.pawapuro_fielder.trajectory %>
-        </td>
-        <td class="align-middle">
-          <%= display_alphabet(player.pawapuro_fielder.meat) %>
-          <%= player.pawapuro_fielder.meat %>
-        </td>
-        <td class="align-middle">
-          <%= display_alphabet(player.pawapuro_fielder.power) %>
-          <%= player.pawapuro_fielder.power %>
-        </td>
-        <td class="align-middle">
-          <%= display_alphabet(player.pawapuro_fielder.running) %>
-          <%= player.pawapuro_fielder.running %>
-        </td>
-        <td class="align-middle">
-          <%= display_alphabet(player.pawapuro_fielder.arm_strength) %>
-          <%= player.pawapuro_fielder.arm_strength %>
-        </td>
-        <td class="align-middle">
-          <%= display_alphabet(player.pawapuro_fielder.defense) %>
-          <%= player.pawapuro_fielder.defense %>
-        </td>
-        <td class="align-middle">
-          <%= display_alphabet(player.pawapuro_fielder.catching) %>
-          <%= player.pawapuro_fielder.catching %>
-        </td>
-        <td class="align-middle">
-          <%= player.created_by %>
-        </td>
-        <td class="align-middle">
-          <%= link_to '詳細', details_pawapuro_path(player), class: 'btn btn-primary details-button', data: { turbo_frame: "pawapuro_details_modal" } %>
-          <%= link_to "削除", pawapuro_path(player), data: { turbo_method: :delete, turbo_confirm: "「選手名：#{player.player_name}」を削除してよろしいですか？" }, class: "btn btn-danger" %>
-        </td>
-      </tr>
+      <%# 自分で作成した選手と、テストデータのみ表示する %>
+      <% if player.created_by == current_user.username || player.id == 1 %>
+        <tr>
+          <th scope="row" class="align-middle">1</th>
+          <td class="align-middle"><%= player.player_name %></td>
+          <td class="align-middle"><%= display_positions(player) %></td>
+          <td class="align-middle"><%= display_left_and_right(player.throws) %>投<%= display_left_and_right(player.bats) %>打</td>
+          <td class="align-middle">
+            <span class="me-2 h5"><%= display_trajectory(player.pawapuro_fielder.trajectory) %></span>
+            <%= player.pawapuro_fielder.trajectory %>
+          </td>
+          <td class="align-middle">
+            <%= display_alphabet(player.pawapuro_fielder.meat) %>
+            <%= player.pawapuro_fielder.meat %>
+          </td>
+          <td class="align-middle">
+            <%= display_alphabet(player.pawapuro_fielder.power) %>
+            <%= player.pawapuro_fielder.power %>
+          </td>
+          <td class="align-middle">
+            <%= display_alphabet(player.pawapuro_fielder.running) %>
+            <%= player.pawapuro_fielder.running %>
+          </td>
+          <td class="align-middle">
+            <%= display_alphabet(player.pawapuro_fielder.arm_strength) %>
+            <%= player.pawapuro_fielder.arm_strength %>
+          </td>
+          <td class="align-middle">
+            <%= display_alphabet(player.pawapuro_fielder.defense) %>
+            <%= player.pawapuro_fielder.defense %>
+          </td>
+          <td class="align-middle">
+            <%= display_alphabet(player.pawapuro_fielder.catching) %>
+            <%= player.pawapuro_fielder.catching %>
+          </td>
+          <td class="align-middle">
+            <%= player.created_by %>
+          </td>
+          <td class="align-middle">
+            <%= link_to '詳細', details_pawapuro_path(player), class: 'btn btn-primary details-button', data: { turbo_frame: "pawapuro_details_modal" } %>
+            <%# テストデータには、削除ボタンを表示しない %>
+            <% if player.id != 1 %>
+              <%= link_to "削除", pawapuro_path(player), data: { turbo_method: :delete, turbo_confirm: "「選手名：#{player.player_name}」を削除してよろしいですか？" }, class: "btn btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

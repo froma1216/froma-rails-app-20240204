@@ -68,7 +68,10 @@
           </div>
         </div>
         <div class="modal-footer">
-          <%= link_to '編集', edit_pawapuro_path(@player), class: 'btn btn-primary', data: { turbo: "false" } %>
+          <%# テストデータには、編集ボタンを表示しない %>
+          <% if @player.id != 1 %>
+            <%= link_to '編集', edit_pawapuro_path(@player), class: 'btn btn-primary', data: { turbo: "false" } %>
+          <% end %>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
         </div>
       </div>

@@ -1,20 +1,31 @@
 class PawapuroController < ApplicationController
+  before_action :ensure_currect_user, { only: [:edit, :update, :destroy] }
+
   # 選手一覧画面
   def index
-    @players = PawapuroPlayer.all
+    if current_user.present?
+      @players = PawapuroPlayer.all
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # 選手詳細モーダル
   def details
     @player = PawapuroPlayer.find(params[:id])
-    # respond_to(&:js)
+    #  自分で作成した選手と、テストデータのみ表示する
+    redirect_to pawapuro_index_path, notice: "権限がありません" if @player.created_by != current_user.username && @player.id != 1
   end
 
   # 選手作成入力画面
   def new
-    @player = PawapuroPlayer.new
-    @player.build_pawapuro_pitcher
-    @player.build_pawapuro_fielder
+    if current_user.present?
+      @player = PawapuroPlayer.new
+      @player.build_pawapuro_pitcher
+      @player.build_pawapuro_fielder
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # 選手作成アクション
@@ -41,8 +52,8 @@ class PawapuroController < ApplicationController
 
     # ログインユーザを created_by に設定
     @player.created_by = current_user&.username || ""
-    @player.pawapuro_pitcher.created_by = current_user&.username || "" if @player.pawapuro_pitcher.present?
-    @player.pawapuro_fielder.created_by = current_user&.username || "" if @player.pawapuro_fielder.present?
+    @player.pawapuro_pitcher.created_by = current_user&.username || ""
+    @player.pawapuro_fielder.created_by = current_user&.username || ""
 
     if @player.save
       # 成功時の処理（例：リダイレクト）
@@ -53,14 +64,10 @@ class PawapuroController < ApplicationController
     end
   end
 
-  def edit
-    @player = PawapuroPlayer.find(params[:id])
-  end
+  def edit; end
 
   # 選手更新アクション
   def update
-    @player = PawapuroPlayer.find(params[:id])
-
     # 選手特殊能力のチェックを連結して格納
     if params[:pawapuro_player].present? && params[:pawapuro_player][:other_special_abilities].present?
       player_other_special_abilities = params[:pawapuro_player][:other_special_abilities].join(",")
@@ -91,8 +98,8 @@ class PawapuroController < ApplicationController
     end
   end
 
+  # 選手削除アクション
   def destroy
-    @player = PawapuroPlayer.find(params[:id])
     @player.destroy
     redirect_to pawapuro_index_path, notice: "「選手名：#{@player.player_name}」は削除されました"
   end
@@ -106,5 +113,11 @@ class PawapuroController < ApplicationController
       pawapuro_pitcher_attributes: [:id, :pace, :control, :stamina, :fastball_type, :second_fastball_type, :slider_type_pitch, :slider_type_movement, :second_slider_type_pitch, :second_slider_type_movement, :curveball_type_pitch, :curveball_type_movement, :second_curveball_type_pitch, :second_curveball_type_movement, :shootball_type_pitch, :shootball_type_movement, :second_shootball_type_pitch, :second_shootball_type_movement, :sinker_type_pitch, :sinker_type_movement, :second_sinker_type_pitch, :second_sinker_type_movement, :forkball_type_pitch, :forkball_type_movement, :second_forkball_type_pitch, :second_forkball_type_movement, :original_pitch, :taipinch, :taihidaridasya, :utarezuyosa, :nobi, :quick, :other_special_abilities, :created_by, :updated_by],
       pawapuro_fielder_attributes: [:id, :trajectory, :meat, :power, :running, :arm_strength, :defense, :catching, :chance, :taihidaritousyu, :catcher, :tourui, :sourui, :soukyuu, :other_special_abilities, :created_by, :updated_by]
     )
+  end
+
+  # 権限確認
+  def ensure_currect_user
+    @player = PawapuroPlayer.find(params[:id])
+    redirect_to pawapuro_index_path, notice: "権限がありません" if @player.created_by != current_user.username
   end
 end

@@ -1,0 +1,2 @@
+module PokemonEmeraldFactoryParticipantsHelper
+end

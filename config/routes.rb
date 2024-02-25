@@ -31,4 +31,7 @@ Rails.application.routes.draw do
       get "details", to: "pawapuro#details" # 選手詳細モーダル
     end
   end
+
+  # エメラルド：ファクトリー参加ポケモン
+  resources :pokemon_emerald_factory_participants, only: [:index]
 end

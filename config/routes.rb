@@ -33,5 +33,9 @@ Rails.application.routes.draw do
   end
 
   # エメラルド：ファクトリー参加ポケモン
-  resources :pokemon_emerald_factory_participants, only: [:index]
+  resources :pokemon_emerald_factory_participants, only: [:index] do
+    collection do
+      get "search"
+    end
+  end
 end

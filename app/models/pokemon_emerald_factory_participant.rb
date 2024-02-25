@@ -1,0 +1,2 @@
+class PokemonEmeraldFactoryParticipant < ApplicationRecord
+end

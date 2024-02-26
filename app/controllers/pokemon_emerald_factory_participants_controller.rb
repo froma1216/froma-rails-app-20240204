@@ -1,5 +1,5 @@
 class PokemonEmeraldFactoryParticipantsController < ApplicationController
-  before_action :set_q, only: [:index, :search]
+  before_action :set_q, only: [:index]
 
   # 一覧画面
   def index

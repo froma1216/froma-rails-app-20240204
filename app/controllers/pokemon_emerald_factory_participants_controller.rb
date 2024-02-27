@@ -5,6 +5,8 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
   def index
     # 検索結果
     @results = @q.result
+    # PokemonEmeraldFactoryParticipantモデルからポケモンの名前を全て取得
+    @pokemon_names = PokemonEmeraldFactoryParticipant.pluck(:name).uniq
   end
 
   private

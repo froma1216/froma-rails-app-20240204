@@ -27,9 +27,14 @@
 =end
 %>
 
-  <%# あいまい検索 %>
-  <%= f.label :name_cont, 'ポケモン名', class: "form-label" %>
-  <%= f.search_field :name_cont, class: "form-control" %>
+  <%# 入力（完全一致）＆セレクトボックス %>
+  <%= f.label :name_eq, 'ポケモン名', class: "form-label" %>
+  <%= f.search_field :name_eq, list: "pokemon-names", class: "form-control", placeholder: "ポケモンを選択または入力" %>
+  <datalist id="pokemon-names">
+    <% @pokemon_names.each do |name| %>
+      <option value="<%= name %>">
+    <% end %>
+  </datalist>
   <br>
   <%= f.submit '検索', class: "btn btn-primary" %>
 <% end %>

@@ -7,6 +7,11 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
     @results = @q.result
     # PokemonEmeraldFactoryParticipantモデルからポケモンの名前を全て取得
     @pokemon_names = PokemonEmeraldFactoryParticipant.pluck(:name).uniq
+
+    # 検索結果が空の場合にフラッシュメッセージを設定
+    if @results.empty?
+      flash.now[:alert] = '対象のポケモンが見つかりませんでした。'
+    end
   end
 
   private

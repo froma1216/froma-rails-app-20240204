@@ -40,21 +40,23 @@
 <% end %>
 
 <%# 検索結果一覧表示 %>
-<div class="shadow">
-  <ul class="list-group list-group-flush ">
-    <% @results.each do |pokemon| %>
-      <li class="list-group-item d-flex flex-row">
-        <%= pokemon.name %>
-        <%= pokemon.type1 %>
-        <%= pokemon.type2 %>
-        <%= pokemon.move1 %>
-        <%= pokemon.move2 %>
-        <%= pokemon.move3 %>
-        <%= pokemon.move4 %>
-        <%= pokemon.item %>
-        <%= pokemon.effort_values %>
-        <%= pokemon.character %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<% if @results.present? %>
+  <div class="shadow">
+    <ul class="list-group list-group-flush ">
+      <% @results.each do |pokemon| %>
+        <li class="list-group-item d-flex flex-row">
+          <%= pokemon.name %>
+          <%= pokemon.type1 %>
+          <%= pokemon.type2 %>
+          <%= pokemon.move1 %>
+          <%= pokemon.move2 %>
+          <%= pokemon.move3 %>
+          <%= pokemon.move4 %>
+          <%= pokemon.item %>
+          <%= pokemon.effort_values %>
+          <%= pokemon.character %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -66,11 +66,11 @@
     </tr>
   </thead>
   <tbody>
-    <% @players.each do |player| %>
+    <% @players.each_with_index do |player,index| %>
       <%# 自分で作成した選手と、テストデータのみ表示する %>
       <% if player.created_by == current_user.username || player.id == 1 %>
         <tr>
-          <th scope="row" class="align-middle">1</th>
+          <th scope="row" class="align-middle"><%= index + 1 %></th>
           <td class="align-middle"><%= player.player_name %></td>
           <td class="align-middle"><%= display_positions(player) %></td>
           <td class="align-middle"><%= display_left_and_right(player.throws) %>投<%= display_left_and_right(player.bats) %>打</td>

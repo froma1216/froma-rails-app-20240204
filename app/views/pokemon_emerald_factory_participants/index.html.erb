@@ -36,27 +36,51 @@
     <% end %>
   </datalist>
   <br>
-  <%= f.submit '検索', class: "btn btn-primary" %>
+  <%= f.submit '検索', class: "btn btn-primary mb-3" %>
 <% end %>
 
 <%# 検索結果一覧表示 %>
 <% if @results.present? %>
+<% 
+=begin
+%>
   <div class="shadow">
-    <ul class="list-group list-group-flush ">
-      <% @results.each do |pokemon| %>
-        <li class="list-group-item d-flex flex-row">
-          <%= pokemon.name %>
-          <%= pokemon.type1 %>
-          <%= pokemon.type2 %>
-          <%= pokemon.move1 %>
-          <%= pokemon.move2 %>
-          <%= pokemon.move3 %>
-          <%= pokemon.move4 %>
-          <%= pokemon.item %>
-          <%= pokemon.effort_values %>
-          <%= pokemon.character %>
-        </li>
-      <% end %>
-    </ul>
+    あああ
   </div>
+<%
+=end
+%>
+  <table class="table table-striped caption-top">
+    <thead>
+      <tr>
+        <th scope="col" class="align-middle">#</th>
+        <th scope="col" class="align-middle">ポケモン名</th>
+        <th scope="col" class="align-middle">タイプ1</th>
+        <th scope="col" class="align-middle">タイプ2</th>
+        <th scope="col" class="align-middle">わざ1</th>
+        <th scope="col" class="align-middle">わざ2</th>
+        <th scope="col" class="align-middle">わざ3</th>
+        <th scope="col" class="align-middle">わざ4</th>
+        <th scope="col" class="align-middle">もちもの</th>
+        <th scope="col" class="align-middle">努力値</th>
+        <th scope="col" class="align-middle">せいかく</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @results.each_with_index do |pokemon, index| %>
+        <tr>
+          <th scope="row" class="align-middle"><%= index + 1 %></th>
+          <td class="align-middle"><%= pokemon.name %></td>
+          <td class="align-middle"><%= pokemon.type1 %></td>
+          <td class="align-middle"><%= pokemon.type2 %></td>
+          <td class="align-middle"><%= pokemon.move1 %></td>
+          <td class="align-middle"><%= pokemon.move2 %></td>
+          <td class="align-middle"><%= pokemon.move3 %></td>
+          <td class="align-middle"><%= pokemon.move4 %></td>
+          <td class="align-middle"><%= pokemon.item %></td>
+          <td class="align-middle"><%= pokemon.effort_values %></td>
+          <td class="align-middle"><%= pokemon.character %></td>
+        </tr>
+      <% end %>
+    </tbody>
 <% end %>

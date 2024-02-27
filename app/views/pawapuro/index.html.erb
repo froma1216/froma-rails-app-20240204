@@ -66,7 +66,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @players.each_with_index do |player,index| %>
+    <% @players.each_with_index do |player, index| %>
       <%# 自分で作成した選手と、テストデータのみ表示する %>
       <% if player.created_by == current_user.username || player.id == 1 %>
         <tr>

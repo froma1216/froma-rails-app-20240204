@@ -79,42 +79,42 @@
       <div class="row">
         <div class="col-4">
           <%= f.label :p12_proper, "先発", class: "form-label small" %>
-          <%= f.number_field :p11_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p11_proper, class: "form-control", min: 0, max: 3 %>
         </div>
         <div class="col-4">
           <%= f.label :p13_proper, "中継ぎ", class: "form-label small" %>
-          <%= f.number_field :p11_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p11_proper, class: "form-control", min: 0, max: 3 %>
         </div>
         <div class="col-4">
           <%= f.label :p13_proper, "抑え", class: "form-label small" %>
-          <%= f.number_field :p11_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p11_proper, class: "form-control", min: 0, max: 3 %>
         </div>
       </div>
       <%# 野手 %>
       <div class="row">
         <div class="col">
           <%= f.label :p2_proper, "捕手", class: "form-label small" %>
-          <%= f.number_field :p2_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p2_proper, class: "form-control", min: 0, max: 3 %>
         </div>
         <div class="col">
           <%= f.label :p3_proper, "一塁手", class: "form-label small" %>
-          <%= f.number_field :p3_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p3_proper, class: "form-control", min: 0, max: 3 %>
         </div>
         <div class="col">
           <%= f.label :p4_proper, "二塁手", class: "form-label small" %>
-          <%= f.number_field :p4_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p4_proper, class: "form-control", min: 0, max: 3 %>
         </div>
         <div class="col">
           <%= f.label :p5_proper, "三塁手", class: "form-label small" %>
-          <%= f.number_field :p5_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p5_proper, class: "form-control", min: 0, max: 3 %>
         </div>
         <div class="col">
           <%= f.label :p6_proper, "遊撃手", class: "form-label small" %>
-          <%= f.number_field :p6_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p6_proper, class: "form-control", min: 0, max: 3 %>
         </div>
         <div class="col">
           <%= f.label :p7_proper, "外野手", class: "form-label small" %>
-          <%= f.number_field :p7_proper, class: "form-control", value: 0, min: 0, max: 3 %>
+          <%= f.number_field :p7_proper, class: "form-control", min: 0, max: 3 %>
         </div>
       </div>
     </div>
@@ -136,11 +136,11 @@
                   ["A", 3, {class: "pawa-bg-sa-g2"}],
                   ["B", 2, {class: "pawa-bg-sa-g2"}],
                   ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white", selected: true}],
+                  ["D", 0, {class: "bg-white"}],
                   ["E", -1, {class: "bg-white"}],
                   ["F", -2, {class: "pawa-bg-sa-b2"}],
                   ["G", -3, {class: "pawa-bg-sa-b2"}]
-              ]),
+              ], @player.new_record? ? 0 : @player.kaifuku),
               {},
               { class: "form-select", id: "kaifuku-select" } %>
           </div>
@@ -160,7 +160,7 @@
                   ["E", -1, {class: "bg-white"}],
                   ["F", -2, {class: "pawa-bg-sa-b2"}],
                   ["G", -3, {class: "pawa-bg-sa-b2"}]
-              ]),
+              ], @player.new_record? ? 0 : @player.kegasinikusa),
               {},
               { class: "form-select", id: "kegasinikusa-select" } %>
           </div>

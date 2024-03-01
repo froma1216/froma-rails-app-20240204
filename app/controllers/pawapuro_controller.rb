@@ -21,6 +21,17 @@ class PawapuroController < ApplicationController
   def new
     if current_user.present?
       @player = PawapuroPlayer.new
+      # 新規作成時にサブポジションの初期値を設定
+      @player.p11_proper = 0
+      @player.p12_proper = 0
+      @player.p13_proper = 0
+      @player.p2_proper = 0
+      @player.p3_proper = 0
+      @player.p4_proper = 0
+      @player.p5_proper = 0
+      @player.p6_proper = 0
+      @player.p7_proper = 0
+      # 投手、野手テーブル用にネストを作成
       @player.build_pawapuro_pitcher
       @player.build_pawapuro_fielder
     else

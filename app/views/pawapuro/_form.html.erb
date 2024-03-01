@@ -8,18 +8,18 @@
     <div class="row">
       <%# 名字 %>
       <div class="col-6">
-        <%= f.label :last_name, "姓", class: "form-label" %>
+        <%= f.label :last_name, "姓", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
         <%= f.text_field :last_name, class: "form-control", placeholder: "佐藤", autocomplete: "name" %>
       </div>
       <%# 名前 %>
       <div class="col-6">
-        <%= f.label :first_name, "名", class: "form-label" %>
+        <%= f.label :first_name, "名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
         <%= f.text_field :first_name, class: "form-control", placeholder: "太郎", autocomplete: "name" %>
       </div>
     </div>
     <%# 選手名 %>
     <div>
-      <%= f.label :player_name, "選手名", class: "form-label" %>
+      <%= f.label :player_name, "選手名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
       <%= f.text_field :player_name, class: "form-control", placeholder: "佐藤太", autocomplete: "name" %>
     </div>
     <div class="row">
@@ -68,7 +68,7 @@
     </div>
     <%# メイン %>
     <div class="mb-3">
-      <%= f.label :main_position, "メインポジション", class: "form-label" %>
+      <%= f.label :main_position, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
       <%= f.select :main_position, [["先発", 10], ["中継ぎ", 11], ["抑え", 12], ["捕手", 2], ["一塁手", 3], ["二塁手", 4], ["三塁手", 5], ["遊撃手", 6], ["外野手", 7]], {include_blank: "選択して下さい"}, {class: "form-select"} %>
     </div>
     <%# サブ %>

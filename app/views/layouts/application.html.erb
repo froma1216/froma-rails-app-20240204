@@ -9,7 +9,7 @@
     <%= javascript_importmap_tags %>
     <%# パワプロjs %>
     <%= javascript_include_tag 'pawapuro' %>
-    <%# パワプロjs %>
+    <%# エメラルドjs %>
     <%= javascript_include_tag 'pokemon_emerald_factory_participant.js' %>
     <%# モーダルブラウザバックに対応 %>
     <%# NOTE: https://blog.to-ko-s.com/tubo-bootstrap-caution/ %>
@@ -32,7 +32,7 @@
                 <%# パワプロ %>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    パワプロ
+                    パワプロ：選手作成メモ
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <%= link_to("作成選手一覧", pawapuro_index_path, class: "dropdown-item") %>

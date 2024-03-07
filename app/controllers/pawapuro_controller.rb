@@ -4,7 +4,7 @@ class PawapuroController < ApplicationController
   # 選手一覧画面
   def index
     if current_user.present?
-      @players = PawapuroPlayer.all
+      @players = PawapuroPlayer.all.order(:id)
     else
       redirect_to new_user_session_path
     end

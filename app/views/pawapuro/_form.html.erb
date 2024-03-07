@@ -156,7 +156,7 @@
                   ["A", 3, {class: "pawa-bg-sa-g2"}],
                   ["B", 2, {class: "pawa-bg-sa-g2"}],
                   ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white", selected: true}],
+                  ["D", 0, {class: "bg-white"}],
                   ["E", -1, {class: "bg-white"}],
                   ["F", -2, {class: "pawa-bg-sa-b2"}],
                   ["G", -3, {class: "pawa-bg-sa-b2"}]
@@ -307,14 +307,14 @@
             </div>
             <div class="col-5">
               <%# TODO: オリジナルを選択時、球種名入力欄を表示 %>
-              <%= pitcher_f.select :fastball_type, [['ストレート', 'ストレート'], ['オリジナル', 'オリジナル']], { selected: 'ストレート' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :fastball_type, [['ストレート', 'ストレート'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.fastball_type }, { class: 'form-select' } %>
             </div>
             <%# 第二 %>
             <div class="col-1 d-flex align-items-center">
               <label class="form-label small mb-0">第二ストレート系</label>
             </div>
             <div class="col-5">
-              <%= pitcher_f.select :second_fastball_type, [['なし', 'なし'], ['ツーシームファースト', 'ツーシームファースト'], ['ムービングファースト', 'ムービングファースト'], ['超スローボール', '超スローボール'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :second_fastball_type, [['なし', 'なし'], ['ツーシームファースト', 'ツーシームファースト'], ['ムービングファースト', 'ムービングファースト'], ['超スローボール', '超スローボール'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.second_fastball_type }, { class: 'form-select' } %>
             </div>
           </div>
           <%# スライダー系 %>
@@ -324,21 +324,21 @@
               <label class="form-label small mb-0">スライダー系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :slider_type_pitch, [['なし', ''], ['スライダー', 'スライダー'], ['Hスライダー', 'Hスライダー'], ['カットボール', 'カットボール'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :slider_type_pitch, [['なし', ''], ['スライダー', 'スライダー'], ['Hスライダー', 'Hスライダー'], ['カットボール', 'カットボール'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.slider_type_pitch }, { class: 'form-select' } %>
             </div>
             <%# FIXME: なしが選ばれたときは、非活性にする %>
             <div class="col-1">
-              <%= pitcher_f.number_field :slider_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :slider_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
             <%# 第二 %>
             <div class="col-1 d-flex align-items-center">
               <label class="form-label small mb-0">第二スライダー系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :second_slider_type_pitch, [['なし', ''], ['スライダー', 'スライダー'], ['Hスライダー', 'Hスライダー'], ['カットボール', 'カットボール'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :second_slider_type_pitch, [['なし', ''], ['スライダー', 'スライダー'], ['Hスライダー', 'Hスライダー'], ['カットボール', 'カットボール'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.second_slider_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :second_slider_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :second_slider_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
           </div>
           <%# カーブ系 %>
@@ -348,20 +348,20 @@
               <label class="form-label small mb-0">カーブ系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :curveball_type_pitch, [['なし', ''], ['カーブ', 'カーブ'], ['スローカーブ', 'スローカーブ'], ['ドロップ', 'ドロップ'], ['ドロップカーブ', 'ドロップカーブ'], ['スラーブ', 'スラーブ'], ['ナックルカーブ', 'ナックルカーブ'], ['パワーカーブ', 'パワーカーブ'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :curveball_type_pitch, [['なし', ''], ['カーブ', 'カーブ'], ['スローカーブ', 'スローカーブ'], ['ドロップ', 'ドロップ'], ['ドロップカーブ', 'ドロップカーブ'], ['スラーブ', 'スラーブ'], ['ナックルカーブ', 'ナックルカーブ'], ['パワーカーブ', 'パワーカーブ'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.curveball_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :curveball_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :curveball_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
             <%# 第二 %>
             <div class="col-1 d-flex align-items-center">
               <label class="form-label small mb-0">第二カーブ系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :second_curveball_type_pitch, [['なし', ''], ['カーブ', 'カーブ'], ['スローカーブ', 'スローカーブ'], ['ドロップ', 'ドロップ'], ['ドロップカーブ', 'ドロップカーブ'], ['スラーブ', 'スラーブ'], ['ナックルカーブ', 'ナックルカーブ'], ['パワーカーブ', 'パワーカーブ'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :second_curveball_type_pitch, [['なし', ''], ['カーブ', 'カーブ'], ['スローカーブ', 'スローカーブ'], ['ドロップ', 'ドロップ'], ['ドロップカーブ', 'ドロップカーブ'], ['スラーブ', 'スラーブ'], ['ナックルカーブ', 'ナックルカーブ'], ['パワーカーブ', 'パワーカーブ'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.second_curveball_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :second_curveball_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :second_curveball_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
           </div>
           <%# シュート系 %>
@@ -371,20 +371,20 @@
               <label class="form-label small mb-0">シュート系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :shootball_type_pitch, [['なし', ''], ['シュート', 'シュート'], ['Hシュート', 'Hシュート'], ['シンキングツーシーム', 'シンキングツーシーム'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :shootball_type_pitch, [['なし', ''], ['シュート', 'シュート'], ['Hシュート', 'Hシュート'], ['シンキングツーシーム', 'シンキングツーシーム'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.shootball_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :shootball_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :shootball_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
             <%# 第二 %>
             <div class="col-1 d-flex align-items-center">
               <label class="form-label small mb-0">第二シュート系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :second_shootball_type_pitch, [['なし', ''], ['シュート', 'シュート'], ['Hシュート', 'Hシュート'], ['シンキングツーシーム', 'シンキングツーシーム'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :second_shootball_type_pitch, [['なし', ''], ['シュート', 'シュート'], ['Hシュート', 'Hシュート'], ['シンキングツーシーム', 'シンキングツーシーム'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.second_shootball_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :second_shootball_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :second_shootball_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
           </div>
           <%# シンカー系 %>
@@ -394,20 +394,20 @@
               <label class="form-label small mb-0">シンカー系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :sinker_type_pitch, [['なし', ''], ['シンカー', 'シンカー'], ['Hシンカー', 'Hシンカー'], ['サークルチェンジ', 'サークルチェンジ'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :sinker_type_pitch, [['なし', ''], ['シンカー', 'シンカー'], ['Hシンカー', 'Hシンカー'], ['サークルチェンジ', 'サークルチェンジ'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.sinker_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :sinker_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :sinker_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
             <%# 第二 %>
             <div class="col-1 d-flex align-items-center">
               <label class="form-label small mb-0">第二シンカー系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :second_sinker_type_pitch, [['なし', ''], ['シンカー', 'シンカー'], ['Hシンカー', 'Hシンカー'], ['サークルチェンジ', 'サークルチェンジ'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :second_sinker_type_pitch, [['なし', ''], ['シンカー', 'シンカー'], ['Hシンカー', 'Hシンカー'], ['サークルチェンジ', 'サークルチェンジ'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.second_sinker_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :second_sinker_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :second_sinker_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
           </div>
           <%# フォーク系 %>
@@ -417,20 +417,20 @@
               <label class="form-label small mb-0">フォーク系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :forkball_type_pitch, [['なし', ''], ['フォーク', 'フォーク'], ['パーム', 'パーム'], ['チェンジアップ', 'チェンジアップ'], ['Vスライダー', 'Vスライダー'], ['ナックル', 'ナックル'], ['SFF', 'SFF'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :forkball_type_pitch, [['なし', ''], ['フォーク', 'フォーク'], ['パーム', 'パーム'], ['チェンジアップ', 'チェンジアップ'], ['Vスライダー', 'Vスライダー'], ['ナックル', 'ナックル'], ['SFF', 'SFF'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.forkball_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :forkball_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :forkball_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
             <%# 第二 %>
             <div class="col-1 d-flex align-items-center">
               <label class="form-label small mb-0">第二フォーク系</label>
             </div>
             <div class="col-4">
-              <%= pitcher_f.select :second_forkball_type_pitch, [['なし', ''], ['フォーク', 'フォーク'], ['パーム', 'パーム'], ['チェンジアップ', 'チェンジアップ'], ['Vスライダー', 'Vスライダー'], ['ナックル', 'ナックル'], ['SFF', 'SFF'], ['オリジナル', 'オリジナル']], { selected: 'なし' }, { class: 'form-select' } %>
+              <%= pitcher_f.select :second_forkball_type_pitch, [['なし', ''], ['フォーク', 'フォーク'], ['パーム', 'パーム'], ['チェンジアップ', 'チェンジアップ'], ['Vスライダー', 'Vスライダー'], ['ナックル', 'ナックル'], ['SFF', 'SFF'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.second_forkball_type_pitch }, { class: 'form-select' } %>
             </div>
             <div class="col-1">
-              <%= pitcher_f.number_field :second_forkball_type_movement, value: 0, class: 'form-control', min: 0, max: 7 %>
+              <%= pitcher_f.number_field :second_forkball_type_movement, class: 'form-control', min: 0, max: 7 %>
             </div>
           </div>
         </div>

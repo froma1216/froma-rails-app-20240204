@@ -32,7 +32,7 @@ class PawapuroController < ApplicationController
       @player.p6_proper = 0
       @player.p7_proper = 0
       # 投手、野手テーブル用にネストを作成
-      @player.build_pawapuro_pitcher(pace: 120, control: 1, stamina: 1)
+      @player.build_pawapuro_pitcher(pace: 120, control: 1, stamina: 1, slider_type_movement: 0, second_slider_type_movement: 0, curveball_type_movement: 0, second_curveball_type_movement: 0, shootball_type_movement: 0, second_shootball_type_movement: 0, sinker_type_movement: 0, second_sinker_type_movement: 0, forkball_type_movement: 0, second_forkball_type_movement: 0)
       @player.build_pawapuro_fielder(trajectory: 1, meat: 1, power: 1, running: 1, arm_strength: 1, defense: 1, catching: 1)
     else
       redirect_to new_user_session_path

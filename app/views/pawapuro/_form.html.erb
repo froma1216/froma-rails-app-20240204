@@ -453,12 +453,12 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
                     ["ノミの心臓", -4, {class: "pawa-bg-sa-b2"}]
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_pitcher.taipinch),
                 {},
                 { class: "form-select", id: "taipinch-select" } %>
             </div>
@@ -474,11 +474,11 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_pitcher.taihidaridasya),
                 {},
                 { class: "form-select", id: "taihidaridasya-select" } %>
             </div>
@@ -494,12 +494,12 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
                     ["ガラスのハート", -4, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_pitcher.utarezuyosa),
                 {},
                 { class: "form-select", id: "utarezuyosa-select" } %>
             </div>
@@ -517,11 +517,11 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_pitcher.nobi),
                 {},
                 { class: "form-select", id: "nobi-select" } %>
             </div>
@@ -537,11 +537,11 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_pitcher.quick),
                 {},
                 { class: "form-select", id: "quick-select" } %>
             </div>
@@ -1055,11 +1055,11 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_fielder.chance),
                 {},
                 { class: "form-select", id: "chance-select" } %>
             </div>
@@ -1075,11 +1075,11 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_fielder.taihidaritousyu),
                 {},
                 { class: "form-select", id: "taihidaritousyu-select" } %>
             </div>
@@ -1096,32 +1096,15 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_fielder.catcher),
                 {},
                 { class: "form-select", id: "catcher-select" } %>
             </div>
           </div>
-          <%# <div class="col row">
-            <div class="col-4 d-flex align-items-center">
-              <label class="form-label small mb-0">キャッチャー</label>
-            </div>
-            <div class="col-8">
-              <select class="form-select" aria-label="Default select example" disabled>
-                <option value="4" class="pawa-bg-sa-sp2">球界の頭脳</option>
-                <option value="3" class="pawa-bg-sa-g2">A</option>
-                <option value="2" class="pawa-bg-sa-g2">B</option>
-                <option value="1" class="bg-white">C</option>
-                <option value="0" class="bg-white" selected>D</option>
-                <option value="-1" class="bg-white">E</option>
-                <option value="-2" class="pawa-bg-sa-b2">F</option>
-                <option value="-3" class="pawa-bg-sa-b2">G</option>
-              </select>
-            </div>
-          </div> %>
         </div>
         <div class="row mb-2">
           <div class="col row">
@@ -1135,11 +1118,11 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_fielder.tourui),
                 {},
                 { class: "form-select", id: "tourui-select" } %>
             </div>
@@ -1155,11 +1138,11 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_fielder.sourui),
                 {},
                 { class: "form-select", id: "sourui-select" } %>
             </div>
@@ -1175,11 +1158,11 @@
                     ["A", 3, {class: "pawa-bg-sa-g2"}],
                     ["B", 2, {class: "pawa-bg-sa-g2"}],
                     ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white", selected: true}],
+                    ["D", 0, {class: "bg-white"}],
                     ["E", -1, {class: "bg-white"}],
                     ["F", -2, {class: "pawa-bg-sa-b2"}],
                     ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ]),
+                ], @player.new_record? ? 0 : @player.pawapuro_fielder.soukyuu),
                 {},
                 { class: "form-select", id: "soukyuu-select" } %>
             </div>

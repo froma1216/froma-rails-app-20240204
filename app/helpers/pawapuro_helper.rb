@@ -118,4 +118,10 @@ module PawapuroHelper
       age
     end
   end
+
+  # other_special_abilitiesに引数の値が入っているかを確認（編集画面でチェックボックスに初期値を入れるため）
+  # return: true or false
+  def ability_checked?(player, ability)
+    player.other_special_abilities.to_s.split(",").include?(ability)
+  end
 end

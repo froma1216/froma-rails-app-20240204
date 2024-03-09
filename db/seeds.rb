@@ -149,7 +149,7 @@ pawapuro_pitcher = PawapuroPitcher.create(
   utarezuyosa: 0,
   nobi: -1,
   quick: 1,
-  other_special_abilities: "キレ◯,奪三振,球速安定,投打躍動",
+  other_special_abilities: "キレ〇,奪三振,球速安定,投打躍動",
   created_by: "master",
   updated_by: "master"
 )
@@ -170,7 +170,7 @@ pawapuro_fielder = PawapuroFielder.create(
   tourui: -1,
   sourui: 2,
   soukyuu: 1,
-  other_special_abilities: "パワーヒッター,初球◯,満塁男,レーザービーム,三振",
+  other_special_abilities: "パワーヒッター,初球〇,満塁男,レーザービーム,三振",
   created_by: "master",
   updated_by: "master"
 )

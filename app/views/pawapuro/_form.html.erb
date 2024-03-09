@@ -555,43 +555,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kire" }, "キレ◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kire", checked: ability_checked?(@player.pawapuro_pitcher, "キレ◯") }, "キレ◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "キレ◯", class: "form-check-label pawa-text-good fw-bold", for: "kire" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kyouinokireaji" }, "驚異の切れ味", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kyouinokireaji", checked: ability_checked?(@player.pawapuro_pitcher, "驚異の切れ味") }, "驚異の切れ味", nil %>
                 <%= pitcher_f.label :other_special_abilities, "驚異の切れ味", class: "form-check-label pawa-text-special fw-bold", for: "kyouinokireaji" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "jairoboru" }, "ジャイロボール", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "jairoboru", checked: ability_checked?(@player.pawapuro_pitcher, "ジャイロボール") }, "ジャイロボール", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ジャイロボール", class: "form-check-label pawa-text-good fw-bold", for: "jairoboru" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "haisupinnjairo" }, "ハイスピンジャイロ", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "haisupinnjairo", checked: ability_checked?(@player.pawapuro_pitcher, "ハイスピンジャイロ") }, "ハイスピンジャイロ", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ハイスピンジャイロ", class: "form-check-label pawa-text-special fw-bold", for: "haisupinnjairo" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "omoitama" }, "重い球", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "omoitama", checked: ability_checked?(@player.pawapuro_pitcher, "重い球") }, "重い球", nil %>
                 <%= pitcher_f.label :other_special_abilities, "重い球", class: "form-check-label pawa-text-good fw-bold", for: "omoitama" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "karuitama" }, "軽い球", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "karuitama", checked: ability_checked?(@player.pawapuro_pitcher, "軽い球") }, "軽い球", nil %>
                 <%= pitcher_f.label :other_special_abilities, "軽い球", class: "form-check-label pawa-text-bad fw-bold", for: "karuitama" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kaibutukyuui" }, "怪物球威", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kaibutukyuui", checked: ability_checked?(@player.pawapuro_pitcher, "怪物球威") }, "怪物球威", nil %>
                 <%= pitcher_f.label :other_special_abilities, "怪物球威", class: "form-check-label pawa-text-special fw-bold", for: "kaibutukyuui" %>
               </div>
             </div>
@@ -600,43 +600,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "nigedama" }, "逃げ球", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "nigedama", checked: ability_checked?(@player.pawapuro_pitcher, "逃げ球") }, "逃げ球", nil %>
                 <%= pitcher_f.label :other_special_abilities, "逃げ球", class: "form-check-label pawa-text-good fw-bold", for: "nigedama" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "ippatu" }, "一発", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "ippatu", checked: ability_checked?(@player.pawapuro_pitcher, "一発") }, "一発", nil %>
                 <%= pitcher_f.label :other_special_abilities, "一発", class: "form-check-label pawa-text-bad fw-bold", for: "ippatu" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "honnruidagennkinn" }, "本塁打厳禁", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "honnruidagennkinn", checked: ability_checked?(@player.pawapuro_pitcher, "本塁打厳禁") }, "本塁打厳禁", nil %>
                 <%= pitcher_f.label :other_special_abilities, "本塁打厳禁", class: "form-check-label pawa-text-special fw-bold", for: "honnruidagennkinn" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "giatyennji" }, "ギアチェンジ", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "giatyennji", checked: ability_checked?(@player.pawapuro_pitcher, "ギアチェンジ") }, "ギアチェンジ", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ギアチェンジ", class: "form-check-label pawa-text-special fw-bold", for: "giatyennji" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "siriagari" }, "尻上がり", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "siriagari", checked: ability_checked?(@player.pawapuro_pitcher, "尻上がり") }, "尻上がり", nil %>
                 <%= pitcher_f.label :other_special_abilities, "尻上がり", class: "form-check-label pawa-text-good fw-bold", for: "siriagari" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "syuubannryoku" }, "終盤力", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "syuubannryoku", checked: ability_checked?(@player.pawapuro_pitcher, "終盤力") }, "終盤力", nil %>
                 <%= pitcher_f.label :other_special_abilities, "終盤力", class: "form-check-label pawa-text-special fw-bold", for: "syuubannryoku" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "datusannsinn" }, "奪三振", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "datusannsinn", checked: ability_checked?(@player.pawapuro_pitcher, "奪三振") }, "奪三振", nil %>
                 <%= pitcher_f.label :other_special_abilities, "奪三振", class: "form-check-label pawa-text-good fw-bold", for: "datusannsinn" %>
               </div>
             </div>
@@ -645,43 +645,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "doctor-k" }, "ドクターK", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "doctor-k", checked: ability_checked?(@player.pawapuro_pitcher, "ドクターK") }, "ドクターK", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ドクターK", class: "form-check-label pawa-text-special fw-bold", for: "doctor-k" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kennsei" }, "牽制◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kennsei", checked: ability_checked?(@player.pawapuro_pitcher, "牽制◯") }, "牽制◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "牽制◯", class: "form-check-label pawa-text-good fw-bold", for: "kennsei" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "release" }, "リリース◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "release", checked: ability_checked?(@player.pawapuro_pitcher, "リリース◯") }, "リリース◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "リリース◯", class: "form-check-label pawa-text-good fw-bold", for: "release" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "dakyuuhannnou" }, "打球反応◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "dakyuuhannnou", checked: ability_checked?(@player.pawapuro_pitcher, "打球反応◯") }, "打球反応◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "打球反応◯", class: "form-check-label pawa-text-good fw-bold", for: "dakyuuhannnou" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "katiunn" }, "勝ち運", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "katiunn", checked: ability_checked?(@player.pawapuro_pitcher, "勝ち運") }, "勝ち運", nil %>
                 <%= pitcher_f.label :other_special_abilities, "勝ち運", class: "form-check-label pawa-text-good fw-bold", for: "katiunn" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "makeunn" }, "負け運", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "makeunn", checked: ability_checked?(@player.pawapuro_pitcher, "負け運") }, "負け運", nil %>
                 <%= pitcher_f.label :other_special_abilities, "負け運", class: "form-check-label pawa-text-bad fw-bold", for: "makeunn" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "syourinohosi" }, "勝利の星", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "syourinohosi", checked: ability_checked?(@player.pawapuro_pitcher, "勝利の星") }, "勝利の星", nil %>
                 <%= pitcher_f.label :other_special_abilities, "勝利の星", class: "form-check-label pawa-text-special fw-bold", for: "syourinohosi" %>
               </div>
             </div>
@@ -690,43 +690,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tousi" }, "闘志", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tousi", checked: ability_checked?(@player.pawapuro_pitcher, "闘志") }, "闘志", nil %>
                 <%= pitcher_f.label :other_special_abilities, "闘志", class: "form-check-label pawa-text-good fw-bold", for: "tousi" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "toukonn" }, "闘魂", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "toukonn", checked: ability_checked?(@player.pawapuro_pitcher, "闘魂") }, "闘魂", nil %>
                 <%= pitcher_f.label :other_special_abilities, "闘魂", class: "form-check-label pawa-text-special fw-bold", for: "toukonn" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "iatukanntousyu" }, "威圧感(投手)", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "iatukanntousyu", checked: ability_checked?(@player.pawapuro_pitcher, "威圧感(投手)") }, "威圧感(投手)", nil %>
                 <%= pitcher_f.label :other_special_abilities, "威圧感(投手)", class: "form-check-label pawa-text-good fw-bold", for: "iatukanntousyu" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "konnjyou" }, "根性◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "konnjyou", checked: ability_checked?(@player.pawapuro_pitcher, "根性◯") }, "根性◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "根性◯", class: "form-check-label pawa-text-good fw-bold", for: "konnjyou" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "dokonnjyou" }, "ド根性", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "dokonnjyou", checked: ability_checked?(@player.pawapuro_pitcher, "ド根性") }, "ド根性", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ド根性", class: "form-check-label pawa-text-special fw-bold", for: "dokonnjyou" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "crossfire" }, "クロスファイヤー", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "crossfire", checked: ability_checked?(@player.pawapuro_pitcher, "クロスファイヤー") }, "クロスファイヤー", nil %>
                 <%= pitcher_f.label :other_special_abilities, "クロスファイヤー", class: "form-check-label pawa-text-good fw-bold", for: "crossfire" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "crosscannon" }, "クロスキャノン", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "crosscannon", checked: ability_checked?(@player.pawapuro_pitcher, "クロスキャノン") }, "クロスキャノン", nil %>
                 <%= pitcher_f.label :other_special_abilities, "クロスキャノン", class: "form-check-label pawa-text-special fw-bold", for: "crosscannon" %>
               </div>
             </div>
@@ -735,43 +735,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tamamoti" }, "球持ち◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tamamoti", checked: ability_checked?(@player.pawapuro_pitcher, "球持ち◯") }, "球持ち◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "球持ち◯", class: "form-check-label pawa-text-good fw-bold", for: "tamamoti" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "delayedarm" }, "ディレイドアーム", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "delayedarm", checked: ability_checked?(@player.pawapuro_pitcher, "ディレイドアーム") }, "ディレイドアーム", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ディレイドアーム", class: "form-check-label pawa-text-special fw-bold", for: "delayedarm" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "hikume" }, "低め◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "hikume", checked: ability_checked?(@player.pawapuro_pitcher, "低め◯") }, "低め◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "低め◯", class: "form-check-label pawa-text-good fw-bold", for: "hikume" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "seimitukikai" }, "精密機械", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "seimitukikai", checked: ability_checked?(@player.pawapuro_pitcher, "精密機械") }, "精密機械", nil %>
                 <%= pitcher_f.label :other_special_abilities, "精密機械", class: "form-check-label pawa-text-special fw-bold", for: "seimitukikai" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kannkyuu" }, "緩急◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kannkyuu", checked: ability_checked?(@player.pawapuro_pitcher, "緩急◯") }, "緩急◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "緩急◯", class: "form-check-label pawa-text-good fw-bold", for: "kannkyuu" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "henngennjizai" }, "変幻自在", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "henngennjizai", checked: ability_checked?(@player.pawapuro_pitcher, "変幻自在") }, "変幻自在", nil %>
                 <%= pitcher_f.label :other_special_abilities, "変幻自在", class: "form-check-label pawa-text-special fw-bold", for: "henngennjizai" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "taikyoudasya" }, "対強打者◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "taikyoudasya", checked: ability_checked?(@player.pawapuro_pitcher, "対強打者◯") }, "対強打者◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "対強打者◯", class: "form-check-label pawa-text-good fw-bold", for: "taikyoudasya" %>
               </div>
             </div>
@@ -780,43 +780,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "syuhoukiller" }, "主砲キラー", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "syuhoukiller", checked: ability_checked?(@player.pawapuro_pitcher, "主砲キラー") }, "主砲キラー", nil %>
                 <%= pitcher_f.label :other_special_abilities, "主砲キラー", class: "form-check-label pawa-text-special fw-bold", for: "syuhoukiller" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kinnkyuutoubann" }, "緊急登板◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kinnkyuutoubann", checked: ability_checked?(@player.pawapuro_pitcher, "緊急登板◯") }, "緊急登板◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "緊急登板◯", class: "form-check-label pawa-text-good fw-bold", for: "kinnkyuutoubann" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kyuusokuanntei" }, "球速安定", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kyuusokuanntei", checked: ability_checked?(@player.pawapuro_pitcher, "球速安定") }, "球速安定", nil %>
                 <%= pitcher_f.label :other_special_abilities, "球速安定", class: "form-check-label pawa-text-good fw-bold", for: "kyuusokuanntei" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "naikakuzeme" }, "内角攻め", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "naikakuzeme", checked: ability_checked?(@player.pawapuro_pitcher, "内角攻め") }, "内角攻め", nil %>
                 <%= pitcher_f.label :other_special_abilities, "内角攻め", class: "form-check-label pawa-text-good fw-bold", for: "naikakuzeme" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "naikakumusou" }, "内角無双", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "naikakumusou", checked: ability_checked?(@player.pawapuro_pitcher, "内角無双") }, "内角無双", nil %>
                 <%= pitcher_f.label :other_special_abilities, "内角無双", class: "form-check-label pawa-text-special fw-bold", for: "naikakumusou" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kaimatagi" }, "回またぎ◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kaimatagi", checked: ability_checked?(@player.pawapuro_pitcher, "回またぎ◯") }, "回またぎ◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "回またぎ◯", class: "form-check-label pawa-text-good fw-bold", for: "kaimatagi" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "toudayakudou" }, "投打躍動", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "toudayakudou", checked: ability_checked?(@player.pawapuro_pitcher, "投打躍動") }, "投打躍動", nil %>
                 <%= pitcher_f.label :other_special_abilities, "投打躍動", class: "form-check-label pawa-text-good fw-bold", for: "toudayakudou" %>
               </div>
             </div>
@@ -825,43 +825,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "tyoutoudayakudou" }, "超投打躍動", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "tyoutoudayakudou", checked: ability_checked?(@player.pawapuro_pitcher, "超投打躍動") }, "超投打躍動", nil %>
                 <%= pitcher_f.label :other_special_abilities, "超投打躍動", class: "form-check-label pawa-text-special fw-bold", for: "tyoutoudayakudou" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "flyballpitcher" }, "フライボールピッチャー", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "flyballpitcher", checked: ability_checked?(@player.pawapuro_pitcher, "フライボールピッチャー") }, "フライボールピッチャー", nil %>
                 <%= pitcher_f.label :other_special_abilities, "フライボールピッチャー", class: "form-check-label pawa-text-gb fw-bold", for: "flyballpitcher" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "goropitcher" }, "ゴロピッチャー", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "goropitcher", checked: ability_checked?(@player.pawapuro_pitcher, "ゴロピッチャー") }, "ゴロピッチャー", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ゴロピッチャー", class: "form-check-label pawa-text-gb fw-bold", for: "goropitcher" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "pokerface" }, "ポーカーフェイス", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "pokerface", checked: ability_checked?(@player.pawapuro_pitcher, "ポーカーフェイス") }, "ポーカーフェイス", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ポーカーフェイス", class: "form-check-label pawa-text-gb fw-bold", for: "pokerface" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "naturalshoot" }, "ナチュラルシュート", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "naturalshoot", checked: ability_checked?(@player.pawapuro_pitcher, "ナチュラルシュート") }, "ナチュラルシュート", nil %>
                 <%= pitcher_f.label :other_special_abilities, "ナチュラルシュート", class: "form-check-label pawa-text-good fw-bold", for: "naturalshoot" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "shootkaitenn" }, "シュート回転", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "shootkaitenn", checked: ability_checked?(@player.pawapuro_pitcher, "シュート回転") }, "シュート回転", nil %>
                 <%= pitcher_f.label :other_special_abilities, "シュート回転", class: "form-check-label pawa-text-good fw-bold", for: "shootkaitenn" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "sunnzenn" }, "寸前✕", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "sunnzenn", checked: ability_checked?(@player.pawapuro_pitcher, "寸前✕") }, "寸前✕", nil %>
                 <%= pitcher_f.label :other_special_abilities, "寸前✕", class: "form-check-label pawa-text-bad fw-bold", for: "sunnzenn" %>
               </div>
             </div>
@@ -870,43 +870,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "aredama" }, "荒れ球", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "aredama", checked: ability_checked?(@player.pawapuro_pitcher, "荒れ球") }, "荒れ球", nil %>
                 <%= pitcher_f.label :other_special_abilities, "荒れ球", class: "form-check-label pawa-text-gb fw-bold", for: "aredama" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "abaredama" }, "暴れ球", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "abaredama", checked: ability_checked?(@player.pawapuro_pitcher, "暴れ球") }, "暴れ球", nil %>
                 <%= pitcher_f.label :other_special_abilities, "暴れ球", class: "form-check-label pawa-text-special fw-bold", for: "abaredama" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "sikyuu" }, "四球", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "sikyuu", checked: ability_checked?(@player.pawapuro_pitcher, "四球") }, "四球", nil %>
                 <%= pitcher_f.label :other_special_abilities, "四球", class: "form-check-label pawa-text-bad fw-bold", for: "sikyuu" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "zennkai" }, "全開", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "zennkai", checked: ability_checked?(@player.pawapuro_pitcher, "全開") }, "全開", nil %>
                 <%= pitcher_f.label :other_special_abilities, "全開", class: "form-check-label pawa-text-gb fw-bold", for: "zennkai" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kannzennnennsyou" }, "完全燃焼", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "kannzennnennsyou", checked: ability_checked?(@player.pawapuro_pitcher, "完全燃焼") }, "完全燃焼", nil %>
                 <%= pitcher_f.label :other_special_abilities, "完全燃焼", class: "form-check-label pawa-text-special fw-bold", for: "kannzennnennsyou" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tairannermaru" }, "対ランナー◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tairannermaru", checked: ability_checked?(@player.pawapuro_pitcher, "対ランナー◯") }, "対ランナー◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "対ランナー◯", class: "form-check-label pawa-text-good fw-bold", for: "tairannermaru" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "tairannerbatu" }, "対ランナー✕", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "tairannerbatu", checked: ability_checked?(@player.pawapuro_pitcher, "対ランナー✕") }, "対ランナー✕", nil %>
                 <%= pitcher_f.label :other_special_abilities, "対ランナー✕", class: "form-check-label pawa-text-bad fw-bold", for: "tairannerbatu" %>
               </div>
             </div>
@@ -915,43 +915,43 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tatiagari" }, "立ち上がり◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tatiagari", checked: ability_checked?(@player.pawapuro_pitcher, "立ち上がり◯") }, "立ち上がり◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "立ち上がり◯", class: "form-check-label pawa-text-good fw-bold", for: "tatiagari" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "slowstarter" }, "スロースターター", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "slowstarter", checked: ability_checked?(@player.pawapuro_pitcher, "スロースターター") }, "スロースターター", nil %>
                 <%= pitcher_f.label :other_special_abilities, "スロースターター", class: "form-check-label pawa-text-bad fw-bold", for: "slowstarter" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "topgear" }, "トップギア", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "topgear", checked: ability_checked?(@player.pawapuro_pitcher, "トップギア") }, "トップギア", nil %>
                 <%= pitcher_f.label :other_special_abilities, "トップギア", class: "form-check-label pawa-text-special fw-bold", for: "topgear" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "tannki" }, "短期", nil %>
-                <%= pitcher_f.label :other_special_abilities, "短期", class: "form-check-label pawa-text-bad fw-bold", for: "tannki" %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "tannki", checked: ability_checked?(@player.pawapuro_pitcher, "短気") }, "短気", nil %>
+                <%= pitcher_f.label :other_special_abilities, "短気", class: "form-check-label pawa-text-bad fw-bold", for: "tannki" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "tikarahaibunn" }, "力配分", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-gb", id: "tikarahaibunn", checked: ability_checked?(@player.pawapuro_pitcher, "力配分") }, "力配分", nil %>
                 <%= pitcher_f.label :other_special_abilities, "力配分", class: "form-check-label pawa-text-gb fw-bold", for: "tikarahaibunn" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "massura" }, "真っスラ", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "massura", checked: ability_checked?(@player.pawapuro_pitcher, "真っスラ") }, "真っスラ", nil %>
                 <%= pitcher_f.label :other_special_abilities, "真っスラ", class: "form-check-label pawa-text-good fw-bold", for: "massura" %>
               </div>
             </div>
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "yousyo" }, "要所◯", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "yousyo", checked: ability_checked?(@player.pawapuro_pitcher, "要所◯") }, "要所◯", nil %>
                 <%= pitcher_f.label :other_special_abilities, "要所◯", class: "form-check-label pawa-text-good fw-bold", for: "yousyo" %>
               </div>
             </div>
@@ -960,7 +960,7 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "ranntyou" }, "乱調", nil %>
+                <%= pitcher_f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "ranntyou", checked: ability_checked?(@player.pawapuro_pitcher, "乱調") }, "乱調", nil %>
                 <%= pitcher_f.label :other_special_abilities, "乱調", class: "form-check-label pawa-text-bad fw-bold", for: "ranntyou" %>
               </div>
             </div>

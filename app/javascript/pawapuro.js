@@ -100,7 +100,7 @@ function setupInputFieldTrajectory(inputFieldId, displaySpanId) {
 }
 
 // ページが読み込まれたときに関数を実行
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("turbo:load", function () {
   // コントロール
   setupInputField("control-input", "control-alphabet-display");
   // スタミナ

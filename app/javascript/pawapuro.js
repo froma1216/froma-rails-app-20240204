@@ -1,13 +1,18 @@
 // 特殊能力セレクト（選択した要素と同様の背景色をセレクトボックスに適用）
 function setupSelectBox(selectBoxId) {
   var selectBox = document.getElementById(selectBoxId);
-  selectBox.addEventListener("change", function () {
-    // 現在の選択肢のクラスを取得
-    var selectedOptionClass = this.options[this.selectedIndex].className;
 
-    // セレクトボックスのクラスを更新
-    this.className = "form-select " + selectedOptionClass;
-  });
+  // セレクトボックスの現在の選択肢に基づいて背景色を更新する関数
+  const updateSelectBoxBackground = () => {
+    var selectedOptionClass = selectBox.options[selectBox.selectedIndex].className;
+    selectBox.className = "form-select " + selectedOptionClass;
+  };
+
+  // changeイベントに反応して背景色を更新
+  selectBox.addEventListener("change", updateSelectBoxBackground);
+
+  // ページ読み込み時にも背景色を適用
+  updateSelectBoxBackground();
 }
 
 // FIXME: 関数名見直し

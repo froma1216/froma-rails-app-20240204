@@ -3,52 +3,68 @@
 .pawa-text-main {
   color: #2274B1 !important;
 }
+
 // 基礎能力
 .pawa-text-s {
   color: #E76C93 !important;
 }
+
 .pawa-text-a {
   color: #DD07AC !important;
 }
+
 .pawa-text-b {
   color: #DA0912 !important;
 }
+
 .pawa-text-c {
   color: #EC810E !important;
 }
+
 .pawa-text-d {
   color: #BDB005 !important;
 }
+
 .pawa-text-e {
   color: #39CC05 !important;
 }
+
 .pawa-text-f {
   color: #086DF4 !important;
 }
+
 .pawa-text-g {
   color: #898687 !important;
 }
+
 // 特殊能力
 .pawa-text-special {
   color: #A16E38 !important;
 }
+
 .pawa-text-good {
   color: #4285B3 !important;
 }
+
 .pawa-text-bad {
   color: #AB4D51 !important;
 }
+
 .pawa-text-sub {
   color: #32865D !important;
 }
+
 .pawa-text-neutral {
   color: #B2D8E1 !important;
 }
+
 // 上下2色
 .pawa-text-gb {
   background: linear-gradient(to bottom, #4285B3 50%, #AB4D51 50%);
-  -webkit-background-clip: text; /* Safari用 */
-  background-clip: text;         /* 標準プロパティ */
+  -webkit-background-clip: text;
+  /* Safari用 */
+  background-clip: text;
+  /* 標準プロパティ */
   color: transparent;
 }
 
@@ -58,10 +74,12 @@
 .pawa-border-main {
   border: 3px solid #C6D9F2;
 }
+
 // 全体（内側）
 .pawa-border-main-in {
   box-shadow: 0 0 0 5px #C6D9F2 inset;
 }
+
 // 選手名
 .pawa-border-outfielder {
   border: 3px solid #37A238;
@@ -73,72 +91,94 @@
 .pawa-bg-main {
   background-color: #E5F4FA !important;
 }
-.pawa-bg-sub{
+
+.pawa-bg-sub {
   background-color: #C6D9F2 !important;
 }
+
 .pawa-bg-s {
   background-color: #E76C93 !important;
 }
+
 .pawa-bg-a {
   background-color: #DD07AC !important;
 }
+
 .pawa-bg-b {
   background-color: #DA0912 !important;
 }
+
 .pawa-bg-c {
   background-color: #EC810E !important;
 }
+
 .pawa-bg-d {
   background-color: #BDB005 !important;
 }
+
 .pawa-bg-e {
   background-color: #39CC05 !important;
 }
+
 .pawa-bg-f {
   background-color: #086DF4 !important;
 }
+
 .pawa-bg-g {
   background-color: #898687 !important;
 }
+
 // 選手名
-.pawa-bg-sa-outfielder{
+.pawa-bg-sa-outfielder {
   background-color: #68F177 !important;
 }
+
 // 特殊能力（special ability）
-.pawa-bg-sa-sp1{
+.pawa-bg-sa-sp1 {
   background-color: #CEB055 !important;
 }
-.pawa-bg-sa-sp2{
+
+.pawa-bg-sa-sp2 {
   background-color: #FCE1AF !important;
 }
-.pawa-bg-sa-g1{
+
+.pawa-bg-sa-g1 {
   background-color: #09B3D4 !important;
 }
-.pawa-bg-sa-g2{
+
+.pawa-bg-sa-g2 {
   background-color: #BAF8FF !important;
 }
-.pawa-bg-sa-b1{
+
+.pawa-bg-sa-b1 {
   background-color: #FA5E62 !important;
 }
-.pawa-bg-sa-b2{
+
+.pawa-bg-sa-b2 {
   background-color: #FFCBCF !important;
 }
-.pawa-bg-sa-gb1{
+
+.pawa-bg-sa-gb1 {
   background: linear-gradient(90deg, #09B3D4 0%, #09B3D4 50%, #FA5E62 50%, #FA5E62 100%) !important;
 }
-.pawa-bg-sa-gb2{
+
+.pawa-bg-sa-gb2 {
   background: linear-gradient(90deg, #BAF8FF 0%, #BAF8FF 50%, #FFCBCF 50%, #FFCBCF 100%) !important;
 }
-.pawa-bg-sa-sb1{
+
+.pawa-bg-sa-sb1 {
   background-color: #48BFAE !important;
 }
-.pawa-bg-sa-sb2{
+
+.pawa-bg-sa-sb2 {
   background-color: #B2F5C8 !important;
 }
-.pawa-bg-sa-n1{
+
+.pawa-bg-sa-n1 {
   background-color: #A8E6FF !important;
 }
-.pawa-bg-sa-n2{
+
+.pawa-bg-sa-n2 {
   background-color: #DDF8FF !important;
 }
 
@@ -149,6 +189,11 @@
   letter-spacing: -2.0px;
 }
 
+// デフォルトサイズから小さくする
+.small-font {
+  font-size: 0.8em;
+}
+
 // 変化球ブロックのフォントサイズ
 .pawa-breaking-font {
   font-size: 12px;
@@ -156,11 +201,12 @@
 
 // 変化球ブロック：あり
 .pawa-breaking-block-exist {
-  background: linear-gradient(#DB4A38,#FEEF31);
+  background: linear-gradient(#DB4A38, #FEEF31);
   border: 2px solid #2274B1;
   // box-shadow: 0 0 0 2px #2274B1 inset;
   height: 8px;
 }
+
 // 変化球ブロック：なし
 .pawa-breaking-block-nil {
   background-color: #4DBAFF;
@@ -171,7 +217,7 @@
 
 // 能力ラベル
 .pawa-ability-label {
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   border: 3px solid #C6D9F2;
@@ -191,6 +237,7 @@
     background-color: #CEB055 !important;
   }
 }
+
 .pawa-checkbox-g {
   border: 2px solid #09B3D4 !important;
 
@@ -198,6 +245,7 @@
     background-color: #09B3D4 !important;
   }
 }
+
 .pawa-checkbox-b {
   border: 2px solid #FA5E62 !important;
 
@@ -205,6 +253,7 @@
     background-color: #FA5E62 !important;
   }
 }
+
 .pawa-checkbox-gb {
   // FIXME: 上下で色を分けたい
   border: 2px solid #FA5E62 !important;
@@ -213,6 +262,7 @@
     background-color: #09B3D4 !important;
   }
 }
+
 .pawa-checkbox-sb {
   border: 2px solid #68F177 !important;
 

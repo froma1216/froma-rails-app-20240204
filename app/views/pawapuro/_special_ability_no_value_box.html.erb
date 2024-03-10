@@ -1,4 +1,15 @@
 <%# 特殊能力（値なし）の１box %>
+<%# HACK: きれいにする %>
+<% if ability.length >= 8 %>
+  <%# 文字数が12以上の場合、フォントサイズを小さくし、文字間隔も狭くする %>
+  <% ability_classes = 'small-font tighter-letter-spacing' %>
+<% elsif ability.length >= 7 %>
+  <%# 文字数が9以上の場合、文字間隔のみ狭くする %>
+  <% ability_classes = 'tighter-letter-spacing' %>
+<% else %>
+  <%# それ以外の場合、通常のクラスを適用 %>
+  <% ability_classes = '' %>
+<% end %>
 <%
 good_abilities = ['キレ〇', 'ジャイロボール', '重い球', '逃げ球', '尻上がり', '奪三振', '牽制〇', 'リリース〇', '打球反応〇', '勝ち運', '闘志', '威圧感(投手)', '根性〇', 'クロスファイヤー', '球持ち〇', '低め〇', '緩急〇', '対強打者〇', '緊急登板〇', '球速安定', '内角攻め', '回またぎ〇', '投打躍動', 'ナチュラルシュート', '全開', '対ランナー〇', '立ち上がり〇', '真っスラ', '要所〇', 'アベレージヒッター', 'パワーヒッター', 'ラインドライブ', '広角打法', 'プルヒッター', '流し打ち', '固め打ち', '粘り打ち', 'バント〇', 'バント職人', '内野安打〇', '初球〇', 'チャンスメーカー', '逆境〇', '代打〇', 'ハイボールヒッター', 'ローボールヒッター', 'いぶし銀', '守備職人', 'ムード〇', '意外性', '対エース〇', 'ホーム突入', 'プレッシャーラン', 'かく乱', 'インコースヒッター', 'アウトコースヒッター', '対変化球〇', 'ダメ押し', '威圧感(野手)', 'お祭り男', 'カット打ち', '窮地〇', '決勝打', '高速チャージ', 'サヨナラ男(安打)', 'サヨナラ男(本塁打)', '対ストレート〇', 'ヘッドスライディング', 'ホーム死守', 'マルチ弾', '満塁男(安打)', '満塁男(本塁打)', 'リベンジ', 'レーザービーム', '国際大会〇', '春男', '夏男', '秋男', 'ツバメキラー', '横浜キラー', '阪神キラー', '巨人キラー', '広島キラー', '中日キラー', 'オリックスキラー', 'ホークスキラー', 'レオキラー', '楽天キラー', 'ロッテキラー', '日本ハムキラー'
 ]
@@ -26,9 +37,9 @@ else
   bg_class_1, bg_class_2, text_class = 'pawa-bg-sa-n1', 'pawa-bg-sa-n2', 'pawa-text-neutral'
 end
 %>
-<div class="col fs-3 <%= bg_class_1 %> rounded">
-  <div class="row p-1 text-center">
+<div class="col fs-3 <%= bg_class_1 %> rounded d-flex pawa-ability-box">
+  <div class="row p-1 text-center flex-fill">
     <%# raw…文字列をエスケープせずにそのまま表示。 %>
-    <span class="col-12 rounded <%= "#{bg_class_2} #{text_class}" %>"><%= raw(ability.presence || '&nbsp;') %></span>
+    <span class="col rounded d-flex justify-content-center align-items-center <%= "#{bg_class_2} #{text_class} #{ability_classes}" %>"><%= raw(ability.presence || '&nbsp;') %></span>
   </div>
 </div>

@@ -270,3 +270,26 @@
     background-color: #68F177 !important;
   }
 }
+
+
+// PCサイズ
+@media (min-width: 992px) {
+  .table-view {
+    display: block;
+  }
+
+  .card-view {
+    display: none;
+  }
+}
+
+// スマートフォンサイズ
+@media (max-width: 991px) {
+  .table-view {
+    display: none;
+  }
+
+  .card-view {
+    display: block;
+  }
+}

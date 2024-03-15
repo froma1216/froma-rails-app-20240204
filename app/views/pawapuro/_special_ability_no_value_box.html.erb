@@ -37,7 +37,7 @@ else
   bg_class_1, bg_class_2, text_class = 'pawa-bg-sa-n1', 'pawa-bg-sa-n2', 'pawa-text-neutral'
 end
 %>
-<div class="col fs-3 <%= bg_class_1 %> rounded d-flex pawa-ability-box">
+<div class="col-12 col-sm-3 fs-3 <%= bg_class_1 %> rounded d-flex pawa-ability-box">
   <div class="row p-1 text-center flex-fill">
     <%# raw…文字列をエスケープせずにそのまま表示。 %>
     <span class="col rounded d-flex justify-content-center align-items-center <%= "#{bg_class_2} #{text_class} #{ability_classes}" %>"><%= raw(ability.presence || '&nbsp;') %></span>

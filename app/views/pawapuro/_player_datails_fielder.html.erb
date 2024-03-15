@@ -14,13 +14,7 @@
       <% if @player.p2_proper >= 1 %>
         <%= render partial: 'special_ability_value_box', locals: { ability_name:"キャッチャー", ability_value: @player.pawapuro_fielder.catcher } %>
       <% else %>
-        <%# FIXME: 部分テンプレートに空白で設定できるように %>
-        <div class="col fs-3 pawa-bg-sa-n1 rounded">
-          <div class="row pt-1 pb-1 ps-1 text-center">
-            <span class="col-10 pawa-bg-main rounded pawa-text-neutral">&nbsp;</span>
-            <span class="col-2 ps-2 text-light"></span>
-          </div>
-        </div>
+        <%= render partial: 'special_ability_value_box', locals: { ability_name:"", ability_value: "" } %>
       <% end %>
       <%= render partial: 'special_ability_value_box', locals: { ability_name:"ケガしにくさ", ability_value: @player.kegasinikusa } %>
     </div>

@@ -227,6 +227,12 @@
   background-color: #ffffff; // bg-white
   width: 100px;
   height: 100%;
+
+  // スマホの場合のフォントサイズを小さくする
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    width: 50px;
+  }
 }
 
 // 特能チェックボックス
@@ -271,7 +277,7 @@
   }
 }
 
-
+// TODO: ブレイクポイントの見直し
 // PCサイズ
 @media (min-width: 992px) {
   .table-view {
@@ -285,6 +291,10 @@
 
 // スマートフォンサイズ
 @media (max-width: 991px) {
+  .h3 {
+    font-size: 1rem;
+  }
+
   .table-view {
     display: none;
   }

@@ -9,7 +9,8 @@ module Admin
     before_action :authenticate_admin
 
     def authenticate_admin
-      # TODO: Add authentication logic here.
+      # ログイン中、roleがadminのユーザのみ操作可能
+      redirect_to "/", alert: "Not authorized." unless current_user && current_user.role == "admin"
     end
 
     # Override this value to specify the number of elements to display at a time

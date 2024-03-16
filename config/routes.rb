@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :conferences
+      resources :days
+      resources :participations
+      resources :pawapuro_fielders
+      resources :pawapuro_pitchers
+      resources :pawapuro_players
+      resources :pokemon_emerald_factory_participants
+      resources :presentations
+      resources :slots
+      resources :tracks
+      resources :users
+
+      root to: "conferences#index"
+    end
   # ルーティング
   root to: "home#index"
 

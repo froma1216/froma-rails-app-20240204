@@ -11,3 +11,6 @@ Rails.application.config.assets.version = "1.0"
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w[bootstrap.min.js popper.js]
+
+# 管理画面
+Rails.application.config.assets.precompile += %w[administrate/application.js administrate/application.css]

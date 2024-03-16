@@ -15,7 +15,7 @@ AllCops:
   DisplayCopNames: true
   # rubocop対象外(リポジトリ毎で調節)
   Exclude:
-    - "Gemfile"
+    # - "Gemfile"
     - "bin/**/*"
     - "db/**/*"
     - "log/**/*"

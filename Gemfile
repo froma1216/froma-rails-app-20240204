@@ -66,6 +66,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# コード理解と品質向上
+gem "ruby-lsp"
 # rubyのlinter
 gem "rubocop"
 # erbフォーマッター
@@ -82,10 +84,14 @@ gem "jquery-rails"
 gem "devise"
 # deviseのメッセージを国際化
 gem "devise-i18n"
-gem "ruby-lsp"
 
 # 検索機能
 gem "ransack"
 
 # 管理画面
 gem "administrate"
+
+# ページネーション
+# NOTE: https://www.gp-standard.com/rails-04-b5kaminari/
+gem "bootstrap5-kaminari-views"
+gem "kaminari"

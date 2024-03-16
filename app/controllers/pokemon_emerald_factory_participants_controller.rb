@@ -8,6 +8,8 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
     # PokemonEmeraldFactoryParticipantモデルからポケモンの名前を全て取得
     @pokemon_names = PokemonEmeraldFactoryParticipant.pluck(:name).uniq
 
+    @results = Kaminari.paginate_array(@results).page(params[:page])
+
     # 検索結果が空の場合にフラッシュメッセージを設定
     flash.now[:alert] = "対象のポケモンが見つかりませんでした。" if @results.empty?
   end

@@ -35,7 +35,7 @@ class PawapuroPlayerDashboard < Administrate::BaseDashboard
     throws: Field::String,
     updated_by: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -45,9 +45,11 @@ class PawapuroPlayerDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    player_name
     back_name
-    bats
-    birthday
+    main_position
+    created_by
+    updated_by
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

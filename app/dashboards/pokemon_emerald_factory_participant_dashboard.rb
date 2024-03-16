@@ -29,7 +29,7 @@ class PokemonEmeraldFactoryParticipantDashboard < Administrate::BaseDashboard
     type1: Field::String,
     type2: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -39,9 +39,12 @@ class PokemonEmeraldFactoryParticipantDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    character
-    effort_values
+    name
     item
+    move1
+    move2
+    move3
+    move4
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

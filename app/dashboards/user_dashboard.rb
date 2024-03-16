@@ -21,6 +21,7 @@ class UserDashboard < Administrate::BaseDashboard
     username: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    role: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,45 +29,51 @@ class UserDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
+  # 一覧画面に表示する項目
   COLLECTION_ATTRIBUTES = %i[
     id
-    conference
-    email
+    username
+    fullname
     encrypted_password
+    role
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
+  # 詳細画面に表示する項目
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    username
+    fullname
     conference
     email
     encrypted_password
-    fullname
     participations
     remember_created_at
     reset_password_sent_at
     reset_password_token
     slots
-    username
     created_at
     updated_at
+    role
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
+  # 編集画面に表示する項目
   FORM_ATTRIBUTES = %i[
     conference
+    username
+    fullname
     email
     encrypted_password
-    fullname
     participations
     remember_created_at
     reset_password_sent_at
     reset_password_token
     slots
-    username
+    role
   ].freeze
 
   # COLLECTION_FILTERS

@@ -45,7 +45,7 @@ class PawapuroPitcherDashboard < Administrate::BaseDashboard
     updated_by: Field::String,
     utarezuyosa: Field::Number,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -55,9 +55,12 @@ class PawapuroPitcherDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    pawapuro_player
+    pace
     control
+    stamina
     created_by
-    curveball_type_movement
+    updated_by
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

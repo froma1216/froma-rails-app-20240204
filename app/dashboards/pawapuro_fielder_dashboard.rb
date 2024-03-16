@@ -27,7 +27,7 @@ class PawapuroFielderDashboard < Administrate::BaseDashboard
     trajectory: Field::Number,
     updated_by: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -37,9 +37,16 @@ class PawapuroFielderDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    pawapuro_player
+    trajectory
+    meat
+    power
+    running
     arm_strength
-    catcher
+    defense
     catching
+    created_by
+    updated_by
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

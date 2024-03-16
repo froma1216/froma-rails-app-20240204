@@ -65,7 +65,7 @@
     <tbody>
       <% @results.each_with_index do |pokemon, index| %>
         <tr>
-          <th scope="row" class="align-middle"><%= index + 1 %></th>
+          <th scope="row" class="align-middle"><%= @starting_number+index + 1 %></th>
           <td class="align-middle"><%= pokemon.name %></td>
           <td class="align-middle"><%= pokemon.type1 %></td>
           <td class="align-middle"><%= pokemon.type2 %></td>

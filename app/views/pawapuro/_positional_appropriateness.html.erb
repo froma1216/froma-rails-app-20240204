@@ -31,7 +31,7 @@ case @player.send("p#{positio_no}_proper")
   end
 %>
 <span class="me-2 h5 <%= "#{add_text_class}" %>"><%= position_name %></span>
-<span class="me-2 h5"><%= display_alphabet(@player.pawapuro_fielder.defense * coefficient) %></span>
+<span class="me-2 h5"><%= display_alphabet((@player.pawapuro_fielder.defense * coefficient).ceil) %></span>
 <span class="h5 <%= "#{add_text_class}" %>">
-  <%= ((@player.pawapuro_fielder.defense * coefficient).to_i).nonzero? || '--' %>
+  <%= ((@player.pawapuro_fielder.defense * coefficient).ceil.to_i).nonzero? || '--' %>
 </span>

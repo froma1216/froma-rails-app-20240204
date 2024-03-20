@@ -34,7 +34,8 @@ when special_abilities.include?(ability)
 when sub_abilities.include?(ability)
   bg_class_1, bg_class_2, text_class = 'pawa-bg-sa-sb1', 'pawa-bg-sa-sb2', 'pawa-text-sub'
 else
-  bg_class_1, bg_class_2, text_class = 'pawa-bg-sa-n1', 'pawa-bg-sa-n2', 'pawa-text-neutral'
+  # 何も設定されていないときは、PCサイズの際のみ表示
+  bg_class_1, bg_class_2, text_class = 'pawa-bg-sa-n1 d-none d-sm-block', 'pawa-bg-sa-n2', 'pawa-text-neutral'
 end
 %>
 <div class="col-12 col-sm-3 fs-3 <%= bg_class_1 %> rounded d-flex pawa-ability-box">

@@ -21,7 +21,12 @@
         <div class="container-fluid">
           <%# ロゴ %>
           <%= link_to("HOME", root_path, class: "navbar-brand") %>
-          <div class="collapse navbar-collapse">
+          <%# モバイルビュー用のトグルボタン %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <%# PCサイズのヘッダー内容 %>
+          <div class="collapse navbar-collapse" id="navbar-content">
             <ul class="navbar-nav mr-auto">
               <%# エメラルド：バトルフロンティア %>
               <li>
@@ -59,11 +64,13 @@
                   <div class="text-white">フロマのささやかなゲーム攻略ツール集</div>
                 </div>
               </div>
-              <div>
-                <%= link_to "sign up", new_user_registration_path, class: "btn btn-primary me-2" %>
-              </div>
-              <div>
-                <%= link_to "login", new_user_session_path, class: "btn btn-success" %>
+              <div class="d-flex justify-content-end">
+                <div>
+                  <%= link_to "sign up", new_user_registration_path, class: "btn btn-primary me-2" %>
+                </div>
+                <div>
+                  <%= link_to "login", new_user_session_path, class: "btn btn-success" %>
+                </div>
               </div>
             <% end %>
           </div>

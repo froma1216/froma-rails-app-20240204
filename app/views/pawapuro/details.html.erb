@@ -26,7 +26,7 @@
             <div class="row mb-1">
               <%# TODO: メインポジションによって色を変える %>
               <%# 選手名 %>
-              <h5 class="col-12 col-sm-4 align-items-center pawa-bg-sa-outfielder pawa-border-outfielder rounded px-4 py-1 text-center h3 mb-sm-0" id="playerDetails"><%= @player.player_name %></h5>
+              <%= render partial: 'player_name_box', locals: { player: @player } %>
               <%# 守備位置 %>
               <div class="col-7 col-sm-4 d-flex justify-content-start justify-content-sm-center align-items-center pawa-text-main ps-0">
                 <div class="p-0">

@@ -124,4 +124,18 @@ module PawapuroHelper
   def ability_checked?(player, ability)
     player.other_special_abilities.to_s.split(",").include?(ability)
   end
+
+  # 選手名ボックスの背景色、ボーダー色のクラスを返す
+  def main_position_box_color_class(main_position)
+    case main_position
+    when 11..13
+      "pawa-bg-sa-pitcher pawa-border-pitcher"
+    when 2
+      "pawa-bg-sa-catcher pawa-border-catcher"
+    when 3..6
+      "pawa-bg-sa-infielder pawa-border-infielder"
+    else
+      "pawa-bg-sa-outfielder pawa-border-outfielder"
+    end
+  end
 end

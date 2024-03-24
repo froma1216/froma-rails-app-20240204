@@ -81,6 +81,18 @@
 }
 
 // 選手名
+.pawa-border-pitcher {
+  border: 3px solid #B65A45;
+}
+
+.pawa-border-catcher {
+  border: 3px solid #2694B7;
+}
+
+.pawa-border-infielder {
+  border: 3px solid #BC923D;
+}
+
 .pawa-border-outfielder {
   border: 3px solid #37A238;
 }
@@ -129,6 +141,18 @@
 }
 
 // 選手名
+.pawa-bg-sa-pitcher {
+  background-color: #FF9878 !important;
+}
+
+.pawa-bg-sa-catcher {
+  background-color: #12ECFE !important;
+}
+
+.pawa-bg-sa-infielder {
+  background-color: #FAD700 !important;
+}
+
 .pawa-bg-sa-outfielder {
   background-color: #68F177 !important;
 }

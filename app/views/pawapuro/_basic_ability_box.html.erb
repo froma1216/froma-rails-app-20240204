@@ -3,16 +3,16 @@
   <div class="col-12 col-sm-5 p-0">
     <div class="pawa-ability-label"><%= label %></div>
   </div>
-  <div class="col-12 col-sm-7">
+  <div class="col-12 col-sm-7 d-flex align-items-center">
     <% if label == "弾道" %>
-      <span class="pawa-text-a me-2 h5"><%= display_trajectory(ability_value) %></span>
-      <span class="h5"><%= ability_value %></span>
+      <span class="pawa-text-a fs-5 fw-bold me-1 me-sm-2"><%= display_trajectory(ability_value) %></span>
+      <span class="fs-5 fw-bold"><%= ability_value %></span>
     <% elsif label == "球速" %>
-      <span class="me-1 h5"><%= ability_value %></span>
+      <span class="fs-5 fw-bold me-1"><%= ability_value %></span>
       <span>km/h</span>
     <% else %>
-      <span class="pawa-text-a me-2 h5"><%= display_alphabet(ability_value) %></span>
-      <span class="h5"><%= ability_value %></span>
+      <span class="pawa-text-a fs-5 fw-bold me-1 me-sm-2"><%= display_alphabet(ability_value) %></span>
+      <span class="fs-5 fw-bold"><%= ability_value %></span>
     <% end %>
   </div>
 </div>

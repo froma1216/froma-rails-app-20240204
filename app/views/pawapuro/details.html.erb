@@ -51,8 +51,12 @@
           <div class="tab-content container pawa-bg-sub rounded">
             <%# 選手能力 %>
             <div class="tab-pane fade show active" id="playerBasic">
-              <%# TODO: メインポジションが投手か野手によって、表示を分ける %>
-              <%= render 'player_datails_fielder' %>
+              <%# メインポジションが投手か野手によって、表示を分ける %>
+              <% if @player.main_position == 11..13 %>
+                <%= render 'player_datails_pitcher' %>
+              <% else %>
+                <%= render 'player_datails_fielder' %>
+              <% end %>
             </div>
             <%# 投手能力 %>
             <div class="tab-pane fade" id="playerPitcher">

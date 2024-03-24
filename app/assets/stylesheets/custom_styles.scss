@@ -279,15 +279,7 @@
 
 // TODO: ブレイクポイントの見直し
 // PCサイズ
-@media (min-width: 992px) {
-  .table-view {
-    display: block;
-  }
-
-  .card-view {
-    display: none;
-  }
-}
+@media (min-width: 992px) {}
 
 // スマートフォンサイズ
 @media (max-width: 991px) {
@@ -295,11 +287,4 @@
     font-size: 1rem;
   }
 
-  .table-view {
-    display: none;
-  }
-
-  .card-view {
-    display: block;
-  }
 }

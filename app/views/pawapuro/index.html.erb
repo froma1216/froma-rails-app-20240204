@@ -44,7 +44,7 @@
 %>
 <%# 一覧表示部 %>
 <%# PCサイズ時 %>
-<div class="table-view">
+<div class="d-block d-sm-none">
   <table class="table table-striped caption-top ">
     <thead>
       <tr>
@@ -113,7 +113,7 @@
   </table>
 </div>
 <%# スマホサイズ時 %>
-<div class="card-view">
+<div class="d-none d-sm-block">
   <% @players.each_with_index do |player, index| %>
     <% if player.created_by == current_user.username || player.id == 1 %>
       <div class="card mb-3">

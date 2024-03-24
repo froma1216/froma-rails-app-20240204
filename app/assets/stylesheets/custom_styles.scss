@@ -235,6 +235,26 @@
   }
 }
 
+// 能力ラベル
+.pawa-ability-label-variable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #C6D9F2;
+  font-weight: bold;
+  border-radius: 0.2rem; // bounded
+  padding: 0.25rem; // p-1
+  background-color: #ffffff; // bg-white
+  width: 100px;
+  height: 100%;
+
+  // スマホの場合のフォントサイズを小さくする
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    width: auto;
+  }
+}
+
 // 特能チェックボックス
 .pawa-checkbox-sp {
   border: 2px solid #CEB055 !important;
@@ -287,4 +307,7 @@
   // .h3 {
   //   font-size: 1rem;
   // }
+  #responsive-font-size {
+    font-size: 0.75rem;
+  }
 }

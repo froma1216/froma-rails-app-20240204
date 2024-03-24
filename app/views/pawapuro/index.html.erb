@@ -144,7 +144,7 @@
             <span class="me-2 h5"><%= display_alphabet(player.pawapuro_fielder.catching) %></span>
             <%= player.pawapuro_fielder.catching %><br>
           </p>
-          <%= link_to '詳細', details_pawapuro_path(player), class: 'btn btn-primary details-button' %>
+          <%= link_to '詳細', details_pawapuro_path(player), class: 'btn btn-primary details-button', data: { turbo_frame: "pawapuro_details_modal" } %>
           <% if player.id != 1 %>
             <%= link_to "削除", pawapuro_path(player), method: :delete, data: { confirm: "「選手名：#{player.player_name}」を削除してよろしいですか？" }, class: "btn btn-danger" %>
           <% end %>

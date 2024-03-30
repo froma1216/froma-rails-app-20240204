@@ -933,49 +933,54 @@
           <%# 基本能力 %>
           <div class="mb-3">
             <div class="row">
-              <div class="col">
+              <div class="col-6 col-sm-2">
                 <%= fielder_f.label :trajectory, "弾道", class: "form-label" %>
                 <div class="input-group">
                   <%= fielder_f.number_field :trajectory, class: "form-control", id:"trajectory-input", min: 1, max: 4 %>
+                  <%# FIXME: 角度が反映されない不具合 %>
                   <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" style="transform: rotate(-10deg);"></i></span>
                 </div>
               </div>
-              <div class="col">
+              <%# PCサイズ時、弾道のみ一段目になるようにダミーで設置 %>
+            <div class="col-10 d-none d-sm-block"></div>
+              <%# スマホサイズ時、弾道のみ一段目になるようにダミーで設置 %>
+            <div class="col-6 d-block d-sm-none"></div>
+              <div class="col-6 col-sm-2">
                 <%= fielder_f.label :meat, "ミート", class: "form-label" %>
                 <div class="input-group">
                   <%= fielder_f.number_field :meat, class: "form-control", id:"meat-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="meat-alphabet-display">G</span>
                 </div>
               </div>
-              <div class="col">
+              <div class="col-6 col-sm-2">
                 <%= fielder_f.label :power, "パワー", class: "form-label" %>
                 <div class="input-group">
                   <%= fielder_f.number_field :power, class: "form-control", id:"power-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="power-alphabet-display">G</span>
                 </div>
               </div>
-              <div class="col">
+              <div class="col-6 col-sm-2">
                 <%= fielder_f.label :running, "走力", class: "form-label" %>
                 <div class="input-group">
                   <%= fielder_f.number_field :running, class: "form-control", id:"running-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="running-alphabet-display">G</span>
                 </div>
               </div>
-              <div class="col">
+              <div class="col-6 col-sm-2">
                 <%= fielder_f.label :arm_strength, "肩力", class: "form-label" %>
                 <div class="input-group">
                   <%= fielder_f.number_field :arm_strength, class: "form-control", id:"arm_strength-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="arm_strength-alphabet-display">G</span>
                 </div>
               </div>
-              <div class="col">
+              <div class="col-6 col-sm-2">
                 <%= fielder_f.label :defense, "守備力", class: "form-label" %>
                 <div class="input-group">
                   <%= fielder_f.number_field :defense, class: "form-control", id:"defense-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="defense-alphabet-display">G</span>
                 </div>
               </div>
-              <div class="col">
+              <div class="col-6 col-sm-2">
                 <%= fielder_f.label :catching, "捕球", class: "form-label" %>
                 <div class="input-group">
                   <%= fielder_f.number_field :catching, class: "form-control", id:"catching-input", min: 1, max: 100 %>
@@ -992,129 +997,109 @@
       </div>
       <div class="mb-3">
         <%# 数値あり %>
-        <div class="row mb-2">
-          <div class="col row">
-            <div class="col-4 d-flex align-items-center">
-              <%= fielder_f.label :chance, "チャンス", class: "form-label small mb-0" %>
-            </div>
-            <div class="col-8">
-              <%= fielder_f.select :chance,
-                options_for_select([
-                    ["勝負師", 4, {class: "pawa-bg-sa-sp2"}],
-                    ["A", 3, {class: "pawa-bg-sa-g2"}],
-                    ["B", 2, {class: "pawa-bg-sa-g2"}],
-                    ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white"}],
-                    ["E", -1, {class: "bg-white"}],
-                    ["F", -2, {class: "pawa-bg-sa-b2"}],
-                    ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ], @player.new_record? ? 0 : @player.pawapuro_fielder.chance),
-                {},
-                { class: "form-select", id: "chance-select" } %>
-            </div>
+        <div class="row mb-3">
+          <div class="col-6 col-sm-4">
+            <%= fielder_f.label :chance, "チャンス", class: "form-label small mb-0" %>
+            <%= fielder_f.select :chance,
+              options_for_select([
+                  ["勝負師", 4, {class: "pawa-bg-sa-sp2"}],
+                  ["A", 3, {class: "pawa-bg-sa-g2"}],
+                  ["B", 2, {class: "pawa-bg-sa-g2"}],
+                  ["C", 1, {class: "bg-white"}],
+                  ["D", 0, {class: "bg-white"}],
+                  ["E", -1, {class: "bg-white"}],
+                  ["F", -2, {class: "pawa-bg-sa-b2"}],
+                  ["G", -3, {class: "pawa-bg-sa-b2"}],
+              ], @player.new_record? ? 0 : @player.pawapuro_fielder.chance),
+              {},
+              { class: "form-select", id: "chance-select" }
+            %>
           </div>
-          <div class="col row">
-            <div class="col-4 d-flex align-items-center">
-              <%= fielder_f.label :taihidaritousyu, "対左投手", class: "form-label small mb-0" %>
-            </div>
-            <div class="col-8">
-              <%= fielder_f.select :taihidaritousyu,
-                options_for_select([
-                    ["左腕キラー", 4, {class: "pawa-bg-sa-sp2"}],
-                    ["A", 3, {class: "pawa-bg-sa-g2"}],
-                    ["B", 2, {class: "pawa-bg-sa-g2"}],
-                    ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white"}],
-                    ["E", -1, {class: "bg-white"}],
-                    ["F", -2, {class: "pawa-bg-sa-b2"}],
-                    ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ], @player.new_record? ? 0 : @player.pawapuro_fielder.taihidaritousyu),
-                {},
-                { class: "form-select", id: "taihidaritousyu-select" } %>
-            </div>
+          <div class="col-6 col-sm-4">
+            <%= fielder_f.label :taihidaritousyu, "対左投手", class: "form-label small mb-0" %>
+            <%= fielder_f.select :taihidaritousyu,
+              options_for_select([
+                  ["左腕キラー", 4, {class: "pawa-bg-sa-sp2"}],
+                  ["A", 3, {class: "pawa-bg-sa-g2"}],
+                  ["B", 2, {class: "pawa-bg-sa-g2"}],
+                  ["C", 1, {class: "bg-white"}],
+                  ["D", 0, {class: "bg-white"}],
+                  ["E", -1, {class: "bg-white"}],
+                  ["F", -2, {class: "pawa-bg-sa-b2"}],
+                  ["G", -3, {class: "pawa-bg-sa-b2"}],
+              ], @player.new_record? ? 0 : @player.pawapuro_fielder.taihidaritousyu),
+              {},
+              { class: "form-select", id: "taihidaritousyu-select" }
+            %>
           </div>
           <%# TODO: ポジション（サブポジ含む）にキャッチャーがない場合は非活性 %>
-          <div class="col row">
-            <div class="col-4 d-flex align-items-center">
-              <%= fielder_f.label :catcher, "キャッチャー", class: "form-label small mb-0" %>
-            </div>
-            <div class="col-8">
-              <%= fielder_f.select :catcher,
-                options_for_select([
-                    ["球界の頭脳", 4, {class: "pawa-bg-sa-sp2"}],
-                    ["A", 3, {class: "pawa-bg-sa-g2"}],
-                    ["B", 2, {class: "pawa-bg-sa-g2"}],
-                    ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white"}],
-                    ["E", -1, {class: "bg-white"}],
-                    ["F", -2, {class: "pawa-bg-sa-b2"}],
-                    ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ], @player.new_record? ? 0 : @player.pawapuro_fielder.catcher),
-                {},
-                { class: "form-select", id: "catcher-select" } %>
-            </div>
+          <div class="col-6 col-sm-4">
+            <%= fielder_f.label :catcher, "キャッチャー", class: "form-label small mb-0" %>
+            <%= fielder_f.select :catcher,
+              options_for_select([
+                  ["球界の頭脳", 4, {class: "pawa-bg-sa-sp2"}],
+                  ["A", 3, {class: "pawa-bg-sa-g2"}],
+                  ["B", 2, {class: "pawa-bg-sa-g2"}],
+                  ["C", 1, {class: "bg-white"}],
+                  ["D", 0, {class: "bg-white"}],
+                  ["E", -1, {class: "bg-white"}],
+                  ["F", -2, {class: "pawa-bg-sa-b2"}],
+                  ["G", -3, {class: "pawa-bg-sa-b2"}],
+              ], @player.new_record? ? 0 : @player.pawapuro_fielder.catcher),
+              {},
+              { class: "form-select", id: "catcher-select" }
+            %>
           </div>
-        </div>
-        <div class="row mb-2">
-          <div class="col row">
-            <div class="col-4 d-flex align-items-center">
-              <%= fielder_f.label :tourui, "盗塁", class: "form-label small mb-0" %>
-            </div>
-            <div class="col-8">
-              <%= fielder_f.select :tourui,
-                options_for_select([
-                    ["電光石火", 4, {class: "pawa-bg-sa-sp2"}],
-                    ["A", 3, {class: "pawa-bg-sa-g2"}],
-                    ["B", 2, {class: "pawa-bg-sa-g2"}],
-                    ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white"}],
-                    ["E", -1, {class: "bg-white"}],
-                    ["F", -2, {class: "pawa-bg-sa-b2"}],
-                    ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ], @player.new_record? ? 0 : @player.pawapuro_fielder.tourui),
-                {},
-                { class: "form-select", id: "tourui-select" } %>
-            </div>
+          <div class="col-6 col-sm-4">
+            <%= fielder_f.label :tourui, "盗塁", class: "form-label small mb-0" %>
+            <%= fielder_f.select :tourui,
+              options_for_select([
+                  ["電光石火", 4, {class: "pawa-bg-sa-sp2"}],
+                  ["A", 3, {class: "pawa-bg-sa-g2"}],
+                  ["B", 2, {class: "pawa-bg-sa-g2"}],
+                  ["C", 1, {class: "bg-white"}],
+                  ["D", 0, {class: "bg-white"}],
+                  ["E", -1, {class: "bg-white"}],
+                  ["F", -2, {class: "pawa-bg-sa-b2"}],
+                  ["G", -3, {class: "pawa-bg-sa-b2"}],
+              ], @player.new_record? ? 0 : @player.pawapuro_fielder.tourui),
+              {},
+              { class: "form-select", id: "tourui-select" }
+            %>
           </div>
-          <div class="col row">
-            <div class="col-4 d-flex align-items-center">
-              <%= fielder_f.label :sourui, "走塁", class: "form-label small mb-0" %>
-            </div>
-            <div class="col-8">
-              <%= fielder_f.select :sourui,
-                options_for_select([
-                    ["高速ベースラン", 4, {class: "pawa-bg-sa-sp2"}],
-                    ["A", 3, {class: "pawa-bg-sa-g2"}],
-                    ["B", 2, {class: "pawa-bg-sa-g2"}],
-                    ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white"}],
-                    ["E", -1, {class: "bg-white"}],
-                    ["F", -2, {class: "pawa-bg-sa-b2"}],
-                    ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ], @player.new_record? ? 0 : @player.pawapuro_fielder.sourui),
-                {},
-                { class: "form-select", id: "sourui-select" } %>
-            </div>
+          <div class="col-6 col-sm-4">
+            <%= fielder_f.label :sourui, "走塁", class: "form-label small mb-0" %>
+            <%= fielder_f.select :sourui,
+              options_for_select([
+                  ["高速ベースラン", 4, {class: "pawa-bg-sa-sp2"}],
+                  ["A", 3, {class: "pawa-bg-sa-g2"}],
+                  ["B", 2, {class: "pawa-bg-sa-g2"}],
+                  ["C", 1, {class: "bg-white"}],
+                  ["D", 0, {class: "bg-white"}],
+                  ["E", -1, {class: "bg-white"}],
+                  ["F", -2, {class: "pawa-bg-sa-b2"}],
+                  ["G", -3, {class: "pawa-bg-sa-b2"}],
+              ], @player.new_record? ? 0 : @player.pawapuro_fielder.sourui),
+              {},
+              { class: "form-select", id: "sourui-select" }
+            %>
           </div>
-          <div class="col row">
-            <div class="col-4 d-flex align-items-center">
-              <%= fielder_f.label :soukyuu, "送球", class: "form-label small mb-0" %>
-            </div>
-            <div class="col-8">
-              <%= fielder_f.select :soukyuu,
-                options_for_select([
-                    ["ストライク送球", 4, {class: "pawa-bg-sa-sp2"}],
-                    ["A", 3, {class: "pawa-bg-sa-g2"}],
-                    ["B", 2, {class: "pawa-bg-sa-g2"}],
-                    ["C", 1, {class: "bg-white"}],
-                    ["D", 0, {class: "bg-white"}],
-                    ["E", -1, {class: "bg-white"}],
-                    ["F", -2, {class: "pawa-bg-sa-b2"}],
-                    ["G", -3, {class: "pawa-bg-sa-b2"}],
-                ], @player.new_record? ? 0 : @player.pawapuro_fielder.soukyuu),
-                {},
-                { class: "form-select", id: "soukyuu-select" } %>
-            </div>
+          <div class="col-6 col-sm-4">
+            <%= fielder_f.label :soukyuu, "送球", class: "form-label small mb-0" %>
+            <%= fielder_f.select :soukyuu,
+              options_for_select([
+                  ["ストライク送球", 4, {class: "pawa-bg-sa-sp2"}],
+                  ["A", 3, {class: "pawa-bg-sa-g2"}],
+                  ["B", 2, {class: "pawa-bg-sa-g2"}],
+                  ["C", 1, {class: "bg-white"}],
+                  ["D", 0, {class: "bg-white"}],
+                  ["E", -1, {class: "bg-white"}],
+                  ["F", -2, {class: "pawa-bg-sa-b2"}],
+                  ["G", -3, {class: "pawa-bg-sa-b2"}],
+              ], @player.new_record? ? 0 : @player.pawapuro_fielder.soukyuu),
+              {},
+              { class: "form-select", id: "soukyuu-select" }
+            %>
           </div>
         </div>
         <%# 数値なし %>

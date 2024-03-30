@@ -1,6 +1,6 @@
 <%# NOTE: https://qiita.com/snskOgata/items/44d32a06045e6a52d11c %>
 <%= form_with model: @player, url: @player.new_record? ? pawapuro_index_path : pawapuro_path(@player), local: true do |f| %>
-  <form class="mb-3">
+  <form>
     <%# プロフィール %>
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       プロフィール
@@ -92,27 +92,27 @@
       </div>
       <%# 野手 %>
       <div class="row">
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <%= f.label :p2_proper, "捕手", class: "form-label small" %>
           <%= f.number_field :p2_proper, class: "form-control", min: 0, max: 3 %>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <%= f.label :p3_proper, "一塁手", class: "form-label small" %>
           <%= f.number_field :p3_proper, class: "form-control", min: 0, max: 3 %>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <%= f.label :p4_proper, "二塁手", class: "form-label small" %>
           <%= f.number_field :p4_proper, class: "form-control", min: 0, max: 3 %>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <%= f.label :p5_proper, "三塁手", class: "form-label small" %>
           <%= f.number_field :p5_proper, class: "form-control", min: 0, max: 3 %>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <%= f.label :p6_proper, "遊撃手", class: "form-label small" %>
           <%= f.number_field :p6_proper, class: "form-control", min: 0, max: 3 %>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <%= f.label :p7_proper, "外野手", class: "form-label small" %>
           <%= f.number_field :p7_proper, class: "form-control", min: 0, max: 3 %>
         </div>
@@ -124,145 +124,127 @@
     </div>
     <div class="mb-3">
       <div class="row mb-2">
-        <div class="col row">
-          <div class="col-4 d-flex align-items-center">
-            <%# TODO: アイコンつけて、注意文言を表示「金特「ガソリンタンク」は投手にのみ影響します。」 %>
-            <%= f.label :kaifuku, "回復", class: "form-label small mb-0" %>
-          </div>
-          <div class="col-8">
-            <%= f.select :kaifuku,
-              options_for_select([
-                  ["ガソリンタンク", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}]
-              ], @player.new_record? ? 0 : @player.kaifuku),
-              {},
-              { class: "form-select", id: "kaifuku-select" } %>
-          </div>
+        <div class="col-6 col-sm-4">
+          <%# TODO: アイコンつけて、注意文言を表示「金特「ガソリンタンク」は投手にのみ影響します。」 %>
+          <%= f.label :kaifuku, "回復", class: "form-label small mb-0" %>
+          <%= f.select :kaifuku,
+            options_for_select([
+                ["ガソリンタンク", 4, {class: "pawa-bg-sa-sp2"}],
+                ["A", 3, {class: "pawa-bg-sa-g2"}],
+                ["B", 2, {class: "pawa-bg-sa-g2"}],
+                ["C", 1, {class: "bg-white"}],
+                ["D", 0, {class: "bg-white"}],
+                ["E", -1, {class: "bg-white"}],
+                ["F", -2, {class: "pawa-bg-sa-b2"}],
+                ["G", -3, {class: "pawa-bg-sa-b2"}]
+            ], @player.new_record? ? 0 : @player.kaifuku),
+            {},
+            { class: "form-select", id: "kaifuku-select" }
+          %>
         </div>
-        <div class="col row">
-          <div class="col-4 d-flex align-items-center">
-            <%= f.label :kegasinikusa, "ケガしにくさ", class: "form-label small mb-0" %>
-          </div>
-          <div class="col-8">
-            <%= f.select :kegasinikusa,
-              options_for_select([
-                  ["鉄人", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}]
-              ], @player.new_record? ? 0 : @player.kegasinikusa),
-              {},
-              { class: "form-select", id: "kegasinikusa-select" } %>
-          </div>
+        <div class="col-6 col-sm-4">
+          <%= f.label :kegasinikusa, "ケガしにくさ", class: "form-label small mb-0" %>
+          <%= f.select :kegasinikusa,
+            options_for_select([
+                ["鉄人", 4, {class: "pawa-bg-sa-sp2"}],
+                ["A", 3, {class: "pawa-bg-sa-g2"}],
+                ["B", 2, {class: "pawa-bg-sa-g2"}],
+                ["C", 1, {class: "bg-white"}],
+                ["D", 0, {class: "bg-white"}],
+                ["E", -1, {class: "bg-white"}],
+                ["F", -2, {class: "pawa-bg-sa-b2"}],
+                ["G", -3, {class: "pawa-bg-sa-b2"}]
+            ], @player.new_record? ? 0 : @player.kegasinikusa),
+            {},
+            { class: "form-select", id: "kegasinikusa-select" }
+          %>
         </div>
-        <div class="col row"></div>
       </div>
-      <%# １行目 %>
-      <div class="row">
-        <div class="col">
+      <div class="row mb-2">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tubamekiller", checked: ability_checked?(@player, "ツバメキラー") }, "ツバメキラー", nil %>
             <%= f.label :other_special_abilities, "ツバメキラー", class: "form-check-label pawa-text-good fw-bold", for: "tubamekiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "yokohamakiller", checked: ability_checked?(@player, "横浜キラー") }, "横浜キラー", nil %>
             <%= f.label :other_special_abilities, "横浜キラー", class: "form-check-label pawa-text-good fw-bold", for: "yokohamakiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "hannsinnkiller", checked: ability_checked?(@player, "阪神キラー") }, "阪神キラー", nil %>
             <%= f.label :other_special_abilities, "阪神キラー", class: "form-check-label pawa-text-good fw-bold", for: "hannsinnkiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kyojinnkiller", checked: ability_checked?(@player, "巨人キラー") }, "巨人キラー", nil %>
             <%= f.label :other_special_abilities, "巨人キラー", class: "form-check-label pawa-text-good fw-bold", for: "kyojinnkiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "hirosimakiller", checked: ability_checked?(@player, "広島キラー") }, "広島キラー", nil %>
             <%= f.label :other_special_abilities, "広島キラー", class: "form-check-label pawa-text-good fw-bold", for: "hirosimakiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "tyuunitikiller", checked: ability_checked?(@player, "中日キラー") }, "中日キラー", nil %>
             <%= f.label :other_special_abilities, "中日キラー", class: "form-check-label pawa-text-good fw-bold", for: "tyuunitikiller" %>
           </div>
         </div>
-      </div>
-      <%# ２行目 %>
-      <div class="row">
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "orixkiller", checked: ability_checked?(@player, "オリックスキラー") }, "オリックスキラー", nil %>
             <%= f.label :other_special_abilities, "オリックスキラー", class: "form-check-label pawa-text-good fw-bold", for: "orixkiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "hawkskiller", checked: ability_checked?(@player, "ホークスキラー") }, "ホークスキラー", nil %>
             <%= f.label :other_special_abilities, "ホークスキラー", class: "form-check-label pawa-text-good fw-bold", for: "hawkskiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "leokiller", checked: ability_checked?(@player, "レオキラー") }, "レオキラー", nil %>
             <%= f.label :other_special_abilities, "レオキラー", class: "form-check-label pawa-text-good fw-bold", for: "leokiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "rakutennkiller", checked: ability_checked?(@player, "楽天キラー") }, "楽天キラー", nil %>
             <%= f.label :other_special_abilities, "楽天キラー", class: "form-check-label pawa-text-good fw-bold", for: "rakutennkiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "lottekiller", checked: ability_checked?(@player, "ロッテキラー") }, "ロッテキラー", nil %>
             <%= f.label :other_special_abilities, "ロッテキラー", class: "form-check-label pawa-text-good fw-bold", for: "lottekiller" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "nipponhamukiller", checked: ability_checked?(@player, "日本ハムキラー") }, "日本ハムキラー", nil %>
             <%= f.label :other_special_abilities, "日本ハムキラー", class: "form-check-label pawa-text-good fw-bold", for: "nipponhamukiller" %>
           </div>
         </div>
-      </div>
-      <%# ３行目 %>
-      <div class="row">
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-g", id: "kokusaitaikaimaru", checked: ability_checked?(@player, "国際大会〇") }, "国際大会〇", nil %>
             <%= f.label :other_special_abilities, "国際大会〇", class: "form-check-label pawa-text-good fw-bold", for: "kokusaitaikaimaru" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-b", id: "kokusaitaikaibatu", checked: ability_checked?(@player, "国際大会✕") }, "国際大会✕", nil %>
             <%= f.label :other_special_abilities, "国際大会✕", class: "form-check-label pawa-text-bad fw-bold", for: "kokusaitaikaibatu" %>
           </div>
         </div>
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"></div>
       </div>
     </div>
     <%= f.fields_for :pawapuro_pitcher do |pitcher_f| %>
@@ -1733,138 +1715,131 @@
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       COM操作起用法特殊能力
     </div>
-    <%# １行目 %>
     <div class="mb-3">
       <div class="row">
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "meettayou", checked: ability_checked?(@player, "ミート多用") }, "ミート多用", nil %>
             <%= f.label :other_special_abilities, "ミート多用", class: "form-check-label pawa-text-sub fw-bold", for: "meettayou" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "kyousinntayou", checked: ability_checked?(@player, "強振多用") }, "強振多用", nil %>
             <%= f.label :other_special_abilities, "強振多用", class: "form-check-label pawa-text-sub fw-bold", for: "kyousinntayou" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "sekkyokudahou", checked: ability_checked?(@player, "積極打法") }, "積極打法", nil %>
             <%= f.label :other_special_abilities, "積極打法", class: "form-check-label pawa-text-sub fw-bold", for: "sekkyokudahou" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "sinntyoudahou", checked: ability_checked?(@player, "慎重打法") }, "慎重打法", nil %>
             <%= f.label :other_special_abilities, "慎重打法", class: "form-check-label pawa-text-sub fw-bold", for: "sinntyoudahou" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "sekkyokutourui", checked: ability_checked?(@player, "積極盗塁") }, "積極盗塁", nil %>
             <%= f.label :other_special_abilities, "積極盗塁", class: "form-check-label pawa-text-sub fw-bold", for: "sekkyokutourui" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "sinntyoutourui", checked: ability_checked?(@player, "慎重盗塁") }, "慎重盗塁", nil %>
             <%= f.label :other_special_abilities, "慎重盗塁", class: "form-check-label pawa-text-sub fw-bold", for: "sinntyoutourui" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "sekkyokusyubi", checked: ability_checked?(@player, "積極守備") }, "積極守備", nil %>
             <%= f.label :other_special_abilities, "積極守備", class: "form-check-label pawa-text-sub fw-bold", for: "sekkyokusyubi" %>
           </div>
         </div>
-      </div>
-      <%# ２行目 %>
-      <div class="row">
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "sekkyokusourui", checked: ability_checked?(@player, "積極走塁") }, "積極走塁", nil %>
             <%= f.label :other_special_abilities, "積極走塁", class: "form-check-label pawa-text-sub fw-bold", for: "sekkyokusourui" %>
           </div>
         </div>
         <%# TODO: 選球眼のみ？（他にもないか確認）、野手テーブルに保存。 %>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "sennkyuugann", checked: ability_checked?(@player, "選球眼") }, "選球眼", nil %>
             <%= f.label :other_special_abilities, "選球眼", class: "form-check-label pawa-text-sub fw-bold", for: "sennkyuugann" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "sokyuutyuusinn", checked: ability_checked?(@player, "速球中心") }, "速球中心", nil %>
             <%= f.label :other_special_abilities, "速球中心", class: "form-check-label pawa-text-sub fw-bold", for: "sokyuutyuusinn" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "hennkakyuutyuusinn", checked: ability_checked?(@player, "変化球中心") }, "変化球中心", nil %>
             <%= f.label :other_special_abilities, "変化球中心", class: "form-check-label pawa-text-sub fw-bold", for: "hennkakyuutyuusinn" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "teamplaymaru", checked: ability_checked?(@player, "チームプレイ〇") }, "チームプレイ〇", nil %>
             <%= f.label :other_special_abilities, "チームプレイ〇", class: "form-check-label pawa-text-sub fw-bold", for: "teamplaymaru" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "teamplaybatu", checked: ability_checked?(@player, "チームプレイ✕") }, "チームプレイ✕", nil %>
             <%= f.label :other_special_abilities, "チームプレイ✕", class: "form-check-label pawa-text-sub fw-bold", for: "teamplaybatu" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "tyousianntei", checked: ability_checked?(@player, "調子安定") }, "調子安定", nil %>
             <%= f.label :other_special_abilities, "調子安定", class: "form-check-label pawa-text-sub fw-bold", for: "tyousianntei" %>
           </div>
         </div>
-      </div>
-      <%# ３行目 %>
-      <div class="row">
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "tyousikyokutann", checked: ability_checked?(@player, "調子極端") }, "調子極端", nil %>
             <%= f.label :other_special_abilities, "調子極端", class: "form-check-label pawa-text-sub fw-bold", for: "tyousikyokutann" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%# TODO: アイコンつけて、注意文言を表示「投手にのみ影響します。」 %>
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sp", id: "tetuwann", checked: ability_checked?(@player, "鉄腕") }, "鉄腕", nil %>
             <%= f.label :other_special_abilities, "鉄腕", class: "form-check-label pawa-text-special fw-bold", for: "tetuwann" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "tempo", checked: ability_checked?(@player, "テンポ〇") }, "テンポ〇", nil %>
             <%= f.label :other_special_abilities, "テンポ〇", class: "form-check-label pawa-text-sub fw-bold", for: "tempo" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "tousyuitihidari", checked: ability_checked?(@player, "投手位置左") }, "投手位置左", nil %>
             <%= f.label :other_special_abilities, "投手位置左", class: "form-check-label pawa-text-sub fw-bold", for: "tousyuitihidari" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "tousyuitimigi", checked: ability_checked?(@player, "投手位置右") }, "投手位置右", nil %>
             <%= f.label :other_special_abilities, "投手位置右", class: "form-check-label pawa-text-sub fw-bold", for: "tousyuitimigi" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "ninnkimono", checked: ability_checked?(@player, "人気者") }, "人気者", nil %>
             <%= f.label :other_special_abilities, "人気者", class: "form-check-label pawa-text-sub fw-bold", for: "ninnkimono" %>
           </div>
         </div>
-        <div class="col">
+        <div class="col-4 col-sm-2">
           <div class="form-check">
             <%= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input pawa-checkbox-sb", id: "furusyutujyou", checked: ability_checked?(@player, "フル出場") }, "フル出場", nil %>
             <%= f.label :other_special_abilities, "フル出場", class: "form-check-label pawa-text-sub fw-bold", for: "furusyutujyou" %>

@@ -61,6 +61,7 @@ group :development do
 
   # RSpec
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :test do
@@ -69,6 +70,7 @@ group :test do
   gem "selenium-webdriver"
   # RSpec
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 # コード理解と品質向上

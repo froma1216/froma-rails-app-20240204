@@ -12,10 +12,7 @@
         </div>
       </div>
       <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0">
-        <span class="pawa-text-neutral me-2 h5">投</span>
-        <span class="h5 pawa-text-neutral">--</span>
-        <%# TODO: 投手ポジション適正を追加 %>
-        <%#= render partial: 'positional_appropriateness', locals: { position_name:"投" } %>
+        <%= render partial: 'positional_appropriateness', locals: { position_name:"投" } %>
       </div>
       <div class="col-6 ps-3 py-3 pawa-border-main border-bottom-0 border-end-0">
         <%= render partial: 'positional_appropriateness', locals: { position_name:"捕" } %>

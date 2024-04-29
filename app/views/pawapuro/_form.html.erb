@@ -139,8 +139,7 @@
                 ["G", -3, {class: "pawa-bg-sa-b2"}]
             ], @player.new_record? ? 0 : @player.kaifuku),
             {},
-            { class: "form-select", id: "kaifuku-select" }
-          %>
+            { class: "form-select", id: "kaifuku-select" } %>
         </div>
         <div class="col-6 col-sm-4">
           <%= f.label :kegasinikusa, "ケガしにくさ", class: "form-label small mb-0" %>
@@ -457,8 +456,7 @@
                   ["ノミの心臓", -4, {class: "pawa-bg-sa-b2"}]
               ], @player.new_record? ? 0 : @player.pawapuro_pitcher.taipinch),
               {},
-              { class: "form-select", id: "taipinch-select" }
-            %>
+              { class: "form-select", id: "taipinch-select" } %>
           </div>
           <div class="col-6 col-sm-4">
             <%= pitcher_f.label :taihidaridasya, "対左打者", class: "form-label small mb-0" %>
@@ -474,8 +472,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_pitcher.taihidaridasya),
               {},
-              { class: "form-select", id: "taihidaridasya-select" } 
-            %>
+              { class: "form-select", id: "taihidaridasya-select" } %>
           </div>
           <div class="col-6 col-sm-4">
             <%= pitcher_f.label :utarezuyosa, "打たれ強さ", class: "form-label small mb-0" %>
@@ -492,8 +489,7 @@
                   ["ガラスのハート", -4, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_pitcher.utarezuyosa),
               {},
-              { class: "form-select", id: "utarezuyosa-select" }
-            %>
+              { class: "form-select", id: "utarezuyosa-select" } %>
           </div>
           <div class="col-6 col-sm-4">
             <%= pitcher_f.label :nobi, "ノビ", class: "form-label small mb-0" %>
@@ -509,8 +505,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_pitcher.nobi),
               {},
-              { class: "form-select", id: "nobi-select" } 
-            %>
+              { class: "form-select", id: "nobi-select" } %>
           </div>
           <div class="col-6 col-sm-4">
             <%= pitcher_f.label :quick, "クイック", class: "form-label small mb-0" %>
@@ -526,8 +521,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_pitcher.quick),
               {},
-              { class: "form-select", id: "quick-select" }
-            %>
+              { class: "form-select", id: "quick-select" } %>
           </div>
         </div>
         <%# 数値なし %>
@@ -942,9 +936,9 @@
                 </div>
               </div>
               <%# PCサイズ時、弾道のみ一段目になるようにダミーで設置 %>
-            <div class="col-10 d-none d-sm-block"></div>
+              <div class="col-10 d-none d-sm-block"></div>
               <%# スマホサイズ時、弾道のみ一段目になるようにダミーで設置 %>
-            <div class="col-6 d-block d-sm-none"></div>
+              <div class="col-6 d-block d-sm-none"></div>
               <div class="col-6 col-sm-2">
                 <%= fielder_f.label :meat, "ミート", class: "form-label" %>
                 <div class="input-group">
@@ -1012,8 +1006,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_fielder.chance),
               {},
-              { class: "form-select", id: "chance-select" }
-            %>
+              { class: "form-select", id: "chance-select" } %>
           </div>
           <div class="col-6 col-sm-4">
             <%= fielder_f.label :taihidaritousyu, "対左投手", class: "form-label small mb-0" %>
@@ -1029,8 +1022,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_fielder.taihidaritousyu),
               {},
-              { class: "form-select", id: "taihidaritousyu-select" }
-            %>
+              { class: "form-select", id: "taihidaritousyu-select" } %>
           </div>
           <%# TODO: ポジション（サブポジ含む）にキャッチャーがない場合は非活性 %>
           <div class="col-6 col-sm-4">
@@ -1047,8 +1039,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_fielder.catcher),
               {},
-              { class: "form-select", id: "catcher-select" }
-            %>
+              { class: "form-select", id: "catcher-select" } %>
           </div>
           <div class="col-6 col-sm-4">
             <%= fielder_f.label :tourui, "盗塁", class: "form-label small mb-0" %>
@@ -1064,8 +1055,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_fielder.tourui),
               {},
-              { class: "form-select", id: "tourui-select" }
-            %>
+              { class: "form-select", id: "tourui-select" } %>
           </div>
           <div class="col-6 col-sm-4">
             <%= fielder_f.label :sourui, "走塁", class: "form-label small mb-0" %>
@@ -1081,8 +1071,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_fielder.sourui),
               {},
-              { class: "form-select", id: "sourui-select" }
-            %>
+              { class: "form-select", id: "sourui-select" } %>
           </div>
           <div class="col-6 col-sm-4">
             <%= fielder_f.label :soukyuu, "送球", class: "form-label small mb-0" %>
@@ -1098,8 +1087,7 @@
                   ["G", -3, {class: "pawa-bg-sa-b2"}],
               ], @player.new_record? ? 0 : @player.pawapuro_fielder.soukyuu),
               {},
-              { class: "form-select", id: "soukyuu-select" }
-            %>
+              { class: "form-select", id: "soukyuu-select" } %>
           </div>
         </div>
         <%# 数値なし %>

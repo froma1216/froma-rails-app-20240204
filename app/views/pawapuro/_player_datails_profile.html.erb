@@ -2,8 +2,12 @@
 <div class="row p-2">
   <%# 基礎能力部 %>
   <div class="col-3 pe-4 pawa-text-main">
-    <%# TODO: メインポジションが投手か野手によって、表示を分ける %>
-    <%= render partial: 'fielder_basic_ability_wrap' %>
+    <%# メインポジションが投手か野手かによって、表示を分ける %>
+    <% if @player.main_position == 11..13 %>
+      <%= render partial: 'pitcher_basic_ability_wrap' %>
+    <% else %>
+      <%= render partial: 'fielder_basic_ability_wrap' %>
+    <% end %>
   </div>
   <%# プロフィール部 %>
   <div class="col-9 pawa-text-main">

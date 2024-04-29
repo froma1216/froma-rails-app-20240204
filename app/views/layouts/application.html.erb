@@ -30,16 +30,16 @@
           <%# PCサイズのヘッダー内容 %>
           <div class="collapse navbar-collapse" id="navbar-content">
             <ul class="navbar-nav mr-auto">
-              <%# エメラルド：バトルフロンティア %>
+              <%# 【エメラルド】バトルフロンティア %>
               <li>
-                <%= link_to("エメラルド：バトルフロンティア", pokemon_emerald_factory_participants_path, class: "nav-link") %>
+                <%= link_to("【エメラルド】バトルフロンティア", pokemon_emerald_factory_participants_path, class: "nav-link") %>
               </li>
               <% if user_signed_in? %>
                 <%# ログイン時 %>
                 <%# パワプロ %>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    パワプロ：選手作成メモ
+                    【パワプロ】選手作成メモ
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <%= link_to("作成選手一覧", pawapuro_index_path, class: "dropdown-item") %>

@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :conferences
-      resources :days
-      resources :participations
-      resources :pawapuro_fielders
-      resources :pawapuro_pitchers
-      resources :pawapuro_players
-      resources :pokemon_emerald_factory_participants
-      resources :presentations
-      resources :slots
-      resources :tracks
-      resources :users
+    resources :conferences
+    resources :days
+    resources :participations
+    resources :pawapuro_fielders
+    resources :pawapuro_pitchers
+    resources :pawapuro_players
+    resources :pokemon_emerald_factory_participants
+    resources :presentations
+    resources :slots
+    resources :tracks
+    resources :users
 
-      root to: "conferences#index"
-    end
+    root to: "conferences#index"
+  end
   # ルーティング
   root to: "home#index"
 
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   resources :slots, only: [:show]
   resources :participations, only: [:create, :destroy]
 
-  # パワプロ：選手作成メモ
+  # 【パワプロ】選手作成メモ
   resources :pawapuro, except: [:show] do
     collection do
       get "confirm", to: "pawapuro#confirm" # 選手作成確認画面
@@ -47,6 +47,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # エメラルド：ファクトリー参加ポケモン
+  # 【エメラルド】ファクトリー参加ポケモン
   resources :pokemon_emerald_factory_participants, only: [:index]
 end

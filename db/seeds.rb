@@ -100,7 +100,7 @@ s=Slot.create(
   end_time:'2020-08-15 17:00:00')
 t2.slots << s
 
-# パワプロ：選手情報
+# 【パワプロ】選手情報
 pawapuro_player = PawapuroPlayer.create(
   last_name: "大谷",
   first_name: "翔平",
@@ -127,7 +127,7 @@ pawapuro_player = PawapuroPlayer.create(
   updated_by: "master"
 )
 
-# パワプロ：投手能力
+# 【パワプロ】投手能力
 pawapuro_pitcher = PawapuroPitcher.create(
   pawapuro_player_id: pawapuro_player.id,
   pace: 163,
@@ -154,7 +154,7 @@ pawapuro_pitcher = PawapuroPitcher.create(
   updated_by: "master"
 )
 
-# パワプロ：野手能力
+# 【パワプロ】野手能力
 pawapuro_fielder = PawapuroFielder.create(
   pawapuro_player_id: pawapuro_player.id,
   trajectory: 4,

@@ -2,28 +2,10 @@
 <%= render partial: 'basic_ability_box', locals: { label:"球速", ability_value: @player.pawapuro_pitcher.pace } %>
 <%= render partial: 'basic_ability_box', locals: { label:"コントロール", ability_value: @player.pawapuro_pitcher.control } %>
 <%= render partial: 'basic_ability_box', locals: { label:"スタミナ", ability_value: @player.pawapuro_pitcher.stamina } %>
-<div class="d-flex justify-content-start row border border-3 border-white rounded p-1 mb-1 pawa-bg-main">
-  <div class="col-12 ps-3 pb-2">
-    <%# TODO: ストレート球種名のカラム追加 %>
-    <%# ストレート %>
-    <div class="pawa-breaking-font">
-      ストレート
-      <% if @player.pawapuro_pitcher.second_fastball_type.present? %>
-        ・<%= @player.pawapuro_pitcher.second_fastball_type %>
-      <% end %>
-    </div>
-    <div class="ms-3">
-      <%# 第一ストレート %>
-      <div class="row">
-        <div class="col-1 pawa-breaking-block-exist"></div>
-      </div>
-      <%# 第二ストレート %>
-      <div class="row">
-        <% if @player.pawapuro_pitcher.second_fastball_type.present? %>
-          <div class="col-1 pawa-breaking-block-exist"></div>
-        <% end %>
-      </div>
-    </div>
+<div class="d-flex justify-content-start row border border-3 border-white rounded p-0 p-sm-1 mb-1 pawa-bg-main">
+  <div class="ps-1 ps-sm-3 pb-2">
+    <%# ストレート系 %>
+    <%= render partial: 'breaking_ball_meter', locals: { breaking_ball_type:"fastball" } %>
     <%# スライダー系 %>
     <% if @player.pawapuro_pitcher.slider_type_pitch.present? %>
       <%= render partial: 'breaking_ball_meter', locals: { breaking_ball_type:"slider" } %>

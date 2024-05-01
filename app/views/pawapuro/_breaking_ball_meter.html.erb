@@ -1,22 +1,51 @@
-<%# 変化球メーター %>
+<%# 変化球部 %>
+<%# 第一球種名 %>
+<% first_pitch_type_pitch = breaking_ball_type == "fastball" ? @player.pawapuro_pitcher.send("#{breaking_ball_type}_type") : @player.pawapuro_pitcher.send("#{breaking_ball_type}_type_pitch") %>
+<%# 第一球種変化量 %>
+<% first_pitch_type_movement = breaking_ball_type == "fastball" ? 1 : @player.pawapuro_pitcher.send("#{breaking_ball_type}_type_movement") %>
 <%# 第二球種名 %>
-<% second_pitch_type = @player.pawapuro_pitcher.send("second_#{breaking_ball_type}_type_pitch") %>
-<%# 変化球名 %>
-<div class="pawa-breaking-font">
-  <%= @player.pawapuro_pitcher.send("#{breaking_ball_type}_type_pitch") %>
-  <% if second_pitch_type.present? %>
-    ・<%= second_pitch_type %>
-  <% end %>
-</div>
-<div class="ms-3">
-  <%# 第一球種 %>
-  <div class="row">
-    <%= breaking_ball_blocks(@player.pawapuro_pitcher, breaking_ball_type) %>
+<% second_pitch_type_pitch = breaking_ball_type == "fastball" ? @player.pawapuro_pitcher.send("second_#{breaking_ball_type}_type") : @player.pawapuro_pitcher.send("second_#{breaking_ball_type}_type_pitch") %>
+<%# 第二球種変化量 %>
+<% second_pitch_type_movement = breaking_ball_type == "fastball" ? 1 : @player.pawapuro_pitcher.send("second_#{breaking_ball_type}_type_movement") %>
+<%# PCサイズ時 %>
+<div class="d-none d-sm-block">
+  <div class="pawa-breaking-font">
+    <%= first_pitch_type_pitch %>
+    <% if second_pitch_type_pitch.present? %>
+      ・<%= second_pitch_type_pitch %>
+    <% end %>
   </div>
-  <%# 第二球種 %>
-  <% if second_pitch_type.present? %>
+  <div class="ms-3">
+    <%# 第一球種 %>
     <div class="row">
-      <%= breaking_ball_blocks(@player.pawapuro_pitcher, "second_#{breaking_ball_type}") %>
+      <%= breaking_ball_blocks(first_pitch_type_movement) %>
     </div>
-  <% end %>
+    <%# 第二球種 %>
+    <% if second_pitch_type_pitch.present? %>
+      <div class="row">
+        <%= breaking_ball_blocks(second_pitch_type_movement) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%# スマホサイズ時 %>
+<div class="d-block d-sm-none mb-1">
+  <div class="pawa-breaking-font">
+    <%# 第一球種 %>
+    <div>
+      <%= first_pitch_type_pitch %>
+      <span class="fw-bold">
+        <%= first_pitch_type_movement %>
+      </span>
+    </div>
+    <%# 第二球種 %>
+    <% if second_pitch_type_pitch.present? %>
+      <div>
+        <%= second_pitch_type_pitch %>
+        <span class="fw-bold">
+          <%= second_pitch_type_movement %>
+        </span>
+      </div>
+    <% end %>
+  </div>
 </div>

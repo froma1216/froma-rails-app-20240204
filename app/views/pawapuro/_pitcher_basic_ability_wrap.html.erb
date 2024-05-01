@@ -6,7 +6,12 @@
   <div class="col-12 ps-3 pb-2">
     <%# TODO: ストレート球種名のカラム追加 %>
     <%# ストレート %>
-    <div class="pawa-breaking-font">ストレート・<%= @player.pawapuro_pitcher.second_fastball_type %></div>
+    <div class="pawa-breaking-font">
+      ストレート
+      <% if @player.pawapuro_pitcher.second_fastball_type.present? %>
+        ・<%= @player.pawapuro_pitcher.second_fastball_type %>
+      <% end %>
+    </div>
     <div class="ms-3">
       <%# 第一ストレート %>
       <div class="row">

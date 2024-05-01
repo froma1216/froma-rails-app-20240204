@@ -292,7 +292,7 @@
             <%# 第二 %>
             <div class="col-12 col-sm-6">
               <label class="form-label small mb-0">第二ストレート系</label>
-              <%= pitcher_f.select :second_fastball_type, [['なし', 'なし'], ['ツーシームファースト', 'ツーシームファースト'], ['ムービングファースト', 'ムービングファースト'], ['超スローボール', '超スローボール'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.second_fastball_type }, { class: 'form-select form-select-sm' } %>
+              <%= pitcher_f.select :second_fastball_type, [['なし', ''], ['ツーシームファースト', 'ツーシームファースト'], ['ムービングファースト', 'ムービングファースト'], ['超スローボール', '超スローボール'], ['オリジナル', 'オリジナル']], { selected: @player.pawapuro_pitcher.second_fastball_type }, { class: 'form-select form-select-sm' } %>
             </div>
           </div>
           <%# スライダー系 %>

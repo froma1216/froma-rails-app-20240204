@@ -1,12 +1,11 @@
-$(function () {
-  // ラジオボタンが変更されたときの処理
-  $(".level-radio").change(function () {
-    var selectedValue = $(this).val();
+document.addEventListener("turbo:load", function() {
+  function updateOptions() {
+    var selectedValue = $("[name='level_radio']:checked").val();
     var options;
 
-    // 選択されたラジオボタンの値に応じてセレクトボックスのオプションを変更
     if (selectedValue == "50") {
       options = [
+        ["指定なし", ""],
         ["1周目", 1],
         ["2周目", 2],
         ["3周目", 3],
@@ -18,6 +17,7 @@ $(function () {
       ];
     } else {
       options = [
+        ["指定なし", ""],
         ["1周目", 4],
         ["2周目", 5],
         ["3周目", 6],
@@ -28,10 +28,13 @@ $(function () {
 
     // 既存のオプションを削除
     $("#lap").empty();
-
     // 新しいオプションを追加
     $.each(options, function (index, option) {
       $("#lap").append(new Option(option[0], option[1]));
     });
-  });
+  }
+
+  // 初期ロード時と変更時の両方でオプションを更新
+  updateOptions();
+  $("[name='level_radio']").change(updateOptions);
 });

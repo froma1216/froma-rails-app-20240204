@@ -1,6 +1,7 @@
 document.addEventListener("turbo:load", function() {
   function updateOptions() {
     var selectedValue = $("[name='level_radio']:checked").val();
+    var previousSelectedOption = $("#lap").val(); // 保存されている選択肢の値を取得
     var options;
 
     if (selectedValue == "50") {
@@ -30,7 +31,8 @@ document.addEventListener("turbo:load", function() {
     $("#lap").empty();
     // 新しいオプションを追加
     $.each(options, function (index, option) {
-      $("#lap").append(new Option(option[0], option[1]));
+      var isSelected = previousSelectedOption === option[1].toString(); // 現在の選択肢が前回の選択肢と同じかどうか確認
+      $("#lap").append(new Option(option[0], option[1], isSelected, isSelected));
     });
   }
 

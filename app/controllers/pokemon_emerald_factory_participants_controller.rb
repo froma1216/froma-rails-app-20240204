@@ -17,8 +17,9 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
       # 検索結果が空の場合にフラッシュメッセージを設定
       flash.now[:alert] = "対象のポケモンが見つかりませんでした。" if @results.empty?
     else
-      # 初期状態で何も表示しない
+      # 初期状態・ポケモン名未入力で何も表示しない
       @results = PokemonEmeraldFactoryParticipant.none
+      # ポケモン名未入力の場合（初期表示を除く）にフラッシュメッセージを設定
       flash.now[:alert] = "ポケモン名を入力してください。" if params[:search]
     end
     # ポケモン名セレクト作成用にポケモンの名前を全て取得

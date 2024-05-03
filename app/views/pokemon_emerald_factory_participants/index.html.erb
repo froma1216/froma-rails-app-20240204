@@ -7,11 +7,11 @@
       <%# レベル50 or オープンレベル %>
       <div class="ms-3">
         <div class="form-check form-check-inline">
-          <%= radio_button_tag 'level_radio', '50', params[:level_radio] == '50', class: 'form-check-input', id: 'level50' %>
+          <%= radio_button_tag 'level_radio', '50', params[:level_radio] == '50' || params[:level_radio].nil?, class: 'form-check-input', class: 'form-check-input', id: 'level50' %>
           <%= label_tag 'level_radio_50', 'レベル50', class: 'form-check-label', for: 'level50' %>
         </div>
         <div class="form-check form-check-inline">
-          <%= radio_button_tag 'level_radio', 'open', params[:level_radio] == 'open' || params[:level_radio].nil?, class: 'form-check-input', id: 'open-level' %>
+          <%= radio_button_tag 'level_radio', 'open', params[:level_radio] == 'open', id: 'open-level' %>
           <%= label_tag 'level_radio_open', 'オープンレベル', class: 'form-check-label', for: 'open-level' %>
         </div>
       </div>

@@ -47,6 +47,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # 【エメラルド】ファクトリー参加ポケモン
+  # 【エメラルド】バトルファクトリー参加ポケモン検索
   resources :pokemon_emerald_factory_participants, only: [:index]
 end

@@ -1,21 +1,21 @@
-<h1>【エメラルド】バトルファクトリー参加ポケモン一覧</h1>
+<h1>【エメラルド】バトルファクトリー参加ポケモン検索</h1>
 <%= search_form_for @q, url: pokemon_emerald_factory_participants_path do |f| %>
-  <%# レベル50 or オープンレベル %>
-  <div class="mb-3">
-    <div class="mb-3">
-      <div class="form-check form-check-inline">
-        <%= radio_button_tag 'level_radio', '50', params[:level_radio] == '50', class: 'form-check-input', id: 'level50' %>
-        <%= label_tag 'level_radio_50', 'レベル50', class: 'form-check-label', for: 'level50' %>
-      </div>
-      <div class="form-check form-check-inline">
-        <%= radio_button_tag 'level_radio', 'open', params[:level_radio] == 'open' || params[:level_radio].nil?, class: 'form-check-input', id: 'open-level' %>
-        <%= label_tag 'level_radio_open', 'オープンレベル', class: 'form-check-label', for: 'open-level' %>
-      </div>
-    </div>
-  </div>
   <%# 周 %>
   <div class="mb-3">
-    <label for="lap" class="form-label">周</label>
+    <div class="d-flex">
+      <label for="lap" class="form-label">周</label>
+      <%# レベル50 or オープンレベル %>
+      <div class="ms-3">
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag 'level_radio', '50', params[:level_radio] == '50', class: 'form-check-input', id: 'level50' %>
+          <%= label_tag 'level_radio_50', 'レベル50', class: 'form-check-label', for: 'level50' %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag 'level_radio', 'open', params[:level_radio] == 'open' || params[:level_radio].nil?, class: 'form-check-input', id: 'open-level' %>
+          <%= label_tag 'level_radio_open', 'オープンレベル', class: 'form-check-label', for: 'open-level' %>
+        </div>
+      </div>
+    </div>
     <%= select_tag :lap_number, options_for_select([ ["指定なし", ""], ["1周目", 4], ["2周目", 5], ["3周目", 6], ["4周目", 7], ["5周目以降", 8]], params[:lap_number].to_i), class: "form-select", id: "lap" %>
   </div>
   <%# 入力（完全一致）＆セレクトボックス %>
@@ -27,7 +27,7 @@
     <% end %>
   </datalist>
   <br>
-  <%= f.submit "検索", class: "btn btn-primary mb-3" %>
+  <%= f.submit "検索", name: "search", class: "btn btn-primary mb-3" %>
 <% end %>
 <%# 検索結果一覧表示 %>
 <% if @results.present? %>

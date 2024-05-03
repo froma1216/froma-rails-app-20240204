@@ -3,9 +3,8 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
 
   # 一覧画面
   def index
-    if params[:q].present?
+    if params[:q].present? && params[:q].values.any?(&:present?)
       # 検索結果
-      # @results = @q.result
       @results = Kaminari.paginate_array(@results).page(params[:page])
 
       # 通番の計算用に現在のページ番号を取得（指定がない場合は1とする）
@@ -20,8 +19,9 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
     else
       # 初期状態で何も表示しない
       @results = PokemonEmeraldFactoryParticipant.none
+      flash.now[:alert] = "ポケモン名を入力してください。" if params[:search]
     end
-    # PokemonEmeraldFactoryParticipantモデルからポケモンの名前を全て取得
+    # ポケモン名セレクト作成用にポケモンの名前を全て取得
     @pokemon_names = PokemonEmeraldFactoryParticipant.pluck(:name).uniq
   end
 
@@ -31,7 +31,6 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
   # NOTE: https://plog.kobacchi.com/rails7-ransack-instant-search/
   def set_q
     @q = PokemonEmeraldFactoryParticipant.ransack(params[:q])
-    # @q.result = @q.result.with_lap_show(params[:lap_number]) if params[:lap_number].present?
     @results = params[:lap_number].present? ? @q.result.with_lap_show(params[:lap_number]) : @q.result
   end
 end

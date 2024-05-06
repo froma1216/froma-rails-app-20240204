@@ -1,5 +1,4 @@
 document.addEventListener("turbo:load", function() {
-  // TODO: ラジオ変更時にセレクトの選択を「指定なし」にしたい
   function updateOptions() {
     var selectedValue = $("[name='level_radio']:checked").val();
     var previousSelectedOption = $("#lap").val(); // 保存されている選択肢の値を取得
@@ -39,7 +38,13 @@ document.addEventListener("turbo:load", function() {
     });
   }
 
-  // 初期ロード時と変更時の両方でオプションを更新
+  // 初期ロード時、オプションを更新
   updateOptions();
-  $("[name='level_radio']").change(updateOptions);
+  // ラジオ変更時
+  $("[name='level_radio']").change(function() {
+     // セレクトの選択を「指定なし」にリセット
+    $("#lap").val("");
+    // オプションを更新
+    updateOptions();
+  });
 });

@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <%= select_tag :lap_number, options_for_select([ ["指定なし", ""], ["1周目", 4], ["2周目", 5], ["3周目", 6], ["4周目", 7], ["5周目以降", 8]], params[:lap_number].to_i), class: "form-select", id: "lap" %>
+    <%= select_tag :lap_number, options_for_select([["指定なし", ""], ["1周目", 1], ["2周目", 2], ["3周目", 3], ["4周目", 4], ["5周目", 5], ["6周目", 6], ["7周目", 7], ["8周目以降", 8]], params[:lap_number].to_i), class: "form-select", id: "lap" %>
   </div>
   <%# 入力（完全一致）＆セレクトボックス %>
   <%= f.label :name_eq, "ポケモン名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>

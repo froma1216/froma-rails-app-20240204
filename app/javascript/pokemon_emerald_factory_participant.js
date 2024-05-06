@@ -32,7 +32,6 @@ document.addEventListener("turbo:load", function() {
     // 新しいオプションを追加
     $.each(options, function (index, option) {
       // 現在の選択肢が前回の選択肢と同じかどうか確認
-      // FIXME: レベル50の1~3を選ぶと反映されない
       var isSelected = previousSelectedOption === option[1].toString();
       $("#lap").append(new Option(option[0], option[1], isSelected, isSelected));
     });

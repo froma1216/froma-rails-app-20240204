@@ -1,4 +1,5 @@
 class PokemonEmeraldFactoryParticipantsController < ApplicationController
+  include PokemonEmeraldFactoryParticipantsHelper
   before_action :set_q, only: [:index]
 
   # 一覧画面
@@ -7,7 +8,7 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
       # 検索結果
       @results = Kaminari.paginate_array(@results).page(params[:page])
       # 画像のパスを生成
-      create_pokemon_image_path(params[:q].values[0])
+      create_name_and_type_image_path(params[:q].values[0])
 
       # 通番の計算用に現在のページ番号を取得（指定がない場合は1とする）
       current_page = params[:page] ? params[:page].to_i : 1
@@ -29,14 +30,11 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
   end
 
   # 画像のパスを生成
-  def create_pokemon_image_path(name)
+  def create_name_and_type_image_path(name)
     types = PokemonEmeraldFactoryParticipant.get_types_by_name(name)
-    romanized_type1 = POKEMON_TYPE_MAPPINGS[types[0]]
-    romanized_type2 = POKEMON_TYPE_MAPPINGS[types[1]]
-    romanized_name = POKEMON_NAME_MAPPINGS[name]
-    @type1_image_path = "pokemon_emerald_factory_participant/types/#{romanized_type1}.png" if romanized_type1
-    @type2_image_path = "pokemon_emerald_factory_participant/types/#{romanized_type2}.png" if romanized_type2
-    @name_image_path = "pokemon_emerald_factory_participant/pokemons/#{romanized_name}.png" if romanized_name
+    @type1_image_path = create_pokemon_image_path(types[0], "types")
+    @type2_image_path = create_pokemon_image_path(types[1], "types") if types[1].present?
+    @name_image_path = create_pokemon_image_path(name, "pokemons")
   end
 
   private

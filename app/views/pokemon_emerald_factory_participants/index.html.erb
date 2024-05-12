@@ -33,10 +33,13 @@
     <%# 画像部 %>
     <div class="col-6">
       <div class="shadow mb-2">
-        <%= params[:q].values[0] if @results.present? %>
-        <% types = PokemonEmeraldFactoryParticipant.get_types_by_name(params[:q].values[0]) %>
-        <%= types[0] %>
-        <%= types[1] %>
+        <% if @results.present? %>
+          <%= params[:q].values[0] %>
+          <% types = PokemonEmeraldFactoryParticipant.get_types_by_name(params[:q].values[0]) %>
+          <%= types[0] %>
+          <%= types[1] %>
+          <%= image_tag(@image_path) %>
+        <% end %>
       </div>
     </div>
   </div>

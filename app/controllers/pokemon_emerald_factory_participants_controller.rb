@@ -6,6 +6,8 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
     if params[:q].present? && params[:q].values.any?(&:present?)
       # 検索結果
       @results = Kaminari.paginate_array(@results).page(params[:page])
+      # 画像のパスを生成
+      create_pokemon_image_path(params[:q].values[0])
 
       # 通番の計算用に現在のページ番号を取得（指定がない場合は1とする）
       current_page = params[:page] ? params[:page].to_i : 1
@@ -24,6 +26,12 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
     end
     # ポケモン名セレクト作成用にポケモンの名前を全て取得
     @pokemon_names = PokemonEmeraldFactoryParticipant.pluck(:name).uniq
+  end
+
+  # 画像のパスを生成
+  def create_pokemon_image_path(name)
+    romanized_name = POKEMON_NAME_MAPPINGS[name]
+    @image_path = "pokemon_emerald_factory_participant/pokemons/#{romanized_name}.png" if romanized_name
   end
 
   private

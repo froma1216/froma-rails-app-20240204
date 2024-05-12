@@ -1,45 +1,50 @@
 <h1>【エメラルド】バトルファクトリー参加ポケモン検索</h1>
 <%= search_form_for @q, url: pokemon_emerald_factory_participants_path do |f| %>
-  <%# 周 %>
-  <div class="mb-3">
-    <div class="d-flex">
-      <label for="lap" class="form-label">周</label>
-      <%# レベル50 or オープンレベル %>
-      <div class="ms-3">
-        <div class="form-check form-check-inline">
-          <%= radio_button_tag 'level_radio', '50', params[:level_radio] == '50' || params[:level_radio].nil?, class: 'form-check-input', class: 'form-check-input', id: 'level50' %>
-          <%= label_tag 'level_radio_50', 'レベル50', class: 'form-check-label', for: 'level50' %>
+  <div class="row">
+    <%# 検索部 %>
+    <div class="col-6">
+      <%# 周 %>
+      <div class="mb-3">
+        <div class="d-flex">
+          <label for="lap" class="form-label">周</label>
+          <%# レベル50 or オープンレベル %>
+          <div class="ms-3">
+            <div class="form-check form-check-inline">
+              <%= radio_button_tag 'level_radio', '50', params[:level_radio] == '50' || params[:level_radio].nil?, class: 'form-check-input', class: 'form-check-input', id: 'level50' %>
+              <%= label_tag 'level_radio_50', 'レベル50', class: 'form-check-label', for: 'level50' %>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= radio_button_tag 'level_radio', 'open', params[:level_radio] == 'open', id: 'open-level' %>
+              <%= label_tag 'level_radio_open', 'オープンレベル', class: 'form-check-label', for: 'open-level' %>
+            </div>
+          </div>
         </div>
-        <div class="form-check form-check-inline">
-          <%= radio_button_tag 'level_radio', 'open', params[:level_radio] == 'open', id: 'open-level' %>
-          <%= label_tag 'level_radio_open', 'オープンレベル', class: 'form-check-label', for: 'open-level' %>
-        </div>
+        <%= select_tag :lap_number, options_for_select([["指定なし", ""], ["1周目", 1], ["2周目", 2], ["3周目", 3], ["4周目", 4], ["5周目", 5], ["6周目", 6], ["7周目", 7], ["8周目以降", 8]], params[:lap_number].to_i), class: "form-select", id: "lap" %>
+      </div>
+      <%# 入力（完全一致）＆セレクトボックス %>
+      <%= f.label :name_eq, "ポケモン名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
+      <%= f.search_field :name_eq, list: "pokemon-names", class: "form-control", placeholder: "ポケモンを選択または入力" %>
+      <datalist id="pokemon-names">
+        <% @pokemon_names.each do |name| %>
+          <option value="<%= name %>"></option>
+        <% end %>
+      </datalist>
+    </div>
+    <%# 画像部 %>
+    <div class="col-6">
+      <div class="shadow mb-2">
+        <%= params[:q].values[0] if @results.present? %>
+        <% types = PokemonEmeraldFactoryParticipant.get_types_by_name(params[:q].values[0]) %>
+        <%= types[0] %>
+        <%= types[1] %>
       </div>
     </div>
-    <%= select_tag :lap_number, options_for_select([["指定なし", ""], ["1周目", 1], ["2周目", 2], ["3周目", 3], ["4周目", 4], ["5周目", 5], ["6周目", 6], ["7周目", 7], ["8周目以降", 8]], params[:lap_number].to_i), class: "form-select", id: "lap" %>
   </div>
-  <%# 入力（完全一致）＆セレクトボックス %>
-  <%= f.label :name_eq, "ポケモン名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
-  <%= f.search_field :name_eq, list: "pokemon-names", class: "form-control", placeholder: "ポケモンを選択または入力" %>
-  <datalist id="pokemon-names">
-    <% @pokemon_names.each do |name| %>
-      <option value="<%= name %>"></option>
-    <% end %>
-  </datalist>
   <br>
   <%= f.submit "検索", name: "search", class: "btn btn-primary mb-3" %>
 <% end %>
 <%# 検索結果一覧表示 %>
 <% if @results.present? %>
-  <%
-=begin
-%>
-  <div class="shadow mb-2">
-    <%= params[:q].values[0] %>
-  </div>
-  <%
-=end
-%>
   <table class="table table-striped caption-top">
     <thead>
       <tr>

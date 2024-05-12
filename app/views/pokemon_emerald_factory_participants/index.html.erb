@@ -35,10 +35,9 @@
       <div class="shadow mb-2">
         <% if @results.present? %>
           <%= params[:q].values[0] %>
-          <% types = PokemonEmeraldFactoryParticipant.get_types_by_name(params[:q].values[0]) %>
-          <%= types[0] %>
-          <%= types[1] %>
-          <%= image_tag(@image_path) %>
+          <%= image_tag(@type1_image_path) %>
+          <%= image_tag(@type2_image_path) if @type2_image_path.present? %>
+          <%= image_tag(@name_image_path) %>
         <% end %>
       </div>
     </div>

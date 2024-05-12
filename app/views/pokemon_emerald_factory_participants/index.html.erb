@@ -51,9 +51,6 @@
     <thead>
       <tr>
         <th scope="col" class="align-middle">#</th>
-        <th scope="col" class="align-middle">ポケモン名</th>
-        <th scope="col" class="align-middle">タイプ1</th>
-        <th scope="col" class="align-middle">タイプ2</th>
         <th scope="col" class="align-middle">わざ1</th>
         <th scope="col" class="align-middle">わざ2</th>
         <th scope="col" class="align-middle">わざ3</th>
@@ -67,9 +64,6 @@
       <% @results.each_with_index do |pokemon, index| %>
         <tr>
           <th scope="row" class="align-middle"><%= @starting_number+index + 1 %></th>
-          <td class="align-middle"><%= pokemon.name %></td>
-          <td class="align-middle"><%= pokemon.type1 %></td>
-          <td class="align-middle"><%= pokemon.type2 || "-" %></td>
           <td class="align-middle"><%= pokemon.move1 %></td>
           <td class="align-middle"><%= pokemon.move2 || "-" %></td>
           <td class="align-middle"><%= pokemon.move3 || "-" %></td>

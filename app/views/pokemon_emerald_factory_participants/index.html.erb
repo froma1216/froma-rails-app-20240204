@@ -63,12 +63,19 @@
     <tbody>
       <% @results.each_with_index do |pokemon, index| %>
         <tr>
-          <th scope="row" class="align-middle"><%= @starting_number+index + 1 %></th>
+          <th scope="row" class="align-middle"><%= @starting_number + index + 1 %></th>
           <td class="align-middle"><%= pokemon.move1 %></td>
           <td class="align-middle"><%= pokemon.move2 || "-" %></td>
           <td class="align-middle"><%= pokemon.move3 || "-" %></td>
           <td class="align-middle"><%= pokemon.move4 || "-" %></td>
-          <td class="align-middle"><%= pokemon.item %></td>
+          <%
+            romanized_item = POKEMON_ITEM_MAPPINGS[pokemon.item]
+            item_image_path = "pokemon_emerald_factory_participant/items/#{romanized_item}.png" if romanized_item
+          %>
+          <td class="align-middle">
+            <%= image_tag(item_image_path) %>
+            <%= pokemon.item %>
+          </td>
           <td class="align-middle"><%= pokemon.effort_values %></td>
           <td class="align-middle"><%= pokemon.character %></td>
         </tr>

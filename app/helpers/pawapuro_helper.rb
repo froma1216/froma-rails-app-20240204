@@ -57,9 +57,9 @@ module PawapuroHelper
   # 能力値（弾道以外）をアルファベットに変換＋文字色変更
   def display_alphabet(val)
     case val
-    when 1..29
+    when 1..19
       content_tag(:span, "G ", class: "pawa-text-g")
-    when 30..39
+    when 20..39
       content_tag(:span, "F ", class: "pawa-text-f")
     when 40..49
       content_tag(:span, "E ", class: "pawa-text-e")

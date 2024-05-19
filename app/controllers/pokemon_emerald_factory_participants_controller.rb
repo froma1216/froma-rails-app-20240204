@@ -32,8 +32,10 @@ class PokemonEmeraldFactoryParticipantsController < ApplicationController
   # 画像のパスを生成
   def create_name_and_type_image_path(name)
     types = PokemonEmeraldFactoryParticipant.get_types_by_name(name)
-    @type1_image_path = create_pokemon_image_path(types[0], "types")
-    @type2_image_path = create_pokemon_image_path(types[1], "types") if types[1].present?
+    @type1 = types[0]
+    @type2 = types[1]
+    @type1_image_path = create_pokemon_image_path(@type1, "types")
+    @type2_image_path = create_pokemon_image_path(@type2, "types") if types[1].present?
     @name_image_path = create_pokemon_image_path(name, "pokemons")
   end
 

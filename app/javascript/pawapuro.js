@@ -24,10 +24,10 @@ function setupInputField(inputFieldId, displaySpanId) {
     let spanText = "";
 
     // 共通ロジック
-    if (inputValue >= 1 && inputValue <= 29) {
+    if (inputValue >= 1 && inputValue <= 19) {
       spanClass = "pawa-bg-g";
       spanText = "G";
-    } else if (inputValue >= 30 && inputValue <= 39) {
+    } else if (inputValue >= 20 && inputValue <= 39) {
       spanClass = "pawa-bg-f";
       spanText = "F";
     } else if (inputValue >= 40 && inputValue <= 49) {

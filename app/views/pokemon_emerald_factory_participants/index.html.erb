@@ -2,7 +2,7 @@
 <%= search_form_for @q, url: pokemon_emerald_factory_participants_path do |f| %>
   <div class="row">
     <%# 検索部 %>
-    <div class="col-6">
+    <div class="col-12 col-sm-6">
       <%# 周 %>
       <div class="mb-3">
         <div class="d-flex">
@@ -29,21 +29,75 @@
           <option value="<%= name %>"></option>
         <% end %>
       </datalist>
+      <br>
+      <%= f.submit "検索", name: "search", class: "btn btn-primary mb-3" %>
     </div>
     <%# 画像部 %>
-    <div class="col-6">
-      <div class="shadow mb-2">
-        <% if @results.present? %>
-          <%= params[:q].values[0] %>
-          <%= image_tag(@type1_image_path) %>
-          <%= image_tag(@type2_image_path) if @type2_image_path.present? %>
-          <%= image_tag(@name_image_path) %>
-        <% end %>
-      </div>
+    <div class="col-12 col-sm-6 mt-2">
+      <% if @results.present? %>
+        <div class="card shadow">
+          <div class="card-header fw-bold d-none d-sm-block">
+            <%= params[:q].values[0] %>
+          </div>
+          <div class="card-body row">
+            <%# ポケモン画像部 %>
+            <div class="col-auto">
+              <%= image_tag(@name_image_path, class: "img-thumbnail", :size =>"120x120") %>
+            </div>
+            <%# タイプ部 %>
+            <div class="col-auto d-flex flex-column">
+              <%= image_tag(@type1_image_path, :size =>"32x16") %>
+              <%= image_tag(@type2_image_path, :size =>"32x16") if @type2_image_path.present? %>
+            </div>
+            <%# 相性部 %>
+            <% type_effective_arr = type_effective_arr(@type1, @type2) %>
+            <div class="col-sm">
+              <div class="row">
+                <span class="col-3">×4</span>
+                <div class="col-9">
+                  <% type_effective_arr["4_times"].each do |type| %>
+                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <span class="col-3">×2</span>
+                <div class="col-9">
+                  <% type_effective_arr["2_times"].each do |type| %>
+                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <span class="col-3">×1/2</span>
+                <div class="col-9">
+                  <% type_effective_arr["0.5_times"].each do |type| %>
+                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <span class="col-3">×1/4</span>
+                <div class="col-9">
+                  <% type_effective_arr["0.25_times"].each do |type| %>
+                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <span class="col-3">×0</span>
+                <div class="col-9">
+                  <% type_effective_arr["0_times"].each do |type| %>
+                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-  <br>
-  <%= f.submit "検索", name: "search", class: "btn btn-primary mb-3" %>
 <% end %>
 <%# 検索結果一覧表示 %>
 <% if @results.present? %>

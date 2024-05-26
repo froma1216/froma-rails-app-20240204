@@ -67,17 +67,14 @@ function setupInputField(inputFieldId, displaySpanId) {
 // 基礎能力入力：弾道（入力値で矢印の角度＋背景色を変更）
 function setupInputFieldTrajectory(inputFieldId, displaySpanId) {
   const updateSpan = () => {
-    const inputValue = parseInt(
-      document.getElementById(inputFieldId).value,
-      10
-    );
+    const inputValue = parseInt(document.getElementById(inputFieldId).value, 10);
     let spanClass = "";
     let rotationAngle = "";
 
     // 共通ロジック
     if (inputValue === 2) {
       spanClass = "pawa-bg-c";
-      rotationAngle = "-20deg";
+      rotationAngle = "-10deg";
     } else if (inputValue === 3) {
       spanClass = "pawa-bg-b";
       rotationAngle = "-30deg";
@@ -86,7 +83,7 @@ function setupInputFieldTrajectory(inputFieldId, displaySpanId) {
       rotationAngle = "-45deg";
     } else {
       spanClass = "pawa-bg-d";
-      rotationAngle = "-10deg";
+      rotationAngle = "0deg";
     }
 
     // span要素の更新
@@ -94,7 +91,7 @@ function setupInputFieldTrajectory(inputFieldId, displaySpanId) {
     spanElement.className = `input-group-text text-white ${spanClass}`;
 
     // アイコン要素を見つけて回転を適用する
-    const iconElement = spanElement.querySelector("i.fa");
+    const iconElement = document.getElementById("fa-icon");
     if (iconElement) {
       iconElement.style.transform = `rotate(${rotationAngle})`;
     }

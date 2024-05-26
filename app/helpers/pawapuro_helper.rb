@@ -1,4 +1,5 @@
 module PawapuroHelper
+  # TODO: ymlに移動
   # 数値をポジション名に変換
   def display_position_name(val)
     positions = {
@@ -43,13 +44,13 @@ module PawapuroHelper
   def display_trajectory(trajectory)
     text_color, angle = case trajectory
                         when 2
-                          ["pawa-text-c", "-20deg"]
+                          ["pawa-text-c", "-10deg"]
                         when 3
                           ["pawa-text-b", "-30deg"]
                         when 4
                           ["pawa-text-a", "-45deg"]
                         else
-                          ["pawa-text-d", "-10deg"]
+                          ["pawa-text-d", "-0deg"]
                         end
     content_tag(:i, "", class: "fa fa-solid fa-arrow-right #{text_color}", style: "transform: rotate(#{angle});")
   end

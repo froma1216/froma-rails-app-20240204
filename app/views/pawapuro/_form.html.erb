@@ -71,9 +71,9 @@
       <%= f.label :main_position, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
       <%= f.select :main_position, [["先発", 11], ["中継ぎ", 12], ["抑え", 13], ["捕手", 2], ["一塁手", 3], ["二塁手", 4], ["三塁手", 5], ["遊撃手", 6], ["外野手", 7]], {include_blank: "選択して下さい"}, {class: "form-select"} %>
     </div>
-    <%# サブ %>
+    <%# ポジション %>
     <div class="mb-3">
-      <label class="form-label">サブポジション</label>
+      <label class="form-label">各ポジション適正</label>
       <%# FIXME: メインポジションで選択しているポジションは、自動で3を入力 %>
       <%# 投手 %>
       <div class="row">
@@ -930,8 +930,7 @@
                 <%= fielder_f.label :trajectory, "弾道", class: "form-label" %>
                 <div class="input-group">
                   <%= fielder_f.number_field :trajectory, class: "form-control", id:"trajectory-input", min: 1, max: 4 %>
-                  <%# FIXME: 角度が反映されない不具合 %>
-                  <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" style="transform: rotate(-10deg);"></i></span>
+                  <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" id="fa-icon"></i></span>
                 </div>
               </div>
               <%# PCサイズ時、弾道のみ一段目になるようにダミーで設置 %>

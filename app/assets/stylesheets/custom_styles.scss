@@ -81,8 +81,12 @@
 }
 
 // 選手名
-.pawa-border-pitcher {
+.pawa-border-pitcher-starter {
   border: 3px solid #B65A45;
+}
+
+.pawa-border-pitcher-relief {
+  border: 3px solid #B67188;
 }
 
 .pawa-border-catcher {
@@ -141,8 +145,12 @@
 }
 
 // 選手名
-.pawa-bg-sa-pitcher {
+.pawa-bg-sa-pitcher-starter {
   background-color: #FF9878 !important;
+}
+
+.pawa-bg-sa-pitcher-relief {
+  background-color: #FDB3D2 !important;
 }
 
 .pawa-bg-sa-catcher {

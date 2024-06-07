@@ -129,14 +129,48 @@ module PawapuroHelper
   # 選手名ボックスの背景色、ボーダー色のクラスを返す
   def main_position_box_color_class(main_position)
     case main_position
-    when 11..13
-      "pawa-bg-sa-pitcher pawa-border-pitcher"
+    when 11
+      "pawa-bg-sa-pitcher-starter pawa-border-pitcher-starter"
+    when 12..13
+      "pawa-bg-sa-pitcher-relief pawa-border-pitcher-relief"
     when 2
       "pawa-bg-sa-catcher pawa-border-catcher"
     when 3..6
       "pawa-bg-sa-infielder pawa-border-infielder"
     else
       "pawa-bg-sa-outfielder pawa-border-outfielder"
+    end
+  end
+
+  # 特殊能力（値なし）ボックスのフォント、文字感覚クラスを返す
+  def ability_text_classes(ability)
+    if ability.length >= 8
+      # フォントサイズを小さくし、文字間隔も狭くする
+      'small-font tighter-letter-spacing'
+    elsif ability.length >= 7
+      # 文字間隔のみ狭くする
+      'tighter-letter-spacing'
+    else
+      ''
+    end
+  end
+
+  # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
+  def ability_color_classes(ability)
+    abilities = PAWAPURO_ABILITIES
+    case
+    when abilities['good'].include?(ability)
+      ['pawa-bg-sa-g1', 'pawa-bg-sa-g2', 'pawa-text-good']
+    when abilities['bad'].include?(ability)
+      ['pawa-bg-sa-b1', 'pawa-bg-sa-b2', 'pawa-text-bad']
+    when abilities['good_and_bad'].include?(ability)
+      ['pawa-bg-sa-gb1', 'pawa-bg-sa-gb2', 'pawa-text-good']
+    when abilities['special'].include?(ability)
+      ['pawa-bg-sa-sp1', 'pawa-bg-sa-sp2', 'pawa-text-special']
+    when abilities['sub'].include?(ability)
+      ['pawa-bg-sa-sb1', 'pawa-bg-sa-sb2', 'pawa-text-sub']
+    else
+      ['pawa-bg-sa-n1 d-none d-sm-block', 'pawa-bg-sa-n2', 'pawa-text-neutral']
     end
   end
 end

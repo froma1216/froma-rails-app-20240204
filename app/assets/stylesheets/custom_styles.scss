@@ -80,27 +80,6 @@
   box-shadow: 0 0 0 5px #C6D9F2 inset;
 }
 
-// 選手名
-.pawa-border-pitcher-starter {
-  border: 3px solid #B65A45;
-}
-
-.pawa-border-pitcher-relief {
-  border: 3px solid #B67188;
-}
-
-.pawa-border-catcher {
-  border: 3px solid #2694B7;
-}
-
-.pawa-border-infielder {
-  border: 3px solid #BC923D;
-}
-
-.pawa-border-outfielder {
-  border: 3px solid #37A238;
-}
-
 
 // 背景色
 // 全体
@@ -142,27 +121,6 @@
 
 .pawa-bg-g {
   background-color: #898687 !important;
-}
-
-// 選手名
-.pawa-bg-sa-pitcher-starter {
-  background-color: #FF9878 !important;
-}
-
-.pawa-bg-sa-pitcher-relief {
-  background-color: #FDB3D2 !important;
-}
-
-.pawa-bg-sa-catcher {
-  background-color: #12ECFE !important;
-}
-
-.pawa-bg-sa-infielder {
-  background-color: #FAD700 !important;
-}
-
-.pawa-bg-sa-outfielder {
-  background-color: #68F177 !important;
 }
 
 // 特殊能力（special ability）
@@ -245,6 +203,230 @@
   border: 2px solid #2274B1;
   // box-shadow: 0 0 0 2px #2274B1 inset;
   height: 8px;
+}
+
+// 選手名BOX
+@mixin pawa-player-name-box($border-color) {
+  box-shadow: inset 0px 15px rgba(#ffffff, .3), inset 0 0 5px rgba(#ffffff, .75);
+  border: 3px solid $border-color;
+  text-align: center;
+  border-radius: .25rem;
+}
+
+.pawa-player-name-box-s {
+  @include pawa-player-name-box(#B65A45);
+  background-color: #FF9878 !important;
+}
+
+.pawa-player-name-box-r {
+  @include pawa-player-name-box(#B67188);
+  background-color: #FDB3D2 !important;
+}
+
+.pawa-player-name-box-c {
+  @include pawa-player-name-box(#2694B7);
+  background-color: #12ECFE !important;
+}
+
+.pawa-player-name-box-i {
+  @include pawa-player-name-box(#BC923D);
+  background-color: #FAD700 !important;
+}
+
+.pawa-player-name-box-o {
+  @include pawa-player-name-box(#37A238);
+  background-color: #68F177 !important;
+}
+
+.pawa-player-name-box-sr {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right, #FF9878 50%, #FDB3D2 50%);
+}
+
+.pawa-player-name-box-sc {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right, #FF9878 50%, #12ECFE 50%);
+}
+
+.pawa-player-name-box-si {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right, #FF9878 50%, #FAD700 50%);
+}
+
+.pawa-player-name-box-so {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right, #FF9878 50%, #68F177 50%);
+}
+
+.pawa-player-name-box-rs {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right, #FDB3D2 50%, #FF9878 50%);
+}
+
+.pawa-player-name-box-rc {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right, #FDB3D2 50%, #12ECFE 50%);
+}
+
+.pawa-player-name-box-ri {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right, #FDB3D2 50%, #FAD700 50%);
+}
+
+.pawa-player-name-box-ro {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right, #FDB3D2 50%, #68F177 50%);
+}
+
+.pawa-player-name-box-ci {
+  @include pawa-player-name-box(#2694B7);
+  background: linear-gradient(to right, #12ECFE 50%, #FAD700 50%);
+}
+
+.pawa-player-name-box-co {
+  @include pawa-player-name-box(#2694B7);
+  background: linear-gradient(to right, #12ECFE 50%, #68F177 50%);
+}
+
+.pawa-player-name-box-ic {
+  @include pawa-player-name-box(#BC923D);
+  background: linear-gradient(to right, #FAD700 50%, #12ECFE 50%);
+}
+
+.pawa-player-name-box-io {
+  @include pawa-player-name-box(#BC923D);
+  background: linear-gradient(to right, #FAD700 50%, #68F177 50%);
+}
+
+.pawa-player-name-box-oc {
+  @include pawa-player-name-box(#37A238);
+  background: linear-gradient(to right, #68F177 50%, #12ECFE 50%);
+}
+
+.pawa-player-name-box-oi {
+  @include pawa-player-name-box(#37A238);
+  background: linear-gradient(to right, #68F177 50%, #FAD700 50%);
+}
+
+.pawa-player-name-box-src {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right,
+      #FF9878 0%, #FF9878 33.33%,
+      #FDB3D2 33.33%, #FDB3D2 66.66%,
+      #12ECFE 66.66%, #12ECFE 100%);
+}
+
+.pawa-player-name-box-sri {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right,
+      #FF9878 0%, #FF9878 33.33%,
+      #FDB3D2 33.33%, #FDB3D2 66.66%,
+      #FAD700 66.66%, #FAD700 100%);
+}
+
+.pawa-player-name-box-sro {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right,
+      #FF9878 0%, #FF9878 33.33%,
+      #FDB3D2 33.33%, #FDB3D2 66.66%,
+      #68F177 66.66%, #68F177 100%);
+}
+
+.pawa-player-name-box-sci {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right,
+      #FF9878 0%, #FF9878 33.33%,
+      #12ECFE 33.33%, #12ECFE 66.66%,
+      #FAD700 66.66%, #FAD700 100%);
+}
+
+
+.pawa-player-name-box-sco {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right,
+      #FF9878 0%, #FF9878 33.33%,
+      #12ECFE 33.33%, #12ECFE 66.66%,
+      #68F177 66.66%, #68F177 100%);
+}
+
+.pawa-player-name-box-sio {
+  @include pawa-player-name-box(#B65A45);
+  background: linear-gradient(to right,
+      #FF9878 0%, #FF9878 33.33%,
+      #FAD700 33.33%, #FAD700 66.66%,
+      #68F177 66.66%, #68F177 100%);
+}
+
+.pawa-player-name-box-rsc {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right,
+      #FDB3D2 0%, #FDB3D2 33.33%,
+      #FF9878 33.33%, #FF9878 66.66%,
+      #12ECFE 66.66%, #12ECFE 100%);
+}
+
+.pawa-player-name-box-rsi {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right,
+      #FDB3D2 0%, #FDB3D2 33.33%,
+      #FF9878 33.33%, #FF9878 66.66%,
+      #FAD700 66.66%, #FAD700 100%);
+}
+
+.pawa-player-name-box-rso {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right,
+      #FDB3D2 0%, #FDB3D2 33.33%,
+      #FF9878 33.33%, #FF9878 66.66%,
+      #68F177 66.66%, #68F177 100%);
+}
+
+.pawa-player-name-box-rci {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right,
+      #FDB3D2 0%, #FDB3D2 33.33%,
+      #12ECFE 33.33%, #12ECFE 66.66%,
+      #FAD700 66.66%, #FAD700 100%);
+}
+
+.pawa-player-name-box-rco {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right,
+      #FDB3D2 0%, #FDB3D2 33.33%,
+      #12ECFE 33.33%, #12ECFE 66.66%,
+      #68F177 66.66%, #68F177 100%);
+}
+
+.pawa-player-name-box-rio {
+  @include pawa-player-name-box(#B67188);
+  background: linear-gradient(to right,
+      #FDB3D2 0%, #FDB3D2 33.33%,
+      #FAD700 33.33%, #FAD700 66.66%,
+      #68F177 66.66%, #68F177 100%);
+}
+
+.pawa-player-name-box-cio {
+  @include pawa-player-name-box(#2694B7);
+  background: linear-gradient(to right,
+      #12ECFE 0%, #12ECFE 33.33%,
+      #FAD700 33.33%, #FAD700 66.66%,
+      #68F177 66.66%, #68F177 100%);
+}
+
+.pawa-player-name-box-ico {
+  @include pawa-player-name-box(#BC923D);
+  background: linear-gradient(to right,
+      #FAD700 0%, #FAD700 33.33%,
+      #12ECFE 33.33%, #12ECFE 66.66%,
+      #68F177 66.66%, #68F177 100%);
+}
+
+.pawa-player-name-box-oci {
+  @include pawa-player-name-box(#37A238);
+  background: linear-gradient(to right,
+      #68F177 0%, #68F177 33.33%,
+      #12ECFE 33.33%, #12ECFE 66.66%,
+      #FAD700 66.66%, #FAD700 100%);
 }
 
 // 能力ラベル

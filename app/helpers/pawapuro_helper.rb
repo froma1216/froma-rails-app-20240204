@@ -127,18 +127,109 @@ module PawapuroHelper
   end
 
   # 選手名ボックスの背景色、ボーダー色のクラスを返す
-  def main_position_box_color_class(main_position)
+  def main_position_box_color_class(main_position, p11_proper, p12_proper, p13_proper, p2_proper, p3_proper, p4_proper, p5_proper, p6_proper, p7_proper)
+    is_starter = p11_proper > 0
+    is_relief = p12_proper > 0 || p13_proper > 0
+    is_catcher = p2_proper > 0
+    is_infielder = p3_proper > 0 || p4_proper > 0 || p5_proper > 0 || p6_proper > 0
+    is_outfielder = p7_proper > 0
     case main_position
     when 11
-      "pawa-bg-sa-pitcher-starter pawa-border-pitcher-starter"
+      if is_relief
+        if is_catcher
+          "pawa-player-name-box-src"
+        elsif is_infielder
+          "pawa-player-name-box-sri"
+        elsif is_outfielder
+          "pawa-player-name-box-sro"
+        else
+          "pawa-player-name-box-sr"
+        end
+      elsif is_catcher
+        if is_infielder
+          "pawa-player-name-box-sci"
+        elsif is_outfielder
+          "pawa-player-name-box-sco"
+        else
+          "pawa-player-name-box-sc"
+        end
+      elsif is_infielder
+        if is_outfielder
+          "pawa-player-name-box-sio"
+        else
+          "pawa-player-name-box-si"
+        end
+      elsif is_outfielder
+        "pawa-player-name-box-so"
+      else
+        "pawa-player-name-box-s"
+      end
     when 12..13
-      "pawa-bg-sa-pitcher-relief pawa-border-pitcher-relief"
+      if is_starter
+        if is_catcher
+          "pawa-player-name-box-rsc"
+        elsif is_infielder
+          "pawa-player-name-box-rsi"
+        elsif is_outfielder
+          "pawa-player-name-box-rso"
+        else
+          "pawa-player-name-box-rs"
+        end
+      elsif is_catcher
+        if is_infielder
+          "pawa-player-name-box-rci"
+        elsif is_outfielder
+          "pawa-player-name-box-rco"
+        else
+          "pawa-player-name-box-rc"
+        end
+      elsif is_infielder
+        if is_outfielder
+          "pawa-player-name-box-rio"
+        else
+          "pawa-player-name-box-ri"
+        end
+      elsif is_outfielder
+        "pawa-player-name-box-ro"
+      else
+        "pawa-player-name-box-r"
+      end
     when 2
-      "pawa-bg-sa-catcher pawa-border-catcher"
+      if is_infielder
+        if is_outfielder
+          "pawa-player-name-box-cio"
+        else
+          "pawa-player-name-box-ci"
+        end
+      elsif is_outfielder
+        "pawa-player-name-box-co"
+      else
+        "pawa-player-name-box-c"
+      end
     when 3..6
-      "pawa-bg-sa-infielder pawa-border-infielder"
+      if is_catcher
+        if is_outfielder
+          "pawa-player-name-box-ico"
+        else
+          "pawa-player-name-box-ic"
+        end
+      elsif is_outfielder
+        "pawa-player-name-box-io"
+      else
+        "pawa-player-name-box-i"
+      end
     else
-      "pawa-bg-sa-outfielder pawa-border-outfielder"
+      if is_catcher
+        if is_infielder
+          "pawa-player-name-box-oci"
+        else
+          "pawa-player-name-box-oc"
+        end
+      elsif is_infielder
+        "pawa-player-name-box-oi"
+      else
+        "pawa-player-name-box-o"
+      end
     end
   end
 

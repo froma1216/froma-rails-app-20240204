@@ -24,9 +24,10 @@
         <div class="modal-body">
           <div class="container">
             <div class="row mb-1">
-              <%# TODO: サブポジションによって２色以上にする %>
               <%# 選手名 %>
-              <%= render partial: 'player_name_box', locals: { player: @player } %>
+              <div class="col-12 col-sm-4 h3 px-4 py-1 mb-sm-0 <%= main_position_box_color_class(@player.main_position, @player.p11_proper, @player.p12_proper, @player.p13_proper, @player.p2_proper, @player.p3_proper, @player.p4_proper, @player.p5_proper, @player.p6_proper, @player.p7_proper) %>">
+                <%= @player.player_name %>
+              </div>
               <%# 守備位置 %>
               <div class="col-7 col-sm-4 d-flex justify-content-start justify-content-sm-center align-items-center pawa-text-main ps-0">
                 <div class="p-0">

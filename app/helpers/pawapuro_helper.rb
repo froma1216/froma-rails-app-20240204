@@ -86,6 +86,7 @@ module PawapuroHelper
   # p#{num}_proper が0ではなく、かつその数値が main_position と異なる場合にのみ、そのポジションを表示用の配列に追加。
   # メインポジションは、太字で確定表示。
   # 最終的に、配列内の要素を「・」で結合して返却。
+  # TODO: 投手の適性も反映させる
   def display_positions(player)
     positions = ["<strong>#{display_position_name(player.main_position)}</strong>"]
 

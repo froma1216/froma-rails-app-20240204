@@ -5,6 +5,11 @@
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       プロフィール
     </div>
+    <%# 選手名 %>
+    <div>
+      <%= f.label :player_name, "選手名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
+      <%= f.text_field :player_name, class: "form-control", placeholder: "佐藤太", autocomplete: "name", maxlength: 10 %>
+    </div>
     <div class="row">
       <%# 名字 %>
       <div class="col-6">
@@ -16,11 +21,6 @@
         <%= f.label :first_name, "名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
         <%= f.text_field :first_name, class: "form-control", placeholder: "太郎", autocomplete: "name", maxlength: 10 %>
       </div>
-    </div>
-    <%# 選手名 %>
-    <div>
-      <%= f.label :player_name, "選手名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
-      <%= f.text_field :player_name, class: "form-control", placeholder: "佐藤太", autocomplete: "name", maxlength: 10 %>
     </div>
     <div class="row">
       <%# 背ネーム %>

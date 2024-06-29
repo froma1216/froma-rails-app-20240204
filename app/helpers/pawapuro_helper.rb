@@ -3,9 +3,9 @@ module PawapuroHelper
   # 数値をポジション名に変換
   def display_position_name(val)
     positions = {
-      11 => "投（先）",
-      12 => "投（中）",
-      13 => "投（抑）",
+      11 => "先",
+      12 => "中",
+      13 => "抑",
       2 => "捕",
       3 => "一",
       4 => "二",
@@ -86,14 +86,19 @@ module PawapuroHelper
   # p#{num}_proper が0ではなく、かつその数値が main_position と異なる場合にのみ、そのポジションを表示用の配列に追加。
   # メインポジションは、太字で確定表示。
   # 最終的に、配列内の要素を「・」で結合して返却。
-  # TODO: 投手の適性も反映させる
   def display_positions(player)
     positions = ["<strong>#{display_position_name(player.main_position)}</strong>"]
+
+    (11..13).each do |num|
+      proper = player.send("p#{num}_proper")
+      positions << display_position_name(num) if proper.to_i.nonzero? && num != player.main_position
+    end
 
     (2..7).each do |num|
       proper = player.send("p#{num}_proper")
       positions << display_position_name(num) if proper.to_i.nonzero? && num != player.main_position
     end
+
     positions.join("・").html_safe
   end
 
@@ -248,7 +253,7 @@ module PawapuroHelper
   end
 
   # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
-  def ability_color_classes(ability)
+  def ability_no_value_color_classes(ability)
     abilities = PAWAPURO_ABILITIES
     case
     when abilities['good'].include?(ability)
@@ -264,5 +269,24 @@ module PawapuroHelper
     else
       ['pawa-bg-sa-n1 d-none d-sm-block', 'pawa-bg-sa-n2', 'pawa-text-neutral']
     end
+  end
+
+  # 特殊能力（値あり）ボックスの背景色、文字色クラスを返す
+  def ability_value_color_classes(ability_value)
+    case ability_value
+    when 2..3
+      ['pawa-bg-sa-g1', 'pawa-bg-sa-g2', 'pawa-text-good']
+    when -4..-2
+      ['pawa-bg-sa-b1', 'pawa-bg-sa-b2', 'pawa-text-bad']
+    when 4
+      ['pawa-bg-sa-sp1', 'pawa-bg-sa-sp2', 'pawa-text-special']
+    else
+      ['pawa-bg-sa-n1', 'pawa-bg-sa-n2', 'pawa-text-neutral']
+    end
+  end
+
+  # 特殊能力（値あり）の金特、超赤特の名前を返す
+  def gold_or_very_red_ability_name(ability_name, ability_value)
+    PAWAPURO_GOLD_OR_VERY_RED_ABILITIES.dig(ability_name, ability_value) || ability_name
   end
 end

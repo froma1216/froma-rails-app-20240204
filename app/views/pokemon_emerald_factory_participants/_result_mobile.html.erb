@@ -1,0 +1,32 @@
+<table class="table table-sm table-striped caption-top">
+  <thead>
+    <tr>
+      <th scope="col" class="align-middle">#</th>
+      <th scope="col" class="align-middle">わざ</th>
+      <th scope="col" class="align-middle">もちもの</th>
+      <th scope="col" class="align-middle">努力値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% results.each_with_index do |pokemon, index| %>
+      <%# TODO: スマホのレイアウト変える（わざを縦に並べる） %>
+      <%# TODO: 努力値のカラムにスペースを追加 %>
+      <tr>
+        <th scope="row" class="align-middle"><%= @starting_number + index + 1 %></th>
+        <td class="align-middle">
+          <%= pokemon.move1 %><br>
+          <%= pokemon.move2 || "-" %><br>
+          <%= pokemon.move3 || "-" %><br>
+          <%= pokemon.move4 || "-" %>
+        </td>
+        <td class="align-middle">
+          <%= pokemon.item %>
+        </td>
+        <td class="align-middle">
+          <%= pokemon.character %><br>
+          <%= format_effort_values(pokemon.effort_values) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

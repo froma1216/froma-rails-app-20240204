@@ -79,4 +79,10 @@ module PokemonEmeraldFactoryParticipantsHelper
 
     results
   end
+
+  # 努力値の後に改行を入れる
+  def format_effort_values(effort_values)
+    formatted_values = effort_values.gsub(/(\d+)(?!\d|\s)/, '\1<br>')
+    formatted_values.html_safe
+  end
 end

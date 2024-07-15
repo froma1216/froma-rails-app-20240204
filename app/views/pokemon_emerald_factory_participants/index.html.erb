@@ -10,7 +10,7 @@
           <%# レベル50 or オープンレベル %>
           <div class="ms-3">
             <div class="form-check form-check-inline">
-              <%= radio_button_tag 'level_radio', '50', params[:level_radio] == '50' || params[:level_radio].nil?, class: 'form-check-input', class: 'form-check-input', id: 'level50' %>
+              <%= radio_button_tag 'level_radio', '50', params[:level_radio] == '50' || params[:level_radio].nil?, class: 'form-check-input', id: 'level50' %>
               <%= label_tag 'level_radio_50', 'レベル50', class: 'form-check-label', for: 'level50' %>
             </div>
             <div class="form-check form-check-inline">
@@ -32,67 +32,47 @@
       <br>
       <%= f.submit "検索", name: "search", class: "btn btn-primary mb-3" %>
     </div>
-    <%# 画像部 %>
-    <div class="col-12 col-sm-6 mt-2">
+    <%# 詳細部 %>
+    <div class="col-12 col-sm-6 mt-2 mb-2">
       <% if @results.present? %>
         <div class="card shadow">
-          <div class="card-header fw-bold d-none d-sm-block">
+          <div class="card-header fw-bold d-flex">
             <%= params[:q].values[0] %>
-          </div>
-          <div class="card-body row">
-            <%# ポケモン画像部 %>
-            <div class="col-auto">
-              <%= image_tag(@name_image_path, class: "img-thumbnail", :size =>"120x120") %>
+            <div class="ms-2 d-flex">
+              <div class="d-flex align-items-center">
+                <%= image_tag(@type1_image_path, size: "32x16") %>
+              </div>
+              <div class="ms-1 d-flex align-items-center">
+                <%= image_tag(@type2_image_path, size: "32x16") if @type2_image_path.present? %>
+              </div>
             </div>
-            <%# タイプ部 %>
-            <div class="col-auto d-flex flex-column">
-              <%= image_tag(@type1_image_path, :size =>"32x16") %>
-              <%= image_tag(@type2_image_path, :size =>"32x16") if @type2_image_path.present? %>
+          </div>
+          <div class="card-body d-flex justify-content-between">
+            <%# ポケモン画像部 %>
+            <div>
+              <%= image_tag(@name_image_path, class: "img-thumbnail", size: "180x180") %>
             </div>
             <%# 相性部 %>
             <% type_effective_arr = type_effective_arr(@type1, @type2) %>
-            <div class="col-sm">
-              <div class="row">
-                <span class="col-3">×4</span>
-                <div class="col-9">
-                  <% type_effective_arr["4_times"].each do |type| %>
-                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="row">
-                <span class="col-3">×2</span>
-                <div class="col-9">
-                  <% type_effective_arr["2_times"].each do |type| %>
-                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="row">
-                <span class="col-3">×1/2</span>
-                <div class="col-9">
-                  <% type_effective_arr["0.5_times"].each do |type| %>
-                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="row">
-                <span class="col-3">×1/4</span>
-                <div class="col-9">
-                  <% type_effective_arr["0.25_times"].each do |type| %>
-                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="row">
-                <span class="col-3">×0</span>
-                <div class="col-9">
-                  <% type_effective_arr["0_times"].each do |type| %>
-                    <%= image_tag(create_pokemon_image_path(type, "types")) %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
+            <% effectiveness_levels = {
+              "×4" => "4_times",
+              "×2" => "2_times",
+              "×1/2" => "0.5_times",
+              "×1/4" => "0.25_times",
+              "×0" => "0_times"
+            } %>
+            <table class="table table-sm table-bordered ms-2 mb-0">
+              <% effectiveness_levels.each do |label, key| %>
+                <tr>
+                  <td class="border-end"><%= label %></td>
+                  <td>
+                    <% type_effective_arr[key].each do |type| %>
+                      <%= image_tag(create_pokemon_image_path(type, "types")) %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
           </div>
         </div>
       <% end %>

@@ -1,5 +1,29 @@
-// 文字色
 // HACK: 色を変数に入れて管理
+// 文字色
+// 背景色
+// 特殊能力BOX
+$good-bold-light-color: #58C1D3;
+$good-bold-dark-color: #09B3D4;
+$good-background-light-color: #D8F6FF;
+$good-background-dark-color: #ABF4FB;
+$bad-bold-light-color: #FAA4A2;
+$bad-bold-dark-color: #FA5E62;
+$bad-background-light-color: #FFDEDD;
+$bad-background-dark-color: #FFCBCF;
+$special-bold-light-color: #D2B861;
+$special-bold-dark-color: #D1AF36;
+$special-background-light-color: #F8E7D3;
+$special-background-dark-color: #F7DDA7;
+$sub-bold-light-color: #80EEB6;
+$sub-bold-dark-color: #47CC9D;
+$sub-background-light-color: #DFF8E3;
+$sub-background-dark-color: #AEFAC4;
+$neutral-bold-light-color: #BAEAFA;
+$neutral-bold-dark-color: #ADE6FE;
+$neutral-background-light-color: #E5F6FE;
+$neutral-background-dark-color: #DEF7FE;
+
+// 文字
 // 全体
 .pawa-text-main {
   color: #2274B1 !important;
@@ -124,53 +148,63 @@
   background-color: #898687 !important;
 }
 
-// 特殊能力（special ability）
-.pawa-bg-sa-sp1 {
-  background-color: #CEB055 !important;
+// 特殊能力BOX
+@mixin pawa-bg-2color($light-color, $dark-color) {
+  background: linear-gradient(180deg, $light-color 0%, $light-color 50%, $dark-color 50%, $dark-color 100%);
 }
 
-.pawa-bg-sa-sp2 {
-  background-color: #FCE1AF !important;
+@mixin pawa-bg-4color($good-light-color, $good-dark-color, $bad-light-color, $bad-dark-color) {
+  background: conic-gradient($bad-light-color 0%, $bad-light-color 25%, $bad-dark-color 25%, $bad-dark-color 50%, $good-dark-color 50%, $good-dark-color 75%, $good-light-color 75%, $good-light-color 100%);
 }
 
 .pawa-bg-sa-g1 {
-  background-color: #09B3D4 !important;
+  @include pawa-bg-2color($good-bold-light-color, $good-bold-dark-color);
 }
 
 .pawa-bg-sa-g2 {
-  background-color: #BAF8FF !important;
+  @include pawa-bg-2color($good-background-light-color, $good-background-dark-color);
 }
 
 .pawa-bg-sa-b1 {
-  background-color: #FA5E62 !important;
+  @include pawa-bg-2color($bad-bold-light-color, $bad-bold-dark-color);
 }
 
 .pawa-bg-sa-b2 {
-  background-color: #FFCBCF !important;
+  @include pawa-bg-2color($bad-background-light-color, $bad-background-dark-color);
 }
 
 .pawa-bg-sa-gb1 {
-  background: linear-gradient(90deg, #09B3D4 0%, #09B3D4 50%, #FA5E62 50%, #FA5E62 100%) !important;
+  @include pawa-bg-4color($good-bold-light-color, $good-bold-dark-color, $bad-bold-light-color, $bad-bold-dark-color);
 }
 
 .pawa-bg-sa-gb2 {
-  background: linear-gradient(90deg, #BAF8FF 0%, #BAF8FF 50%, #FFCBCF 50%, #FFCBCF 100%) !important;
+  @include pawa-bg-4color($good-background-light-color, $good-background-dark-color, $bad-background-light-color, $bad-background-dark-color);
+}
+
+.pawa-bg-sa-sp1 {
+  @include pawa-bg-2color($special-bold-light-color, $special-bold-dark-color);
+}
+
+.pawa-bg-sa-sp2 {
+  @include pawa-bg-2color($special-background-light-color, $special-background-dark-color);
 }
 
 .pawa-bg-sa-sb1 {
-  background-color: #48BFAE !important;
+  @include pawa-bg-2color($sub-bold-light-color, $sub-bold-dark-color);
 }
 
 .pawa-bg-sa-sb2 {
-  background-color: #B2F5C8 !important;
+  @include pawa-bg-2color($sub-background-light-color, $sub-background-dark-color);
 }
 
 .pawa-bg-sa-n1 {
-  background-color: #A8E6FF !important;
+  // background-color: #A8E6FF !important;
+  @include pawa-bg-2color($neutral-bold-light-color, $neutral-bold-dark-color);
 }
 
 .pawa-bg-sa-n2 {
-  background-color: #DDF8FF !important;
+  // background-color: #DDF8FF !important;
+  @include pawa-bg-2color($neutral-background-light-color, $neutral-background-dark-color);
 }
 
 
@@ -430,7 +464,7 @@
       #FAD700 66.66%, #FAD700 100%);
 }
 
-// 能力ラベル
+// 能力ラベル（値なし）
 .pawa-ability-label {
   display: flex;
   align-items: center;
@@ -450,7 +484,7 @@
   }
 }
 
-// 能力ラベル
+// 能力ラベル（値あり）
 .pawa-ability-label-variable {
   display: flex;
   align-items: center;

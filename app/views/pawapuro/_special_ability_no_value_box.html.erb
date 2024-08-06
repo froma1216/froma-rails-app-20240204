@@ -1,8 +1,7 @@
 <%# 特殊能力（値なし）の１box %>
 <% ability_classes = ability_text_classes(ability) %>
 <% bg_class_1, bg_class_2, text_class = ability_no_value_color_classes(ability) %>
-
-<div class="col-12 col-sm-3 fs-3 <%= bg_class_1 %> rounded d-flex pawa-ability-box">
+<div class="col-12 col-sm-3 fs-3 <%= bg_class_1 %> rounded d-flex">
   <div class="row p-1 text-center flex-fill">
     <span class="col rounded d-flex justify-content-center align-items-center <%= "#{bg_class_2} #{text_class} #{ability_classes}" %>">
       <%= raw(ability.presence || '&nbsp;') %>

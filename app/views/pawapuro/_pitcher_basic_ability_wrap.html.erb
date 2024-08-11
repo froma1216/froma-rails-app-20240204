@@ -2,7 +2,7 @@
 <%= render partial: 'basic_ability_box', locals: { label:"球速", ability_value: @player.pawapuro_pitcher.pace } %>
 <%= render partial: 'basic_ability_box', locals: { label:"コントロール", ability_value: @player.pawapuro_pitcher.control } %>
 <%= render partial: 'basic_ability_box', locals: { label:"スタミナ", ability_value: @player.pawapuro_pitcher.stamina } %>
-<div class="d-flex justify-content-start row border border-3 border-white rounded p-0 p-sm-1 mb-1 pawa-bg-main">
+<div class="d-flex justify-content-start row p-0 p-sm-1 mb-1 pawa-main-box">
   <div class="ps-1 ps-sm-3 pb-2">
     <%# ストレート系 %>
     <%= render partial: 'breaking_ball_meter', locals: { breaking_ball_type:"fastball" } %>

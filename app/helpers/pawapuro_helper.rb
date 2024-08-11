@@ -263,7 +263,7 @@ module PawapuroHelper
     when abilities['good_and_bad'].include?(ability)
       ['pawa-bg-sa-gb1', 'pawa-bg-sa-gb2', 'pawa-text-good']
     when abilities['special'].include?(ability)
-      ['pawa-bg-sa-sp1', 'pawa-bg-sa-sp2', 'pawa-text-special']
+      ['pawa-bg-sa-sp1', 'pawa-bg-sa-sp2', 'pawa-text-speial']
     when abilities['sub'].include?(ability)
       ['pawa-bg-sa-sb1', 'pawa-bg-sa-sb2', 'pawa-text-sub']
     else
@@ -279,7 +279,7 @@ module PawapuroHelper
     when -4..-2
       ['pawa-bg-sa-b1', 'pawa-bg-sa-b2', 'pawa-text-bad']
     when 4
-      ['pawa-bg-sa-sp1', 'pawa-bg-sa-sp2', 'pawa-text-special']
+      ['pawa-bg-sa-sp1', 'pawa-bg-sa-sp2', 'pawa-text-speial']
     else
       ['pawa-bg-sa-n1', 'pawa-bg-sa-n2', 'pawa-text-neutral']
     end

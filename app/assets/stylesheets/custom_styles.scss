@@ -1,6 +1,24 @@
 // HACK: 色を変数に入れて管理
-// 文字色
+// 共通色
+// bootstrap：white
+$white: #fff;
+// メイン
+$main-color: #2274B1;
+// サブ
+$sub-color: #C6D9F2;
+// 基本能力アルファベット
+$alphabet-s-color: #E76C93;
+$alphabet-a-color: #DD07AC;
+$alphabet-b-color: #DA0912;
+$alphabet-c-color: #EC810E;
+$alphabet-d-color: #BDB005;
+$alphabet-e-color: #39CC05;
+$alphabet-f-color: #086DF4;
+$alphabet-g-color: #898687;
 // 背景色
+// メインBOX
+$main-bakground-top-color: #E5F4FA;
+$main-bakground-bottom-color: #D2EEF6;
 // 特殊能力BOX
 $good-bold-light-color: #58C1D3;
 $good-bold-dark-color: #09B3D4;
@@ -22,70 +40,81 @@ $neutral-bold-light-color: #BAEAFA;
 $neutral-bold-dark-color: #ADE6FE;
 $neutral-background-light-color: #E5F6FE;
 $neutral-background-dark-color: #DEF7FE;
+// 文字色
+// 特殊能力
+$special-text-color: #A16E38;
+$good-text-color: #4285B3;
+$bad-text-color: #AB4D51;
+$sub-text-color: #32865D;
+$neutral-text-color: #B2D8E1;
 
 // 文字
 // 全体
+@mixin pawa-text($text-color) {
+  color: $text-color;
+}
+
 .pawa-text-main {
-  color: #2274B1 !important;
+  @include pawa-text($main-color);
 }
 
 // 基礎能力
 .pawa-text-s {
-  color: #E76C93 !important;
+  @include pawa-text($alphabet-s-color);
 }
 
 .pawa-text-a {
-  color: #DD07AC !important;
+  @include pawa-text($alphabet-a-color);
 }
 
 .pawa-text-b {
-  color: #DA0912 !important;
+  @include pawa-text($alphabet-b-color);
 }
 
 .pawa-text-c {
-  color: #EC810E !important;
+  @include pawa-text($alphabet-c-color);
 }
 
 .pawa-text-d {
-  color: #BDB005 !important;
+  @include pawa-text($alphabet-d-color);
 }
 
 .pawa-text-e {
-  color: #39CC05 !important;
+  @include pawa-text($alphabet-e-color);
 }
 
 .pawa-text-f {
-  color: #086DF4 !important;
+  @include pawa-text($alphabet-f-color);
 }
 
 .pawa-text-g {
-  color: #898687 !important;
+  @include pawa-text($alphabet-g-color);
 }
 
 // 特殊能力
-.pawa-text-special {
-  color: #A16E38 !important;
+.pawa-text-speial {
+  @include pawa-text($special-text-color);
 }
 
 .pawa-text-good {
-  color: #4285B3 !important;
+  @include pawa-text($good-text-color);
 }
 
 .pawa-text-bad {
-  color: #AB4D51 !important;
+  @include pawa-text($bad-text-color);
 }
 
 .pawa-text-sub {
-  color: #32865D !important;
+  @include pawa-text($sub-text-color);
 }
 
 .pawa-text-neutral {
-  color: #B2D8E1 !important;
+  @include pawa-text($neutral-text-color);
 }
 
 // 上下2色
-.pawa-text-gb {
-  background: linear-gradient(to bottom, #4285B3 50%, #AB4D51 50%);
+.pawa-text-good-bad {
+  background: linear-gradient(to bottom, $good-text-color 50%, $bad-text-color 50%);
   -webkit-background-clip: text;
   /* Safari用 */
   background-clip: text;
@@ -97,55 +126,12 @@ $neutral-background-dark-color: #DEF7FE;
 // ボーダー色
 // 全体
 .pawa-border-main {
-  border: 3px solid #C6D9F2;
+  border: 3px solid $sub-color;
 }
 
 // 全体（内側）
 .pawa-border-main-in {
-  box-shadow: 0 0 0 5px #C6D9F2 inset;
-}
-
-
-// 背景色
-// 全体
-.pawa-bg-main {
-  background-color: #E5F4FA !important;
-}
-
-.pawa-bg-sub {
-  background-color: #C6D9F2 !important;
-}
-
-.pawa-bg-s {
-  background-color: #E76C93 !important;
-}
-
-.pawa-bg-a {
-  background-color: #DD07AC !important;
-}
-
-.pawa-bg-b {
-  background-color: #DA0912 !important;
-}
-
-.pawa-bg-c {
-  background-color: #EC810E !important;
-}
-
-.pawa-bg-d {
-  background-color: #BDB005 !important;
-}
-
-.pawa-bg-e {
-  background-color: #39CC05 !important;
-}
-
-.pawa-bg-f {
-  background-color: #086DF4 !important;
-}
-
-.pawa-bg-g {
-  background-color: #898687 !important;
+  box-shadow: 0 0 0 5px $sub-color inset;
 }
 
 // 特殊能力BOX
@@ -227,22 +213,33 @@ $neutral-background-dark-color: #DEF7FE;
 // 変化球ブロック：あり
 .pawa-breaking-block-exist {
   background: linear-gradient(#DB4A38, #FEEF31);
-  border: 2px solid #2274B1;
-  // box-shadow: 0 0 0 2px #2274B1 inset;
+  border: 2px solid $main-color;
+  // box-shadow: 0 0 0 2px $main-color inset;
   height: 8px;
 }
 
 // 変化球ブロック：なし
 .pawa-breaking-block-nil {
   background-color: #4DBAFF;
-  border: 2px solid #2274B1;
-  // box-shadow: 0 0 0 2px #2274B1 inset;
+  border: 2px solid $main-color;
+  // box-shadow: 0 0 0 2px $main-color inset;
   height: 8px;
+}
+
+// メインBOX
+.pawa-main-box {
+  background: linear-gradient(to bottom, $main-bakground-top-color 50%, $main-bakground-bottom-color);
+  border: 3px solid $white;
+  border-radius: 0.5rem; // bounded
+}
+
+.pawa-sub-box {
+  background-color: $sub-color;
 }
 
 // 選手名BOX
 @mixin pawa-player-name-box($border-color) {
-  box-shadow: inset 0px 15px rgba(#ffffff, .3), inset 0 0 5px rgba(#ffffff, .75);
+  box-shadow: inset 0px 15px rgba($white, .3), inset 0 0 5px rgba($white, .75);
   border: 3px solid $border-color;
   text-align: center;
   border-radius: .25rem;
@@ -250,27 +247,27 @@ $neutral-background-dark-color: #DEF7FE;
 
 .pawa-player-name-box-s {
   @include pawa-player-name-box(#B65A45);
-  background-color: #FF9878 !important;
+  background-color: #FF9878;
 }
 
 .pawa-player-name-box-r {
   @include pawa-player-name-box(#B67188);
-  background-color: #FDB3D2 !important;
+  background-color: #FDB3D2;
 }
 
 .pawa-player-name-box-c {
   @include pawa-player-name-box(#2694B7);
-  background-color: #12ECFE !important;
+  background-color: #12ECFE;
 }
 
 .pawa-player-name-box-i {
   @include pawa-player-name-box(#BC923D);
-  background-color: #FAD700 !important;
+  background-color: #FAD700;
 }
 
 .pawa-player-name-box-o {
   @include pawa-player-name-box(#37A238);
-  background-color: #68F177 !important;
+  background-color: #68F177;
 }
 
 .pawa-player-name-box-sr {
@@ -469,11 +466,11 @@ $neutral-background-dark-color: #DEF7FE;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid #C6D9F2;
+  border: 2px solid $sub-color;
   font-weight: bold;
   border-radius: 0.5rem; // bounded
   padding: 0.25rem; // p-1
-  background-color: #ffffff; // bg-white
+  background-color: $white; // bg-white
   box-shadow: inset 0 -12px 0 0 rgba(0, 0, 0, 0.1);
   width: 100px;
   height: 100%;
@@ -498,6 +495,43 @@ $neutral-background-dark-color: #DEF7FE;
 // 値あり
 .pawa-ability-label-variable {
   @include pawa-ability-label;
+}
+
+// 新規登録時基本能力アルファベットラベル
+@mixin pawa-bg($alphabet-background-color) {
+  background-color: $alphabet-background-color;
+}
+
+.pawa-bg-s {
+  @include pawa-bg($alphabet-s-color);
+}
+
+.pawa-bg-a {
+  @include pawa-bg($alphabet-a-color);
+}
+
+.pawa-bg-b {
+  @include pawa-bg($alphabet-b-color);
+}
+
+.pawa-bg-c {
+  @include pawa-bg($alphabet-c-color);
+}
+
+.pawa-bg-d {
+  @include pawa-bg($alphabet-d-color);
+}
+
+.pawa-bg-e {
+  @include pawa-bg($alphabet-e-color);
+}
+
+.pawa-bg-f {
+  @include pawa-bg($alphabet-f-color);
+}
+
+.pawa-bg-g {
+  @include pawa-bg($alphabet-g-color);
 }
 
 // 特能チェックボックス

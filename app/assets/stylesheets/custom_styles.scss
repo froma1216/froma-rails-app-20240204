@@ -1,4 +1,3 @@
-// HACK: 色を変数に入れて管理
 // 共通色
 // bootstrap：white
 $white: #fff;
@@ -15,31 +14,33 @@ $alphabet-d-color: #BDB005;
 $alphabet-e-color: #39CC05;
 $alphabet-f-color: #086DF4;
 $alphabet-g-color: #898687;
+
 // 背景色
 // メインBOX
 $main-bakground-top-color: #E5F4FA;
 $main-bakground-bottom-color: #D2EEF6;
-// 特殊能力BOX
-$good-bold-light-color: #58C1D3;
-$good-bold-dark-color: #09B3D4;
+// 特殊能力BOX、チェックボックス
+$good-border-light-color: #58C1D3;
+$good-border-dark-color: #09B3D4;
 $good-background-light-color: #D8F6FF;
 $good-background-dark-color: #ABF4FB;
-$bad-bold-light-color: #FAA4A2;
-$bad-bold-dark-color: #FA5E62;
+$bad-border-light-color: #FAA4A2;
+$bad-border-dark-color: #FA5E62;
 $bad-background-light-color: #FFDEDD;
 $bad-background-dark-color: #FFCBCF;
-$special-bold-light-color: #D2B861;
-$special-bold-dark-color: #D1AF36;
+$special-border-light-color: #D2B861;
+$special-border-dark-color: #D1AF36;
 $special-background-light-color: #F8E7D3;
 $special-background-dark-color: #F7DDA7;
-$sub-bold-light-color: #80EEB6;
-$sub-bold-dark-color: #47CC9D;
+$sub-border-light-color: #80EEB6;
+$sub-border-dark-color: #47CC9D;
 $sub-background-light-color: #DFF8E3;
 $sub-background-dark-color: #AEFAC4;
-$neutral-bold-light-color: #BAEAFA;
-$neutral-bold-dark-color: #ADE6FE;
+$neutral-border-light-color: #BAEAFA;
+$neutral-border-dark-color: #ADE6FE;
 $neutral-background-light-color: #E5F6FE;
 $neutral-background-dark-color: #DEF7FE;
+
 // 文字色
 // 特殊能力
 $special-text-color: #A16E38;
@@ -47,6 +48,24 @@ $good-text-color: #4285B3;
 $bad-text-color: #AB4D51;
 $sub-text-color: #32865D;
 $neutral-text-color: #B2D8E1;
+
+// 変化球ブロック
+$breaking-block-border-color: $main-color;
+$breaking-block-exist-top-color: #DB4A38;
+$breaking-block-exist-bottom-color: #FEEF31;
+$breaking-block-null-color: #4DBAFF;
+
+// 特殊能力BOX
+$player-name-border-s-color: #B65A45;
+$player-name-background-s-color: #FF9878;
+$player-name-border-r-color: #B67188;
+$player-name-background-r-color: #FDB3D2;
+$player-name-border-c-color: #2694B7;
+$player-name-background-c-color: #12ECFE;
+$player-name-border-i-color: #BC923D;
+$player-name-background-i-color: #FAD700;
+$player-name-border-o-color: #37A238;
+$player-name-background-o-color: #68F177;
 
 // 文字
 // 全体
@@ -144,7 +163,7 @@ $neutral-text-color: #B2D8E1;
 }
 
 .pawa-bg-sa-g1 {
-  @include pawa-bg-2color($good-bold-light-color, $good-bold-dark-color);
+  @include pawa-bg-2color($good-border-light-color, $good-border-dark-color);
 }
 
 .pawa-bg-sa-g2 {
@@ -152,7 +171,7 @@ $neutral-text-color: #B2D8E1;
 }
 
 .pawa-bg-sa-b1 {
-  @include pawa-bg-2color($bad-bold-light-color, $bad-bold-dark-color);
+  @include pawa-bg-2color($bad-border-light-color, $bad-border-dark-color);
 }
 
 .pawa-bg-sa-b2 {
@@ -160,7 +179,7 @@ $neutral-text-color: #B2D8E1;
 }
 
 .pawa-bg-sa-gb1 {
-  @include pawa-bg-4color($good-bold-light-color, $good-bold-dark-color, $bad-bold-light-color, $bad-bold-dark-color);
+  @include pawa-bg-4color($good-border-light-color, $good-border-dark-color, $bad-border-light-color, $bad-border-dark-color);
 }
 
 .pawa-bg-sa-gb2 {
@@ -168,7 +187,7 @@ $neutral-text-color: #B2D8E1;
 }
 
 .pawa-bg-sa-sp1 {
-  @include pawa-bg-2color($special-bold-light-color, $special-bold-dark-color);
+  @include pawa-bg-2color($special-border-light-color, $special-border-dark-color);
 }
 
 .pawa-bg-sa-sp2 {
@@ -176,7 +195,7 @@ $neutral-text-color: #B2D8E1;
 }
 
 .pawa-bg-sa-sb1 {
-  @include pawa-bg-2color($sub-bold-light-color, $sub-bold-dark-color);
+  @include pawa-bg-2color($sub-border-light-color, $sub-border-dark-color);
 }
 
 .pawa-bg-sa-sb2 {
@@ -184,12 +203,10 @@ $neutral-text-color: #B2D8E1;
 }
 
 .pawa-bg-sa-n1 {
-  // background-color: #A8E6FF !important;
-  @include pawa-bg-2color($neutral-bold-light-color, $neutral-bold-dark-color);
+  @include pawa-bg-2color($neutral-border-light-color, $neutral-border-dark-color);
 }
 
 .pawa-bg-sa-n2 {
-  // background-color: #DDF8FF !important;
   @include pawa-bg-2color($neutral-background-light-color, $neutral-background-dark-color);
 }
 
@@ -212,17 +229,15 @@ $neutral-text-color: #B2D8E1;
 
 // 変化球ブロック：あり
 .pawa-breaking-block-exist {
-  background: linear-gradient(#DB4A38, #FEEF31);
-  border: 2px solid $main-color;
-  // box-shadow: 0 0 0 2px $main-color inset;
+  background: linear-gradient(to bottom, $breaking-block-exist-top-color, $breaking-block-exist-bottom-color);
+  border: 2px solid $breaking-block-border-color;
   height: 8px;
 }
 
 // 変化球ブロック：なし
 .pawa-breaking-block-nil {
-  background-color: #4DBAFF;
-  border: 2px solid $main-color;
-  // box-shadow: 0 0 0 2px $main-color inset;
+  background-color: $breaking-block-null-color;
+  border: 2px solid $breaking-block-border-color;
   height: 8px;
 }
 
@@ -233,6 +248,7 @@ $neutral-text-color: #B2D8E1;
   border-radius: 0.5rem; // bounded
 }
 
+// サブBOX
 .pawa-sub-box {
   background-color: $sub-color;
 }
@@ -245,220 +261,159 @@ $neutral-text-color: #B2D8E1;
   border-radius: .25rem;
 }
 
+@mixin pawa-player-name-box-1color($border-color, $background-color) {
+  @include pawa-player-name-box($border-color);
+  background-color: $background-color;
+}
+
+@mixin pawa-player-name-box-2color($border-color, $background-color1, $background-color2) {
+  @include pawa-player-name-box($border-color);
+  background: linear-gradient(to right, $background-color1 50%, $background-color2 50%);
+}
+
+@mixin pawa-player-name-box-3color($border-color, $background-color1, $background-color2, $background-color3) {
+  @include pawa-player-name-box($border-color);
+  background: linear-gradient(to right,
+      $background-color1 0%, $background-color1 33.33%,
+      $background-color2 33.33%, $background-color2 66.66%,
+      $background-color3 66.66%, $background-color3 100%);
+}
+
 .pawa-player-name-box-s {
-  @include pawa-player-name-box(#B65A45);
-  background-color: #FF9878;
+  @include pawa-player-name-box-1color($player-name-border-s-color, $player-name-background-s-color);
 }
 
 .pawa-player-name-box-r {
-  @include pawa-player-name-box(#B67188);
-  background-color: #FDB3D2;
+  @include pawa-player-name-box-1color($player-name-border-r-color, $player-name-background-r-color);
 }
 
 .pawa-player-name-box-c {
-  @include pawa-player-name-box(#2694B7);
-  background-color: #12ECFE;
+  @include pawa-player-name-box-1color($player-name-border-c-color, $player-name-background-c-color);
 }
 
 .pawa-player-name-box-i {
-  @include pawa-player-name-box(#BC923D);
-  background-color: #FAD700;
+  @include pawa-player-name-box-1color($player-name-border-i-color, $player-name-background-i-color);
 }
 
 .pawa-player-name-box-o {
-  @include pawa-player-name-box(#37A238);
-  background-color: #68F177;
+  @include pawa-player-name-box-1color($player-name-border-o-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-sr {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right, #FF9878 50%, #FDB3D2 50%);
+  @include pawa-player-name-box-2color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-r-color);
 }
 
 .pawa-player-name-box-sc {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right, #FF9878 50%, #12ECFE 50%);
+  @include pawa-player-name-box-2color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-c-color);
 }
 
 .pawa-player-name-box-si {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right, #FF9878 50%, #FAD700 50%);
+  @include pawa-player-name-box-2color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-i-color);
 }
 
 .pawa-player-name-box-so {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right, #FF9878 50%, #68F177 50%);
+  @include pawa-player-name-box-2color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-rs {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right, #FDB3D2 50%, #FF9878 50%);
+  @include pawa-player-name-box-2color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-s-color);
 }
 
 .pawa-player-name-box-rc {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right, #FDB3D2 50%, #12ECFE 50%);
+  @include pawa-player-name-box-2color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-c-color);
 }
 
 .pawa-player-name-box-ri {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right, #FDB3D2 50%, #FAD700 50%);
+  @include pawa-player-name-box-2color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-i-color);
 }
 
 .pawa-player-name-box-ro {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right, #FDB3D2 50%, #68F177 50%);
+  @include pawa-player-name-box-2color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-ci {
-  @include pawa-player-name-box(#2694B7);
-  background: linear-gradient(to right, #12ECFE 50%, #FAD700 50%);
+  @include pawa-player-name-box-2color($player-name-border-c-color, $player-name-background-c-color, $player-name-background-i-color);
 }
 
 .pawa-player-name-box-co {
-  @include pawa-player-name-box(#2694B7);
-  background: linear-gradient(to right, #12ECFE 50%, #68F177 50%);
+  @include pawa-player-name-box-2color($player-name-border-c-color, $player-name-background-c-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-ic {
-  @include pawa-player-name-box(#BC923D);
-  background: linear-gradient(to right, #FAD700 50%, #12ECFE 50%);
+  @include pawa-player-name-box-2color($player-name-border-i-color, $player-name-background-i-color, $player-name-background-c-color);
 }
 
 .pawa-player-name-box-io {
-  @include pawa-player-name-box(#BC923D);
-  background: linear-gradient(to right, #FAD700 50%, #68F177 50%);
+  @include pawa-player-name-box-2color($player-name-border-i-color, $player-name-background-i-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-oc {
-  @include pawa-player-name-box(#37A238);
-  background: linear-gradient(to right, #68F177 50%, #12ECFE 50%);
+  @include pawa-player-name-box-2color($player-name-border-o-color, $player-name-background-o-color, $player-name-background-c-color);
 }
 
 .pawa-player-name-box-oi {
-  @include pawa-player-name-box(#37A238);
-  background: linear-gradient(to right, #68F177 50%, #FAD700 50%);
+  @include pawa-player-name-box-2color($player-name-border-o-color, $player-name-background-o-color, $player-name-background-i-color);
 }
 
 .pawa-player-name-box-src {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right,
-      #FF9878 0%, #FF9878 33.33%,
-      #FDB3D2 33.33%, #FDB3D2 66.66%,
-      #12ECFE 66.66%, #12ECFE 100%);
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-r-color, $player-name-background-c-color);
 }
 
 .pawa-player-name-box-sri {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right,
-      #FF9878 0%, #FF9878 33.33%,
-      #FDB3D2 33.33%, #FDB3D2 66.66%,
-      #FAD700 66.66%, #FAD700 100%);
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-r-color, $player-name-background-i-color);
 }
 
 .pawa-player-name-box-sro {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right,
-      #FF9878 0%, #FF9878 33.33%,
-      #FDB3D2 33.33%, #FDB3D2 66.66%,
-      #68F177 66.66%, #68F177 100%);
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-r-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-sci {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right,
-      #FF9878 0%, #FF9878 33.33%,
-      #12ECFE 33.33%, #12ECFE 66.66%,
-      #FAD700 66.66%, #FAD700 100%);
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-c-color, $player-name-background-i-color);
 }
 
 
 .pawa-player-name-box-sco {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right,
-      #FF9878 0%, #FF9878 33.33%,
-      #12ECFE 33.33%, #12ECFE 66.66%,
-      #68F177 66.66%, #68F177 100%);
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-c-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-sio {
-  @include pawa-player-name-box(#B65A45);
-  background: linear-gradient(to right,
-      #FF9878 0%, #FF9878 33.33%,
-      #FAD700 33.33%, #FAD700 66.66%,
-      #68F177 66.66%, #68F177 100%);
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-i-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-rsc {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right,
-      #FDB3D2 0%, #FDB3D2 33.33%,
-      #FF9878 33.33%, #FF9878 66.66%,
-      #12ECFE 66.66%, #12ECFE 100%);
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-s-color, $player-name-background-c-color);
 }
 
 .pawa-player-name-box-rsi {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right,
-      #FDB3D2 0%, #FDB3D2 33.33%,
-      #FF9878 33.33%, #FF9878 66.66%,
-      #FAD700 66.66%, #FAD700 100%);
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-s-color, $player-name-background-i-color);
 }
 
 .pawa-player-name-box-rso {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right,
-      #FDB3D2 0%, #FDB3D2 33.33%,
-      #FF9878 33.33%, #FF9878 66.66%,
-      #68F177 66.66%, #68F177 100%);
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-s-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-rci {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right,
-      #FDB3D2 0%, #FDB3D2 33.33%,
-      #12ECFE 33.33%, #12ECFE 66.66%,
-      #FAD700 66.66%, #FAD700 100%);
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-c-color, $player-name-background-i-color);
 }
 
 .pawa-player-name-box-rco {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right,
-      #FDB3D2 0%, #FDB3D2 33.33%,
-      #12ECFE 33.33%, #12ECFE 66.66%,
-      #68F177 66.66%, #68F177 100%);
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-c-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-rio {
-  @include pawa-player-name-box(#B67188);
-  background: linear-gradient(to right,
-      #FDB3D2 0%, #FDB3D2 33.33%,
-      #FAD700 33.33%, #FAD700 66.66%,
-      #68F177 66.66%, #68F177 100%);
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-i-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-cio {
-  @include pawa-player-name-box(#2694B7);
-  background: linear-gradient(to right,
-      #12ECFE 0%, #12ECFE 33.33%,
-      #FAD700 33.33%, #FAD700 66.66%,
-      #68F177 66.66%, #68F177 100%);
+  @include pawa-player-name-box-3color($player-name-border-c-color, $player-name-background-c-color, $player-name-background-i-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-ico {
-  @include pawa-player-name-box(#BC923D);
-  background: linear-gradient(to right,
-      #FAD700 0%, #FAD700 33.33%,
-      #12ECFE 33.33%, #12ECFE 66.66%,
-      #68F177 66.66%, #68F177 100%);
+  @include pawa-player-name-box-3color($player-name-border-i-color, $player-name-background-i-color, $player-name-background-c-color, $player-name-background-o-color);
 }
 
 .pawa-player-name-box-oci {
-  @include pawa-player-name-box(#37A238);
-  background: linear-gradient(to right,
-      #68F177 0%, #68F177 33.33%,
-      #12ECFE 33.33%, #12ECFE 66.66%,
-      #FAD700 66.66%, #FAD700 100%);
+  @include pawa-player-name-box-3color($player-name-border-o-color, $player-name-background-o-color, $player-name-background-c-color, $player-name-background-i-color);
 }
 
 // 能力ラベル
@@ -535,45 +490,33 @@ $neutral-text-color: #B2D8E1;
 }
 
 // 特能チェックボックス
-.pawa-checkbox-sp {
-  border: 2px solid #CEB055 !important;
+@mixin pawa-checkbox($border-color, $background-color) {
+  border: 2px solid $border-color !important;
 
   &:checked {
-    background-color: #CEB055 !important;
+    background-color: $background-color;
   }
+}
+
+.pawa-checkbox-sp {
+  @include pawa-checkbox($special-border-dark-color, $special-border-dark-color);
 }
 
 .pawa-checkbox-g {
-  border: 2px solid #09B3D4 !important;
-
-  &:checked {
-    background-color: #09B3D4 !important;
-  }
+  @include pawa-checkbox($good-border-dark-color, $good-border-dark-color);
 }
 
 .pawa-checkbox-b {
-  border: 2px solid #FA5E62 !important;
-
-  &:checked {
-    background-color: #FA5E62 !important;
-  }
+  @include pawa-checkbox($bad-border-dark-color, $bad-border-dark-color);
 }
 
 .pawa-checkbox-gb {
   // FIXME: 上下で色を分けたい
-  border: 2px solid #FA5E62 !important;
-
-  &:checked {
-    background-color: #09B3D4 !important;
-  }
+  @include pawa-checkbox($bad-border-dark-color, $good-border-dark-color);
 }
 
 .pawa-checkbox-sb {
-  border: 2px solid #68F177 !important;
-
-  &:checked {
-    background-color: #68F177 !important;
-  }
+  @include pawa-checkbox($sub-border-dark-color, $sub-border-dark-color);
 }
 
 // TODO: ブレイクポイントの見直し

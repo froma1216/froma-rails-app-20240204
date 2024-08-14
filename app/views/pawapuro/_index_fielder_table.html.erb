@@ -1,0 +1,40 @@
+<div class="mb-3 container">
+  <% @players.each_with_index do |player, index| %>
+    <%# HACK: @playerで取得する際のSQLに組み込みたい %>
+    <%# 自分で作成した選手と、テストデータのみ表示する %>
+    <% if player.created_by == current_user.username || player.id == 1 %>
+      <div class="row pawa-index__box mb-1">
+        <%# 選手名 %>
+        <div class="col-12 col-sm-2 my-2 my-sm-0 d-flex justify-content-between align-items-center">
+          <div class="h5 mb-0 w-75
+          <%= player_name_box_color_class(player.main_position, player.p11_proper, player.p12_proper, player.p13_proper, player.p2_proper, player.p3_proper, player.p4_proper, player.p5_proper, player.p6_proper, player.p7_proper) %>
+          <%= 'tighter-letter-spacing' if player.player_name.length > 5 %>">
+            <%= player.player_name %>
+          </div>
+          <div class="<%= main_position_box_color_class(player.main_position) %>">
+            <%= display_position_name(player.main_position) %>
+          </div>
+        </div>
+        <div class="col-12 col-sm-8 mb-2 mb-sm-0 d-flex justify-content-between align-items-center flex-wrap">
+          <%= render partial: 'basic_ability_table_box', locals: { label:"弾道", ability_value: player.pawapuro_fielder.trajectory, width: "w-30 w-sm-10" } %>
+          <%= render partial: 'basic_ability_table_box', locals: { label:"ミート", ability_value: player.pawapuro_fielder.meat, width: "w-30 w-sm-10" } %>
+          <%= render partial: 'basic_ability_table_box', locals: { label:"パワー", ability_value: player.pawapuro_fielder.power, width: "w-30 w-sm-10" } %>
+          <%= render partial: 'basic_ability_table_box', locals: { label:"走力", ability_value: player.pawapuro_fielder.running, width: "w-30 w-sm-10" } %>
+          <%= render partial: 'basic_ability_table_box', locals: { label:"肩力", ability_value: player.pawapuro_fielder.arm_strength, width: "w-30 w-sm-10" } %>
+          <%= render partial: 'basic_ability_table_box', locals: { label:"守備力", ability_value: player.pawapuro_fielder.defense, width: "w-30 w-sm-10" } %>
+          <%= render partial: 'basic_ability_table_box', locals: { label:"捕球", ability_value: player.pawapuro_fielder.catching, width: "w-30 w-sm-10" } %>
+          <%= render partial: 'basic_ability_table_box', locals: { label:"守備位置", ability_value: display_positions(player), width: "w-66 w-sm-20" } %>
+        </div>
+        <div class="col-12 col-sm-2 mb-2 mb-sm-0 d-flex justify-content-start justify-content-sm-evenly align-items-center">
+          <div>
+            <%= link_to '詳細', details_pawapuro_path(player), class: 'btn btn-primary details-button', data: { turbo_frame: "pawapuro_details_modal" } %>
+            <%# テストデータには、削除ボタンを表示しない %>
+            <% if player.id != 1 %>
+              <%= link_to "削除", pawapuro_path(player), data: { turbo_method: :delete, turbo_confirm: "「選手名：#{player.player_name}」を削除してよろしいですか？" }, class: "btn btn-danger" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

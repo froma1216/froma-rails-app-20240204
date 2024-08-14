@@ -1,0 +1,13 @@
+<div class="pawa-ability-card my-1 <%= width %>">
+  <div class="pawa-ability-card__label">
+    <%= label %>
+  </div>
+  <div class="pawa-ability-card__body">
+    <% if label == "守備位置" %>
+      <span class=""><%= ability_value %></span>
+    <% else %>
+      <span class=""><%= label == "弾道" ? display_trajectory(ability_value) : display_alphabet(ability_value) %></span>
+      <span class=""><%= ability_value %></span>
+    <% end %>
+  </div>
+</div>

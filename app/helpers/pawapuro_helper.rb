@@ -132,8 +132,24 @@ module PawapuroHelper
     player.other_special_abilities.to_s.split(",").include?(ability)
   end
 
+  # ポジションボックスの背景色、ボーダー色のクラスを返す
+  def main_position_box_color_class(main_position)
+    case main_position
+    when 11
+      "pawa-position-box--s"
+    when 12..13
+      "pawa-position-box--r"
+    when 2
+      "pawa-position-box--c"
+    when 3..6
+      "pawa-position-box--i"
+    else
+      "pawa-position-box--o"
+    end
+  end
+
   # 選手名ボックスの背景色、ボーダー色のクラスを返す
-  def main_position_box_color_class(main_position, p11_proper, p12_proper, p13_proper, p2_proper, p3_proper, p4_proper, p5_proper, p6_proper, p7_proper)
+  def player_name_box_color_class(main_position, p11_proper, p12_proper, p13_proper, p2_proper, p3_proper, p4_proper, p5_proper, p6_proper, p7_proper)
     is_starter = p11_proper > 0
     is_relief = p12_proper > 0 || p13_proper > 0
     is_catcher = p2_proper > 0

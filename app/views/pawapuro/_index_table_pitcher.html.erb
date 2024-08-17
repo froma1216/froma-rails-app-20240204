@@ -1,0 +1,14 @@
+<%= render partial: 'basic_ability_table_box', locals: { label:"球速", ability_value: player.pawapuro_pitcher.pace, width: "w-30 w-sm-10" } %>
+<%= render partial: 'basic_ability_table_box', locals: { label:"コントロール", ability_value: player.pawapuro_pitcher.control, width: "w-30 w-sm-10" } %>
+<%= render partial: 'basic_ability_table_box', locals: { label:"スタミナ", ability_value: player.pawapuro_pitcher.stamina, width: "w-30 w-sm-10" } %>
+<%# TODO: 右投げか左投げかで矢印の向きを変える（順番を変える） %>
+<%# シュート %>
+<%= render partial: 'basic_ability_table_box', locals: { label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down", style: "transform: rotate(90deg);"), ability_value: player.pawapuro_pitcher.shootball_type_movement, ability_value2: player.pawapuro_pitcher.second_shootball_type_movement.to_i.nonzero?, width: "w-30 w-sm-10" } %>
+<%# シンカー系 %>
+<%= render partial: 'basic_ability_table_box', locals: { label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down", style: "transform: rotate(45deg);"), ability_value: player.pawapuro_pitcher.sinker_type_movement, ability_value2: player.pawapuro_pitcher.second_sinker_type_movement.to_i.nonzero?, width: "w-30 w-sm-10" } %>
+<%# フォーク系 %>
+<%= render partial: 'basic_ability_table_box', locals: { label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down"), ability_value: player.pawapuro_pitcher.forkball_type_movement, ability_value2: player.pawapuro_pitcher.second_forkball_type_movement.to_i.nonzero?, width: "w-30 w-sm-10" } %>
+<%# カーブ系 %>
+<%= render partial: 'basic_ability_table_box', locals: { label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down", style: "transform: rotate(-45deg);"), ability_value: player.pawapuro_pitcher.curveball_type_movement, ability_value2: player.pawapuro_pitcher.second_curveball_type_movement.to_i.nonzero?, width: "w-30 w-sm-10" } %>
+<%# スライダー系 %>
+<%= render partial: 'basic_ability_table_box', locals: { label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down", style: "transform: rotate(-90deg);"), ability_value: player.pawapuro_pitcher.slider_type_movement, ability_value2: player.pawapuro_pitcher.second_slider_type_movement.to_i.nonzero?, width: "w-30 w-sm-10" } %>

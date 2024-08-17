@@ -1,13 +1,22 @@
+<%# デフォルト値を設定する（呼び出し元でability_value2を指定しなくてもエラーにならないように） %>
+<% ability_value2 ||= nil %>
+
 <div class="pawa-ability-card my-1 <%= width %>">
   <div class="pawa-ability-card__label">
     <%= label %>
   </div>
   <div class="pawa-ability-card__body">
-    <% if label == "守備位置" %>
-      <span class=""><%= ability_value %></span>
+    <% if label == "守備位置" || label.to_s.include?("fa-arrow-down") %>
+      <div class="d-flex justify-content-between">
+        <%= ability_value %>
+        <%= ability_value2&.presence %>
+      </div>
+    <% elsif label == "球速" %>
+      <span><%= ability_value %></span>
+      <span><small>km/h</small></span>
     <% else %>
-      <span class=""><%= label == "弾道" ? display_trajectory(ability_value) : display_alphabet(ability_value) %></span>
-      <span class=""><%= ability_value %></span>
+      <span><%= label == "弾道" ? display_trajectory(ability_value) : display_alphabet(ability_value) %></span>
+      <span><%= ability_value %></span>
     <% end %>
   </div>
 </div>

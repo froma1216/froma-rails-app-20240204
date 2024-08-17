@@ -92,7 +92,15 @@ $player-name-background-o-color: #68F177;
   width: 66%;
 }
 
-// w-10のレスポンシブ
+// w-5のレスポンシブ
+@each $breakpoint in (sm, md, lg, xl) {
+  .w-#{$breakpoint}-5 {
+    @include media-breakpoint-up($breakpoint) {
+      width: 5% !important;
+    }
+  }
+}
+
 @each $breakpoint in (sm, md, lg, xl) {
   .w-#{$breakpoint}-10 {
     @include media-breakpoint-up($breakpoint) {

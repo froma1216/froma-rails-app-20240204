@@ -1,23 +1,24 @@
 <h1>【パワプロ】作成選手一覧</h1>
 <%# 選手作成 %>
 <%= link_to '新規選手作成', new_pawapuro_path, class: 'btn btn-primary mb-2' %>
+<%# 投/野能力表示切り替えラジオ %>
+<div>
+  <label class="form-label">表示能力</label>
+  <div class="mb-3">
+    <div class="form-check form-check-inline">
+      <%= radio_button_tag 'display_ability_radio', 'pitcher', true, class: 'form-check-input', id: 'form-radio-pitcher' %>
+      <%= label_tag 'display_ability_radio_pitcher', '投手', class: 'form-check-label', for: 'form-radio-pitcher' %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= radio_button_tag 'display_ability_radio', 'fielder', false, class: 'form-check-input', id: 'form-radio-fielder' %>
+      <%= label_tag 'display_ability_radio_fielder', '野手', class: 'form-check-label', for: 'form-radio-fielder' %>
+    </div>
+  </div>
+</div>
 <%
 =begin
 %>
 <form class="mb-3">
-  <%# 投/野ラジオ %>
-  <label class="form-label">表示能力</label>
-  <div class="mb-3">
-    <div class="form-check form-check-inline">
-      <%= radio_button_tag 'display_ability', 'pitcher', params[:display_ability] == 'pitcher' || params[:display_ability].nil?, class: 'form-check-input', id: 'formRadioPitcher' %>
-      <%= label_tag 'display_ability_pitcher', '投手', class: 'form-check-label', for: 'formRadioPitcher' %>
-    </div>
-    <div class="form-check form-check-inline">
-      <%= radio_button_tag 'display_ability', 'fielder', params[:display_ability] == 'fielder', class: 'form-check-input', id: 'formRadioFielder' %>
-      <%= label_tag 'display_ability_fielder', '野手', class: 'form-check-label', for: 'formRadioFielder' %>
-    </div>
-  </div>
-
   <%# 選手名 %>
   <div class="mb-3">
     <label for="name" class="form-label">選手名</label>
@@ -40,4 +41,4 @@
 =end
 %>
 <%# 一覧表示部 %>
-<%= render partial: 'index_fielder_table' %>
+<%= render partial: 'index_table' %>

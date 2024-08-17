@@ -101,8 +101,78 @@ function setupInputFieldTrajectory(inputFieldId, displaySpanId) {
   document.getElementById(inputFieldId).addEventListener("input", updateSpan);
 }
 
+// 能力切り替え
+// function changeDisplayAbility(index) {
+//   const pitcherRadio = document.getElementById('form-radio-pitcher');
+//   const fielderRadio = document.getElementById('form-radio-fielder');
+//   const pitcherContent = document.getElementById('pitcher-content-'+ index);
+//   const fielderContent = document.getElementById('fielder-content-' + index);
+
+//   if (pitcherRadio.checked) {
+//     pitcherContent.classList.remove('d-none');
+//     pitcherContent.classList.add('d-flex');
+//     fielderContent.classList.remove('d-flex');
+//     fielderContent.classList.add('d-none');
+//   } else if (fielderRadio.checked) {
+//     pitcherContent.classList.remove('d-flex');
+//     pitcherContent.classList.add('d-none');
+//     fielderContent.classList.remove('d-none');
+//     fielderContent.classList.add('d-flex');
+//   }
+// }
+
+// // pitcherRadio.addEventListener('change', changeDisplayAbility);
+// // fielderRadio.addEventListener('change', changeDisplayAbility);
+// document.addEventListener('DOMContentLoaded', function() {
+//   // 初期表示を設定
+//   // changeDisplayAbility();
+
+//   // 各選手に対して初期表示とイベントリスナーを設定
+//   document.querySelectorAll('[id^="form-radio-pitcher"]').forEach((radio, index) => {
+//     changeDisplayAbility(index);
+//     radio.addEventListener('change', () => changeDisplayAbility(index));
+//   });
+
+//   document.querySelectorAll('[id^="form-radio-fielder"]').forEach((radio, index) => {
+//     radio.addEventListener('change', () => changeDisplayAbility(index));
+//   });
+// });
+
+// 投/野能力表示切り替え
+function changeDisplayAbility() {
+  const pitcherRadio = document.getElementById('form-radio-pitcher');
+  const fielderRadio = document.getElementById('form-radio-fielder');
+  const pitcherContents = document.querySelectorAll('[id^="pitcher-content"]');
+  const fielderContents = document.querySelectorAll('[id^="fielder-content"]');
+
+  if (pitcherRadio.checked) {
+    pitcherContents.forEach(content => {
+      content.classList.remove('d-none');
+      content.classList.add('d-flex');
+    });
+    fielderContents.forEach(content => {
+      content.classList.remove('d-flex');
+      content.classList.add('d-none');
+    });
+  } else if (fielderRadio.checked) {
+    pitcherContents.forEach(content => {
+      content.classList.remove('d-flex');
+      content.classList.add('d-none');
+    });
+    fielderContents.forEach(content => {
+      content.classList.remove('d-none');
+      content.classList.add('d-flex');
+    });
+  }
+}
+
 // ページが読み込まれたときに関数を実行
 document.addEventListener("turbo:load", function () {
+  // 投/野能力表示切り替え
+  changeDisplayAbility();
+  document.getElementById('form-radio-pitcher').addEventListener('change', changeDisplayAbility);
+  document.getElementById('form-radio-fielder').addEventListener('change', changeDisplayAbility);
+
   // コントロール
   setupInputField("control-input", "control-alphabet-display");
   // スタミナ

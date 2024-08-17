@@ -75,6 +75,32 @@ $player-name-background-i-color: #FAD700;
 $player-name-border-o-color: #37A238;
 $player-name-background-o-color: #68F177;
 
+
+.froma-body--background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: .7;
+  z-index: -1;
+
+  // 【エメラルド】バトルファクトリー参加ポケモン検索
+  &.pokemon_emerald_factory_participants {
+    background: url(asset-path('pokemon_emerald_factory_participant/em_f_top.png')) 5% center / cover no-repeat;
+  }
+
+  // 【パワプロ】選手作成メモ
+  &.pawapuro {
+    background: url(asset-path('pawapuro/pawa_2024_top3.png')) 5% center / cover no-repeat;
+  }
+}
+
+.froma-container {
+  background: rgba(255, 255, 255, .7);
+  min-height: 100vh;
+}
+
 // サイズ
 .w-10 {
   width: 10%;

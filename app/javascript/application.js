@@ -5,3 +5,10 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "@fortawesome/fontawesome-free"
+
+// containerの高さを設定
+document.addEventListener("turbo:load", function () {
+  var headerHeight = document.getElementById('navbar').offsetHeight;
+  var container = document.getElementById('container');
+  container.style.minHeight = `calc(100vh - ${headerHeight}px)`;
+});

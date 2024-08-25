@@ -1,0 +1,2 @@
+module Mhxx::TimesHelper
+end

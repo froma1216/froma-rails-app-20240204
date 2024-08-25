@@ -1,0 +1,2 @@
+module Mhxx::RanksHelper
+end

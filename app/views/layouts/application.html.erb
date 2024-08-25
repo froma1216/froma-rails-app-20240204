@@ -35,7 +35,7 @@
           <%# PCサイズのヘッダー内容 %>
           <div class="collapse navbar-collapse" id="navbar-content">
             <ul class="navbar-nav mr-auto">
-              <%# 【エメラルド】バトルファクトリー参加ポケモン検索 %>
+              <%# エメラルド %>
               <li>
                 <%= link_to("【エメラルド】バトルファクトリー参加ポケモン検索", pokemon_emerald_factory_participants_path, class: "nav-link") %>
               </li>
@@ -49,6 +49,16 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <%= link_to("作成選手一覧", pawapuro_index_path, class: "dropdown-item") %>
                     <%= link_to("新規選手作成", new_pawapuro_path, class: "dropdown-item") %>
+                  </div>
+                </li>
+                <%# MHXX %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    【MHXX】クエスト別クリアタイムメモ
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%= link_to("ランク一覧", mhxx_ranks_path, class: "dropdown-item") %>
+                    <%= link_to("新規クリアタイム作成", new_mhxx_time_path, class: "dropdown-item") %>
                   </div>
                 </li>
               <% end %>

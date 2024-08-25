@@ -75,7 +75,7 @@ $player-name-background-i-color: #FAD700;
 $player-name-border-o-color: #37A238;
 $player-name-background-o-color: #68F177;
 
-
+// HACK: リファクタリング
 .froma-body--background {
   width: 100vw;
   height: 100vh;
@@ -93,6 +93,19 @@ $player-name-background-o-color: #68F177;
   // 【パワプロ】選手作成メモ
   &.pawapuro {
     background: url(asset-path('pawapuro/pawa_2024_top3.png')) 5% center / cover no-repeat;
+  }
+
+  // 【MHXX】超特殊許可ソロクリアタイムメモ
+  &.ranks {
+    background: url(asset-path('mhxx_special_permit_time/mhxx_top.png')) 5% center / cover no-repeat;
+  }
+
+  &.quests {
+    background: url(asset-path('mhxx_special_permit_time/mhxx_top.png')) 5% center / cover no-repeat;
+  }
+
+  &.times {
+    background: url(asset-path('mhxx_special_permit_time/mhxx_top.png')) 5% center / cover no-repeat;
   }
 }
 

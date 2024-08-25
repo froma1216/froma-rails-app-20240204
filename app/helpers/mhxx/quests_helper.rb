@@ -1,0 +1,2 @@
+module Mhxx::QuestsHelper
+end

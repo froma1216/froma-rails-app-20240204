@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # 管理
   namespace :admin do
     resources :conferences
     resources :days
@@ -49,4 +50,11 @@ Rails.application.routes.draw do
 
   # 【エメラルド】バトルファクトリー参加ポケモン検索
   resources :pokemon_emerald_factory_participants, only: [:index]
+
+  # 【MHXX】クエスト別クリアタイムメモ
+  namespace :mhxx do
+    resources :ranks, only: [:index, :show]
+    resources :quests, only: [:show]
+    resources :times
+  end
 end

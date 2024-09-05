@@ -1,2 +1,77 @@
-<h1>Mhxx::Times#index</h1>
-<p>Find me in app/views/mhxx/times/index.html.erb</p>
+<h1>【MHXX】最速クリアタイム一覧</h1>
+<div class="d-flex">
+  <label for="lap" class="form-label">ランク</label>
+  <%# ランク選択 %>
+  <div class="ms-3">
+    <div class="form-check form-check-inline">
+      <%= radio_button_tag 'rank_radio', 'g_rank', params[:rank_radio] == 'g_rank' || params[:rank_radio].nil?, class: 'form-check-input', id: 'g-rank' %>
+      <%= label_tag 'rank_radio_g_rank', 'G級', class: 'form-check-label', for: 'g-rank' %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= radio_button_tag 'rank_radio', 'event', params[:rank_radio] == 'event', class: 'form-check-input', id: 'event' %>
+      <%= label_tag 'rank_radio_event', 'イベントクエスト', class: 'form-check-label', for: 'event' %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= radio_button_tag 'rank_radio', 'special_permit', params[:rank_radio] == 'special_permit', class: 'form-check-input', id: 'special-permit' %>
+      <%= label_tag 'rank_radio_special_permit', '特殊許可クエスト', class: 'form-check-label', for: 'special-permit' %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= radio_button_tag 'rank_radio', 'bookmark', params[:rank_radio] == 'bookmark', class: 'form-check-input', id: 'bookmark' %>
+      <%= label_tag 'rank_radio_bookmark', 'お気に入り', class: 'form-check-label', for: 'bookmark' %>
+    </div>
+  </div>
+</div>
+<%= select_tag :rank_number, options_for_select([["すべて", 0], ["G★1", 110], ["G★2", 120], ["G★3", 130], ["G★4", 140]], params[:rank_number].to_i), class: "form-select mb-3", id: "rank_number" %>
+<h2 class="mhxx_rank_label">G★★★★</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="col">クエスト名</th>
+      <th class="col">タイム</th>
+      <th class="col">武器種/スタイル</th>
+      <th class="col">武器名</th>
+      <th class="col">Action</th>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>千刃は刀よりも鋭く</td>
+      <td>05'44"33</td>
+      <td>ストライカー/双剣</td>
+      <td>真明マアトガナフ</td>
+      <td>
+        <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
+        <%= link_to "その他のタイム", mhxx_quest_path(1), class: 'btn btn-outline-primary' %>
+        <%= link_to("#", {method: "post"}) do %>
+          <i class="fa-solid fa-star"></i>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>イビルジョーの狩猟</td>
+      <td>49'59"99</td>
+      <td>ギルド/大剣</td>
+      <td>ふるふるふるみなんと</td>
+      <td>
+        <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
+        <%= link_to "その他のタイム", mhxx_quest_path(1), class: 'btn btn-outline-primary' %>
+        <%= link_to("#", {method: "post"}) do %>
+          <i class="fa-solid fa-star"></i>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>地獄の業火で焼かれてもらうぜ</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>
+        <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
+        <%= link_to "その他のタイム", mhxx_quest_path(1), class: 'btn btn-outline-primary' %>
+        <%= link_to("#", {method: "post"}) do %>
+          <i class="fa-solid fa-star"></i>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>

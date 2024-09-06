@@ -1,6 +1,6 @@
 ja:
   enums:
-    mhxx/m_quest:
+    mhxx:
       quest_division:
         gathering: "採取"
         hunt: "狩猟"

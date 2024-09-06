@@ -1,0 +1,5 @@
+weapon_type_division:
+  blademaster: 110 # 剣士
+  gunner: 120      # ガンナー
+  prowler: 130     # ニャンター
+  common: 200      # 共通

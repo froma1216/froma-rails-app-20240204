@@ -1,0 +1,12 @@
+element:
+  none: 100       # 無
+  fire: 210       # 火
+  water: 220      # 水
+  thunder: 230    # 雷
+  ice: 240        # 氷
+  dragon: 250     # 龍
+  poison: 260     # 毒
+  paralysis: 270  # 痺
+  sleep: 280      # 眠
+  blast: 290      # 爆
+  other: 999      # その他

@@ -1,0 +1,8 @@
+ja:
+  enums:
+    mhxx:
+      weapon_type_division:
+        blademaster: "剣士"
+        gunner: "ガンナー"
+        prowler: "ニャンター"
+        common: "共通"

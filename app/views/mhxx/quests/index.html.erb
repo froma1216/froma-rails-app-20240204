@@ -1,4 +1,4 @@
-<h1>【MHXX】最速クリアタイム一覧</h1>
+<h1>【MHXX】クエスト一覧</h1>
 <div class="d-flex">
   <label for="lap" class="form-label">ランク</label>
   <%# ランク選択 %>
@@ -26,6 +26,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th class="col">No</th>
       <th class="col">クエスト名</th>
       <th class="col">タイム</th>
       <th class="col">武器種/スタイル</th>
@@ -34,45 +35,23 @@
     </th>
   </thead>
   <tbody>
-    <tr>
-      <td>千刃は刀よりも鋭く</td>
-      <td>05'44"33</td>
-      <td>ストライカー/双剣</td>
-      <td>真明マアトガナフ</td>
-      <td>
-        <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
-        <%= link_to "その他のタイム", mhxx_quest_path(1), class: 'btn btn-outline-primary' %>
-        <%= link_to("#", {method: "post"}) do %>
-          <i class="fa-solid fa-star"></i>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>イビルジョーの狩猟</td>
-      <td>49'59"99</td>
-      <td>ギルド/大剣</td>
-      <td>ふるふるふるみなんと</td>
-      <td>
-        <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
-        <%= link_to "その他のタイム", mhxx_quest_path(1), class: 'btn btn-outline-primary' %>
-        <%= link_to("#", {method: "post"}) do %>
-          <i class="fa-solid fa-star"></i>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>地獄の業火で焼かれてもらうぜ</td>
-      <td></td>
-      <td>-</td>
-      <td>-</td>
-      <td>
-        <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
-        <%= link_to "その他のタイム", mhxx_quest_path(1), class: 'btn btn-outline-primary' %>
-        <%= link_to("#", {method: "post"}) do %>
-          <i class="fa-solid fa-star"></i>
-        <% end %>
-      </td>
-    </tr>
+    <% @quests.each_with_index do |quest, index| %>
+      <% best_time = @times[quest.id]&.min_by(&:clear_time) %>
+      <tr>
+        <th scope="row" class="align-middle"><%= index + 1 %></th>
+        <td class="align-middle"><%= quest.name %></td>
+        <td class="align-middle"><%= best_time.present? ? formatted_clear_time(best_time.clear_time) : "-" %></td>
+        <td class="align-middle"><%= best_time.present? ? "#{best_time.m_hunting_style.name}/#{best_time.m_weapon.m_weapon_type.name}" : "-"  %></td>
+        <td class="align-middle"><%= best_time.present? ? best_time.m_weapon.name : "-" %></td>
+        <td class="align-middle">
+          <%= link_to "タイム一覧", mhxx_quest_path(quest.id), class: 'btn btn-outline-primary' %>
+          <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
+          <%= link_to("#", {method: "post"}) do %>
+            <i class="fa-solid fa-star"></i>
+          <% end %>
+        </td>
+        </tr>
+    <% end %>
   </tbody>
 </table>
 <h1>リレーション確認</h1>

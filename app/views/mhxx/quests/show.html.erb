@@ -1,9 +1,11 @@
-<h1>【MHXX】千刃は刀よりも鋭く</h1>
-<div>セルレギオス</div>
-<div>セルレギオス1頭の狩猟</div>
-<div>平均クリアタイム：22'33"44</div>
+<h1>【MHXX】<%= @quest.name %></h1>
+<%# TODO: 1~5をループで取得 %>
+<div><%= @quest.m_monster1.name %></div>
+<%# TODO: ヘルパーでクエスト文言を分岐 %>
+<div><%= "#{@quest.m_monster1.name}1頭の#{I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}")}" %></div>
+<div>平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></div>
 <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
-<%= link_to "最速クリアタイム一覧へ戻る", mhxx_times_path %>
+<%= link_to "クエスト一覧へ戻る", mhxx_quests_path %>
 
 <table class="table table-striped">
   <thead>
@@ -18,62 +20,44 @@
     </th>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>05'44"33</td>
-      <td>
-        ストライカー<br>
-        双剣
-      </td>
-      <td>
-        <ul>
-          <li>絶対回避</li>
-          <li>獣宿し【餓狼】Ⅲ</li>
-          <li>ラセンザンⅢ SP</li>
-        </ul>
-      </td>
-      <td>真明マアトガナフ</td>
-      <td>
-        <ul>
-          <li>キノコ大好き</li>
-          <li>スタミナ奪取</li>
-          <li>ハニーハンター</li>
-          <li>暑さ無効</li>
-          <li>超会心</li>
-        </ul>
-      </td>
-      <td>
-        <div>
-          <%= link_to "編集", edit_mhxx_time_path, class: 'btn btn-outline-primary' %>
-          <%= link_to "削除", "#", class: 'btn btn-outline-danger' %>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>11'11"11</td>
-      <td>
-        ギルド<br>
-        太刀
-      </td>
-      <td>
-        <ul>
-          <li>絶対回避</li>
-          <li>完全調合</li>
-        </ul>
-      </td>
-      <td>ヨロイザキカッター</td>
-      <td>
-        <ul>
-          <li>ねばねば剣法</li>
-        </ul>
-      </td>
-      <td>
-        <div>
-          <%= link_to "編集", edit_mhxx_time_path, class: 'btn btn-outline-primary' %>
-          <%= link_to "削除", "#", class: 'btn btn-outline-danger' %>
-        </div>
-      </td>
-    </tr>
+    <% @quest_times.each_with_index do |quest_time, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= formatted_clear_time(quest_time.clear_time) %></td>
+        <td>
+          <%= quest_time.present? ? sanitize("#{quest_time.m_hunting_style.name}<br>#{quest_time.m_weapon.m_weapon_type.name}") : "-"  %>
+        </td>
+        <td>
+          <ul>
+            <% if quest_time.m_hunter_art1_id.present? %>
+              <li><%= quest_time.m_hunter_art1.name %></li>
+            <% end %>
+            <% if quest_time.m_hunter_art2_id.present? %>
+              <li><%= quest_time.m_hunter_art2.name %></li>
+            <% end %>
+            <% if quest_time.m_hunter_art3_id.present? %>
+              <li><%= quest_time.m_hunter_art3.name %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td><%= quest_time.present? ? quest_time.m_weapon.name : "-"  %></td>
+        <%# TODO: テーブル作ってから実装 %>
+        <td>
+          <ul>
+            <li>キノコ大好き</li>
+            <li>スタミナ奪取</li>
+            <li>ハニーハンター</li>
+            <li>暑さ無効</li>
+            <li>超会心</li>
+          </ul>
+        </td>
+        <td>
+          <div>
+            <%= link_to "編集", edit_mhxx_time_path, class: 'btn btn-outline-primary' %>
+            <%= link_to "削除", "#", class: 'btn btn-outline-danger' %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

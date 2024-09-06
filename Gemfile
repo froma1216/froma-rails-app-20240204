@@ -98,3 +98,7 @@ gem "administrate"
 # NOTE: https://www.gp-standard.com/rails-04-b5kaminari/
 gem "bootstrap5-kaminari-views"
 gem "kaminari"
+
+# Enum管理
+# NOTE: https://spirits.appirits.com/doruby/8917/
+gem "enumerize"

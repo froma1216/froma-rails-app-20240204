@@ -1,0 +1,12 @@
+ja:
+  enums:
+    mhxx/m_quest:
+      quest_division:
+        gathering: "採取"
+        hunt: "狩猟"
+        slay: "討伐"
+        capture: "捕獲"
+        multi_monster: "大連続"
+        special_permit: "特殊許可"
+        prowler: "ニャンター"
+        special: "特殊"

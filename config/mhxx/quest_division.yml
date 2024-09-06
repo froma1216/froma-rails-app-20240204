@@ -1,0 +1,9 @@
+quest_division:
+  gathering: 110      # 採取
+  hunt: 120           # 狩猟
+  slay: 130           # 討伐
+  capture: 140        # 捕獲
+  multi_monster: 150  # 大連続
+  special_permit: 160 # 特殊許可
+  prowler: 170        # ニャンター
+  special: 180        # 特殊

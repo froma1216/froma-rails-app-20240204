@@ -81,3 +81,6 @@
 <p>クエストマスタ→クエストランクマスタ：<%= Mhxx::MQuest.first.m_sub_quest_rank.name %></p>
 <p>武器マスタ→武器種マスタ：<%= Mhxx::MWeapon.first.m_weapon_type.name %></p>
 <p>狩技マスタ→武器種マスタ：<%= Mhxx::MHunterArt.first.m_weapon_type.name %></p>
+<h1>Enum確認</h1>
+<p>クエストマスタ：<%= Mhxx::MQuest.first.quest_division %> </p>
+<p>クエストマスタ：<%= I18n.t("enums.mhxx/m_quest.quest_division.#{Mhxx::MQuest.first.quest_division}") %> </p>

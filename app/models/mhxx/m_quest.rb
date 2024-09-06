@@ -8,4 +8,7 @@ class Mhxx::MQuest < ApplicationRecord
 
   has_many :bookmark_quest
   has_many :time
+
+  extend Enumerize
+  enumerize :quest_division, in: Enums.quest_division
 end

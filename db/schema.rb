@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_16_071015) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_06_024501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,108 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_16_071015) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conference_id"], name: "index_days_on_conference_id"
+  end
+
+  create_table "mhxx_bookmark_quests", comment: "お気に入りクエスト", force: :cascade do |t|
+    t.bigint "m_quest_id", null: false, comment: "クエストID"
+    t.integer "display_order", comment: "表示順"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_quest_id"], name: "index_mhxx_bookmark_quests_on_m_quest_id"
+  end
+
+  create_table "mhxx_m_hunter_arts", comment: "狩技マスタ", force: :cascade do |t|
+    t.string "name", comment: "狩技名"
+    t.bigint "m_weapon_type_id", null: false, comment: "武器種ID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_weapon_type_id"], name: "index_mhxx_m_hunter_arts_on_m_weapon_type_id"
+  end
+
+  create_table "mhxx_m_hunting_styles", comment: "狩猟スタイルマスタ", force: :cascade do |t|
+    t.string "name", comment: "スタイル名"
+    t.integer "hunter_arts_quantity", comment: "狩技数"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mhxx_m_monsters", comment: "モンスターマスタ", force: :cascade do |t|
+    t.string "name", comment: "モンスター名"
+    t.string "name_romanized", comment: "ローマ字"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mhxx_m_quest_ranks", comment: "クエストランクマスタ", force: :cascade do |t|
+    t.string "name", comment: "クエストランク名"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mhxx_m_quests", comment: "クエストマスタ", force: :cascade do |t|
+    t.string "name", limit: 100, comment: "クエスト名"
+    t.bigint "m_sub_quest_rank_id", null: false, comment: "サブクエストランクID"
+    t.integer "quest_division", comment: "クエスト区分"
+    t.bigint "m_monster1_id", null: false, comment: "モンスターID1"
+    t.bigint "m_monster2_id", comment: "モンスターID2"
+    t.bigint "m_monster3_id", comment: "モンスターID3"
+    t.bigint "m_monster4_id", comment: "モンスターID4"
+    t.bigint "m_monster5_id", comment: "モンスターID5"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_monster1_id"], name: "index_mhxx_m_quests_on_m_monster1_id"
+    t.index ["m_monster2_id"], name: "index_mhxx_m_quests_on_m_monster2_id"
+    t.index ["m_monster3_id"], name: "index_mhxx_m_quests_on_m_monster3_id"
+    t.index ["m_monster4_id"], name: "index_mhxx_m_quests_on_m_monster4_id"
+    t.index ["m_monster5_id"], name: "index_mhxx_m_quests_on_m_monster5_id"
+    t.index ["m_sub_quest_rank_id"], name: "index_mhxx_m_quests_on_m_sub_quest_rank_id"
+  end
+
+  create_table "mhxx_m_sub_quest_ranks", comment: "サブクエストランクマスタ", force: :cascade do |t|
+    t.bigint "m_quest_rank_id", null: false, comment: "クエストランクID"
+    t.string "name", comment: "サブクエストランク名"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_quest_rank_id"], name: "index_mhxx_m_sub_quest_ranks_on_m_quest_rank_id"
+  end
+
+  create_table "mhxx_m_weapon_types", comment: "武器種マスタ", force: :cascade do |t|
+    t.integer "weapon_type_division", comment: "武器種区分"
+    t.string "name", comment: "武器種名"
+    t.string "name_romanized", comment: "ローマ字"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mhxx_m_weapons", comment: "武器マスタ", force: :cascade do |t|
+    t.bigint "m_weapon_type_id", null: false, comment: "武器種ID"
+    t.string "name", comment: "武器名"
+    t.integer "attack", comment: "攻撃力"
+    t.integer "element", comment: "属性"
+    t.string "rarity", comment: "レア度"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_weapon_type_id"], name: "index_mhxx_m_weapons_on_m_weapon_type_id"
+  end
+
+  create_table "mhxx_times", comment: "タイム", force: :cascade do |t|
+    t.bigint "m_quest_id", null: false, comment: "クエストID"
+    t.string "clear_time", null: false, comment: "クリアタイム"
+    t.bigint "m_hunting_style_id", comment: "狩猟スタイルID"
+    t.bigint "m_hunter_art1_id", comment: "狩技ID1"
+    t.bigint "m_hunter_art2_id", comment: "狩技ID2"
+    t.bigint "m_hunter_art3_id", comment: "狩技ID3"
+    t.bigint "m_weapon_id", comment: "武器ID"
+    t.boolean "display_flag", default: true, comment: "表示フラグ"
+    t.string "skills", comment: "スキル"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_hunter_art1_id"], name: "index_mhxx_times_on_m_hunter_art1_id"
+    t.index ["m_hunter_art2_id"], name: "index_mhxx_times_on_m_hunter_art2_id"
+    t.index ["m_hunter_art3_id"], name: "index_mhxx_times_on_m_hunter_art3_id"
+    t.index ["m_hunting_style_id"], name: "index_mhxx_times_on_m_hunting_style_id"
+    t.index ["m_quest_id"], name: "index_mhxx_times_on_m_quest_id"
+    t.index ["m_weapon_id"], name: "index_mhxx_times_on_m_weapon_id"
   end
 
   create_table "participations", force: :cascade do |t|
@@ -223,6 +325,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_16_071015) do
   end
 
   add_foreign_key "days", "conferences"
+  add_foreign_key "mhxx_bookmark_quests", "mhxx_m_quests", column: "m_quest_id"
+  add_foreign_key "mhxx_m_hunter_arts", "mhxx_m_weapon_types", column: "m_weapon_type_id"
+  add_foreign_key "mhxx_m_quests", "mhxx_m_monsters", column: "m_monster1_id"
+  add_foreign_key "mhxx_m_quests", "mhxx_m_monsters", column: "m_monster2_id"
+  add_foreign_key "mhxx_m_quests", "mhxx_m_monsters", column: "m_monster3_id"
+  add_foreign_key "mhxx_m_quests", "mhxx_m_monsters", column: "m_monster4_id"
+  add_foreign_key "mhxx_m_quests", "mhxx_m_monsters", column: "m_monster5_id"
+  add_foreign_key "mhxx_m_quests", "mhxx_m_sub_quest_ranks", column: "m_sub_quest_rank_id"
+  add_foreign_key "mhxx_m_sub_quest_ranks", "mhxx_m_quest_ranks", column: "m_quest_rank_id"
+  add_foreign_key "mhxx_m_weapons", "mhxx_m_weapon_types", column: "m_weapon_type_id"
+  add_foreign_key "mhxx_times", "mhxx_m_hunter_arts", column: "m_hunter_art1_id"
+  add_foreign_key "mhxx_times", "mhxx_m_hunter_arts", column: "m_hunter_art2_id"
+  add_foreign_key "mhxx_times", "mhxx_m_hunter_arts", column: "m_hunter_art3_id"
+  add_foreign_key "mhxx_times", "mhxx_m_hunting_styles", column: "m_hunting_style_id"
+  add_foreign_key "mhxx_times", "mhxx_m_quests", column: "m_quest_id"
+  add_foreign_key "mhxx_times", "mhxx_m_weapons", column: "m_weapon_id"
   add_foreign_key "participations", "conferences"
   add_foreign_key "participations", "slots"
   add_foreign_key "participations", "users"

@@ -62,7 +62,7 @@
     </tr>
     <tr>
       <td>地獄の業火で焼かれてもらうぜ</td>
-      <td>-</td>
+      <td></td>
       <td>-</td>
       <td>-</td>
       <td>
@@ -75,3 +75,9 @@
     </tr>
   </tbody>
 </table>
+<h1>リレーション確認</h1>
+<p>サブクエストランクマスタ→クエストランクマスタ：<%= Mhxx::MSubQuestRank.first.m_quest_rank.name %></p>
+<p>クエストマスタ→モンスターマスタ：<%= Mhxx::MQuest.first.m_monster1.name %></p>
+<p>クエストマスタ→クエストランクマスタ：<%= Mhxx::MQuest.first.m_sub_quest_rank.name %></p>
+<p>武器マスタ→武器種マスタ：<%= Mhxx::MWeapon.first.m_weapon_type.name %></p>
+<p>狩技マスタ→武器種マスタ：<%= Mhxx::MHunterArt.first.m_weapon_type.name %></p>

@@ -5,6 +5,10 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "@fortawesome/fontawesome-free"
+// カスタムjs
+import "./pawapuro";
+import "./pokemon_emerald_factory_participant";
+import "./mhxx";
 
 // containerの高さを設定
 document.addEventListener("turbo:load", function () {

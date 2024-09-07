@@ -6,7 +6,6 @@
 <div>平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></div>
 <%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
 <%= link_to "クエスト一覧へ戻る", mhxx_quests_path %>
-
 <table class="table table-striped">
   <thead>
     <tr>

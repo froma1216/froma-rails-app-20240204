@@ -1,6 +1,11 @@
 class Mhxx::QuestsController < ApplicationController
   def index
-    @quests = Mhxx::MQuest.all.order(:id)
+    @quests = if params[:rank_number].present? && params[:rank_number].to_i != 0
+                Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number]).order(:id)
+              else
+                Mhxx::MQuest.all.order(:id)
+              end
+
     @times = Mhxx::Time.where(m_quest_id: @quests.pluck(:id)).group_by(&:m_quest_id)
   end
 
@@ -9,6 +14,12 @@ class Mhxx::QuestsController < ApplicationController
     @quest_times = Mhxx::Time.where(m_quest_id: @quest.id).order(:clear_time)
     # 平均クリアタイム
     @average_clear_time_in_seconds = average_clear_time_in_seconds(@quest_times)
+  end
+
+  # セレクトボックスに標示するサブクエストランクを取得
+  def sub_quest_ranks
+    @sub_quest_ranks = Mhxx::MSubQuestRank.where(m_quest_rank_id: params[:m_quest_rank_id])
+    render json: @sub_quest_ranks
   end
 
   private
@@ -26,11 +37,10 @@ class Mhxx::QuestsController < ApplicationController
   # 受け取った値を合計秒数に変換する
   def clear_time_to_total_seconds(clear_time)
     time_value = clear_time.to_i
-    minutes = time_value / 10000
-    seconds = (time_value % 10000) / 100
+    minutes = time_value / 10_000
+    seconds = (time_value % 10_000) / 100
     fraction = time_value % 100
 
-    total_seconds = (minutes * 60) + seconds + (fraction / 100.0)
-    total_seconds
+    (minutes * 60) + seconds + (fraction / 100.0)
   end
 end

@@ -53,7 +53,11 @@ Rails.application.routes.draw do
 
   # 【MHXX】クエスト別クリアタイムメモ
   namespace :mhxx do
-    resources :quests, only: [:index, :show]
+    resources :quests, only: [:index, :show] do
+      collection do
+        get "sub_quest_ranks", to: "quests#sub_quest_ranks"
+      end
+    end
     resources :times, except: [:index, :show]
   end
 end

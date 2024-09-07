@@ -76,8 +76,8 @@ $player-name-border-o-color: #37A238;
 $player-name-background-o-color: #68F177;
 
 // MHXX
-$mhxx_rank_label_text: #9EC6FF;
-$mhxx_rank_label_color: #002C9B;
+// $mhxx_rank_label_text: #9EC6FF;
+// $mhxx_rank_label_color: #002C9B;
 
 // HACK: リファクタリング
 .froma-body--background {
@@ -708,12 +708,12 @@ $mhxx_rank_label_color: #002C9B;
   @include pawa-checkbox($sub-border-dark-color, $sub-border-dark-color);
 }
 
-.mhxx_rank_label {
-  @extend .p-2;
-  color: $mhxx_rank_label_text;
-  background-color: $mhxx_rank_label_color;
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.4);
-}
+// .mhxx_rank_label {
+//   @extend .p-2;
+//   color: $mhxx_rank_label_text;
+//   background-color: $mhxx_rank_label_color;
+//   box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.4);
+// }
 
 // TODO: ブレイクポイントの見直し
 // PCサイズ

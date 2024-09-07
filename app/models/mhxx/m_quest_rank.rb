@@ -3,6 +3,6 @@ class Mhxx::MQuestRank < ApplicationRecord
 
   # ラジオボタンの要素
   def self.with_all_option
-    [["すべて", "all"]] + Mhxx::MQuestRank.all.map { |rank| [rank.name, rank.id] }
+    [["すべて", 0]] + Mhxx::MQuestRank.all.map { |rank| [rank.name, rank.id] }
   end
 end

@@ -1,17 +1,21 @@
 class Mhxx::QuestsController < ApplicationController
   def index
-    @quests = if params[:rank_number].present? && params[:rank_number].to_i != 0
-                Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number]).order(:id)
-              else
-                Mhxx::MQuest.all.order(:id)
-              end
+    if current_user.present?
+      @quests = if params[:rank_number].present? && params[:rank_number].to_i != 0
+        Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number]).order(:id)
+      else
+        Mhxx::MQuest.all.order(:id)
+      end
 
-    @times = Mhxx::Time.where(m_quest_id: @quests.pluck(:id)).group_by(&:m_quest_id)
+      @times = Mhxx::Time.where(m_quest_id: @quests.pluck(:id), user: current_user).group_by(&:m_quest_id)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def show
     @quest = Mhxx::MQuest.find_by(id: params[:id])
-    @quest_times = Mhxx::Time.where(m_quest_id: @quest.id).order(:clear_time)
+    @quest_times = Mhxx::Time.where(m_quest_id: @quest.id, user: current_user).order(:clear_time)
     # 平均クリアタイム
     @average_clear_time_in_seconds = average_clear_time_in_seconds(@quest_times)
   end

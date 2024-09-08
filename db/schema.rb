@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_08_064450) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_070852) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,9 +39,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_064450) do
     t.integer "display_order", comment: "表示順"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "created_by", comment: "作成者"
-    t.integer "updated_by", comment: "更新者"
+    t.bigint "user_id", comment: "ユーザーID"
     t.index ["m_quest_id"], name: "index_mhxx_bookmark_quests_on_m_quest_id"
+    t.index ["user_id"], name: "index_mhxx_bookmark_quests_on_user_id"
   end
 
   create_table "mhxx_m_hunter_arts", comment: "狩技マスタ", force: :cascade do |t|
@@ -130,14 +130,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_064450) do
     t.string "skills", comment: "スキル"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "created_by", comment: "作成者"
-    t.integer "updated_by", comment: "更新者"
+    t.bigint "user_id", comment: "ユーザーID"
     t.index ["m_hunter_art1_id"], name: "index_mhxx_times_on_m_hunter_art1_id"
     t.index ["m_hunter_art2_id"], name: "index_mhxx_times_on_m_hunter_art2_id"
     t.index ["m_hunter_art3_id"], name: "index_mhxx_times_on_m_hunter_art3_id"
     t.index ["m_hunting_style_id"], name: "index_mhxx_times_on_m_hunting_style_id"
     t.index ["m_quest_id"], name: "index_mhxx_times_on_m_quest_id"
     t.index ["m_weapon_id"], name: "index_mhxx_times_on_m_weapon_id"
+    t.index ["user_id"], name: "index_mhxx_times_on_user_id"
   end
 
   create_table "participations", force: :cascade do |t|
@@ -330,6 +330,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_064450) do
 
   add_foreign_key "days", "conferences"
   add_foreign_key "mhxx_bookmark_quests", "mhxx_m_quests", column: "m_quest_id"
+  add_foreign_key "mhxx_bookmark_quests", "users"
   add_foreign_key "mhxx_m_hunter_arts", "mhxx_m_weapon_types", column: "m_weapon_type_id"
   add_foreign_key "mhxx_m_quests", "mhxx_m_monsters", column: "m_monster1_id"
   add_foreign_key "mhxx_m_quests", "mhxx_m_monsters", column: "m_monster2_id"
@@ -345,6 +346,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_064450) do
   add_foreign_key "mhxx_times", "mhxx_m_hunting_styles", column: "m_hunting_style_id"
   add_foreign_key "mhxx_times", "mhxx_m_quests", column: "m_quest_id"
   add_foreign_key "mhxx_times", "mhxx_m_weapons", column: "m_weapon_id"
+  add_foreign_key "mhxx_times", "users"
   add_foreign_key "participations", "conferences"
   add_foreign_key "participations", "slots"
   add_foreign_key "participations", "users"

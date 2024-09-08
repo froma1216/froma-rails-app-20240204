@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_06_024501) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_064450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_024501) do
     t.integer "display_order", comment: "表示順"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "created_by", comment: "作成者"
+    t.integer "updated_by", comment: "更新者"
     t.index ["m_quest_id"], name: "index_mhxx_bookmark_quests_on_m_quest_id"
   end
 
@@ -128,6 +130,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_024501) do
     t.string "skills", comment: "スキル"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "created_by", comment: "作成者"
+    t.integer "updated_by", comment: "更新者"
     t.index ["m_hunter_art1_id"], name: "index_mhxx_times_on_m_hunter_art1_id"
     t.index ["m_hunter_art2_id"], name: "index_mhxx_times_on_m_hunter_art2_id"
     t.index ["m_hunter_art3_id"], name: "index_mhxx_times_on_m_hunter_art3_id"

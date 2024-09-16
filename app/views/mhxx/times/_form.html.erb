@@ -1,100 +1,59 @@
-<form>
+<% if @time.errors.any? %>
+  <div class="alert alert-danger">
+    <h2>以下のエラーが発生しました:</h2>
+    <ul>
+      <% @time.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @time, url: @time.new_record? ? mhxx_times_path(quest_id: @quest.id) : mhxx_time_path(@time), local: true, data: { turbo: false } do |f| %>
   <%# クエスト %>
   <h2>クエスト</h2>
-  <div class="d-flex">
-    <label for="lap" class="form-label">ランク</label>
-    <div class="ms-3">
-      <div class="form-check form-check-inline">
-        <%= radio_button_tag 'rank_radio', 'g_rank', params[:rank_radio] == 'g_rank' || params[:rank_radio].nil?, class: 'form-check-input', id: 'g-rank' %>
-        <%= label_tag 'rank_radio_g_rank', 'G級', class: 'form-check-label', for: 'g-rank' %>
-      </div>
-      <div class="form-check form-check-inline">
-        <%= radio_button_tag 'rank_radio', 'event', params[:rank_radio] == 'event', class: 'form-check-input', id: 'event' %>
-        <%= label_tag 'rank_radio_event', 'イベントクエスト', class: 'form-check-label', for: 'event' %>
-      </div>
-      <div class="form-check form-check-inline">
-        <%= radio_button_tag 'rank_radio', 'special_permit', params[:rank_radio] == 'special_permit', class: 'form-check-input', id: 'special-permit' %>
-        <%= label_tag 'rank_radio_special_permit', '特殊許可クエスト', class: 'form-check-label', for: 'special-permit' %>
-      </div>
-    </div>
-  </div>
-  <%= select_tag :rank_number, options_for_select([["G★1", 110], ["G★2", 120], ["G★3", 130], ["G★4", 140]], params[:rank_number].to_i), class: "form-select form-select-sm mb-3", id: "rank_number" %>
-  <div class="form-floating mb-3">
-    <select class="form-select" id="questSelect">
-      <option value="1">ああああ</option>
-      <option value="2">いいいい</option>
-      <option value="3">うううう</option>
-      <option value="4">ええええ</option>
-    </select>
-    <label for="questSelect">クエスト名</label>
-  </div>
+  <%= text_field_tag :m_quest_name, @quest.name, class: "form-control mb-3", disabled: true %>
+  <%= f.hidden_field :m_quest_id, value: @quest.id %>
   <%# クリアタイム %>
   <h2>クリアタイム</h2>
   <div class="form-floating mb-3">
-    <input type="text" class="form-control" id="cleartime" placeholder="name@example.com">
-    <label for="cleartime">クリアタイム</label>
+    <%= f.text_field :clear_time, class: "form-control", id: "cleartime", placeholder: "050130" %>
+    <%= f.label :clear_time, "クリアタイム", for: "cleartime" %>
     <div class="form-text">区切りなしでの6桁で入力してください。 例）5'01"30 → 050130</div>
   </div>
   <%# 武器 %>
   <h2>武器</h2>
-  <%= select_tag :rank_number, options_for_select([["大剣", 1], ["双剣", 2], ["太刀", 3]], params[:rank_number].to_i), class: "form-select form-select-sm mb-3", id: "rank_number" %>
+  <%# 武器種セレクト %>
+  <%= select_tag :m_weapon_type, grouped_options_for_select(@grouped_weapon_types, params[:m_weapon_type].to_i), class: "form-select form-select-sm mb-3", id: "m_weapon_type" %>
+  <%# 属性リンクボタン %>
   <div class="mb-3">
-    <%= link_to "全表示", "#", class: "btn btn-primary" %>
-    <%= link_to "無", "#", class: "btn btn-primary" %>
-    <%= link_to "火", "#", class: "btn btn-primary" %>
-    <%= link_to "水", "#", class: "btn btn-primary" %>
-    <%= link_to "雷", "#", class: "btn btn-primary" %>
-    <%= link_to "氷", "#", class: "btn btn-primary" %>
-    <%= link_to "龍", "#", class: "btn btn-primary" %>
-    <%= link_to "毒", "#", class: "btn btn-primary" %>
-    <%= link_to "痺", "#", class: "btn btn-primary" %>
-    <%= link_to "眠", "#", class: "btn btn-primary" %>
-    <%= link_to "爆", "#", class: "btn btn-primary" %>
+    <%= link_to "全表示", "#", class: "btn btn-primary", data: { element: '' } %>
+    <% Enums.element.except(:other).each do |key, value| %>
+      <%= link_to t("enums.mhxx.element.#{key}"), "#", class: "btn btn-primary", data: { element: value } %>
+    <% end %>
   </div>
+  <%# TODO: ソート %>
   <div class="form-floating mb-3">
-    <select class="form-select" id="weaponSelect">
-      <option value="1">断骨</option>
-      <option value="2">ネブタ</option>
-      <option value="3">ジャラーシュナイダー</option>
-    </select>
+    <%= f.select :m_weapon_id, options_from_collection_for_select(Mhxx::MWeapon.all, :id, :name), { prompt: "--武器を選択--" }, { class: "form-select", id: "weaponSelect" } %>
     <label for="weaponSelect">武器名</label>
   </div>
   <%# スタイル・狩技 %>
   <h2>スタイル・狩技</h2>
   <div class="form-floating mb-3">
-    <select class="form-select" id="styleSelect">
-      <option value="1">ギルド</option>
-      <option value="2">ストライカー</option>
-      <option value="3">ブシドー</option>
-    </select>
+    <%= f.select :m_hunting_style_id, options_from_collection_for_select( Mhxx::MHuntingStyle.all, :id, :name), { prompt: "--スタイルを選択--" }, { class: "form-select", id: "styleSelect" } %>
     <label for="styleSelect">スタイル</label>
   </div>
   <div class="d-flex mb-3">
     <div class="form-floating">
-      <select class="form-select" id="artSelect1">
-        <option selected>狩技１を選択してください</option>
-        <option value="1">絶対回避</option>
-        <option value="2">獣宿し【餓狼】Ⅲ</option>
-        <option value="3">ヒールゲイン</option>
-      </select>
+      <%= f.select :m_hunter_art1_id, grouped_options_for_select(@grouped_hunter_arts), { prompt: "--狩技を選択--" }, { class: "form-select", id: "artSelect1" } %>
       <label for="artSelect1">狩技１</label>
     </div>
     <div class="form-floating">
-      <select class="form-select" id="artSelect1">
-        <option selected>狩技２を選択してください</option>
-        <option value="1">絶対回避</option>
-        <option value="2">獣宿し【餓狼】Ⅲ</option>
-        <option value="3">ヒールゲイン</option>
-      </select>
+      <%= f.select :m_hunter_art2_id, grouped_options_for_select(@grouped_hunter_arts), { prompt: "--狩技を選択--" }, { class: "form-select", id: "artSelect2" } %>
       <label for="artSelect1">狩技２</label>
     </div>
     <div class="form-floating">
-      <select class="form-select" id="artSelect1" disabled>
-        <option selected>狩技３を選択してください</option>
-        <option value="1">絶対回避</option>
-        <option value="2">獣宿し【餓狼】Ⅲ</option>
-        <option value="3">ヒールゲイン</option>
-      </select>
+      <%= f.select :m_hunter_art3_id, grouped_options_for_select(@grouped_hunter_arts), { prompt: "--狩技を選択--" }, { class: "form-select", id: "artSelect3" } %>
       <label for="artSelect1">狩技３</label>
     </div>
   </div>
@@ -103,6 +62,6 @@
   <p>チェックボックス！スキルシミュを参考に！</p>
   
   <%# ボタンエリア %>
-  <%= link_to '登録する', mhxx_times_path, class: "btn btn-primary" %>
-  <%= link_to 'キャンセル', mhxx_times_path, class: 'btn btn-secondary' %>
-</form>
+  <%= f.submit '登録する', class: "btn btn-primary" %>
+  <%= link_to 'キャンセル', mhxx_quests_path, class: 'btn btn-secondary' %>
+<% end %>

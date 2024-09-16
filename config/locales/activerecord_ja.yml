@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      'mhxx/time': "タイム"
+    attributes:
+      'mhxx/time':
+        m_quest: "クエスト"
+        m_hunting_style: "狩猟スタイル"
+        m_weapon: "武器"
+        clear_time: "クリアタイム"
+        m_hunter_art1: "狩技1"
+        m_hunter_art2: "狩技2"
+        m_hunter_art3: "狩技3"

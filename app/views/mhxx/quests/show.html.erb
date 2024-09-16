@@ -4,7 +4,7 @@
 <%# TODO: ヘルパーでクエスト文言を分岐 %>
 <div><%= "#{@quest.m_monster1.name}1頭の#{I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}")}" %></div>
 <div>平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></div>
-<%= link_to "タイム登録", new_mhxx_time_path, class: 'btn btn-outline-primary' %>
+<%= link_to "タイム登録", new_mhxx_time_path(quest_id: @quest.id), class: 'btn btn-outline-primary' %>
 <%= link_to "クエスト一覧へ戻る", mhxx_quests_path %>
 <table class="table table-striped">
   <thead>
@@ -24,22 +24,21 @@
         <td><%= index + 1 %></td>
         <td><%= formatted_clear_time(quest_time.clear_time) %></td>
         <td>
-          <%= quest_time.present? ? sanitize("#{quest_time.m_hunting_style.name}<br>#{quest_time.m_weapon.m_weapon_type.name}") : "-"  %>
+          <%= sanitize("#{quest_time.m_hunting_style&.name || "-"}/<br>#{quest_time.m_weapon&.m_weapon_type&.name || "-"}")  %>
         </td>
         <td>
+          <% hunter_arts = [quest_time.m_hunter_art1, quest_time.m_hunter_art2, quest_time.m_hunter_art3].compact %>
           <ul>
-            <% if quest_time.m_hunter_art1_id.present? %>
-              <li><%= quest_time.m_hunter_art1.name %></li>
-            <% end %>
-            <% if quest_time.m_hunter_art2_id.present? %>
-              <li><%= quest_time.m_hunter_art2.name %></li>
-            <% end %>
-            <% if quest_time.m_hunter_art3_id.present? %>
-              <li><%= quest_time.m_hunter_art3.name %></li>
+            <% if hunter_arts.present? %>
+              <% hunter_arts.each do |hunter_art| %>
+                <li><%= hunter_art.name %></li>
+              <% end %>
+            <% else %>
+              -
             <% end %>
           </ul>
         </td>
-        <td><%= quest_time.present? ? quest_time.m_weapon.name : "-"  %></td>
+        <td><%= quest_time.m_weapon.present? ? quest_time.m_weapon.name : "-"  %></td>
         <%# TODO: テーブル作ってから実装 %>
         <td>
           <ul>

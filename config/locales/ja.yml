@@ -99,8 +99,9 @@ ja:
   errors:
     format: ! "%{attribute}%{message}"
     messages:
+      required: を入力してください。
       accepted: を受諾してください。
-      blank: を入力してください
+      blank: を入力してください。
       present: は入力しないでください。
       confirmation: と%{attribute}の入力が一致しません。
       empty: を入力してください。

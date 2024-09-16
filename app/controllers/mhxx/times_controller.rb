@@ -68,6 +68,8 @@ class Mhxx::TimesController < ApplicationController
   end
 
   def destroy
+    @time.destroy
+    redirect_to mhxx_quests_path, notice: "タイムが削除されました"
   end
 
   private

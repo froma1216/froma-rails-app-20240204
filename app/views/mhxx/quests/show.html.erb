@@ -52,7 +52,7 @@
         <td>
           <div>
             <%= link_to "編集", edit_mhxx_time_path, class: 'btn btn-outline-primary' %>
-            <%= link_to "削除", "#", class: 'btn btn-outline-danger' %>
+            <%= link_to "削除", mhxx_time_path(quest_time), data: { turbo_method: :delete, turbo_confirm: "タイムを削除してよろしいですか？" }, class: "btn btn-outline-danger" %>
           </div>
         </td>
       </tr>

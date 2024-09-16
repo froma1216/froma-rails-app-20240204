@@ -1,3 +1,4 @@
+<%# 全体ではなく、フォームの一つ一つにエラーを出す %>
 <% if @time.errors.any? %>
   <div class="alert alert-danger">
     <h2>以下のエラーが発生しました:</h2>
@@ -9,7 +10,7 @@
   </div>
 <% end %>
 
-<%= form_with model: @time, url: @time.new_record? ? mhxx_times_path(quest_id: @quest.id) : mhxx_time_path(@time), local: true, data: { turbo: false } do |f| %>
+<%= form_with model: @time, local: true, data: { turbo: false } do |f| %>
   <%# クエスト %>
   <h2>クエスト</h2>
   <%= text_field_tag :m_quest_name, @quest.name, class: "form-control mb-3", disabled: true %>
@@ -24,7 +25,7 @@
   <%# 武器 %>
   <h2>武器</h2>
   <%# 武器種セレクト %>
-  <%= select_tag :m_weapon_type, grouped_options_for_select(@grouped_weapon_types, params[:m_weapon_type].to_i), class: "form-select form-select-sm mb-3", id: "m_weapon_type" %>
+  <%= select_tag :m_weapon_type, grouped_options_for_select(@grouped_weapon_types, params[:m_weapon_type].to_i), prompt: "--武器種を選択--", class: "form-select form-select-sm mb-3", id: "m_weapon_type" %>
   <%# 属性リンクボタン %>
   <div class="mb-3">
     <%= link_to "全表示", "#", class: "btn btn-primary", data: { element: '' } %>
@@ -34,26 +35,26 @@
   </div>
   <%# TODO: ソート %>
   <div class="form-floating mb-3">
-    <%= f.select :m_weapon_id, options_from_collection_for_select(Mhxx::MWeapon.all, :id, :name), { prompt: "--武器を選択--" }, { class: "form-select", id: "weaponSelect" } %>
+    <%= f.select :m_weapon_id, options_from_collection_for_select(Mhxx::MWeapon.all, :id, :name, @time.m_weapon_id), { prompt: "--武器を選択--" }, { class: "form-select", id: "weaponSelect" } %>
     <label for="weaponSelect">武器名</label>
   </div>
   <%# スタイル・狩技 %>
   <h2>スタイル・狩技</h2>
   <div class="form-floating mb-3">
-    <%= f.select :m_hunting_style_id, options_from_collection_for_select( Mhxx::MHuntingStyle.all, :id, :name), { prompt: "--スタイルを選択--" }, { class: "form-select", id: "styleSelect" } %>
+    <%= f.select :m_hunting_style_id, options_from_collection_for_select( Mhxx::MHuntingStyle.all, :id, :name, @time.m_hunting_style_id), { prompt: "--スタイルを選択--" }, { class: "form-select", id: "styleSelect" } %>
     <label for="styleSelect">スタイル</label>
   </div>
   <div class="d-flex mb-3">
     <div class="form-floating">
-      <%= f.select :m_hunter_art1_id, grouped_options_for_select(@grouped_hunter_arts), { prompt: "--狩技を選択--" }, { class: "form-select", id: "artSelect1" } %>
+      <%= f.select :m_hunter_art1_id, grouped_options_for_select(@grouped_hunter_arts, @time.m_hunter_art1_id), {}, { class: "form-select", id: "artSelect1" } %>
       <label for="artSelect1">狩技１</label>
     </div>
     <div class="form-floating">
-      <%= f.select :m_hunter_art2_id, grouped_options_for_select(@grouped_hunter_arts), { prompt: "--狩技を選択--" }, { class: "form-select", id: "artSelect2" } %>
+      <%= f.select :m_hunter_art2_id, grouped_options_for_select(@grouped_hunter_arts, @time.m_hunter_art2_id), {}, { class: "form-select", id: "artSelect2" } %>
       <label for="artSelect1">狩技２</label>
     </div>
     <div class="form-floating">
-      <%= f.select :m_hunter_art3_id, grouped_options_for_select(@grouped_hunter_arts), { prompt: "--狩技を選択--" }, { class: "form-select", id: "artSelect3" } %>
+      <%= f.select :m_hunter_art3_id, grouped_options_for_select(@grouped_hunter_arts, @time.m_hunter_art3_id), {}, { class: "form-select", id: "artSelect3" } %>
       <label for="artSelect1">狩技３</label>
     </div>
   </div>

@@ -1,0 +1,11 @@
+ja:
+  enums:
+    mhxx:
+      skill_division:
+        combat_survival: "戦闘(生存)"
+        items: "アイテム"
+        quests: "クエスト"
+        special_attack_resistances: "特殊攻撃耐性"
+        parameter_changes: "パラメータ変化"
+        combat_offense: "戦闘(攻撃)"
+        compound: "複合スキル"

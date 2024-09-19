@@ -1,0 +1,8 @@
+skill_division:
+  combat_survival: 110            # 戦闘(生存)
+  items: 120                      # アイテム
+  quests: 130                     # クエスト
+  special_attack_resistances: 140 # 特殊攻撃耐性
+  parameter_changes: 150          # パラメータ変化
+  combat_offense: 160             # 戦闘(攻撃)
+  compound: 170                   # 複合スキル

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_08_070852) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_17_000727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,6 +91,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_070852) do
     t.index ["m_sub_quest_rank_id"], name: "index_mhxx_m_quests_on_m_sub_quest_rank_id"
   end
 
+  create_table "mhxx_m_skills", comment: "スキルマスタ", force: :cascade do |t|
+    t.string "name", comment: "スキル名"
+    t.string "skill_division", comment: "スキル区分"
+    t.string "weapon_type_division", comment: "武器種区分"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "mhxx_m_sub_quest_ranks", comment: "サブクエストランクマスタ", force: :cascade do |t|
     t.bigint "m_quest_rank_id", null: false, comment: "クエストランクID"
     t.string "name", comment: "サブクエストランク名"
@@ -116,6 +124,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_070852) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["m_weapon_type_id"], name: "index_mhxx_m_weapons_on_m_weapon_type_id"
+  end
+
+  create_table "mhxx_time_skills", comment: "タイムスキル関連", force: :cascade do |t|
+    t.bigint "time_id", null: false, comment: "タイムID"
+    t.bigint "m_skill_id", null: false, comment: "スキルID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_skill_id"], name: "index_mhxx_time_skills_on_m_skill_id"
+    t.index ["time_id"], name: "index_mhxx_time_skills_on_time_id"
   end
 
   create_table "mhxx_times", comment: "タイム", force: :cascade do |t|
@@ -340,6 +357,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_070852) do
   add_foreign_key "mhxx_m_quests", "mhxx_m_sub_quest_ranks", column: "m_sub_quest_rank_id"
   add_foreign_key "mhxx_m_sub_quest_ranks", "mhxx_m_quest_ranks", column: "m_quest_rank_id"
   add_foreign_key "mhxx_m_weapons", "mhxx_m_weapon_types", column: "m_weapon_type_id"
+  add_foreign_key "mhxx_time_skills", "mhxx_m_skills", column: "m_skill_id"
+  add_foreign_key "mhxx_time_skills", "mhxx_times", column: "time_id"
   add_foreign_key "mhxx_times", "mhxx_m_hunter_arts", column: "m_hunter_art1_id"
   add_foreign_key "mhxx_times", "mhxx_m_hunter_arts", column: "m_hunter_art2_id"
   add_foreign_key "mhxx_times", "mhxx_m_hunter_arts", column: "m_hunter_art3_id"

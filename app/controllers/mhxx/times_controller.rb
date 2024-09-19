@@ -22,6 +22,10 @@ class Mhxx::TimesController < ApplicationController
     @time.user = current_user
 
     if @time.save
+      # スキルの関連付けを処理
+      if params[:mhxx_time][:skill_ids].present?
+        @time.m_skills = Mhxx::MSkill.where(id: params[:mhxx_time][:skill_ids])
+      end
       redirect_to mhxx_quests_path, notice: "タイムが作成されました"
     else
       render :new
@@ -33,6 +37,13 @@ class Mhxx::TimesController < ApplicationController
     @quest = @time.m_quest # 更新対象のタイムからクエストを取得
 
     if @time.update(time_params)
+      # スキルの関連付けを処理
+      if params[:mhxx_time][:skill_ids].present?
+        @time.m_skills = Mhxx::MSkill.where(id: params[:mhxx_time][:skill_ids]).reject(&:blank?)
+      else
+        # スキルが選択されなかった場合は関連をクリアする
+        @time.m_skills.clear
+      end
       redirect_to mhxx_quests_path, notice: "タイムが更新されました"
     else
       render :edit

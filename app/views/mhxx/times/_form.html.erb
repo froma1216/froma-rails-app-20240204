@@ -60,7 +60,16 @@
   </div>
   <%# スキル %>
   <h2>スキル</h2>
-  <p>チェックボックス！スキルシミュを参考に！</p>
+  <div class="container">
+    <div class="row">
+      <% Mhxx::MSkill.all.each do |skill| %>
+        <div class="col-2 form-check">
+          <%= check_box_tag 'mhxx_time[skill_ids][]', skill.id, @time.m_skills.include?(skill), id: "time_skill_#{skill.id}", class: "form-check-input" %>
+          <%= label_tag "time_skill_#{skill.id}", skill.name, class: "form-check-label" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
   
   <%# ボタンエリア %>
   <%= f.submit '登録する', class: "btn btn-primary" %>

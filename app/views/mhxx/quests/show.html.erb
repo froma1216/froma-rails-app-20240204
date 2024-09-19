@@ -42,11 +42,13 @@
         <%# TODO: テーブル作ってから実装 %>
         <td>
           <ul>
-            <li>キノコ大好き</li>
-            <li>スタミナ奪取</li>
-            <li>ハニーハンター</li>
-            <li>暑さ無効</li>
-            <li>超会心</li>
+            <% if quest_time.m_skills.any? %>
+              <% quest_time.m_skills.each do |skill| %>
+                <li><%= skill.name %></li>
+              <% end %>
+            <% else %>
+              -
+            <% end %>
           </ul>
         </td>
         <td>

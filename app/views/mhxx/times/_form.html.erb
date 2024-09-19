@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-<%= form_with model: @time, local: true, data: { turbo: false } do |f| %>
+<%= form_with model: @time, local: true do |f| %>
   <%# クエスト %>
   <h2>クエスト</h2>
   <%= text_field_tag :m_quest_name, @quest.name, class: "form-control mb-3", disabled: true %>
@@ -34,10 +34,21 @@
     <% end %>
   </div>
   <%# TODO: ソート %>
-  <div class="form-floating mb-3">
+  <div class="form-floating mb-3" id="weaponSelectWrap">
+    <%# 初期セレクト %>
     <%= f.select :m_weapon_id, options_from_collection_for_select(Mhxx::MWeapon.all, :id, :name, @time.m_weapon_id), { prompt: "--武器を選択--" }, { class: "form-select", id: "weaponSelect" } %>
     <label for="weaponSelect">武器名</label>
+
+    <%# 武器種セレクト選択時に生成する際に使用するテンプレート %>
+    <% Mhxx::MWeaponType.all.each do |weapon_type| %>
+      <template id="m-weapon-of-weapon-type<%= weapon_type.id %>">
+        <%#= f.collection_select :sub_category, category.sub_categories, :id, :name, include_blank: "サブカテゴリーを選択してください" %>
+        <%= f.collection_select :m_weapon_id, weapon_type.m_weapon, :id, :name, { prompt: "--武器を選択--" }, { class: "form-select", id: "weaponSelect" } %>
+        <%#= f.collection_select :m_weapon_id, weapon_type.m_weapon, :id, :name, include_blank: "--武器を選択--", class: "form-select", id: "weaponSelect-#{weapon_type.id}" %>
+      </template>
+    <% end %>
   </div>
+  
   <%# スタイル・狩技 %>
   <h2>スタイル・狩技</h2>
   <div class="form-floating mb-3">

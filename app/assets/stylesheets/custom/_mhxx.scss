@@ -1,0 +1,77 @@
+// 属性
+$fire: #dc143c;
+$water: #1e90ff;
+$thunder: #ffd700;
+$ice: #87cefa;
+$dragon: #483d8b;
+$poison: #8a2be2;
+$paralysis: #daa520;
+$sleep: #6495ed;
+$blast: #8b0000;
+$none: #808080;
+
+// 属性ボタン
+@mixin mhxx-btn__element($background-color, $text-color) {
+  background-color: $background-color;
+  color: $text-color;
+  border: 1px solid $background-color;
+
+  &:hover {
+    background-color: darken($background-color, 10%);
+    border-color: darken($background-color, 10%);
+    color: $text-color;
+  }
+
+  &:focus {
+    background-color: darken($background-color, 10%);
+    color: $text-color;
+    box-shadow: 0 0 0 0.25rem rgba($background-color, 0.5);
+  }
+
+  // クリック後にactiveクラスが追加されたときのスタイル
+  &.active {
+    background-color: darken($background-color, 15%); // クリック時にさらに濃く
+    border-color: darken($background-color, 15%);
+    color: $text-color;
+  }
+}
+
+.mhxx-btn__element--fire {
+  @include mhxx-btn__element($fire, white);
+}
+
+.mhxx-btn__element--water {
+  @include mhxx-btn__element($water, white);
+}
+
+.mhxx-btn__element--thunder {
+  @include mhxx-btn__element($thunder, white);
+}
+
+.mhxx-btn__element--ice {
+  @include mhxx-btn__element($ice, white);
+}
+
+.mhxx-btn__element--dragon {
+  @include mhxx-btn__element($dragon, white);
+}
+
+.mhxx-btn__element--poison {
+  @include mhxx-btn__element($poison, white);
+}
+
+.mhxx-btn__element--paralysis {
+  @include mhxx-btn__element($paralysis, white);
+}
+
+.mhxx-btn__element--sleep {
+  @include mhxx-btn__element($sleep, white);
+}
+
+.mhxx-btn__element--blast {
+  @include mhxx-btn__element($blast, white);
+}
+
+.mhxx-btn__element--none {
+  @include mhxx-btn__element($none, white);
+}

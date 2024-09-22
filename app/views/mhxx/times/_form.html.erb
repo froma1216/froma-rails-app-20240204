@@ -32,9 +32,10 @@
     id: "m_weapon_type" %>
   <%# 属性ボタン %>
   <div class="mb-3">
-    <%= button_tag "全表示", type: "button", class: "btn btn-primary me-2 active", data: { element: '' } %>
-    <% Enums.element.except("other").each do |key, value| %>
-      <%= button_tag t("enums.mhxx.element.#{key}"), type: "button", class: "btn btn-primary", data: { element: value } %>
+    <%= button_tag "全表示", type: "button", class: "btn btn-secondary me-2 active", data: { element: '' } %>
+    <% Enums.element.except("other").each_with_index do |(key, value), index| %>
+      <%# 氷と龍の間に余白を入れるため、indexで判断します %>
+      <%= button_tag t("enums.mhxx.element.#{key}"), type: "button", class: "btn #{"me-2" if key == "dragon"} mhxx-btn__element--#{key}", data: { element: value } %>
     <% end %>
   </div>
   <%# 武器セレクト %>

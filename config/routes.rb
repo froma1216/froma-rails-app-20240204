@@ -58,6 +58,10 @@ Rails.application.routes.draw do
         get "sub_quest_ranks", to: "quests#sub_quest_ranks"
       end
     end
-    resources :times, except: [:index, :show]
+    resources :times, except: [:index, :show] do
+      collection do
+        get "filtered_weapons", to: "times#filtered_weapons"
+      end
+    end
   end
 end

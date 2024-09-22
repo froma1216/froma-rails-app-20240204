@@ -56,6 +56,21 @@ class Mhxx::TimesController < ApplicationController
     redirect_to mhxx_quests_path, notice: "タイムが削除されました"
   end
 
+  # 武器種セレクト・属性ボタンから、武器セレクトの内容を作るAPI
+  def filtered_weapons
+    # パラメータから武器種と属性を取得
+    weapon_type = params[:m_weapon_type]
+    element = params[:element]
+
+    # 武器を絞り込むクエリ
+    filtered_weapons = Mhxx::MWeapon.all.order(:m_weapon_type_id, attack: :desc)
+    filtered_weapons = filtered_weapons.where(m_weapon_type_id: weapon_type) if weapon_type.present?
+    filtered_weapons = filtered_weapons.where(element: element) if element.present?
+
+    # 結果をJSONで返す
+    render json: filtered_weapons.select(:id, :name)
+  end
+
   private
 
   # タイム作成時のパラメータ

@@ -25,28 +25,22 @@
   <%# 武器 %>
   <h2>武器</h2>
   <%# 武器種セレクト %>
-  <%= select_tag :m_weapon_type, grouped_options_for_select(@grouped_weapon_types, params[:m_weapon_type].to_i), prompt: "--武器種を選択--", class: "form-select form-select-sm mb-3", id: "m_weapon_type" %>
-  <%# 属性リンクボタン %>
+  <%= select_tag :m_weapon_type,
+    grouped_options_for_select(@grouped_weapon_types, selected: @time.m_weapon&.m_weapon_type_id.presence),
+    prompt: "--武器種を選択--",
+    class: "form-select form-select-sm mb-3",
+    id: "m_weapon_type" %>
+  <%# 属性ボタン %>
   <div class="mb-3">
-    <%= link_to "全表示", "#", class: "btn btn-primary", data: { element: '' } %>
-    <% Enums.element.except(:other).each do |key, value| %>
-      <%= link_to t("enums.mhxx.element.#{key}"), "#", class: "btn btn-primary", data: { element: value } %>
+    <%= button_tag "全表示", type: "button", class: "btn btn-primary me-2 active", data: { element: '' } %>
+    <% Enums.element.except("other").each do |key, value| %>
+      <%= button_tag t("enums.mhxx.element.#{key}"), type: "button", class: "btn btn-primary", data: { element: value } %>
     <% end %>
   </div>
-  <%# TODO: ソート %>
+  <%# 武器セレクト %>
   <div class="form-floating mb-3" id="weaponSelectWrap">
-    <%# 初期セレクト %>
     <%= f.select :m_weapon_id, options_from_collection_for_select(Mhxx::MWeapon.all, :id, :name, @time.m_weapon_id), { prompt: "--武器を選択--" }, { class: "form-select", id: "weaponSelect" } %>
     <label for="weaponSelect">武器名</label>
-
-    <%# 武器種セレクト選択時に生成する際に使用するテンプレート %>
-    <% Mhxx::MWeaponType.all.each do |weapon_type| %>
-      <template id="m-weapon-of-weapon-type<%= weapon_type.id %>">
-        <%#= f.collection_select :sub_category, category.sub_categories, :id, :name, include_blank: "サブカテゴリーを選択してください" %>
-        <%= f.collection_select :m_weapon_id, weapon_type.m_weapon, :id, :name, { prompt: "--武器を選択--" }, { class: "form-select", id: "weaponSelect" } %>
-        <%#= f.collection_select :m_weapon_id, weapon_type.m_weapon, :id, :name, include_blank: "--武器を選択--", class: "form-select", id: "weaponSelect-#{weapon_type.id}" %>
-      </template>
-    <% end %>
   </div>
   
   <%# スタイル・狩技 %>

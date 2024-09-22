@@ -75,28 +75,61 @@ document.addEventListener("turbo:load", () => {
 
 // 新規作成・編集フォーム：武器セレクトを動的に生成
 document.addEventListener("turbo:load", () => {
-  // 最初に作成されたセレクトボックスをクローンして保存
-  const originalWeaponSelect = $('#weaponSelect').clone();
+  // セレクトボックスの初期化関数
+  const clearAndAddDefaultOption = (selectBox) => {
+    selectBox.innerHTML = ""; // 既存の選択肢をクリア
 
-  // セレクトボックスを更新する処理
-  const updateWeaponSelect = (categoryVal) => {
-    $('#weaponSelect').remove(); // 既存のセレクトボックスを削除
-    if (categoryVal) {
-      const selectedTemplate = $(`#m-weapon-of-weapon-type${categoryVal}`);
-      $('#weaponSelectWrap').prepend(selectedTemplate.html()); // 新しいセレクトボックスを追加
-    } else {
-      $('#weaponSelectWrap').prepend(originalWeaponSelect.clone()); // デフォルトのセレクトボックスを追加
-    }
+    // "--武器を選択--" オプションを最初に追加
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "--武器を選択--";
+    defaultOption.disabled = true;
+    defaultOption.selected = true; // デフォルトで選択状態にする
+    selectBox.appendChild(defaultOption);
   };
 
-  // ページ読み込み時の初期化処理
-  const initialCategoryVal = $('#m_weapon_type').val();
-  updateWeaponSelect(initialCategoryVal); // 初期表示のセレクトボックスを設定
+  // 武器セレクトの更新処理
+  const updateWeaponSelect = (weaponType, element) => {
+    if (!weaponType && !element) return; // 初期表示の際に既存セレクトを保持
+
+    fetch(`/mhxx/times/filtered_weapons?m_weapon_type=${weaponType}&element=${element}`)
+      .then(response => response.json())
+      .then(data => {
+        const weaponSelectBox = document.getElementById("weaponSelect");
+        clearAndAddDefaultOption(weaponSelectBox); // セレクトボックスをクリアし、デフォルトオプションを追加
+
+        // フィルタ結果をセレクトボックスに反映
+        data.forEach(weapon => {
+          const option = document.createElement("option");
+          option.value = weapon.id;
+          option.textContent = weapon.name;
+          weaponSelectBox.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error fetching filtered weapons:', error));
+  };
+
+  // フィルタ変更時の処理
+  const weaponTypeSelect = document.getElementById("m_weapon_type");
+  const elementButtons = document.querySelectorAll("button[data-element]");
+
+  const applyFilters = () => {
+    const selectedWeaponType = weaponTypeSelect.value;
+    const activeElementButton = document.querySelector("button[data-element].active");
+    const selectedElement = activeElementButton ? activeElementButton.dataset.element : "";
+    
+    updateWeaponSelect(selectedWeaponType, selectedElement);
+  };
 
   // 武器種セレクトが変更された時の処理
-  // TODO: 選択を初期化する
-  $('#m_weapon_type').on('change', function() {
-    const categoryVal = $(this).val();
-    updateWeaponSelect(categoryVal); // セレクトボックスを更新
+  weaponTypeSelect.addEventListener("change", applyFilters);
+
+  // 属性ボタンがクリックされた時の処理
+  elementButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      elementButtons.forEach(btn => btn.classList.remove("active")); // 全てのボタンからactiveを削除
+      this.classList.add("active"); // クリックされたボタンにactiveを追加
+      applyFilters(); // フィルタを適用
+    });
   });
 });

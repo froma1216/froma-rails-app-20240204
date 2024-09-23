@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     resources :times, except: [:index, :show] do
       collection do
         get "filtered_weapons", to: "times#filtered_weapons"
+        get "filtered_hunter_arts", to: "times#filtered_hunter_arts"
       end
     end
   end

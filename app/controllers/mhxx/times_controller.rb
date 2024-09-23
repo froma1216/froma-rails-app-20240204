@@ -28,7 +28,7 @@ class Mhxx::TimesController < ApplicationController
       end
       redirect_to mhxx_quests_path, notice: "タイムが作成されました"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -46,7 +46,7 @@ class Mhxx::TimesController < ApplicationController
       end
       redirect_to mhxx_quests_path, notice: "タイムが更新されました"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -59,16 +59,41 @@ class Mhxx::TimesController < ApplicationController
   # 武器種セレクト・属性ボタンから、武器セレクトの内容を作るAPI
   def filtered_weapons
     # パラメータから武器種と属性を取得
-    weapon_type = params[:m_weapon_type]
+    weapon_type_id = params[:m_weapon_type]
     element = params[:element]
 
     # 武器を絞り込むクエリ
     filtered_weapons = Mhxx::MWeapon.all.order(:m_weapon_type_id, attack: :desc)
-    filtered_weapons = filtered_weapons.where(m_weapon_type_id: weapon_type) if weapon_type.present?
+    filtered_weapons = filtered_weapons.where(m_weapon_type_id: weapon_type_id) if weapon_type_id.present?
     filtered_weapons = filtered_weapons.where(element: element) if element.present?
 
     # 結果をJSONで返す
     render json: filtered_weapons.select(:id, :name)
+  end
+
+  # 武器種セレクトから、武器セレクトの内容を作るAPI
+  def filtered_hunter_arts
+    weapon_type_id = params[:m_weapon_type]
+    
+    if weapon_type_id.present?
+      weapon_type = Mhxx::MWeaponType.find(weapon_type_id)
+      
+      # 各武器種に対応する狩技を取得
+      weapon_type_hunter_arts = weapon_type.m_hunter_art.map { |art| { id: art.id, name: art.name } }
+      
+      # 共通狩技を取得
+      common_hunter_arts = Mhxx::MWeaponType.find_by(weapon_type_division: 200).m_hunter_art.map { |art| { id: art.id, name: art.name } }
+  
+      # グループ化したデータを返す
+      grouped_hunter_arts = {
+        "共通" => common_hunter_arts,
+        weapon_type.name => weapon_type_hunter_arts
+      }
+  
+      render json: grouped_hunter_arts
+    else
+      render json: { error: 'Weapon type not provided' }, status: :unprocessable_entity
+    end
   end
 
   private

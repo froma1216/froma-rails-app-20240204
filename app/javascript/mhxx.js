@@ -134,6 +134,7 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
+// HACK: 武器種を変更したとき、共通の狩技もリセットされるようにする。
 // 新規作成・編集フォーム：武器種セレクトによって、狩技セレクトを動的に生成。
 document.addEventListener("turbo:load", () => {
   const weaponTypeSelect = document.getElementById("m_weapon_type");
@@ -142,44 +143,32 @@ document.addEventListener("turbo:load", () => {
     document.getElementById("artSelect2"),
     document.getElementById("artSelect3")
   ];
+  const hiddenFields = [
+    document.getElementById("hiddenArtSelect1"),
+    document.getElementById("hiddenArtSelect2"),
+    document.getElementById("hiddenArtSelect3")
+  ];
+  const styleSelect = document.getElementById("styleSelect");
+  const huntingStyles = JSON.parse(styleSelect.dataset.huntingStyles);
 
-  // すでに選択されている狩技のIDを取得
-  const selectedArts = artSelects.map(select => select.value);
-
-  // 武器種が変更された際に狩技のセレクトボックスを更新する関数
+  // 狩技セレクトボックスを更新する関数
   function updateHunterArtsSelect(weaponTypeId, selectedArts = []) {
     fetch(`/mhxx/times/filtered_hunter_arts?m_weapon_type=${weaponTypeId}`)
       .then(response => response.json())
       .then(data => {
         artSelects.forEach((select, index) => {
           const currentSelectedArt = selectedArts[index]; // 現在の選択状態を保持
+          select.innerHTML = ''; // オプションをクリア
+          select.appendChild(createDefaultOption()); // "なし" を追加
 
-          select.innerHTML = ''; // 現在のオプションをクリア
-
-          // なしのオプションを追加
-          const defaultOption = document.createElement('option');
-          defaultOption.value = '';
-          defaultOption.text = 'なし';
-          select.appendChild(defaultOption);
-
-          // グループ化されたデータを反映（共通→武器種の順）
+          // グループ化されたオプションを追加
           Object.keys(data).forEach(group => {
             const optgroup = document.createElement('optgroup');
             optgroup.label = group;
-
             data[group].forEach(art => {
-              const option = document.createElement('option');
-              option.value = art.id;
-              option.text = art.name;
-
-              // 初期表示時に選択済みの値を選択状態にする
-              if (String(art.id) === String(currentSelectedArt)) {
-                option.selected = true;
-              }
-
+              const option = createOption(art, currentSelectedArt);
               optgroup.appendChild(option);
             });
-
             select.appendChild(optgroup);
           });
         });
@@ -187,76 +176,73 @@ document.addEventListener("turbo:load", () => {
       .catch(error => console.error('Error fetching hunter arts:', error));
   }
 
-  // ページ読み込み時に武器種が既に選択されている場合に狩技を更新
-  const selectedWeaponTypeId = weaponTypeSelect.value;
-  if (selectedWeaponTypeId) {
-    updateHunterArtsSelect(selectedWeaponTypeId, selectedArts); // 初期表示時に現在の選択状態を渡す
+  // デフォルトの "なし" オプションを作成する関数
+  function createDefaultOption() {
+    const option = document.createElement('option');
+    option.value = '';
+    option.text = 'なし';
+    return option;
   }
 
-  // 武器種が変更された際に狩技を更新
-  weaponTypeSelect.addEventListener('change', (event) => {
-    const selectedWeaponTypeId = event.target.value;
-    if (selectedWeaponTypeId) {
-      updateHunterArtsSelect(selectedWeaponTypeId, selectedArts);
-    } else {
-      // 武器種が未選択の場合、狩技をリセット
-      artSelects.forEach(select => {
-        select.innerHTML = '';
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.text = 'なし';
-        select.appendChild(defaultOption);
-      });
+  // オプションを作成する関数
+  function createOption(art, currentSelectedArt) {
+    const option = document.createElement('option');
+    option.value = art.id;
+    option.text = art.name;
+    if (String(art.id) === String(currentSelectedArt)) {
+      option.selected = true;
     }
-  });
-});
+    return option;
+  }
 
-// 新規作成・編集フォーム：狩猟スタイルセレクトによって、狩技セレクトをdisableにする。
-document.addEventListener("turbo:load", () => {
-  const artSelects = [
-    document.getElementById("artSelect1"),
-    document.getElementById("artSelect2"),
-    document.getElementById("artSelect3")
-  ];
-
-  const hiddenFields = [
-    document.getElementById("hiddenArtSelect1"),
-    document.getElementById("hiddenArtSelect2"),
-    document.getElementById("hiddenArtSelect3")
-  ];
-
+  // 狩猟スタイルに応じて狩技セレクトを無効化/有効化する関数
   function updateHunterArtsSelects(quantity) {
     artSelects.forEach((select, index) => {
       const artIndex = index + 1;
       select.disabled = quantity < artIndex;
-
       if (select.disabled) {
-        select.value = "";  // 無効化されたときにセレクトの値をリセット
-        hiddenFields[index].value = "";  // 隠しフィールドにもリセットを反映
+        select.value = "";  // 無効化されたときにリセット
+        hiddenFields[index].value = "";  // 隠しフィールドにも反映
       } else {
-        hiddenFields[index].value = select.value;  // 隠しフィールドに選択状態を反映
+        hiddenFields[index].value = select.value;  // 有効化されている場合は隠しフィールドに値を反映
       }
     });
   }
 
-  // セレクトボックスが変更されたときにhidden_fieldの値を更新
+  // 狩技セレクトの変更時に隠しフィールドを更新
   artSelects.forEach((select, index) => {
     select.addEventListener('change', () => {
-      hiddenFields[index].value = select.value;  // セレクトボックスの変更に応じてhidden_fieldを更新
+      hiddenFields[index].value = select.value;
     });
   });
 
-  // スタイルセレクト変更時の処理（スタイルの数量に応じて）
-  const styleSelect = document.getElementById("styleSelect");
-  const huntingStyles = JSON.parse(styleSelect.dataset.huntingStyles);
+  // 武器種セレクトの変更時に狩技セレクトを更新
+  weaponTypeSelect.addEventListener('change', (event) => {
+    const selectedWeaponTypeId = event.target.value;
+    const selectedArts = artSelects.map(select => select.value); // 現在の選択状態を保持
+    if (selectedWeaponTypeId) {
+      updateHunterArtsSelect(selectedWeaponTypeId, selectedArts);
+    } else {
+      artSelects.forEach(select => {
+        select.innerHTML = '';
+        select.appendChild(createDefaultOption()); // "なし" を追加
+      });
+    }
+  });
 
+  // 狩猟スタイルセレクトの変更時に狩技セレクトを無効化/有効化
   styleSelect.addEventListener("change", (event) => {
     const selectedStyleId = event.target.value;
     const quantity = huntingStyles[selectedStyleId] || 0;
     updateHunterArtsSelects(quantity);
   });
 
-  // 初期状態での処理
+  // ページ読み込み時の初期化
+  const selectedWeaponTypeId = weaponTypeSelect.value;
+  const selectedArts = artSelects.map(select => select.value); // 初期選択状態を保持
+  if (selectedWeaponTypeId) {
+    updateHunterArtsSelect(selectedWeaponTypeId, selectedArts);
+  }
   const initialStyleId = styleSelect.value;
   updateHunterArtsSelects(huntingStyles[initialStyleId]);
 });

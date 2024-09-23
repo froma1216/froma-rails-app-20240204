@@ -134,7 +134,6 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
-// HACK: 武器種を変更したとき、共通の狩技もリセットされるようにする。
 // 新規作成・編集フォーム：武器種セレクトによって、狩技セレクトを動的に生成。
 document.addEventListener("turbo:load", () => {
   const weaponTypeSelect = document.getElementById("m_weapon_type");
@@ -218,17 +217,20 @@ document.addEventListener("turbo:load", () => {
 
   // 武器種セレクトの変更時に狩技セレクトを更新
   weaponTypeSelect.addEventListener('change', (event) => {
-    const selectedWeaponTypeId = event.target.value;
-    const selectedArts = artSelects.map(select => select.value); // 現在の選択状態を保持
-    if (selectedWeaponTypeId) {
-      updateHunterArtsSelect(selectedWeaponTypeId, selectedArts);
-    } else {
-      artSelects.forEach(select => {
-        select.innerHTML = '';
-        select.appendChild(createDefaultOption()); // "なし" を追加
-      });
-    }
+  const selectedWeaponTypeId = event.target.value;
+
+  // すべての狩技セレクトとhidden fieldをリセット
+  artSelects.forEach((select, index) => {
+    select.innerHTML = '';
+    select.appendChild(createDefaultOption()); // "なし" を追加
+    select.value = ""; // 選択をリセット
+    hiddenFields[index].value = ""; // hidden fieldの値もリセット
   });
+
+  if (selectedWeaponTypeId) {
+    updateHunterArtsSelect(selectedWeaponTypeId, []); // リセットされた状態で更新
+  }
+});
 
   // 狩猟スタイルセレクトの変更時に狩技セレクトを無効化/有効化
   styleSelect.addEventListener("change", (event) => {

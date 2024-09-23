@@ -1,4 +1,4 @@
-<%# 全体ではなく、フォームの一つ一つにエラーを出す %>
+<%# TODO: 全体ではなく、フォームの一つ一つにエラーを出す %>
 <% if @time.errors.any? %>
   <div class="alert alert-danger">
     <h2>以下のエラーが発生しました:</h2>
@@ -29,40 +29,57 @@
     grouped_options_for_select(@grouped_weapon_types, selected: @time.m_weapon&.m_weapon_type_id.presence),
     prompt: "--武器種を選択--",
     class: "form-select form-select-sm mb-3",
-    id: "m_weapon_type" %>
+    id: "m_weapon_type"
+  %>
   <%# 属性ボタン %>
   <div class="mb-3">
     <%= button_tag "全表示", type: "button", class: "btn btn-secondary me-2 active", data: { element: '' } %>
     <% Enums.element.except("other").each_with_index do |(key, value), index| %>
       <%# 氷と龍の間に余白を入れるため、indexで判断します %>
-      <%= button_tag t("enums.mhxx.element.#{key}"), type: "button", class: "btn #{"me-2" if key == "dragon"} mhxx-btn__element--#{key}", data: { element: value } %>
+      <%= button_tag t("enums.mhxx.element.#{key}"),
+        type: "button",
+        class: "btn #{"me-2" if key == "dragon"} mhxx-btn__element--#{key}",
+        data: { element: value }
+      %>
     <% end %>
   </div>
   <%# 武器セレクト %>
   <div class="form-floating mb-3" id="weaponSelectWrap">
-    <%= f.select :m_weapon_id, options_from_collection_for_select(Mhxx::MWeapon.all, :id, :name, @time.m_weapon_id), { prompt: "--武器を選択--" }, { class: "form-select", id: "weaponSelect" } %>
-    <label for="weaponSelect">武器名</label>
+    <%= f.select :m_weapon_id,
+      options_from_collection_for_select(Mhxx::MWeapon.all, :id, :name, @time.m_weapon_id),
+      { prompt: "--武器を選択--" },
+      { class: "form-select", id: "weaponSelect" }
+    %>
+    <%= f.label :m_weapon_id, "武器名", for: "weaponSelect" %>
   </div>
-  
   <%# スタイル・狩技 %>
   <h2>スタイル・狩技</h2>
+  <%# スタイルセレクト %>
   <div class="form-floating mb-3">
-    <%= f.select :m_hunting_style_id, options_from_collection_for_select( Mhxx::MHuntingStyle.all, :id, :name, @time.m_hunting_style_id), { prompt: "--スタイルを選択--" }, { class: "form-select", id: "styleSelect" } %>
-    <label for="styleSelect">スタイル</label>
+    <%# data部分…スタイルごとのhunter_arts_quantityをJSON形式で格納（jsで使用） %>
+    <%= f.select :m_hunting_style_id,
+      options_from_collection_for_select( Mhxx::MHuntingStyle.all, :id, :name, @time.m_hunting_style_id),
+      { prompt: "--スタイルを選択--" },
+      { class: "form-select", id: "styleSelect",
+        data: {
+          hunting_styles: Mhxx::MHuntingStyle.all.map { |style| [style.id, style.hunter_arts_quantity] }.to_h.to_json
+        }
+      }
+    %>
+    <%= f.label :m_hunting_style_id, "スタイル", for: "styleSelect" %>
   </div>
+  <%# 狩技セレクト %>
   <div class="d-flex mb-3">
-    <div class="form-floating">
-      <%= f.select :m_hunter_art1_id, grouped_options_for_select(@grouped_hunter_arts, @time.m_hunter_art1_id), {}, { class: "form-select", id: "artSelect1" } %>
-      <label for="artSelect1">狩技１</label>
-    </div>
-    <div class="form-floating">
-      <%= f.select :m_hunter_art2_id, grouped_options_for_select(@grouped_hunter_arts, @time.m_hunter_art2_id), {}, { class: "form-select", id: "artSelect2" } %>
-      <label for="artSelect1">狩技２</label>
-    </div>
-    <div class="form-floating">
-      <%= f.select :m_hunter_art3_id, grouped_options_for_select(@grouped_hunter_arts, @time.m_hunter_art3_id), {}, { class: "form-select", id: "artSelect3" } %>
-      <label for="artSelect1">狩技３</label>
-    </div>
+    <% (1..3).each do |i| %>
+      <div class="form-floating">
+        <%= f.select "m_hunter_art#{i}_id".to_sym,
+          grouped_options_for_select(@grouped_hunter_arts, @time.send("m_hunter_art#{i}_id")),
+          {},
+          { class: "form-select", id: "artSelect#{i}" }
+        %>
+        <%= f.label "m_hunter_art#{i}_id".to_sym, "狩技#{i}", for: "artSelect#{i}" %>
+      </div>
+    <% end %>
   </div>
   <%# スキル %>
   <h2>スキル</h2>
@@ -75,7 +92,12 @@
       <% skills.each do |skill| %>
         <div class="col-2">
           <div class="form-check">
-            <%= check_box_tag 'mhxx_time[skill_ids][]', skill.id, @time.m_skills.include?(skill), id: "time_skill_#{skill.id}", class: "form-check-input" %>
+            <%= check_box_tag 'mhxx_time[skill_ids][]',
+              skill.id,
+              @time.m_skills.include?(skill),
+              id: "time_skill_#{skill.id}",
+              class: "form-check-input"
+            %>
             <%= label_tag "time_skill_#{skill.id}", skill.name, class: "form-check-label" %>
           </div>
         </div>

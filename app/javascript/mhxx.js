@@ -133,3 +133,40 @@ document.addEventListener("turbo:load", () => {
     });
   });
 });
+
+// 新規作成・編集フォーム：狩猟スタイルセレクトによって、狩技セレクトをdisableにする。
+document.addEventListener("turbo:load", () => {
+  // スタイルセレクトボックスと狩技セレクトボックスを取得
+  const styleSelect = document.getElementById("styleSelect");
+  const artSelects = [
+    document.getElementById("artSelect1"),
+    document.getElementById("artSelect2"),
+    document.getElementById("artSelect3")
+  ];
+
+  // スタイルごとのhunter_arts_quantityを取得 (data属性からJSONをパース)
+  const huntingStyles = JSON.parse(styleSelect.dataset.huntingStyles);
+
+  // 狩技セレクトボックスの有効/無効とリセット処理を行う関数
+  function updateHunterArtsSelects(quantity) {
+    // 各狩技セレクトボックスをループ処理
+    artSelects.forEach((select, index) => {
+      const artIndex = index + 1;
+      select.disabled = quantity < artIndex;
+      if (select.disabled) {
+        select.value = ""; // 無効化されたときに値をリセット
+      }
+    });
+  }
+
+  // 初期状態での処理
+  const initialStyleId = styleSelect.value;
+  updateHunterArtsSelects(huntingStyles[initialStyleId]);
+
+  // スタイル変更時の処理
+  styleSelect.addEventListener("change", (event) => {
+    const selectedStyleId = event.target.value;
+    const quantity = huntingStyles[selectedStyleId] || 0;
+    updateHunterArtsSelects(quantity);
+  });
+});

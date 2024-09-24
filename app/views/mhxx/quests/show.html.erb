@@ -1,11 +1,11 @@
 <h1>【MHXX】<%= @quest.name %></h1>
+<%= link_to "タイムを追加", new_mhxx_time_path(quest_id: @quest.id), class: 'btn btn-success' %>
+<%= link_to "クエスト一覧へ戻る", mhxx_quests_path, class: "btn btn-info" %>
+<div>平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></div>
 <%# TODO: 1~5をループで取得 %>
 <div><%= @quest.m_monster1.name %></div>
 <%# TODO: ヘルパーでクエスト文言を分岐 %>
 <div><%= "#{@quest.m_monster1.name}1頭の#{I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}")}" %></div>
-<div>平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></div>
-<%= link_to "タイム登録", new_mhxx_time_path(quest_id: @quest.id), class: 'btn btn-outline-primary' %>
-<%= link_to "クエスト一覧へ戻る", mhxx_quests_path %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -53,8 +53,8 @@
         </td>
         <td>
           <div>
-            <%= link_to "編集", edit_mhxx_time_path(quest_time), class: 'btn btn-outline-primary' %>
-            <%= link_to "削除", mhxx_time_path(quest_time), data: { turbo_method: :delete, turbo_confirm: "タイムを削除してよろしいですか？" }, class: "btn btn-outline-danger" %>
+            <%= link_to "編集", edit_mhxx_time_path(quest_time), class: 'btn btn-primary' %>
+            <%= link_to "削除", mhxx_time_path(quest_time), data: { turbo_method: :delete, turbo_confirm: "タイムを削除してよろしいですか？" }, class: "btn btn-danger" %>
           </div>
         </td>
       </tr>

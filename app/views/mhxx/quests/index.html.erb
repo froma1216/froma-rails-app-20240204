@@ -11,11 +11,11 @@
           Mhxx::MQuestRank.with_all_option,
           :last,
           :first,
-          checked: (params[:rank_radio] || '0'),
-          item_wrapper_class: 'form-check form-check-inline',
-          label_class: 'form-check-label'
+          checked: (params[:rank_radio] || "0"),
+          item_wrapper_class: "form-check form-check-inline",
+          label_class: "form-check-label"
         ) do |b| %>
-          <%= b.radio_button(class: 'form-check-input', name: 'rank_radio') %>
+          <%= b.radio_button(class: "form-check-input", name: "rank_radio") %>
           <%= b.label %>
         <% end %>
       </div>
@@ -23,7 +23,7 @@
     <%# クエスト選択 %>
     <%= select_tag :rank_number, options_for_select([["すべて", 0]], params[:rank_number]), class: "form-select mb-3", id: "rank_number", data: { selected: params[:rank_number] } %>
     <%# ボタンエリア %>
-    <%= f.submit '検索', class: 'btn btn-primary' %>
+    <%= f.submit "検索", class: "btn btn-primary" %>
   <% end %>
 </div>
 <table class="table table-striped">
@@ -35,6 +35,8 @@
       <th class="col">武器種 / スタイル</th>
       <th class="col">武器名</th>
       <th class="col">Action</th>
+      <%# TODO: ツールチップで説明を追加 %>
+      <th class="col text-center">お気に入り <i class="fa-solid fa-circle-exclamation"></i></th>
     </th>
   </thead>
   <tbody>
@@ -46,16 +48,15 @@
         <td class="align-middle"><%= best_time.present? ? formatted_clear_time(best_time.clear_time) : "-" %></td>
         <td class="align-middle"><%= "#{best_time&.m_hunting_style&.name || "-"} / #{best_time&.m_weapon&.m_weapon_type&.name || "-" }" %></td>
         <td class="align-middle"><%= best_time&.m_weapon.present? ? best_time.m_weapon.name : "-" %></td>
-        <td class="align-middle d-flex justify-content-between">
-          <div>
-            <%= link_to "タイム一覧", mhxx_quest_path(quest.id), class: 'btn btn-outline-primary' %>
-            <%= link_to "タイム登録", new_mhxx_time_path(quest_id: quest.id), class: 'btn btn-outline-primary' %>
-          </div>
-          <div>
-            <%= link_to("#", {method: "post"}) do %>
-              <i class="fa-solid fa-star"></i>
-            <% end %>
-          </div>
+        <td class="align-middle">
+          <%= link_to "タイム一覧", mhxx_quest_path(quest.id), class: "btn btn btn-info" %>
+          <%= link_to "タイムを追加", new_mhxx_time_path(quest_id: quest.id), class: "btn btn-success" %>
+        </td>
+        <td class="align-middle text-center">
+          <%= link_to("#", {method: "post"}) do %>
+            <%# <i class="fa-solid fa-star"></i> %>
+            <i class="fa-regular fa-star"></i>
+          <% end %>
         </td>
       </tr>
     <% end %>

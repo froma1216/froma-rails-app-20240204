@@ -6,6 +6,7 @@ class Mhxx::TimesController < ApplicationController
     if current_user.present?
       @quest = Mhxx::MQuest.find(params[:quest_id])
       @time = Mhxx::Time.new
+      session[:previous_url] = request.referer # 遷移元のURLをセッションに保存
     else
       redirect_to new_user_session_path
     end
@@ -14,6 +15,7 @@ class Mhxx::TimesController < ApplicationController
   def edit
     @time = Mhxx::Time.find(params[:id])
     @quest = @time.m_quest # 既存のタイムから関連するクエストを取得
+    session[:previous_url] = request.referer # 遷移元のURLをセッションに保存
   end
 
   def create
@@ -26,7 +28,7 @@ class Mhxx::TimesController < ApplicationController
       if params[:mhxx_time][:skill_ids].present?
         @time.m_skills = Mhxx::MSkill.where(id: params[:mhxx_time][:skill_ids])
       end
-      redirect_to mhxx_quests_path, notice: "タイムが作成されました"
+      redirect_to session.delete(:previous_url) || mhxx_quests_path, notice: "タイムが作成されました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -44,7 +46,7 @@ class Mhxx::TimesController < ApplicationController
         # スキルが選択されなかった場合は関連をクリアする
         @time.m_skills.clear
       end
-      redirect_to mhxx_quests_path, notice: "タイムが更新されました"
+      redirect_to mhxx_quest_path(@quest), notice: "タイムが更新されました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -52,8 +54,9 @@ class Mhxx::TimesController < ApplicationController
 
   def destroy
     @time = Mhxx::Time.find(params[:id])
+    @quest = @time.m_quest
     @time.destroy
-    redirect_to mhxx_quests_path, notice: "タイムが削除されました"
+    redirect_to mhxx_quest_path(@quest), notice: "タイムが削除されました"
   end
 
   # 武器種セレクト・属性ボタンから、武器セレクトの内容を作るAPI

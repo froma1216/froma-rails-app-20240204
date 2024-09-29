@@ -10,29 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_17_000727) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_29_060938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "conferences", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.date "start_date"
-    t.integer "duration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "days", force: :cascade do |t|
-    t.bigint "conference_id", null: false
-    t.string "title"
-    t.text "description"
-    t.string "seq_no"
-    t.string "integer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["conference_id"], name: "index_days_on_conference_id"
-  end
 
   create_table "mhxx_bookmark_quests", comment: "お気に入りクエスト", force: :cascade do |t|
     t.bigint "m_quest_id", null: false, comment: "クエストID"
@@ -157,17 +137,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_000727) do
     t.index ["user_id"], name: "index_mhxx_times_on_user_id"
   end
 
-  create_table "participations", force: :cascade do |t|
-    t.bigint "conference_id", null: false
-    t.bigint "user_id", null: false
-    t.bigint "slot_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["conference_id"], name: "index_participations_on_conference_id"
-    t.index ["slot_id"], name: "index_participations_on_slot_id"
-    t.index ["user_id"], name: "index_participations_on_user_id"
-  end
-
   create_table "pawapuro_fielders", force: :cascade do |t|
     t.integer "trajectory"
     t.integer "meat"
@@ -284,50 +253,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_000727) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "presentations", force: :cascade do |t|
-    t.bigint "slot_id", null: false
-    t.string "title"
-    t.string "presenter"
-    t.string "authors"
-    t.text "description"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["slot_id"], name: "index_presentations_on_slot_id"
-  end
-
-  create_table "slots", force: :cascade do |t|
-    t.bigint "track_id", null: false
-    t.string "title"
-    t.string "organizer"
-    t.string "chair"
-    t.string "lecturer"
-    t.string "room"
-    t.text "description"
-    t.string "url"
-    t.string "audience"
-    t.string "level"
-    t.string "background"
-    t.string "category"
-    t.string "material"
-    t.string "mlinkurl"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["track_id"], name: "index_slots_on_track_id"
-  end
-
-  create_table "tracks", force: :cascade do |t|
-    t.bigint "day_id", null: false
-    t.string "title"
-    t.text "description"
-    t.integer "seq_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["day_id"], name: "index_tracks_on_day_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -338,14 +263,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_000727) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "fullname"
-    t.bigint "conference_id"
     t.string "role"
-    t.index ["conference_id"], name: "index_users_on_conference_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "days", "conferences"
   add_foreign_key "mhxx_bookmark_quests", "mhxx_m_quests", column: "m_quest_id"
   add_foreign_key "mhxx_bookmark_quests", "users"
   add_foreign_key "mhxx_m_hunter_arts", "mhxx_m_weapon_types", column: "m_weapon_type_id"
@@ -366,13 +288,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_000727) do
   add_foreign_key "mhxx_times", "mhxx_m_quests", column: "m_quest_id"
   add_foreign_key "mhxx_times", "mhxx_m_weapons", column: "m_weapon_id"
   add_foreign_key "mhxx_times", "users"
-  add_foreign_key "participations", "conferences"
-  add_foreign_key "participations", "slots"
-  add_foreign_key "participations", "users"
   add_foreign_key "pawapuro_fielders", "pawapuro_players"
   add_foreign_key "pawapuro_pitchers", "pawapuro_players"
-  add_foreign_key "presentations", "slots"
-  add_foreign_key "slots", "tracks"
-  add_foreign_key "tracks", "days"
-  add_foreign_key "users", "conferences"
 end

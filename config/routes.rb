@@ -1,19 +1,13 @@
 Rails.application.routes.draw do
   # 管理
   namespace :admin do
-    resources :conferences
-    resources :days
-    resources :participations
     resources :pawapuro_fielders
     resources :pawapuro_pitchers
     resources :pawapuro_players
     resources :pokemon_emerald_factory_participants
-    resources :presentations
-    resources :slots
-    resources :tracks
     resources :users
 
-    root to: "conferences#index"
+    root to: "pawapuro_players#index"
   end
   # ルーティング
   root to: "home#index"
@@ -30,12 +24,6 @@ Rails.application.routes.draw do
     passwords: "users/passwords",
     registrations: "users/registrations"
   }
-
-  # オンラインイベント支援システム
-  resources :conferences, only: [:show, :index]
-  resources :days, only: [:show]
-  resources :slots, only: [:show]
-  resources :participations, only: [:create, :destroy]
 
   # 【パワプロ】選手作成メモ
   resources :pawapuro, except: [:show] do

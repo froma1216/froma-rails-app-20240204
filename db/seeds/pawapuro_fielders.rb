@@ -2,7 +2,7 @@ require 'csv'
 
 file_path = 'db/seeds/csv/pawapuro_fielders.csv'
 CSV.foreach(file_path, headers: true) do |row|
-  fielder = PawapuroFielder.ind_or_initialize_by(id: row['id'])
+  fielder = PawapuroFielder.find_or_initialize_by(id: row['id'])
   fielder.update(
     trajectory: row['trajectory'],
     meat: row['meat'],

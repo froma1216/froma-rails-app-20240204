@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_29_060938) do
   end
 
   create_table "mhxx_m_quests", comment: "クエストマスタ", force: :cascade do |t|
-    t.string "name", limit: 100, comment: "クエスト名"
+    t.string "name", comment: "クエスト名"
     t.bigint "m_sub_quest_rank_id", null: false, comment: "サブクエストランクID"
     t.integer "quest_division", comment: "クエスト区分"
     t.bigint "m_monster1_id", null: false, comment: "モンスターID1"

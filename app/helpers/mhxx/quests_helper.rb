@@ -2,10 +2,10 @@ module Mhxx::QuestsHelper
   # 送られてきた6桁の文字列を「MM'SS"FF」形式に変換する
   def formatted_clear_time(clear_time)
     time_value = clear_time.to_i
-    minutes = time_value / 10000
-    seconds = (time_value % 10000) / 100
+    minutes = time_value / 10_000
+    seconds = (time_value % 10_000) / 100
     fraction = time_value % 100
-    format("%02d'%02d\"%02d", minutes, seconds, fraction)
+    format("%<minutes>02d'%<seconds>02d\"%<fraction>02d", minutes:, seconds:, fraction:)
   end
 
   # 送られてきた合計秒数を「MM'SS"FF」形式に変換する
@@ -14,6 +14,6 @@ module Mhxx::QuestsHelper
     remaining_seconds = total_seconds % 60
     seconds = remaining_seconds.floor
     fraction = ((remaining_seconds - seconds) * 100).round
-    format("%02d'%02d\"%02d", minutes, seconds, fraction)
+    format("%<minutes>02d'%<seconds>02d\"%<fraction>02d", minutes:, seconds:, fraction:)
   end
 end

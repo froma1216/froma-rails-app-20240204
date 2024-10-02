@@ -2,10 +2,10 @@ class Mhxx::QuestsController < ApplicationController
   def index
     if current_user.present?
       @quests = if params[:rank_number].present? && params[:rank_number].to_i != 0
-        Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number]).order(:id)
-      else
-        Mhxx::MQuest.all.order(:id)
-      end
+                  Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number]).order(:id)
+                else
+                  Mhxx::MQuest.all.order(:id)
+                end
 
       @times = Mhxx::Time.where(m_quest_id: @quests.pluck(:id), user: current_user).group_by(&:m_quest_id)
     else

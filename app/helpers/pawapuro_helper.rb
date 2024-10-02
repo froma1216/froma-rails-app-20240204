@@ -149,12 +149,13 @@ module PawapuroHelper
   end
 
   # 選手名ボックスの背景色、ボーダー色のクラスを返す
-  def player_name_box_color_class(main_position, p11_proper, p12_proper, p13_proper, p2_proper, p3_proper, p4_proper, p5_proper, p6_proper, p7_proper)
-    is_starter = p11_proper > 0
-    is_relief = p12_proper > 0 || p13_proper > 0
-    is_catcher = p2_proper > 0
-    is_infielder = p3_proper > 0 || p4_proper > 0 || p5_proper > 0 || p6_proper > 0
-    is_outfielder = p7_proper > 0
+  def player_name_box_color_class(main_position, p11_proper, p12_proper, p13_proper, p2_proper, p3_proper, p4_proper,
+                                  p5_proper, p6_proper, p7_proper)
+    is_starter = p11_proper.positive?
+    is_relief = p12_proper.positive? || p13_proper.positive?
+    is_catcher = p2_proper.positive?
+    is_infielder = p3_proper.positive? || p4_proper.positive? || p5_proper.positive? || p6_proper.positive?
+    is_outfielder = p7_proper.positive?
     case main_position
     when 11
       if is_relief
@@ -259,31 +260,30 @@ module PawapuroHelper
   def ability_text_classes(ability)
     if ability.length >= 8
       # フォントサイズを小さくし、文字間隔も狭くする
-      'small-font tighter-letter-spacing'
+      "small-font tighter-letter-spacing"
     elsif ability.length >= 7
       # 文字間隔のみ狭くする
-      'tighter-letter-spacing'
+      "tighter-letter-spacing"
     else
-      ''
+      ""
     end
   end
 
   # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
   def ability_no_value_color_classes(ability)
     abilities = PAWAPURO_ABILITIES
-    case
-    when abilities['good'].include?(ability)
-      ['pawa-bg-sa-g1', 'pawa-bg-sa-g2', 'pawa-text-good']
-    when abilities['bad'].include?(ability)
-      ['pawa-bg-sa-b1', 'pawa-bg-sa-b2', 'pawa-text-bad']
-    when abilities['good_and_bad'].include?(ability)
-      ['pawa-bg-sa-gb1', 'pawa-bg-sa-gb2', 'pawa-text-good']
-    when abilities['special'].include?(ability)
-      ['pawa-bg-sa-sp1', 'pawa-bg-sa-sp2', 'pawa-text-speial']
-    when abilities['sub'].include?(ability)
-      ['pawa-bg-sa-sb1', 'pawa-bg-sa-sb2', 'pawa-text-sub']
+    if abilities["good"].include?(ability)
+      ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
+    elsif abilities["bad"].include?(ability)
+      ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
+    elsif abilities["good_and_bad"].include?(ability)
+      ["pawa-bg-sa-gb1", "pawa-bg-sa-gb2", "pawa-text-good"]
+    elsif abilities["special"].include?(ability)
+      ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-speial"]
+    elsif abilities["sub"].include?(ability)
+      ["pawa-bg-sa-sb1", "pawa-bg-sa-sb2", "pawa-text-sub"]
     else
-      ['pawa-bg-sa-n1 d-none d-sm-block', 'pawa-bg-sa-n2', 'pawa-text-neutral']
+      ["pawa-bg-sa-n1 d-none d-sm-block", "pawa-bg-sa-n2", "pawa-text-neutral"]
     end
   end
 
@@ -291,13 +291,13 @@ module PawapuroHelper
   def ability_value_color_classes(ability_value)
     case ability_value
     when 2..3
-      ['pawa-bg-sa-g1', 'pawa-bg-sa-g2', 'pawa-text-good']
+      ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
     when -4..-2
-      ['pawa-bg-sa-b1', 'pawa-bg-sa-b2', 'pawa-text-bad']
+      ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
     when 4
-      ['pawa-bg-sa-sp1', 'pawa-bg-sa-sp2', 'pawa-text-speial']
+      ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-speial"]
     else
-      ['pawa-bg-sa-n1', 'pawa-bg-sa-n2', 'pawa-text-neutral']
+      ["pawa-bg-sa-n1", "pawa-bg-sa-n2", "pawa-text-neutral"]
     end
   end
 

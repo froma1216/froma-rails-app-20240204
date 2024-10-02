@@ -13,7 +13,7 @@
 <%= form_with model: @time, local: true do |f| %>
   <%# クエスト %>
   <h2>クエスト</h2>
-  <%= text_field_tag :m_quest_name, @quest.name, class: "form-control mb-3", disabled: true %>
+  <%= text_field_tag :m_quest_name, @quest.name, class: "form-control mb-3", disabled: true, autocomplete: "off" %>
   <%= f.hidden_field :m_quest_id, value: @quest.id %>
   <%# クリアタイム %>
   <h2>クリアタイム</h2>
@@ -22,6 +22,7 @@
     <%= f.label :clear_time, "クリアタイム", for: "cleartime" %>
     <div class="form-text">区切りなしでの6桁で入力してください。 例）5'01"30 → 050130</div>
   </div>
+
   <%# 武器 %>
   <h2>武器</h2>
   <%# 武器種セレクト %>
@@ -29,18 +30,16 @@
     grouped_options_for_select(@grouped_weapon_types, selected: @time.m_weapon&.m_weapon_type_id.presence),
     prompt: "--武器種を選択--",
     class: "form-select form-select-sm mb-3",
-    id: "m_weapon_type"
-  %>
+    id: "m_weapon_type" %>
   <%# 属性ボタン %>
   <div class="mb-3">
     <%= button_tag "全表示", type: "button", class: "btn btn-secondary me-2 active", data: { element: '' } %>
     <% Enums.element.except("other").each_with_index do |(key, value), index| %>
-      <%# 氷と龍の間に余白を入れるため、indexで判断します %>
+      <%# 氷と龍の間に余白を入れるため、indexで判断する %>
       <%= button_tag t("enums.mhxx.element.#{key}"),
         type: "button",
         class: "btn #{"me-2" if key == "dragon"} mhxx-btn__element--#{key}",
-        data: { element: value }
-      %>
+        data: { element: value } %>
     <% end %>
   </div>
   <%# 武器セレクト %>
@@ -48,8 +47,7 @@
     <%= f.select :m_weapon_id,
       options_from_collection_for_select(Mhxx::MWeapon.all, :id, :name, @time.m_weapon_id),
       { prompt: "--武器を選択--" },
-      { class: "form-select", id: "weaponSelect" }
-    %>
+      { class: "form-select", id: "weaponSelect" } %>
     <%= f.label :m_weapon_id, "武器名", for: "weaponSelect" %>
   </div>
   <%# スタイル・狩技 %>
@@ -64,8 +62,7 @@
         data: {
           hunting_styles: Mhxx::MHuntingStyle.all.map { |style| [style.id, style.hunter_arts_quantity] }.to_h.to_json
         }
-      }
-    %>
+      } %>
     <%= f.label :m_hunting_style_id, "スタイル", for: "styleSelect" %>
   </div>
   <%# 狩技セレクト %>
@@ -76,8 +73,7 @@
           <%= f.select "m_hunter_art#{i}_id".to_sym,
             grouped_options_for_select(@grouped_hunter_arts, @time.send("m_hunter_art#{i}_id")),
             {},
-            { class: "form-select", id: "artSelect#{i}" }
-          %>
+            { class: "form-select", id: "artSelect#{i}" } %>
           <%= f.hidden_field "m_hunter_art#{i}_id".to_sym, id: "hiddenArtSelect#{i}" %>
           <%= f.label "m_hunter_art#{i}_id".to_sym, "狩技#{i}", for: "artSelect#{i}" %>
         </div>
@@ -87,7 +83,7 @@
   <%# スキル %>
   <h2>スキル</h2>
   <div class="row mb-3">
-    <% grouped_skills = Mhxx::MSkill.all.group_by(&:skill_division) %> 
+    <% grouped_skills = Mhxx::MSkill.all.group_by(&:skill_division) %>
     <% grouped_skills.each do |division, skills| %>
       <div class="col-12">
         <h3><%= I18n.t("enums.mhxx.skill_division.#{Enums.skill_division.key(division.to_i)}") %></h3>
@@ -99,14 +95,13 @@
               skill.id,
               @time.m_skills.include?(skill),
               id: "time_skill_#{skill.id}",
-              class: "form-check-input"
-            %>
+              class: "form-check-input" %>
             <%= label_tag "time_skill_#{skill.id}", skill.name, class: "form-check-label" %>
           </div>
         </div>
       <% end %>
     <% end %>
-  </div>  
+  </div>
   <%# ボタンエリア %>
   <%= f.submit '登録する', class: "btn btn-primary" %>
   <%= link_to 'キャンセル', mhxx_quests_path, class: 'btn btn-secondary' %>

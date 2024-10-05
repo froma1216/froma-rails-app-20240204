@@ -195,8 +195,11 @@ $player-name-background-o-color: #68F177;
   font-size: 0.8em;
 }
 
-.info-icon{
+.icon__info{
   color: $info;
+}
+.icon__bookmark{
+  color: $yellow-600;
 }
 
 // 文字

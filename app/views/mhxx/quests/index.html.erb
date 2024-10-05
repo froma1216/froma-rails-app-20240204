@@ -36,7 +36,7 @@
       <th class="col">武器名</th>
       <th class="col">Action</th>
       <th class="col text-center">
-        お気に入り <span role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="クエスト検索時に、絞り込みができるようになります。"><i class="fa-solid fa-circle-exclamation info-icon"></i></span>
+        お気に入り <span role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="クエスト検索時に、絞り込みができるようになります。"><i class="fa-solid fa-circle-exclamation icon__info"></i></span>
       </th>
     </th>
   </thead>
@@ -55,8 +55,13 @@
         </td>
         <td class="align-middle text-center">
           <%= link_to("#", {method: "post"}) do %>
-            <%# <i class="fa-solid fa-star"></i> %>
-            <i class="fa-regular fa-star"></i>
+            <%# HACK: N1対応 %>
+            <% if Mhxx::BookmarkQuest.find_by(user_id: current_user, m_quest_id: quest.id ) %>
+              <%# if quest.bookmark_quest.present? %>
+              <i class="fa-solid fa-star icon__bookmark"></i>
+            <% else %>
+              <i class="fa-regular fa-star icon__bookmark"></i>
+            <% end %>
           <% end %>
         </td>
       </tr>

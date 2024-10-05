@@ -20,8 +20,8 @@ $alphabet-g-color: #898687;
 
 // 背景色
 // メインBOX
-$main-bakground-top-color: #E5F4FA;
-$main-bakground-bottom-color: #D2EEF6;
+$main-background-top-color: #E5F4FA;
+$main-background-bottom-color: #D2EEF6;
 // 一覧BOX
 $index-box-top-color: #35C9EE;
 $index-box-bottom-color: #2376CC;
@@ -195,6 +195,10 @@ $player-name-background-o-color: #68F177;
   font-size: 0.8em;
 }
 
+.info-icon{
+  color: $info;
+}
+
 // 文字
 // 全体
 @mixin pawa-text($text-color) {
@@ -239,7 +243,7 @@ $player-name-background-o-color: #68F177;
 }
 
 // 特殊能力
-.pawa-text-speial {
+.pawa-text-special {
   @include pawa-text($special-text-color);
 }
 
@@ -366,7 +370,7 @@ $player-name-background-o-color: #68F177;
 
 // メインBOX
 .pawa-main-box {
-  background: linear-gradient(to bottom, $main-bakground-top-color 50%, $main-bakground-bottom-color);
+  background: linear-gradient(to bottom, $main-background-top-color 50%, $main-background-bottom-color);
   border: 3px solid $white;
   border-radius: 0.5rem; // bounded
 }
@@ -565,7 +569,7 @@ $player-name-background-o-color: #68F177;
   @extend .justify-content-center;
   @extend .px-3;
   color: $main-color;
-  background: linear-gradient(to bottom, $main-bakground-top-color 50%, $main-bakground-bottom-color);
+  background: linear-gradient(to bottom, $main-background-top-color 50%, $main-background-bottom-color);
   font-weight: bold;
   box-sizing: border-box;
 }

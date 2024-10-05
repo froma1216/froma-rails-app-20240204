@@ -34,21 +34,15 @@ document.addEventListener("turbo:load", () => {
   /**
    * セレクトボックスの状態を更新
    */
-  function updateSelectBoxState(
-    selectedRankId,
-    selectBox,
-    allOptionId,
-    eventOptionId
-  ) {
+  function updateSelectBoxState(selectedRankId, selectBox, allOptionId) {
     // `selectBox`が存在しない場合は処理を終了
     if (!selectBox) {
       console.error("セレクトボックスが見つかりません。");
       return;
     }
 
-    // 「すべて」または「イベント」が選択されたときにセレクトボックスを無効化
-    selectBox.disabled =
-      selectedRankId === allOptionId || selectedRankId === eventOptionId;
+    // 「すべて」が選択されたとき、セレクトボックスを無効化
+    selectBox.disabled = selectedRankId === allOptionId;
   }
 
   /**

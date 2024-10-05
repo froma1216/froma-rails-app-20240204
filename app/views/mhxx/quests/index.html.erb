@@ -15,13 +15,12 @@
           item_wrapper_class: "form-check form-check-inline",
           label_class: "form-check-label"
         ) do |b| %>
-          <%= b.radio_button(class: "form-check-input", name: "rank_radio") %>
+          <%= b.radio_button(class: "form-check-input") %>
           <%= b.label %>
         <% end %>
       </div>
     </div>
     <%# クエスト選択 %>
-    <%# FIXME: イベントの検索ができていない %>
     <%= select_tag :rank_number, options_for_select([["すべて", 0]], params[:rank_number]), class: "form-select mb-3", id: "rank_number", data: { selected: params[:rank_number] } %>
     <%# ボタンエリア %>
     <%= f.submit "検索", class: "btn btn-primary" %>

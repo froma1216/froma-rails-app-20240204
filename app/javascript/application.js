@@ -18,6 +18,7 @@ document.addEventListener("turbo:load", function () {
 });
 
 // bootstrap5のtooltipを有効化
+// FIXME: 画面リロードしないと有効化されない？
 var tooltipTriggerList = [].slice.call(
   document.querySelectorAll('[data-bs-toggle="tooltip"]')
 );

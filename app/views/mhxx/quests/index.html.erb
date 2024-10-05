@@ -54,13 +54,15 @@
           <%= link_to "タイムを追加", new_mhxx_time_path(quest_id: quest.id), class: "btn btn-success" %>
         </td>
         <td class="align-middle text-center">
-          <%= link_to("#", {method: "post"}) do %>
-            <%# HACK: N1対応 %>
-            <% if Mhxx::BookmarkQuest.find_by(user_id: current_user, m_quest_id: quest.id ) %>
-              <%# if quest.bookmark_quest.present? %>
-              <i class="fa-solid fa-star icon__bookmark"></i>
-            <% else %>
-              <i class="fa-regular fa-star icon__bookmark"></i>
+          <%# HACK: N1対応 %>
+          <% bookmark = Mhxx::BookmarkQuest.find_by(user_id: current_user, m_quest_id: quest.id) %>
+          <% if bookmark %>
+            <%= link_to mhxx_bookmark_quest_path(bookmark), data: { turbo_method: :delete }, class: "icon__bookmark" do %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+          <% else %>
+            <%= link_to mhxx_bookmark_quests_path(quest_id: quest.id), data: { turbo_method: :post }, class: "icon__bookmark" do %>
+              <i class="fa-regular fa-star"></i>
             <% end %>
           <% end %>
         </td>

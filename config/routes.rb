@@ -52,5 +52,6 @@ Rails.application.routes.draw do
         get "filtered_hunter_arts", to: "times#filtered_hunter_arts"
       end
     end
+    resources :bookmark_quests, only: [:create, :destroy]
   end
 end

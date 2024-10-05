@@ -21,6 +21,7 @@
       </div>
     </div>
     <%# クエスト選択 %>
+    <%# FIXME: イベントの検索ができていない %>
     <%= select_tag :rank_number, options_for_select([["すべて", 0]], params[:rank_number]), class: "form-select mb-3", id: "rank_number", data: { selected: params[:rank_number] } %>
     <%# ボタンエリア %>
     <%= f.submit "検索", class: "btn btn-primary" %>
@@ -55,7 +56,7 @@
         </td>
         <td class="align-middle text-center">
           <%# HACK: N1対応 %>
-          <% bookmark = Mhxx::BookmarkQuest.find_by(user_id: current_user, m_quest_id: quest.id) %>
+          <% bookmark = @bookmarks[quest.id] %>
           <% if bookmark %>
             <%= link_to mhxx_bookmark_quest_path(bookmark), data: { turbo_method: :delete }, class: "icon__bookmark" do %>
               <i class="fa-solid fa-star"></i>

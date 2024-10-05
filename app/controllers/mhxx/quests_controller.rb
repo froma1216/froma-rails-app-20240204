@@ -8,6 +8,9 @@ class Mhxx::QuestsController < ApplicationController
                 end
 
       @times = Mhxx::Time.where(m_quest_id: @quests.pluck(:id), user: current_user).group_by(&:m_quest_id)
+      # TODO: 並び替え順は、表示順登録実装後に変更
+      @bookmarks = Mhxx::BookmarkQuest.where(user_id: current_user.id,
+                                             m_quest_id: @quests.pluck(:id)).index_by(&:m_quest_id)
     else
       redirect_to new_user_session_path
     end

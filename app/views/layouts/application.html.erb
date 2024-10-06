@@ -49,13 +49,7 @@
                 </li>
                 <%# MHXX %>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    【MHXX】クエスト別クリアタイムメモ
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <%= link_to("クエスト一覧", mhxx_quests_path, class: "dropdown-item") %>
-                    <%= link_to("タイム登録", new_mhxx_time_path, class: "dropdown-item") %>
-                  </div>
+                  <%= link_to("【MHXX】クエスト別クリアタイムメモ", mhxx_quests_path, class: "nav-link") %>
                 </li>
               <% end %>
             </ul>

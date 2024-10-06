@@ -6,9 +6,10 @@ import "@hotwired/turbo-rails";
 import "controllers";
 import "@fortawesome/fontawesome-free";
 // カスタムjs
-import "./pawapuro";
-import "./pokemon_emerald_factory_participant";
-import "./mhxx";
+// TODO: 画面毎に切り出し
+import "./controllers/pawapuro/pawapuro";
+import "./controllers/poke_em/poke_em";
+import "./controllers/mhxx/mhxx";
 
 // containerの高さを設定
 document.addEventListener("turbo:load", function () {

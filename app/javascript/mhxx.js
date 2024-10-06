@@ -3,74 +3,50 @@ document.addEventListener("turbo:load", () => {
   const radioButtons = document.querySelectorAll('input[name="rank_radio"]');
   const selectBox = document.getElementById("rank_number");
 
-  // 「すべて」と「イベント」のIDを取得
-  const allOptionId = "0"; // 「すべて」のID
-  const eventOptionId = "2"; // 「イベント」のID
+  const options = {
+    all: { id: "0", label: "すべて" },
+    favorite: { id: "99", label: "お気に入り" },
+  };
 
-  // 初期表示で「すべて」を選択
   const selectedRankId =
     document.querySelector('input[name="rank_radio"]:checked')?.value ||
-    allOptionId;
-  updateSelectBoxState(selectedRankId, selectBox, allOptionId, eventOptionId);
+    options.all.id;
 
-  if (selectedRankId) {
-    updateSelectOptions(selectedRankId, selectBox, allOptionId);
-  }
+  updateSelectOptions(selectedRankId);
 
-  // ラジオボタンにイベントリスナーを追加
   radioButtons.forEach((radio) => {
     radio.addEventListener("change", function () {
-      const selectedRankId = this.value;
-      updateSelectOptions(selectedRankId, selectBox, allOptionId);
-      updateSelectBoxState(
-        selectedRankId,
-        selectBox,
-        allOptionId,
-        eventOptionId
-      );
+      updateSelectOptions(this.value);
     });
   });
 
-  /**
-   * セレクトボックスの状態を更新
-   */
-  function updateSelectBoxState(selectedRankId, selectBox, allOptionId) {
-    // `selectBox`が存在しない場合は処理を終了
-    if (!selectBox) {
-      console.error("セレクトボックスが見つかりません。");
-      return;
-    }
+  function updateSelectOptions(selectedRankId) {
+    selectBox.innerHTML = ""; // セレクトボックスをクリア
 
-    // 「すべて」が選択されたとき、セレクトボックスを無効化
-    selectBox.disabled = selectedRankId === allOptionId;
-  }
-
-  /**
-   * ランクに応じたセレクトボックスのオプションを更新
-   */
-  function updateSelectOptions(selectedRankId, selectBox, allOptionId) {
-    if (selectedRankId === allOptionId) {
-      selectBox.innerHTML = ""; // 「すべて」だけを表示
+    if (
+      selectedRankId === options.all.id ||
+      selectedRankId === options.favorite.id
+    ) {
+      // 「すべて」または「お気に入り」が選択された場合
       const option = document.createElement("option");
-      option.value = 0;
-      option.text = "すべて";
+      option.value = selectedRankId;
+      option.text =
+        selectedRankId === options.all.id
+          ? options.all.label
+          : options.favorite.label;
       selectBox.appendChild(option);
-      selectBox.value = 0; // 自動的に「すべて」を選択
+      selectBox.value = selectedRankId;
     } else {
+      // その他のランクが選択された場合
       fetch(`/mhxx/quests/sub_quest_ranks?m_quest_rank_id=` + selectedRankId)
         .then((response) => response.json())
         .then((data) => {
-          selectBox.innerHTML = ""; // 「すべて」を表示しない
-
-          // 新しい選択肢を追加
           data.forEach((subRank) => {
             const option = document.createElement("option");
             option.value = subRank.id;
             option.text = subRank.name;
             selectBox.appendChild(option);
           });
-
-          // デフォルトで最初の項目を選択
           selectBox.value = selectBox.options[0].value;
         })
         .catch((error) => {

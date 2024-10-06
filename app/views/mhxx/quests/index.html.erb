@@ -54,7 +54,6 @@
           <%= link_to "タイムを追加", new_mhxx_time_path(quest_id: quest.id), class: "btn btn-success" %>
         </td>
         <td class="align-middle text-center">
-          <%# HACK: N1対応 %>
           <% bookmark = @bookmarks[quest.id] %>
           <% if bookmark %>
             <%= link_to mhxx_bookmark_quest_path(bookmark), data: { turbo_method: :delete }, class: "icon__bookmark" do %>

@@ -1,11 +1,17 @@
 class Mhxx::QuestsController < ApplicationController
   def index
     if current_user.present?
-      @quests = if params[:rank_number].present? && params[:rank_number].to_i != 0
-                  Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number]).order(:id)
-                else
-                  Mhxx::MQuest.all.order(:id)
-                end
+      if params[:rank_radio].to_i == 99
+        # お気に入りが選択された場合
+        bookmarked_quests_ids = Mhxx::BookmarkQuest.where(user: current_user).pluck(:m_quest_id)
+        @quests = Mhxx::MQuest.where(id: bookmarked_quests_ids).order(:id)
+      elsif params[:rank_number].present? && params[:rank_number].to_i != 0
+        # その他のランクが選択された場合
+        @quests = Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number]).order(:id)
+      else
+        # すべてが選択された場合
+        @quests = Mhxx::MQuest.all.order(:id)
+      end
 
       @times = Mhxx::Time.where(m_quest_id: @quests.pluck(:id), user: current_user).group_by(&:m_quest_id)
       # TODO: 並び替え順は、表示順登録実装後に変更

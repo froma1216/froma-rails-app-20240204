@@ -1,11 +1,21 @@
-<h1>【MHXX】<%= @quest.name %></h1>
-<%= link_to "タイムを追加", new_mhxx_time_path(quest_id: @quest.id), class: 'btn btn-success' %>
-<%= link_to "クエスト一覧へ戻る", mhxx_quests_path, class: "btn btn-info" %>
-<div>平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></div>
-<%# TODO: 1~5をループで取得 %>
-<div><%= @quest.m_monster1.name %></div>
-<%# TODO: ヘルパーでクエスト文言を分岐 %>
-<div><%= "#{@quest.m_monster1.name}1頭の#{I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}")}" %></div>
+<h1>【MHXX】クエスト詳細</h1>
+<div class="mb-2">
+  <%= link_to "タイムを追加", new_mhxx_time_path(quest_id: @quest.id), class: 'btn btn-success' %>
+  <%= link_to "クエスト一覧へ戻る", mhxx_quests_path, class: "btn btn-info" %>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= @quest.name %></h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary"><%= I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}") %>クエスト</h6>
+    <p class="card-text">平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></p>
+    <%# TODO: ヘルパーでクエスト文言を分岐 %>
+    <p class="card-text"><%= "#{@quest.m_monster1.name}1頭の#{I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}")}" %></p>
+    <%# TODO: 1~5をループで取得 %>
+    <p class="card-text"><%= @quest.m_monster1.name %></p>
+  </div>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -24,7 +34,7 @@
         <td><%= index + 1 %></td>
         <td><%= formatted_clear_time(quest_time.clear_time) %></td>
         <td>
-          <%= sanitize("#{quest_time.m_hunting_style&.name || "-"}/<br>#{quest_time.m_weapon&.m_weapon_type&.name || "-"}")  %>
+          <%= sanitize("#{quest_time.m_hunting_style&.name || "-"}/<br>#{quest_time.m_weapon&.m_weapon_type&.name || "-"}") %>
         </td>
         <td>
           <% hunter_arts = [quest_time.m_hunter_art1, quest_time.m_hunter_art2, quest_time.m_hunter_art3].compact %>
@@ -38,8 +48,7 @@
             <% end %>
           </ul>
         </td>
-        <td><%= quest_time.m_weapon.present? ? quest_time.m_weapon.name : "-"  %></td>
-        <%# TODO: テーブル作ってから実装 %>
+        <td><%= quest_time.m_weapon.present? ? quest_time.m_weapon.name : "-" %></td>
         <td>
           <ul>
             <% if quest_time.m_skills.any? %>

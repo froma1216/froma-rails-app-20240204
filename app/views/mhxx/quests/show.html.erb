@@ -11,8 +11,10 @@
     <p class="card-text">平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></p>
     <%# TODO: ヘルパーでクエスト文言を分岐 %>
     <p class="card-text"><%= "#{@quest.m_monster1.name}1頭の#{I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}")}" %></p>
-    <%# TODO: 1~5をループで取得 %>
-    <p class="card-text"><%= @quest.m_monster1.name %></p>
+    <% monsters = [@quest.m_monster1, @quest.m_monster2, @quest.m_monster3, @quest.m_monster4, @quest.m_monster5].compact %>
+    <% monsters.each do |monster| %>
+      <p class="card-text"><%= monster.name %></p>
+    <% end %>
   </div>
 </div>
 

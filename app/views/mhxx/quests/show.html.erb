@@ -8,10 +8,9 @@
   <div class="card-body">
     <h5 class="card-title"><%= @quest.name %></h5>
     <h6 class="card-subtitle mb-2 text-body-secondary"><%= I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}") %>クエスト</h6>
+    <% monsters = (1..5).map { |i| @quest.send("m_monster#{i}") }.compact %>
+    <p class="card-text"><%= quest_main_target(@quest, monsters) %></p>
     <p class="card-text">平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></p>
-    <%# TODO: ヘルパーでクエスト文言を分岐 %>
-    <p class="card-text"><%= "#{@quest.m_monster1.name}1頭の#{I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}")}" %></p>
-    <% monsters = [@quest.m_monster1, @quest.m_monster2, @quest.m_monster3, @quest.m_monster4, @quest.m_monster5].compact %>
     <% monsters.each do |monster| %>
       <p class="card-text"><%= monster.name %></p>
     <% end %>

@@ -7,7 +7,7 @@
     <%= f.input :email,
                 required: true,
                 autofocus: true ,
-                input_html: { autocomplete: "email" }%>
+                input_html: { autocomplete: "email" } %>
     <%= f.input :password,
                 required: true,
                 hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length),

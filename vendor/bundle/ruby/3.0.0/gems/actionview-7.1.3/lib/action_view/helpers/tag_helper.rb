@@ -284,7 +284,7 @@ module ActionView
       # ==== Examples
       #
       #   tag("br")
-      #   # => <br />
+      #   # => <br>
       #
       #   tag("br", nil, true)
       #   # => <br>

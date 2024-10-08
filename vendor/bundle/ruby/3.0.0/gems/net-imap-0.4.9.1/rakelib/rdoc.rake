@@ -28,7 +28,7 @@ module RDoc::Generator
       def list_item_start(list_item, list_type)
         case list_type
         when :NOTE
-          %(<tr><td class='label'>#{Array(list_item.label).map{|label| to_html(label)}.join("<br />")}</td><td>)
+          %(<tr><td class='label'>#{Array(list_item.label).map{|label| to_html(label)}.join("<br>")}</td><td>)
         else
           super
         end

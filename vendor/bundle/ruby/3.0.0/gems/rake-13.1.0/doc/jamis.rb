@@ -244,7 +244,7 @@ FILE_PAGE = <<HTML
 <table border='0' cellpadding='0' cellspacing='0' width="100%" class='banner'>
   <tr><td>
     <table width="100%" border='0' cellpadding='0' cellspacing='0'><tr>
-      <td class="file-title" colspan="2"><span class="file-title-prefix">File</span><br />%short_name%</td>
+      <td class="file-title" colspan="2"><span class="file-title-prefix">File</span><br>%short_name%</td>
       <td align="right">
         <table border='0' cellspacing="0" cellpadding="2">
           <tr>
@@ -270,7 +270,7 @@ HTML
 
 CLASS_PAGE = <<HTML
 <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
-  <td class="file-title"><span class="file-title-prefix">%classmod%</span><br />%full_name%</td>
+  <td class="file-title"><span class="file-title-prefix">%classmod%</span><br>%full_name%</td>
   <td align="right">
     <table cellspacing=0 cellpadding=2>
       <tr valign="top">

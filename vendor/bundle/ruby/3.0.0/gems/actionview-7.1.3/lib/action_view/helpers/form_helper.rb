@@ -44,10 +44,10 @@ module ActionView
     #
     #   <%= form_for @person do |f| %>
     #     <%= f.label :first_name %>:
-    #     <%= f.text_field :first_name %><br />
+    #     <%= f.text_field :first_name %><br>
     #
     #     <%= f.label :last_name %>:
-    #     <%= f.text_field :last_name %><br />
+    #     <%= f.text_field :last_name %><br>
     #
     #     <%= f.submit %>
     #   <% end %>
@@ -57,10 +57,10 @@ module ActionView
     #   <form action="/people" class="new_person" id="new_person" method="post">
     #     <input name="authenticity_token" type="hidden" value="NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=" />
     #     <label for="person_first_name">First name</label>:
-    #     <input id="person_first_name" name="person[first_name]" type="text" /><br />
+    #     <input id="person_first_name" name="person[first_name]" type="text" /><br>
     #
     #     <label for="person_last_name">Last name</label>:
-    #     <input id="person_last_name" name="person[last_name]" type="text" /><br />
+    #     <input id="person_last_name" name="person[last_name]" type="text" /><br>
     #
     #     <input name="commit" type="submit" value="Create Person" />
     #   </form>
@@ -87,10 +87,10 @@ module ActionView
     #     <input name="_method" type="hidden" value="patch" />
     #     <input name="authenticity_token" type="hidden" value="NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=" />
     #     <label for="person_first_name">First name</label>:
-    #     <input id="person_first_name" name="person[first_name]" type="text" value="John" /><br />
+    #     <input id="person_first_name" name="person[first_name]" type="text" value="John" /><br>
     #
     #     <label for="person_last_name">Last name</label>:
-    #     <input id="person_last_name" name="person[last_name]" type="text" value="Smith" /><br />
+    #     <input id="person_last_name" name="person[last_name]" type="text" value="Smith" /><br>
     #
     #     <input name="commit" type="submit" value="Update Person" />
     #   </form>
@@ -129,10 +129,10 @@ module ActionView
       # the object we are concerned with:
       #
       #   <%= form_for :person do |f| %>
-      #     First name: <%= f.text_field :first_name %><br />
-      #     Last name : <%= f.text_field :last_name %><br />
-      #     Biography : <%= f.text_area :biography %><br />
-      #     Admin?    : <%= f.check_box :admin %><br />
+      #     First name: <%= f.text_field :first_name %><br>
+      #     Last name : <%= f.text_field :last_name %><br>
+      #     Biography : <%= f.text_area :biography %><br>
+      #     Admin?    : <%= f.check_box :admin %><br>
       #     <%= f.submit %>
       #   <% end %>
       #

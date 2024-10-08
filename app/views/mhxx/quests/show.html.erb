@@ -10,7 +10,7 @@
     <h6 class="card-subtitle mb-2 text-body-secondary"><%= I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}") %>クエスト</h6>
     <% monsters = (1..5).map { |i| @quest.send("m_monster#{i}") }.compact %>
     <p class="card-text"><%= quest_main_target(@quest, monsters) %></p>
-    <p class="card-text">平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></p>
+    <p class="card-text">あなたの平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></p>
     <% monsters.each do |monster| %>
       <p class="card-text"><%= monster.name %></p>
     <% end %>

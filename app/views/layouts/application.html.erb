@@ -18,85 +18,13 @@
   </head>
   <body>
     <header class="sticky-top">
-      <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-        <div class="container-fluid">
-          <%# ロゴ %>
-          <%= link_to(root_path, class: "navbar-brand") do %>
-            <i class="fa-solid fa-house"></i> HOME
-          <% end %>
-          <%# モバイルビュー用のトグルボタン %>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="ナビゲーションの切り替え">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <%# PCサイズのヘッダー内容 %>
-          <div class="collapse navbar-collapse" id="navbar-content">
-            <ul class="navbar-nav mr-auto">
-              <%# エメラルド %>
-              <li>
-                <%= link_to("【エメラルド】バトルファクトリー参加ポケモン検索", pokemon_emerald_factory_participants_path, class: "nav-link") %>
-              </li>
-              <% if user_signed_in? %>
-                <%# ログイン時 %>
-                <%# パワプロ %>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    【パワプロ】選手作成メモ
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <%= link_to("作成選手一覧", pawapuro_index_path, class: "dropdown-item") %>
-                    <%= link_to("新規選手作成", new_pawapuro_path, class: "dropdown-item") %>
-                  </div>
-                </li>
-                <%# MHXX %>
-                <li class="nav-item dropdown">
-                  <%= link_to("【MHXX】クエスト別クリアタイムメモ", mhxx_quests_path, class: "nav-link") %>
-                </li>
-              <% end %>
-            </ul>
-            <%# サインイン・ログイン・ログアウトボタン %>
-            <% if user_signed_in? %>
-              <%# ログイン時 %>
-              <div class="collapse navbar-collapse justify-content-center">
-                <div class="text-white">
-                  <%= current_user.fullname %>
-                </div>
-              </div>
-              <form class="form-inline">
-                <%= link_to "logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-danger" %>
-              </form>
-            <% else %>
-              <%# ログアウト時 %>
-              <div class="collapse navbar-collapse justify-content-center">
-                <div class="text-white">
-                  <div class="text-white">フロマのささやかなゲーム攻略ツール集</div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-end">
-                <div>
-                  <%= link_to "sign up", new_user_registration_path, class: "btn btn-primary me-2" %>
-                </div>
-                <div>
-                  <%= link_to "login", new_user_session_path, class: "btn btn-success" %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </nav>
+      <!-- ナビゲーションバー -->
+      <%= render 'layouts/navbar' %>
     </header>
-    <%# flashメッセージ %>
-    <% if notice %>
-      <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <%= notice %>
-      </div>
-    <% end %>
-    <% if alert %>
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <%= alert %>
-      </div>
-    <% end %>
+    <!-- flashメッセージ -->
     <%# 各画面 %>
     <div id="container" class="container froma-container py-3">
+      <%= render 'layouts/flash_messages' %>
       <%= yield %>
       <%= turbo_frame_tag "pawapuro_details_modal" %>
     </div>

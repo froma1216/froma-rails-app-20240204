@@ -50,9 +50,25 @@ module Mhxx::QuestsHelper
     end
   end
 
+  # モンスターアイコン表示
+  def monster_image_tag(monster)
+    if Rails.application.assets.find_asset("mhxx/monsters/#{monster&.name_romanized}.png")
+      # 通常
+      image_tag("mhxx/monsters/#{monster.name_romanized}.png", class: "mhxx-monster-icon__base-image")
+    elsif monster.name_romanized.starts_with?("hyper_")
+      # 獰猛化
+      modified_name = monster.name_romanized.sub(/^hyper_/, "")
+      image_tag("mhxx/monsters/#{modified_name}.png", class: "mhxx-monster-icon__base-image") +
+        image_tag("mhxx/hyper.png", class: "mhxx-monster-icon__overlay-image")
+    else
+      # 禁忌（固有アイコン無し）
+      image_tag("mhxx/monsters/question.png")
+    end
+  end
+
   private
 
-  # 狩猟の詳細分岐
+  # クエスト説明文：狩猟の詳細分岐
   def generate_hunt_target(monsters)
     if monsters[1].nil?
       "#{monsters[0].name}１頭の狩猟"
@@ -63,7 +79,7 @@ module Mhxx::QuestsHelper
     end
   end
 
-  # 討伐の詳細分岐
+  # クエスト説明文：討伐の詳細分岐
   def generate_slay_target(monsters)
     elder_dragon_class_ids = [72, 75, 76] + (81..93).to_a
     if elder_dragon_class_ids.include?(monsters[0].id)
@@ -73,10 +89,12 @@ module Mhxx::QuestsHelper
     end
   end
 
-  # 特殊許可の詳細分岐
+  # クエスト説明文：特殊許可の詳細分岐
   def generate_special_permit_target(quest, monsters)
     if quest.name.include?("捕獲")
       "#{monsters[0].name}１頭の捕獲"
+    elsif monsters[1].nil?
+      "#{monsters[0].name}１頭の狩猟"
     elsif monsters[2].present?
       "全ての大型モンスターの狩猟"
     elsif monsters[0].id == monsters[1].id

@@ -12,7 +12,9 @@
     <p class="card-text"><%= quest_main_target(@quest, monsters) %></p>
     <p class="card-text">あなたの平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></p>
     <% monsters.each do |monster| %>
-      <p class="card-text"><%= monster.name %></p>
+      <div class="mhxx-monster-icon">
+        <%= monster_image_tag(monster) %>
+      </div>
     <% end %>
   </div>
 </div>

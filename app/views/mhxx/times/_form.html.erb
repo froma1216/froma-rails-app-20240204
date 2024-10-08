@@ -104,5 +104,5 @@
   </div>
   <%# ボタンエリア %>
   <%= f.submit '登録する', class: "btn btn-primary" %>
-  <%= link_to 'キャンセル', mhxx_quests_path, class: 'btn btn-secondary' %>
+  <%= link_to "キャンセル", request.referer || mhxx_quests_path, class: "btn btn-secondary" %>
 <% end %>

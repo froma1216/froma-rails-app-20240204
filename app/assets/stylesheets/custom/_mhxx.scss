@@ -75,3 +75,25 @@ $none: #808080;
 .mhxx-btn__element--none {
   @include mhxx-btn__element($none, white);
 }
+
+// アイコン
+.mhxx-monster-icon {
+  background-color: $yellow-700;
+  border-radius: 4px;
+  padding: 4px;
+  display: inline-block;
+  position: relative; /* 被せる画像をこの要素に基準にする */
+}
+
+.mhxx-monster-icon__base-image {
+  width: 100%;
+  height: auto;
+}
+
+.mhxx-monster-icon__overlay-image {
+  position: absolute; /* 被せる画像を絶対位置にする */
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: auto;
+}

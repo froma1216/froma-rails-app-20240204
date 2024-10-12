@@ -4,22 +4,26 @@
   <%= link_to "クエスト一覧へ戻る", mhxx_quests_path, class: "btn btn-info" %>
 </div>
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title"><%= @quest.name %></h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary"><%= I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}") %>クエスト</h6>
-    <% monsters = (1..5).map { |i| @quest.send("m_monster#{i}") }.compact %>
-    <p class="card-text"><%= quest_main_target(@quest, monsters) %></p>
-    <p class="card-text">あなたの平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></p>
-    <% monsters.each do |monster| %>
-      <div class="mhxx-monster-icon">
-        <%= monster_image_tag(monster) %>
+<div class="d-flex justify-content-center mb-3">
+  <div class="card mhxx-card" style="width: 32rem;">
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-body-secondary"><%= I18n.t("enums.mhxx.quest_division.#{@quest.quest_division}") %>クエスト</h6>
+      <h5 class="card-title"><%= @quest.name %></h5>
+      <% monsters = (1..5).map { |i| @quest.send("m_monster#{i}") }.compact %>
+      <p class="card-text"><%= quest_main_target(@quest, monsters) %></p>
+      <div class="mb-3">
+        <% monsters.each do |monster| %>
+          <div class="mhxx-monster-icon">
+            <%= monster_image_tag(monster) %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+      <p class="card-text">あなたの平均クリアタイム：<%= @quest_times.present? ? total_seconds_to_formatted_time(@average_clear_time_in_seconds) : "--'--\"--" %></p>
+    </div>
   </div>
 </div>
 
-<table class="table table-striped">
+<table class="table table-light table-striped">
   <thead>
     <tr>
       <th class="col">No</th>

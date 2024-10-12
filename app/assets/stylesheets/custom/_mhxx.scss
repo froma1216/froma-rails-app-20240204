@@ -78,7 +78,7 @@ $none: #808080;
 
 // アイコン
 .mhxx-monster-icon {
-  background-color: $yellow-700;
+  background-color: #5A5B40;
   border-radius: 4px;
   padding: 4px;
   display: inline-block;
@@ -96,4 +96,11 @@ $none: #808080;
   left: 0;
   width: 100%;
   height: auto;
+}
+.mhxx-card {
+  background-image: url(asset-path('mhxx/background_paper.png')); /* 画像のパスを指定 */
+  background-size: cover; /* 画像がカードのサイズに合わせて表示されるように設定 */
+  background-position: center; /* 画像がカードの中央に配置される */
+  background-repeat: no-repeat; /* 画像の繰り返しを無効にする */
+  color: #442F0F; /* 必要に応じて文字色を変更 */
 }

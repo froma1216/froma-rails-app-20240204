@@ -2,10 +2,8 @@
 <div class="mb-3">
   <%= form_with url: mhxx_quests_path, method: :get, local: true do |f| %>
     <%# ランク選択 %>
-    <%# TODO: お気に入り追加 %>
     <div class="d-flex">
-      <label for="lap" class="form-label">ランク：</label>
-      <div class="ms-3">
+      <div class="ms-1">
         <%= f.collection_radio_buttons(
           :rank_radio,
           Mhxx::MQuestRank.with_all_option,
@@ -26,7 +24,7 @@
     <%= f.submit "検索", class: "btn btn-primary" %>
   <% end %>
 </div>
-<table class="table table-striped">
+<table class="table table-light table-striped">
   <thead>
     <tr>
       <th class="col">No</th>

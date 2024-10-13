@@ -10,7 +10,7 @@
               rank.last,
               class: "form-check-input",
               id: "rank_radio_#{rank.last}",
-              checked: params[:rank_radio] == rank.last.to_s %>
+              checked: (params[:rank_radio].blank? && rank.last == 0) || params[:rank_radio] == rank.last.to_s %>
             <%= f.label "rank_radio_#{rank.last}", rank.first, class: "form-check-label" %>
           </div>
         <% end %>

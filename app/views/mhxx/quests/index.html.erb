@@ -4,22 +4,25 @@
     <%# ランク選択 %>
     <div class="d-flex">
       <div class="ms-1">
-        <%= f.collection_radio_buttons(
-          :rank_radio,
-          Mhxx::MQuestRank.with_all_option,
-          :last,
-          :first,
-          checked: (params[:rank_radio] || "0"),
-          item_wrapper_class: "form-check form-check-inline",
-          label_class: "form-check-label"
-        ) do |b| %>
-          <%= b.radio_button(class: "form-check-input") %>
-          <%= b.label %>
+        <% Mhxx::MQuestRank.with_all_option.each do |rank| %>
+          <div class="form-check form-check-inline me-2">
+            <%= f.radio_button :rank_radio,
+              rank.last,
+              class: "form-check-input",
+              id: "rank_radio_#{rank.last}",
+              checked: params[:rank_radio] == rank.last.to_s %>
+            <%= f.label "rank_radio_#{rank.last}", rank.first, class: "form-check-label" %>
+          </div>
         <% end %>
       </div>
     </div>
     <%# クエスト選択 %>
-    <%= select_tag :rank_number, options_for_select([["すべて", 0]], params[:rank_number]), class: "form-select mb-3", id: "rank_number", data: { selected: params[:rank_number] } %>
+    <%= f.select :rank_number,
+      options_for_select([["すべて", 0]], params[:rank_number]),
+      {},
+      class: "form-select mb-3",
+      id: "rank_number",
+      data: { selected: params[:rank_number] } %>
     <%# ボタンエリア %>
     <%= f.submit "検索", class: "btn btn-primary" %>
   <% end %>

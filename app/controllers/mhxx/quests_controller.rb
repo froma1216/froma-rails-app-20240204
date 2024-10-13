@@ -4,13 +4,15 @@ class Mhxx::QuestsController < ApplicationController
       if params[:rank_radio].to_i == 99
         # お気に入りが選択された場合
         bookmarked_quests_ids = Mhxx::BookmarkQuest.where(user: current_user).pluck(:m_quest_id)
-        @quests = Mhxx::MQuest.where(id: bookmarked_quests_ids).order(:id)
+        @quests = Mhxx::MQuest.where(id: bookmarked_quests_ids).includes(:times, :bookmark_quests).order(:id)
       elsif params[:rank_number].present? && params[:rank_number].to_i != 0
         # その他のランクが選択された場合
-        @quests = Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number]).order(:id)
+        @quests = Mhxx::MQuest.where(m_sub_quest_rank_id: params[:rank_number])
+          .includes(:times, :bookmark_quests)
+          .order(:id)
       else
         # すべてが選択された場合
-        @quests = Mhxx::MQuest.all.order(:id)
+        @quests = Mhxx::MQuest.all.includes(:times, :bookmark_quests).order(:id)
       end
 
       @times = Mhxx::Time.where(m_quest_id: @quests.pluck(:id), user: current_user).group_by(&:m_quest_id)

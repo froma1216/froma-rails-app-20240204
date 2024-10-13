@@ -6,8 +6,8 @@ class Mhxx::MQuest < ApplicationRecord
   belongs_to :m_monster5, class_name: "Mhxx::MMonster", foreign_key: "m_monster5_id", optional: true
   belongs_to :m_sub_quest_rank
 
-  has_many :bookmark_quest
-  has_many :time
+  has_many :bookmark_quests
+  has_many :times
 
   extend Enumerize
   enumerize :quest_division, in: Enums.quest_division

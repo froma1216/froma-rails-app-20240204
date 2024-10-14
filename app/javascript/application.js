@@ -10,6 +10,7 @@ import "@fortawesome/fontawesome-free";
 import "./controllers/pawapuro/pawapuro";
 import "./controllers/poke_em/poke_em";
 import "./controllers/mhxx/mhxx";
+import "./sortable";
 
 // containerの高さを設定
 document.addEventListener("turbo:load", function () {

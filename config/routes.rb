@@ -52,6 +52,11 @@ Rails.application.routes.draw do
         get "filtered_hunter_arts", to: "times#filtered_hunter_arts"
       end
     end
-    resources :bookmark_quests, only: [:create, :destroy]
+    resources :bookmark_quests, only: [:index, :create, :destroy] do
+      collection do
+        # 並び替え
+        post "update_order", to: "bookmark_quests#update_order"
+      end
+    end
   end
 end

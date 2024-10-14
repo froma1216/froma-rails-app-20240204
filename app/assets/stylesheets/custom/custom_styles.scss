@@ -112,6 +112,10 @@ $player-name-background-o-color: #68F177;
   &.times {
     background: url(asset-path('mhxx/mhxx_top.png')) 5% center / cover no-repeat;
   }
+
+  &.bookmark_quests {
+    background: url(asset-path('mhxx/mhxx_top.png')) 5% center / cover no-repeat;
+  }
 }
 
 .froma-container {

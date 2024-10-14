@@ -2,10 +2,10 @@
 <div class="mb-2">
   <%= link_to "クエスト一覧へ戻る", mhxx_quests_path, class: "btn btn-info" %>
 </div>
-<ul class="list-group" id="sort-table">
+<div class="list-group" id="sort-table">
   <% @bookmarks.each do |bookmark_quest| %>
-    <li href="#" class="list-group-item list-group-item-action" data-id="<%= bookmark_quest.id %>">
-      <%= bookmark_quest.m_quest.name %>
-    </li>
+    <button type="button" class="list-group-item list-group-item-action" data-id="<%= bookmark_quest.id %>">
+      <i class="fa-solid fa-grip-vertical text-black-50 me-4"></i><%= bookmark_quest.m_quest.name %>
+    </button>
   <% end %>
-</ul>
+</div>

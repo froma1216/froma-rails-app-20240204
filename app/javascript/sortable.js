@@ -6,12 +6,14 @@ document.addEventListener("turbo:load", function () {
     onEnd: function (evt) {
       let order = [];
       // 並び替えられたクエストの順番を取得
-      document.querySelectorAll("#sort-table li").forEach((element, index) => {
-        order.push({
-          id: element.dataset.id,
-          display_order: index + 1, // 順番を1から開始して保存
+      document
+        .querySelectorAll("#sort-table button")
+        .forEach((element, index) => {
+          order.push({
+            id: element.dataset.id,
+            display_order: index + 1, // 順番を1から開始して保存
+          });
         });
-      });
 
       // 新しい順序をサーバーへ送信
       fetch("/mhxx/bookmark_quests/update_order", {

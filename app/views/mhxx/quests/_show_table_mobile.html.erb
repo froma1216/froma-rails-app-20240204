@@ -1,0 +1,47 @@
+<% @quest_times.each_with_index do |quest_time, index| %>
+  <div class="card mb-2">
+    <div class="card-header">
+      <%= formatted_clear_time(quest_time.clear_time) %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">武器</h5>
+      <p class="card-text">
+        <%= sanitize("#{quest_time.m_hunting_style&.name || "-"}/#{quest_time.m_weapon&.m_weapon_type&.name || "-"}") %>：
+        <span><%= quest_time.m_weapon.present? ? quest_time.m_weapon.name : "-" %></span>
+      </p>
+      <div class="d-flex">
+        <!-- 狩技 -->
+        <div>
+          <h5 class="card-title">狩技</h5>
+          <% hunter_arts = [quest_time.m_hunter_art1, quest_time.m_hunter_art2, quest_time.m_hunter_art3].compact %>
+          <ul>
+            <% if hunter_arts.present? %>
+              <% hunter_arts.each do |hunter_art| %>
+                <li><%= hunter_art.name %></li>
+              <% end %>
+            <% else %>
+              -
+            <% end %>
+          </ul>
+        </div>
+        <!-- スキル -->
+        <div>
+          <h5 class="card-title">スキル</h5>
+          <ul>
+            <% if quest_time.m_skills.any? %>
+              <% quest_time.m_skills.each do |skill| %>
+                <li><%= skill.name %></li>
+              <% end %>
+            <% else %>
+              -
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <%= link_to "編集", edit_mhxx_time_path(quest_time), class: 'btn btn-primary' %>
+        <%= link_to "削除", mhxx_time_path(quest_time), data: { turbo_method: :delete, turbo_confirm: "タイムを削除してよろしいですか？" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -23,57 +23,10 @@
   </div>
 </div>
 
-<table class="table table-light table-striped">
-  <thead>
-    <tr>
-      <th class="col">No</th>
-      <th class="col">タイム</th>
-      <th class="col">スタイル/武器種</th>
-      <th class="col">狩技</th>
-      <th class="col">武器名</th>
-      <th class="col">スキル</th>
-      <th class="col">Action</th>
-    </th>
-  </thead>
-  <tbody>
-    <% @quest_times.each_with_index do |quest_time, index| %>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td><%= formatted_clear_time(quest_time.clear_time) %></td>
-        <td>
-          <%= sanitize("#{quest_time.m_hunting_style&.name || "-"}/<br>#{quest_time.m_weapon&.m_weapon_type&.name || "-"}") %>
-        </td>
-        <td>
-          <% hunter_arts = [quest_time.m_hunter_art1, quest_time.m_hunter_art2, quest_time.m_hunter_art3].compact %>
-          <ul>
-            <% if hunter_arts.present? %>
-              <% hunter_arts.each do |hunter_art| %>
-                <li><%= hunter_art.name %></li>
-              <% end %>
-            <% else %>
-              -
-            <% end %>
-          </ul>
-        </td>
-        <td><%= quest_time.m_weapon.present? ? quest_time.m_weapon.name : "-" %></td>
-        <td>
-          <ul>
-            <% if quest_time.m_skills.any? %>
-              <% quest_time.m_skills.each do |skill| %>
-                <li><%= skill.name %></li>
-              <% end %>
-            <% else %>
-              -
-            <% end %>
-          </ul>
-        </td>
-        <td>
-          <div>
-            <%= link_to "編集", edit_mhxx_time_path(quest_time), class: 'btn btn-primary' %>
-            <%= link_to "削除", mhxx_time_path(quest_time), data: { turbo_method: :delete, turbo_confirm: "タイムを削除してよろしいですか？" }, class: "btn btn-danger" %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- テーブル部 -->
+<div class="d-none d-sm-block">
+  <%= render 'show_table' %>
+</div>
+<div class="d-block d-sm-none">
+  <%= render 'show_table_mobile' %>
+</div>

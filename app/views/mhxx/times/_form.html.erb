@@ -29,17 +29,22 @@
   <%= select_tag :m_weapon_type,
     grouped_options_for_select(@grouped_weapon_types, selected: @time.m_weapon&.m_weapon_type_id.presence),
     prompt: "--武器種を選択--",
-    class: "form-select form-select-sm mb-3",
+    class: "form-select form-select-sm mb-2",
     id: "m_weapon_type" %>
   <%# 属性ボタン %>
   <div class="mb-3">
-    <%= button_tag "全表示", type: "button", class: "btn btn-secondary me-2 active", data: { element: '' } %>
+    <!-- スマホサイズで改行 -->
+    <%= button_tag "全表示", type: "button", class: "btn btn-secondary mb-1 me-2 active d-block d-sm-inline-block", data: { element: '' } %>
     <% Enums.element.except("other").each_with_index do |(key, value), index| %>
-      <%# 氷と龍の間に余白を入れるため、indexで判断する %>
+      <!-- 龍の後に余白を入れる -->
       <%= button_tag t("enums.mhxx.element.#{key}"),
-        type: "button",
-        class: "btn #{"me-2" if key == "dragon"} mhxx-btn__element--#{key}",
-        data: { element: value } %>
+      type: "button",
+      class: "btn mb-1 mhxx-btn__element--#{key} #{"me-2" if key == 'dragon'}",
+      data: { element: value } %>
+      <!-- スマホサイズ時、龍の後に改行を入れる -->
+      <% if key == 'dragon' %>
+        <div class="w-100 d-block d-sm-none"></div>
+      <% end %>
     <% end %>
   </div>
   <%# 武器セレクト %>

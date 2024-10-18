@@ -102,5 +102,3 @@ gem "kaminari"
 # Enum管理
 # NOTE: https://spirits.appirits.com/doruby/8917/
 gem "enumerize"
-
-gem "terser"

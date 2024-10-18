@@ -96,7 +96,7 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = :terser
   config.assets.css_compressor = :sass
 
   # Enable serving of assets from an asset server.

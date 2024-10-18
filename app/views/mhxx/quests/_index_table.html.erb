@@ -1,0 +1,43 @@
+<table class="table table-light table-striped">
+  <thead>
+    <tr>
+      <th class="col">No</th>
+      <th class="col">クエスト名</th>
+      <th class="col">タイム</th>
+      <th class="col">武器種 / スタイル</th>
+      <th class="col">武器名</th>
+      <th class="col">Action</th>
+      <th class="col text-center">
+        お気に入り <span role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="クエスト検索時に「お気に入り」で絞り込みができるようになります。"><i class="fa-solid fa-circle-exclamation icon__info"></i></span>
+      </th>
+    </th>
+  </thead>
+  <tbody>
+    <% @quests.each_with_index do |quest, index| %>
+      <% best_time = @times[quest.id]&.min_by(&:clear_time) %>
+      <tr>
+        <th scope="row" class="align-middle"><%= index + 1 %></th>
+        <td class="align-middle"><%= quest.name %></td>
+        <td class="align-middle"><%= best_time.present? ? formatted_clear_time(best_time.clear_time) : "-" %></td>
+        <td class="align-middle"><%= "#{best_time&.m_hunting_style&.name || "-"} / #{best_time&.m_weapon&.m_weapon_type&.name || "-" }" %></td>
+        <td class="align-middle"><%= best_time&.m_weapon.present? ? best_time.m_weapon.name : "-" %></td>
+        <td class="align-middle">
+          <%= link_to "タイム一覧", mhxx_quest_path(quest.id), class: "btn btn-info" %>
+          <%= link_to "タイム追加", new_mhxx_time_path(quest_id: quest.id), class: "btn btn-success" %>
+        </td>
+        <td class="align-middle text-center">
+          <% bookmark = @bookmarks[quest.id] %>
+          <% if bookmark %>
+            <%= link_to mhxx_bookmark_quest_path(bookmark), data: { turbo_method: :delete }, class: "icon__bookmark" do %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+          <% else %>
+            <%= link_to mhxx_bookmark_quests_path(quest_id: quest.id), data: { turbo_method: :post }, class: "icon__bookmark" do %>
+              <i class="fa-regular fa-star"></i>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

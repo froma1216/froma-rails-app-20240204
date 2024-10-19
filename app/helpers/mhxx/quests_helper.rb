@@ -52,7 +52,7 @@ module Mhxx::QuestsHelper
 
   # モンスターアイコン表示
   def monster_image_tag(monster)
-    if Rails.application.assets.find_asset("mhxx/monsters/#{monster&.name_romanized}.png")
+    if asset_exists?("mhxx/monsters/#{monster&.name_romanized}.png")
       # 通常
       image_tag("mhxx/monsters/#{monster.name_romanized}.png", class: "mhxx-monster-icon__base-image")
     elsif monster.name_romanized.starts_with?("hyper_")
@@ -67,6 +67,11 @@ module Mhxx::QuestsHelper
   end
 
   private
+
+  # 画像ファイルの存在を確認
+  def asset_exists?(filename)
+    Rails.application.assets_manifest.assets[filename].present?
+  end
 
   # クエスト説明文：狩猟の詳細分岐
   def generate_hunt_target(monsters)

@@ -13,7 +13,7 @@ pin "@popperjs/core", to: "@popperjs--core.js" # @2.11.8
 # Font Awesome
 pin "@fortawesome/fontawesome-free", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-free@6.5.1/js/all.js"
 
-pin "pawapuro", to: "controllers/pawapuro/pawapuro.js"
+pin "pawapuro", to: "controllers/pawapuro/pawapuro"
 pin "poke_em", to: "controllers/poke_em/poke_em.js"
-pin "mhxx", to: "controllers/mhxx/mhxx.js"
+pin "mhxx", to: "controllers/mhxx/mhxx"
 pin "sortable", to: "sortable.js"

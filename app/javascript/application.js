@@ -7,10 +7,10 @@ import "controllers";
 import "@fortawesome/fontawesome-free";
 // カスタムjs
 // TODO: 画面毎に切り出し
-import "./controllers/pawapuro/pawapuro";
-import "./controllers/poke_em/poke_em";
-import "./controllers/mhxx/mhxx";
-import "./sortable";
+// import "./controllers/pawapuro/pawapuro";
+// import "./controllers/poke_em/poke_em";
+// import "./controllers/mhxx/mhxx";
+// import "./sortable";
 
 // containerの高さを設定
 document.addEventListener("turbo:load", function () {

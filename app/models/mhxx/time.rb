@@ -10,5 +10,6 @@ class Mhxx::Time < ApplicationRecord
   has_many :time_skills, dependent: :destroy
   has_many :m_skills, through: :time_skills, class_name: "Mhxx::MSkill"
 
-  validates :clear_time, presence: true
+  validates :clear_time, presence: true, numericality: { only_integer: true },
+                         format: { with: /\A\d{6}\z/, message: :clear_time_invalid }
 end

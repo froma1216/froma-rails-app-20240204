@@ -18,7 +18,7 @@
   <%# クリアタイム %>
   <h2>クリアタイム</h2>
   <div class="form-floating mb-3">
-    <%= f.text_field :clear_time, class: "form-control", id: "cleartime", placeholder: "050130" %>
+    <%= f.number_field :clear_time, class: "form-control", id: "cleartime", placeholder: "050130", min: 0, max: 999999 %>
     <%= f.label :clear_time, "クリアタイム", for: "cleartime" %>
     <div class="form-text">区切りなしでの6桁で入力してください。 例）5'01"30 → 050130</div>
   </div>

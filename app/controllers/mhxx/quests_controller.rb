@@ -1,25 +1,19 @@
 class Mhxx::QuestsController < ApplicationController
   def index
     if current_user.present?
-      if params[:rank_radio].to_i == 99
-        # お気に入りが選択された場合
-        bookmarked_quests_ids = Mhxx::BookmarkQuest.where(user: current_user).pluck(:m_quest_id)
-        @quests = Mhxx::MQuest
-          .where(id: bookmarked_quests_ids)
-          .includes(:times, :bookmark_quests)
-          .order("bookmark_quests.display_order")
-      elsif params[:rank_number].present? && params[:rank_number].to_i != 0
+      if params[:rank_number].present? && params[:rank_number].to_i != 99
         # その他のランクが選択された場合
         @quests = Mhxx::MQuest
           .where(m_sub_quest_rank_id: params[:rank_number])
           .includes(:times, :bookmark_quests)
           .order(:id)
       else
-        # すべてが選択された場合
+        #  初期表示 もしくは お気に入りが選択された場合
+        bookmarked_quests_ids = Mhxx::BookmarkQuest.where(user: current_user).pluck(:m_quest_id)
         @quests = Mhxx::MQuest
-          .all
+          .where(id: bookmarked_quests_ids)
           .includes(:times, :bookmark_quests)
-          .order(:id)
+          .order("bookmark_quests.display_order")
       end
 
       @times = Mhxx::Time

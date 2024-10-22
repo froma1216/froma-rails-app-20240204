@@ -4,13 +4,13 @@
     <%# ランク選択 %>
     <div class="d-flex">
       <div class="ms-1">
-        <% Mhxx::MQuestRank.with_all_option.each do |rank| %>
+        <% Mhxx::MQuestRank.with_favorite_option.each do |rank| %>
           <div class="form-check form-check-inline me-2">
             <%= f.radio_button :rank_radio,
               rank.last,
               class: "form-check-input",
               id: "rank_radio_#{rank.last}",
-              checked: (params[:rank_radio].blank? && rank.last == 0) || params[:rank_radio] == rank.last.to_s %>
+              checked: (params[:rank_radio].blank? && rank.last == 99) || params[:rank_radio] == rank.last.to_s %>
             <%= f.label "rank_radio_#{rank.last}", rank.first, class: "form-check-label" %>
           </div>
         <% end %>
@@ -18,7 +18,7 @@
     </div>
     <%# クエスト選択 %>
     <%= f.select :rank_number,
-      options_for_select([["すべて", 0]], params[:rank_number]),
+      options_for_select([["お気に入り", 99]], params[:rank_number]),
       {},
       class: "form-select mb-3",
       id: "rank_number",

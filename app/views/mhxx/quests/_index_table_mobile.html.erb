@@ -22,7 +22,7 @@
         <td class="align-middle text-center">
           <% bookmark = @bookmarks[quest.id] %>
           <% if bookmark %>
-            <%= link_to mhxx_bookmark_quest_path(bookmark), data: { turbo_method: :delete }, class: "icon__bookmark" do %>
+            <%= link_to mhxx_bookmark_quest_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "クエスト「#{quest.name}」のお気に入りを解除してよろしいですか？" }, class: "icon__bookmark" do %>
               <i class="fa-solid fa-star"></i>
             <% end %>
           <% else %>

@@ -38,6 +38,13 @@
           </ul>
         </div>
       </div>
+      <!-- 備考 -->
+      <div class="mb-3">
+        <h5 class="card-title">備考</h5>
+        <p class="card-text">
+          <%= quest_time.note %>
+        </p>
+      </div>
       <div>
         <%= link_to "編集", edit_mhxx_time_path(quest_time), class: 'btn btn-primary' %>
         <%= link_to "削除", mhxx_time_path(quest_time), data: { turbo_method: :delete, turbo_confirm: "タイムを削除してよろしいですか？" }, class: "btn btn-danger" %>

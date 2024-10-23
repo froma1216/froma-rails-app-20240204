@@ -107,6 +107,11 @@
       <% end %>
     <% end %>
   </div>
+  <!-- 備考 -->
+  <div class="form-floating mb-3">
+    <%= f.text_field :note, class: "form-control", id: "note", placeholder: "備考" %>
+    <%= f.label :note, "備考", for: "note" %>
+  </div>
   <%# ボタンエリア %>
   <%= f.submit '登録する', class: "btn btn-primary" %>
   <%= link_to "キャンセル", request.referer || mhxx_quests_path, class: "btn btn-secondary" %>

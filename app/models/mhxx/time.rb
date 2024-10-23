@@ -12,4 +12,5 @@ class Mhxx::Time < ApplicationRecord
 
   validates :clear_time, presence: true, numericality: { only_integer: true },
                          format: { with: /\A\d{6}\z/, message: :clear_time_invalid }
+  #  TODO: 備考の文字数バリデーション
 end

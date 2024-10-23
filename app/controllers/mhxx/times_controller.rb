@@ -105,7 +105,7 @@ class Mhxx::TimesController < ApplicationController
   def time_params
     params.require(:mhxx_time).permit(
       :m_quest_id, :clear_time, :m_weapon_id, :m_hunting_style_id,
-      :m_hunter_art1_id, :m_hunter_art2_id, :m_hunter_art3_id
+      :m_hunter_art1_id, :m_hunter_art2_id, :m_hunter_art3_id, :note
     )
   end
 

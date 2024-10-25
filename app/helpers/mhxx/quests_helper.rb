@@ -66,6 +66,16 @@ module Mhxx::QuestsHelper
     end
   end
 
+  # クエスト名表示のスタイル
+  def styled_quest_name(quest)
+    if quest.name.start_with?("【超特殊許可】")
+      # 超特は文字色を変える
+      content_tag(:span, quest.name, class: "mhxx-text-super-special-permit")
+    else
+      quest.name
+    end
+  end
+
   private
 
   # 画像ファイルの存在を確認

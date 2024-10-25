@@ -76,6 +76,11 @@ $none: #808080;
   @include mhxx-btn__element($none, white);
 }
 
+// 超特殊許可文字
+.mhxx-text-super-special-permit {
+  color: $pink-600;
+}
+
 // アイコン
 .mhxx-monster-icon {
   background-color: #5A5B40;

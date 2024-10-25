@@ -17,7 +17,7 @@
       <% best_time = @times[quest.id]&.min_by(&:clear_time) %>
       <tr>
         <th scope="row" class="align-middle"><%= index + 1 %></th>
-        <td class="align-middle"><%= quest.name %></td>
+        <td class="align-middle"><%= styled_quest_name(quest) %></td>
         <td class="align-middle"><%= best_time.present? ? formatted_clear_time(best_time.clear_time) : "-" %></td>
         <td class="align-middle"><%= "#{best_time&.m_hunting_style&.name || "-"} / #{best_time&.m_weapon&.m_weapon_type&.name || "-" }" %></td>
         <td class="align-middle"><%= best_time&.m_weapon.present? ? best_time.m_weapon.name : "-" %></td>

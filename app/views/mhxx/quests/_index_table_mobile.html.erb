@@ -13,7 +13,7 @@
     <% @quests.each_with_index do |quest, index| %>
       <% best_time = @times[quest.id]&.min_by(&:clear_time) %>
       <tr>
-        <td class="align-middle"><%= quest.name %></td>
+        <td class="align-middle"><%= styled_quest_name(quest) %></td>
         <td class="align-middle"><%= best_time.present? ? formatted_clear_time(best_time.clear_time) : "-" %></td>
         <td class="align-middle">
           <%= link_to "タイム一覧", mhxx_quest_path(quest.id), class: "btn btn-sm btn-info mb-1" %>

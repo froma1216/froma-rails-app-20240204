@@ -76,4 +76,7 @@ Rails.application.configure do
   
   # ActionMailerがメール内でURLを生成する際に使用するデフォルトのホスト名とポート番号を設定
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # SCSSのキャッシュを無効にし、ファイル変更を検知して即座に反映させる
+  config.assets.debug = true
 end

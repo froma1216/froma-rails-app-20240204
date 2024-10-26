@@ -4,7 +4,8 @@ class PawapuroController < ApplicationController
   # 選手一覧画面
   def index
     if current_user.present?
-      @players = PawapuroPlayer.all.order(:id)
+      # 自分で作った選手 もしくは サンプルデータのみ取得
+      @players = PawapuroPlayer.where("created_by = ? OR id = ?", current_user.username, 1).order(id: :desc)
     else
       redirect_to new_user_session_path
     end

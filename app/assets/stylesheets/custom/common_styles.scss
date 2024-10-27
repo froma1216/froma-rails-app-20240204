@@ -1,0 +1,117 @@
+// HACK: リファクタリング
+.froma-body--background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: .7;
+  z-index: -1;
+
+  // 【エメラルド】バトルファクトリー参加ポケモン検索
+  &.pokemon_emerald_factory_participants {
+    background: url(asset-path('pokemon_emerald_factory_participant/em_f_top.png')) 5% center / cover no-repeat;
+  }
+
+  // 【パワプロ】選手作成メモ
+  &.pawapuro {
+    background: url(asset-path('pawapuro/pawa_2024_top3.png')) 5% center / cover no-repeat;
+  }
+
+  // 【MHXX】超特殊許可ソロクリアタイムメモ
+  &.ranks {
+    background: url(asset-path('mhxx/mhxx_top.png')) 5% center / cover no-repeat;
+  }
+
+  &.quests {
+    background: url(asset-path('mhxx/mhxx_top.png')) 5% center / cover no-repeat;
+  }
+
+  &.times {
+    background: url(asset-path('mhxx/mhxx_top.png')) 5% center / cover no-repeat;
+  }
+
+  &.bookmark_quests {
+    background: url(asset-path('mhxx/mhxx_top.png')) 5% center / cover no-repeat;
+  }
+}
+
+.froma-container {
+  background: rgba(255, 255, 255, .7);
+  min-height: 100vh;
+}
+
+// サイズ
+.w-10 {
+  width: 10%;
+}
+
+.w-20 {
+  width: 20%;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-66 {
+  width: 66%;
+}
+
+// w-5のレスポンシブ
+@each $breakpoint in (sm, md, lg, xl) {
+  .w-#{$breakpoint}-5 {
+    @include media-breakpoint-up($breakpoint) {
+      width: 5% !important;
+    }
+  }
+}
+
+@each $breakpoint in (sm, md, lg, xl) {
+  .w-#{$breakpoint}-10 {
+    @include media-breakpoint-up($breakpoint) {
+      width: 10% !important;
+    }
+  }
+}
+
+@each $breakpoint in (sm, md, lg, xl) {
+  .w-#{$breakpoint}-20 {
+    @include media-breakpoint-up($breakpoint) {
+      width: 20% !important;
+    }
+  }
+}
+
+@each $breakpoint in (sm, md, lg, xl) {
+  .w-#{$breakpoint}-25 {
+    @include media-breakpoint-up($breakpoint) {
+      width: 25% !important;
+    }
+  }
+}
+
+@each $breakpoint in (sm, md, lg, xl) {
+  .w-#{$breakpoint}-50 {
+    @include media-breakpoint-up($breakpoint) {
+      width: 50% !important;
+    }
+  }
+}
+
+@each $breakpoint in (sm, md, lg, xl) {
+  .w-#{$breakpoint}-75 {
+    @include media-breakpoint-up($breakpoint) {
+      width: 75% !important;
+    }
+  }
+}
+
+// ！マークアイコン
+.icon__info{
+  color: $info;
+}
+// お気に入り★アイコン
+.icon__bookmark{
+  color: $yellow-600;
+}

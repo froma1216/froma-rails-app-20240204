@@ -1,0 +1,616 @@
+// HACK: Bootstrapで対応できるところは指定する
+// https://chatgpt.com/c/4f71272c-7b36-4519-8020-403c974f8119
+
+// 共通色
+// メイン
+$main-color: #2274B1;
+// サブ
+$sub-color: #C6D9F2;
+// 基本能力アルファベット
+$alphabet-s-color: #E76C93;
+$alphabet-a-color: #DD07AC;
+$alphabet-b-color: #DA0912;
+$alphabet-c-color: #EC810E;
+$alphabet-d-color: #BDB005;
+$alphabet-e-color: #39CC05;
+$alphabet-f-color: #086DF4;
+$alphabet-g-color: #898687;
+
+// 背景色
+// メインBOX
+$main-background-top-color: #E5F4FA;
+$main-background-bottom-color: #D2EEF6;
+// 一覧BOX
+$index-box-top-color: #35C9EE;
+$index-box-bottom-color: #2376CC;
+// 能力カード
+$ability-card-top-color: #01266F;
+$ability-card-bottom-color: #00154D;
+// 特殊能力BOX、チェックボックス
+$good-border-light-color: #58C1D3;
+$good-border-dark-color: #09B3D4;
+$good-background-light-color: #D8F6FF;
+$good-background-dark-color: #ABF4FB;
+$bad-border-light-color: #FAA4A2;
+$bad-border-dark-color: #FA5E62;
+$bad-background-light-color: #FFDEDD;
+$bad-background-dark-color: #FFCBCF;
+$special-border-light-color: #D2B861;
+$special-border-dark-color: #D1AF36;
+$special-background-light-color: #F8E7D3;
+$special-background-dark-color: #F7DDA7;
+$sub-border-light-color: #19D07F;
+$sub-border-dark-color: #47CC9D;
+$sub-background-light-color: #DFF8E3;
+$sub-background-dark-color: #AEFAC4;
+$neutral-border-light-color: #BAEAFA;
+$neutral-border-dark-color: #ADE6FE;
+$neutral-background-light-color: #E5F6FE;
+$neutral-background-dark-color: #DEF7FE;
+
+// 文字色
+// 特殊能力
+$special-text-color: #A16E38;
+$good-text-color: #4285B3;
+$bad-text-color: #AB4D51;
+$sub-text-color: #32865D;
+$neutral-text-color: #B2D8E1;
+
+// 変化球ブロック
+$breaking-block-border-color: $main-color;
+$breaking-block-exist-top-color: #DB4A38;
+$breaking-block-exist-bottom-color: #FEEF31;
+$breaking-block-null-color: #4DBAFF;
+
+// 特殊能力BOX
+$player-name-border-s-color: #B65A45;
+$player-name-background-s-color: #FF9878;
+$player-name-border-r-color: #B67188;
+$player-name-background-r-color: #FDB3D2;
+$player-name-border-c-color: #2694B7;
+$player-name-background-c-color: #12ECFE;
+$player-name-border-i-color: #BC923D;
+$player-name-background-i-color: #FAD700;
+$player-name-border-o-color: #37A238;
+$player-name-background-o-color: #68F177;
+
+// 文字間隔を狭くする
+.tighter-letter-spacing {
+  letter-spacing: -2.0px;
+}
+
+// デフォルトサイズから小さくする
+.small-font {
+  font-size: 0.8em;
+}
+
+// 文字
+// 全体
+@mixin pawa-text($text-color) {
+  color: $text-color;
+}
+
+.pawa-text-main {
+  @include pawa-text($main-color);
+}
+
+// 基礎能力
+.pawa-text-s {
+  @include pawa-text($alphabet-s-color);
+}
+
+.pawa-text-a {
+  @include pawa-text($alphabet-a-color);
+}
+
+.pawa-text-b {
+  @include pawa-text($alphabet-b-color);
+}
+
+.pawa-text-c {
+  @include pawa-text($alphabet-c-color);
+}
+
+.pawa-text-d {
+  @include pawa-text($alphabet-d-color);
+}
+
+.pawa-text-e {
+  @include pawa-text($alphabet-e-color);
+}
+
+.pawa-text-f {
+  @include pawa-text($alphabet-f-color);
+}
+
+.pawa-text-g {
+  @include pawa-text($alphabet-g-color);
+}
+
+// 特殊能力
+.pawa-text-special {
+  @include pawa-text($special-text-color);
+}
+
+.pawa-text-good {
+  @include pawa-text($good-text-color);
+}
+
+.pawa-text-bad {
+  @include pawa-text($bad-text-color);
+}
+
+.pawa-text-sub {
+  @include pawa-text($sub-text-color);
+}
+
+.pawa-text-neutral {
+  @include pawa-text($neutral-text-color);
+}
+
+// 上下2色
+.pawa-text-good-bad {
+  background: linear-gradient(to bottom, $good-text-color 50%, $bad-text-color 50%);
+  -webkit-background-clip: text;
+  /* Safari用 */
+  background-clip: text;
+  /* 標準プロパティ */
+  color: transparent;
+}
+
+// ボーダー色
+// 全体
+.pawa-border-main {
+  border: 3px solid $sub-color;
+}
+
+// 全体（内側）
+.pawa-border-main-in {
+  box-shadow: 0 0 0 5px $sub-color inset;
+}
+
+// 特殊能力BOX
+@mixin pawa-bg-2color($light-color, $dark-color) {
+  background: linear-gradient(180deg, $light-color 0%, $light-color 50%, $dark-color 50%, $dark-color 100%);
+}
+
+@mixin pawa-bg-4color($good-light-color, $good-dark-color, $bad-light-color, $bad-dark-color) {
+  background: conic-gradient($bad-light-color 0%, $bad-light-color 25%, $bad-dark-color 25%, $bad-dark-color 50%, $good-dark-color 50%, $good-dark-color 75%, $good-light-color 75%, $good-light-color 100%);
+}
+
+.pawa-bg-sa-g1 {
+  @include pawa-bg-2color($good-border-light-color, $good-border-dark-color);
+}
+
+.pawa-bg-sa-g2 {
+  @include pawa-bg-2color($good-background-light-color, $good-background-dark-color);
+}
+
+.pawa-bg-sa-b1 {
+  @include pawa-bg-2color($bad-border-light-color, $bad-border-dark-color);
+}
+
+.pawa-bg-sa-b2 {
+  @include pawa-bg-2color($bad-background-light-color, $bad-background-dark-color);
+}
+
+.pawa-bg-sa-gb1 {
+  @include pawa-bg-4color($good-border-light-color, $good-border-dark-color, $bad-border-light-color, $bad-border-dark-color);
+}
+
+.pawa-bg-sa-gb2 {
+  @include pawa-bg-4color($good-background-light-color, $good-background-dark-color, $bad-background-light-color, $bad-background-dark-color);
+}
+
+.pawa-bg-sa-sp1 {
+  @include pawa-bg-2color($special-border-light-color, $special-border-dark-color);
+}
+
+.pawa-bg-sa-sp2 {
+  @include pawa-bg-2color($special-background-light-color, $special-background-dark-color);
+}
+
+.pawa-bg-sa-sb1 {
+  @include pawa-bg-2color($sub-border-light-color, $sub-border-dark-color);
+}
+
+.pawa-bg-sa-sb2 {
+  @include pawa-bg-2color($sub-background-light-color, $sub-background-dark-color);
+}
+
+.pawa-bg-sa-n1 {
+  @include pawa-bg-2color($neutral-border-light-color, $neutral-border-dark-color);
+}
+
+.pawa-bg-sa-n2 {
+  @include pawa-bg-2color($neutral-background-light-color, $neutral-background-dark-color);
+}
+
+// 変化球ブロックのフォントサイズ
+.pawa-breaking-font {
+  font-size: 12px;
+}
+
+// 変化球ブロック：あり
+.pawa-breaking-block-exist {
+  background: linear-gradient(to bottom, $breaking-block-exist-top-color, $breaking-block-exist-bottom-color);
+  border: 2px solid $breaking-block-border-color;
+  height: 8px;
+}
+
+// 変化球ブロック：なし
+.pawa-breaking-block-nil {
+  background-color: $breaking-block-null-color;
+  border: 2px solid $breaking-block-border-color;
+  height: 8px;
+}
+
+// 一覧BOX
+.pawa-index__box {
+  background: linear-gradient(to bottom, $index-box-top-color 50%, $index-box-bottom-color);
+  @extend .rounded;
+  border: 3px solid $ability-card-bottom-color;
+}
+
+// メインBOX
+.pawa-main-box {
+  background: linear-gradient(to bottom, $main-background-top-color 50%, $main-background-bottom-color);
+  border: 3px solid $white;
+  border-radius: 0.5rem; // bounded
+}
+
+// サブBOX
+.pawa-sub-box {
+  background-color: $sub-color;
+}
+
+// 選手名BOX
+@mixin pawa-player-name-box($border-color) {
+  box-shadow: inset 0px 15px rgba($white, .3), inset 0 0 5px rgba($white, .75);
+  border: 3px solid $border-color;
+  text-align: center;
+  border-radius: .25rem;
+  @extend .px-4;
+  @extend .py-1;
+}
+
+@mixin pawa-player-name-box-1color($border-color, $background-color) {
+  @include pawa-player-name-box($border-color);
+  background-color: $background-color;
+}
+
+@mixin pawa-player-name-box-2color($border-color, $background-color1, $background-color2) {
+  @include pawa-player-name-box($border-color);
+  background: linear-gradient(to right, $background-color1 50%, $background-color2 50%);
+}
+
+@mixin pawa-player-name-box-3color($border-color, $background-color1, $background-color2, $background-color3) {
+  @include pawa-player-name-box($border-color);
+  background: linear-gradient(to right,
+      $background-color1 0%, $background-color1 33.33%,
+      $background-color2 33.33%, $background-color2 66.66%,
+      $background-color3 66.66%, $background-color3 100%);
+}
+
+.pawa-player-name-box-s {
+  @include pawa-player-name-box-1color($player-name-border-s-color, $player-name-background-s-color);
+}
+
+.pawa-player-name-box-r {
+  @include pawa-player-name-box-1color($player-name-border-r-color, $player-name-background-r-color);
+}
+
+.pawa-player-name-box-c {
+  @include pawa-player-name-box-1color($player-name-border-c-color, $player-name-background-c-color);
+}
+
+.pawa-player-name-box-i {
+  @include pawa-player-name-box-1color($player-name-border-i-color, $player-name-background-i-color);
+}
+
+.pawa-player-name-box-o {
+  @include pawa-player-name-box-1color($player-name-border-o-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-sr {
+  @include pawa-player-name-box-2color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-r-color);
+}
+
+.pawa-player-name-box-sc {
+  @include pawa-player-name-box-2color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-c-color);
+}
+
+.pawa-player-name-box-si {
+  @include pawa-player-name-box-2color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-i-color);
+}
+
+.pawa-player-name-box-so {
+  @include pawa-player-name-box-2color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-rs {
+  @include pawa-player-name-box-2color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-s-color);
+}
+
+.pawa-player-name-box-rc {
+  @include pawa-player-name-box-2color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-c-color);
+}
+
+.pawa-player-name-box-ri {
+  @include pawa-player-name-box-2color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-i-color);
+}
+
+.pawa-player-name-box-ro {
+  @include pawa-player-name-box-2color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-ci {
+  @include pawa-player-name-box-2color($player-name-border-c-color, $player-name-background-c-color, $player-name-background-i-color);
+}
+
+.pawa-player-name-box-co {
+  @include pawa-player-name-box-2color($player-name-border-c-color, $player-name-background-c-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-ic {
+  @include pawa-player-name-box-2color($player-name-border-i-color, $player-name-background-i-color, $player-name-background-c-color);
+}
+
+.pawa-player-name-box-io {
+  @include pawa-player-name-box-2color($player-name-border-i-color, $player-name-background-i-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-oc {
+  @include pawa-player-name-box-2color($player-name-border-o-color, $player-name-background-o-color, $player-name-background-c-color);
+}
+
+.pawa-player-name-box-oi {
+  @include pawa-player-name-box-2color($player-name-border-o-color, $player-name-background-o-color, $player-name-background-i-color);
+}
+
+.pawa-player-name-box-src {
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-r-color, $player-name-background-c-color);
+}
+
+.pawa-player-name-box-sri {
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-r-color, $player-name-background-i-color);
+}
+
+.pawa-player-name-box-sro {
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-r-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-sci {
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-c-color, $player-name-background-i-color);
+}
+
+
+.pawa-player-name-box-sco {
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-c-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-sio {
+  @include pawa-player-name-box-3color($player-name-border-s-color, $player-name-background-s-color, $player-name-background-i-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-rsc {
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-s-color, $player-name-background-c-color);
+}
+
+.pawa-player-name-box-rsi {
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-s-color, $player-name-background-i-color);
+}
+
+.pawa-player-name-box-rso {
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-s-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-rci {
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-c-color, $player-name-background-i-color);
+}
+
+.pawa-player-name-box-rco {
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-c-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-rio {
+  @include pawa-player-name-box-3color($player-name-border-r-color, $player-name-background-r-color, $player-name-background-i-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-cio {
+  @include pawa-player-name-box-3color($player-name-border-c-color, $player-name-background-c-color, $player-name-background-i-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-ico {
+  @include pawa-player-name-box-3color($player-name-border-i-color, $player-name-background-i-color, $player-name-background-c-color, $player-name-background-o-color);
+}
+
+.pawa-player-name-box-oci {
+  @include pawa-player-name-box-3color($player-name-border-o-color, $player-name-background-o-color, $player-name-background-c-color, $player-name-background-i-color);
+}
+
+// 能力カード
+.pawa-ability-card {
+  @extend .rounded;
+  height: auto;
+  overflow: hidden;
+}
+
+.pawa-ability-card__label {
+  width: 100%;
+  height: auto;
+  @extend .text-center;
+  color: $white;
+  background: linear-gradient(to bottom, $ability-card-top-color 50%, $ability-card-bottom-color);
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.pawa-ability-card__body {
+  width: 100%;
+  height: auto;
+  @extend .d-flex;
+  @extend .justify-content-center;
+  @extend .px-3;
+  color: $main-color;
+  background: linear-gradient(to bottom, $main-background-top-color 50%, $main-background-bottom-color);
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+// ポジションBOX
+@mixin pawa-position-box($border-color, $background-color) {
+  color: $white;
+  text-shadow: 1px 1px 0 $border-color, -1px -1px 0 $border-color,
+    -1px 1px 0 $border-color, 1px -1px 0 $border-color,
+    0px 1px 0 $border-color, 0-1px 0 $border-color,
+    -1px 0 0 $border-color, 1px 0 0 $border-color;
+  background-color: $background-color;
+  box-shadow: inset 0px 15px rgba($white, .3), inset 0 0 5px rgba($white, .75);
+  border: 3px solid $border-color;
+  text-align: center;
+  border-radius: .25rem;
+  @extend .px-2;
+  @extend .py-1;
+}
+
+.pawa-position-box--s {
+  @include pawa-position-box($player-name-border-s-color, $player-name-background-s-color);
+}
+
+.pawa-position-box--r {
+  @include pawa-position-box($player-name-border-r-color, $player-name-background-r-color);
+}
+
+.pawa-position-box--c {
+  @include pawa-position-box($player-name-border-c-color, $player-name-background-c-color);
+}
+
+.pawa-position-box--i {
+  @include pawa-position-box($player-name-border-i-color, $player-name-background-i-color);
+}
+
+.pawa-position-box--o {
+  @include pawa-position-box($player-name-border-o-color, $player-name-background-o-color);
+}
+
+// 能力ラベル
+@mixin pawa-ability-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $sub-color;
+  font-weight: bold;
+  border-radius: 0.5rem; // bounded
+  padding: 0.25rem; // p-1
+  background-color: $white; // bg-white
+  box-shadow: inset 0 -12px 0 0 rgba(0, 0, 0, 0.1);
+  width: 100px;
+  height: 100%;
+
+  // スマホの場合のフォントサイズを小さくする
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    width: auto;
+  }
+}
+
+// 値なし
+.pawa-ability-label-no-value {
+  @include pawa-ability-label;
+
+  // スマホの場合に幅を50pxに変更
+  @media (max-width: 480px) {
+    width: 50px;
+  }
+}
+
+// 値あり
+.pawa-ability-label-variable {
+  @include pawa-ability-label;
+}
+
+// 新規登録時基本能力アルファベットラベル
+@mixin pawa-bg($alphabet-background-color) {
+  background-color: $alphabet-background-color;
+}
+
+.pawa-bg-s {
+  @include pawa-bg($alphabet-s-color);
+}
+
+.pawa-bg-a {
+  @include pawa-bg($alphabet-a-color);
+}
+
+.pawa-bg-b {
+  @include pawa-bg($alphabet-b-color);
+}
+
+.pawa-bg-c {
+  @include pawa-bg($alphabet-c-color);
+}
+
+.pawa-bg-d {
+  @include pawa-bg($alphabet-d-color);
+}
+
+.pawa-bg-e {
+  @include pawa-bg($alphabet-e-color);
+}
+
+.pawa-bg-f {
+  @include pawa-bg($alphabet-f-color);
+}
+
+.pawa-bg-g {
+  @include pawa-bg($alphabet-g-color);
+}
+
+// 特能チェックボックス
+@mixin pawa-checkbox($border-color, $background-color) {
+  border: 2px solid $border-color !important;
+
+  &:checked {
+    background-color: $background-color;
+  }
+}
+
+.pawa-checkbox-sp {
+  @include pawa-checkbox($special-border-dark-color, $special-border-dark-color);
+}
+
+.pawa-checkbox-g {
+  @include pawa-checkbox($good-border-dark-color, $good-border-dark-color);
+}
+
+.pawa-checkbox-b {
+  @include pawa-checkbox($bad-border-dark-color, $bad-border-dark-color);
+}
+
+.pawa-checkbox-gb {
+  // FIXME: 上下で色を分けたい
+  @include pawa-checkbox($bad-border-dark-color, $good-border-dark-color);
+}
+
+.pawa-checkbox-sb {
+  @include pawa-checkbox($sub-border-dark-color, $sub-border-dark-color);
+}
+
+// .mhxx_rank_label {
+//   @extend .p-2;
+//   color: $mhxx_rank_label_text;
+//   background-color: $mhxx_rank_label_color;
+//   box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.4);
+// }
+
+// TODO: ブレイクポイントの見直し
+// PCサイズ
+@media (min-width: 992px) {}
+
+// スマートフォンサイズ
+@media (max-width: 991px) {
+  #responsive-font-size {
+    font-size: 0.75rem;
+  }
+}

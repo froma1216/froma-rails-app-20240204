@@ -5,7 +5,9 @@ class PawapuroController < ApplicationController
   def index
     if current_user.present?
       # 自分で作った選手 もしくは サンプルデータのみ取得
-      @players = PawapuroPlayer.where("created_by = ? OR id = ?", current_user.username, 1).order(id: :desc)
+      @players = PawapuroPlayer.includes(:pawapuro_pitcher, :pawapuro_fielder)
+        .where("created_by = ? OR id = ?", current_user.username, 1)
+        .order(id: :desc)
     else
       redirect_to new_user_session_path
     end

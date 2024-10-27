@@ -1,5 +1,4 @@
 // ページが読み込まれたときに関数を実行
-// TODO: 一個コケると全部死ぬ。mhxx.jsを参考に切り分ける
 document.addEventListener("turbo:load", function () {
   // 投/野能力表示切り替え
   changeDisplayAbility();

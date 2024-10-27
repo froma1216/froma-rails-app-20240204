@@ -605,9 +605,17 @@ $tab-color-profile: #0DAD0D;
   @include pawa-checkbox($sub-border-dark-color, $sub-border-dark-color);
 }
 
+// 選手詳細モーダル
+.pawa-details-modal {
+  background: linear-gradient(to bottom, $main-background-top-color 50%, $main-background-bottom-color);
+  border: 3px solid $tab-color-basic;
+  border-radius: 0.5rem; // bounded
+  transition: border-color 0.2s ease; // 色が変わる際のアニメーション
+}
+
 // nav-tabs のスタイル
 .nav-tabs .nav-item .nav-link {
-  color: #fff;
+  color: $white;
   opacity: 0.6;
   background-color: transparent;
   transition: all 0.3s ease;

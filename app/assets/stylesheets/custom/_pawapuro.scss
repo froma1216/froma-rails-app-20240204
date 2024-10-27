@@ -74,6 +74,14 @@ $player-name-background-i-color: #FAD700;
 $player-name-border-o-color: #37A238;
 $player-name-background-o-color: #68F177;
 
+// 能力詳細：タブ色
+$tab-color-basic: #0054A2;
+$tab-color-pitcher: #C30621;
+$tab-color-fielder: #0884E6;
+$tab-color-promotion: #D79E05;
+$tab-color-profile: #0DAD0D;
+
+
 // 文字間隔を狭くする
 .tighter-letter-spacing {
   letter-spacing: -2.0px;
@@ -597,20 +605,40 @@ $player-name-background-o-color: #68F177;
   @include pawa-checkbox($sub-border-dark-color, $sub-border-dark-color);
 }
 
-// .mhxx_rank_label {
-//   @extend .p-2;
-//   color: $mhxx_rank_label_text;
-//   background-color: $mhxx_rank_label_color;
-//   box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.4);
-// }
+// nav-tabs のスタイル
+.nav-tabs .nav-item .nav-link {
+  color: #fff;
+  opacity: 0.6;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
 
-// TODO: ブレイクポイントの見直し
-// PCサイズ
-@media (min-width: 992px) {}
+.nav-tabs .nav-item .nav-link.active {
+  opacity: 1;
+}
 
-// スマートフォンサイズ
-@media (max-width: 991px) {
-  #responsive-font-size {
-    font-size: 0.75rem;
-  }
+// 各タブに特定の色を適用
+.nav-tabs .nav-link[data-bs-target="#playerBasic"] {
+  background-color: $tab-color-basic;
+}
+
+.nav-tabs .nav-link[data-bs-target="#playerPitcher"] {
+  background-color: $tab-color-pitcher;
+}
+
+.nav-tabs .nav-link[data-bs-target="#playerFielder"] {
+  background-color: $tab-color-fielder;
+}
+
+.nav-tabs .nav-link[data-bs-target="#playerPromotion"] {
+  background-color: $tab-color-promotion;
+}
+
+.nav-tabs .nav-link[data-bs-target="#playerProfile"] {
+  background-color: $tab-color-profile;
+}
+
+// 非アクティブなタブを薄暗くする
+.nav-tabs .nav-link:not(.active) {
+  filter: brightness(0.7);
 }

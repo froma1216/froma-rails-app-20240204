@@ -111,3 +111,14 @@
 .icon__bookmark{
   color: $yellow-600;
 }
+
+// TODO: ブレイクポイントの見直し
+// PCサイズ
+@media (min-width: 992px) {}
+
+// スマートフォンサイズ
+@media (max-width: 991px) {
+  #responsive-font-size {
+    font-size: 0.75rem;
+  }
+}

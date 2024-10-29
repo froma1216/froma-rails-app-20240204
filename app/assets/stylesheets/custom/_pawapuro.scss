@@ -1,86 +1,7 @@
+@import 'pawapuro_colors';
+
 // HACK: Bootstrapで対応できるところは指定する
 // https://chatgpt.com/c/4f71272c-7b36-4519-8020-403c974f8119
-
-// 共通色
-// メイン
-$main-color: #2274B1;
-// サブ
-$sub-color: #C6D9F2;
-// 基本能力アルファベット
-$alphabet-s-color: #E76C93;
-$alphabet-a-color: #DD07AC;
-$alphabet-b-color: #DA0912;
-$alphabet-c-color: #EC810E;
-$alphabet-d-color: #BDB005;
-$alphabet-e-color: #39CC05;
-$alphabet-f-color: #086DF4;
-$alphabet-g-color: #898687;
-
-// 背景色
-// メインBOX
-$main-background-top-color: #E5F4FA;
-$main-background-bottom-color: #D2EEF6;
-// 一覧BOX
-$index-box-top-color: #35C9EE;
-$index-box-bottom-color: #2376CC;
-// 能力カード
-$ability-card-top-color: #01266F;
-$ability-card-bottom-color: #00154D;
-// 特殊能力BOX、チェックボックス
-$good-border-light-color: #58C1D3;
-$good-border-dark-color: #09B3D4;
-$good-background-light-color: #D8F6FF;
-$good-background-dark-color: #ABF4FB;
-$bad-border-light-color: #FAA4A2;
-$bad-border-dark-color: #FA5E62;
-$bad-background-light-color: #FFDEDD;
-$bad-background-dark-color: #FFCBCF;
-$special-border-light-color: #D2B861;
-$special-border-dark-color: #D1AF36;
-$special-background-light-color: #F8E7D3;
-$special-background-dark-color: #F7DDA7;
-$sub-border-light-color: #19D07F;
-$sub-border-dark-color: #47CC9D;
-$sub-background-light-color: #DFF8E3;
-$sub-background-dark-color: #AEFAC4;
-$neutral-border-light-color: #BAEAFA;
-$neutral-border-dark-color: #ADE6FE;
-$neutral-background-light-color: #E5F6FE;
-$neutral-background-dark-color: #DEF7FE;
-
-// 文字色
-// 特殊能力
-$special-text-color: #A16E38;
-$good-text-color: #4285B3;
-$bad-text-color: #AB4D51;
-$sub-text-color: #32865D;
-$neutral-text-color: #B2D8E1;
-
-// 変化球ブロック
-$breaking-block-border-color: $main-color;
-$breaking-block-exist-top-color: #DB4A38;
-$breaking-block-exist-bottom-color: #FEEF31;
-$breaking-block-null-color: #4DBAFF;
-
-// 特殊能力BOX
-$player-name-border-s-color: #B65A45;
-$player-name-background-s-color: #FF9878;
-$player-name-border-r-color: #B67188;
-$player-name-background-r-color: #FDB3D2;
-$player-name-border-c-color: #2694B7;
-$player-name-background-c-color: #12ECFE;
-$player-name-border-i-color: #BC923D;
-$player-name-background-i-color: #FAD700;
-$player-name-border-o-color: #37A238;
-$player-name-background-o-color: #68F177;
-
-// 能力詳細：タブ色
-$tab-color-basic: #0054A2;
-$tab-color-pitcher: #C30621;
-$tab-color-fielder: #0884E6;
-$tab-color-promotion: #D79E05;
-$tab-color-profile: #0DAD0D;
-
 
 // 文字間隔を狭くする
 .tighter-letter-spacing {
@@ -263,7 +184,7 @@ $tab-color-profile: #0DAD0D;
 // メインBOX
 .pawa-main-box {
   background: linear-gradient(to bottom, $main-background-top-color 50%, $main-background-bottom-color);
-  border: 3px solid $white;
+  border: 3px solid white;
   border-radius: 0.5rem; // bounded
 }
 
@@ -274,7 +195,7 @@ $tab-color-profile: #0DAD0D;
 
 // 選手名BOX
 @mixin pawa-player-name-box($border-color) {
-  box-shadow: inset 0px 15px rgba($white, .3), inset 0 0 5px rgba($white, .75);
+  box-shadow: inset 0px 15px rgba(white, .3), inset 0 0 5px rgba(white, .75);
   border: 3px solid $border-color;
   text-align: center;
   border-radius: .25rem;
@@ -448,7 +369,7 @@ $tab-color-profile: #0DAD0D;
   width: 100%;
   height: auto;
   @extend .text-center;
-  color: $white;
+  color: white;
   background: linear-gradient(to bottom, $ability-card-top-color 50%, $ability-card-bottom-color);
   font-weight: bold;
   box-sizing: border-box;
@@ -468,13 +389,13 @@ $tab-color-profile: #0DAD0D;
 
 // ポジションBOX
 @mixin pawa-position-box($border-color, $background-color) {
-  color: $white;
+  color: white;
   text-shadow: 1px 1px 0 $border-color, -1px -1px 0 $border-color,
     -1px 1px 0 $border-color, 1px -1px 0 $border-color,
     0px 1px 0 $border-color, 0-1px 0 $border-color,
     -1px 0 0 $border-color, 1px 0 0 $border-color;
   background-color: $background-color;
-  box-shadow: inset 0px 15px rgba($white, .3), inset 0 0 5px rgba($white, .75);
+  box-shadow: inset 0px 15px rgba(white, .3), inset 0 0 5px rgba(white, .75);
   border: 3px solid $border-color;
   text-align: center;
   border-radius: .25rem;
@@ -511,7 +432,7 @@ $tab-color-profile: #0DAD0D;
   font-weight: bold;
   border-radius: 0.5rem; // bounded
   padding: 0.25rem; // p-1
-  background-color: $white; // bg-white
+  background-color: white;
   box-shadow: inset 0 -12px 0 0 rgba(0, 0, 0, 0.1);
   width: 100px;
   height: 100%;
@@ -615,7 +536,7 @@ $tab-color-profile: #0DAD0D;
 
 // nav-tabs のスタイル
 .nav-tabs .nav-item .nav-link {
-  color: $white;
+  color: white;
   opacity: 0.6;
   background-color: transparent;
   transition: all 0.3s ease;

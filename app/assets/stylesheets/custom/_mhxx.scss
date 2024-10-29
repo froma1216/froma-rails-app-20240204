@@ -1,14 +1,18 @@
+@import 'mhxx_colors';
+
 // 属性
-$fire: #dc143c;
-$water: #1e90ff;
-$thunder: #ffd700;
-$ice: #87cefa;
-$dragon: #483d8b;
-$poison: #8a2be2;
-$paralysis: #daa520;
-$sleep: #6495ed;
-$blast: #8b0000;
-$none: #808080;
+$elements-colors: (
+  fire: $color-fire,
+  water: $color-water,
+  thunder: $color-thunder,
+  ice: $color-ice,
+  dragon: $color-dragon,
+  poison: $color-poison,
+  paralysis: $color-paralysis,
+  sleep: $color-sleep,
+  blast: $color-blast,
+  none: $color-none
+);
 
 // 属性ボタン
 @mixin mhxx-btn__element($background-color, $text-color) {
@@ -36,54 +40,21 @@ $none: #808080;
   }
 }
 
-.mhxx-btn__element--fire {
-  @include mhxx-btn__element($fire, white);
-}
-
-.mhxx-btn__element--water {
-  @include mhxx-btn__element($water, white);
-}
-
-.mhxx-btn__element--thunder {
-  @include mhxx-btn__element($thunder, white);
-}
-
-.mhxx-btn__element--ice {
-  @include mhxx-btn__element($ice, white);
-}
-
-.mhxx-btn__element--dragon {
-  @include mhxx-btn__element($dragon, white);
-}
-
-.mhxx-btn__element--poison {
-  @include mhxx-btn__element($poison, white);
-}
-
-.mhxx-btn__element--paralysis {
-  @include mhxx-btn__element($paralysis, white);
-}
-
-.mhxx-btn__element--sleep {
-  @include mhxx-btn__element($sleep, white);
-}
-
-.mhxx-btn__element--blast {
-  @include mhxx-btn__element($blast, white);
-}
-
-.mhxx-btn__element--none {
-  @include mhxx-btn__element($none, white);
+// ループで回して属性ボタンを作成
+@each $element, $color in $elements-colors {
+  .mhxx-btn__element--#{$element} {
+    @include mhxx-btn__element($color, white);
+  }
 }
 
 // 超特殊許可文字
 .mhxx-text-super-special-permit {
-  color: #EE21E7;
+  color: $special-permit-text-color;
 }
 
 // アイコン
 .mhxx-monster-icon {
-  background-color: #5A5B40;
+  background-color: $monster-icon-bg-color;
   border-radius: 4px;
   padding: 4px;
   display: inline-block;
@@ -102,10 +73,12 @@ $none: #808080;
   width: 100%;
   height: auto;
 }
+
+// クエスト詳細カード
 .mhxx-card {
-  background-image: url(asset-path('mhxx/background_paper.png')); /* 画像のパスを指定 */
-  background-size: cover; /* 画像がカードのサイズに合わせて表示されるように設定 */
-  background-position: center; /* 画像がカードの中央に配置される */
-  background-repeat: no-repeat; /* 画像の繰り返しを無効にする */
-  color: #442F0F; /* 必要に応じて文字色を変更 */
+  background-image: url(asset-path('mhxx/background_paper.png'));
+  background-size: cover; // 画像がカードのサイズに合わせて表示されるように
+  background-position: center; // 画像をカードの中央に配置
+  background-repeat: no-repeat; // 画像の繰り返しを無効にする
+  color: $quest-card-text-color;
 }

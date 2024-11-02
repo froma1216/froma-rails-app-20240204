@@ -1,0 +1,2 @@
+module Pawapuro::PlayersHelper
+end

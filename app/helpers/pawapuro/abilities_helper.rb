@@ -1,3 +1,5 @@
+# TODO: 不要になり次第削除
+
 module Pawapuro::AbilitiesHelper
   def common_special_abilities
     [

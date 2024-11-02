@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_02_123146) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_02_153550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -171,6 +171,45 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_02_123146) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pawapuro_player_m_basic_abilities", comment: "選手・値なし特殊能力マスタ関連", force: :cascade do |t|
+    t.bigint "player_id", null: false, comment: "選手ID"
+    t.bigint "m_basic_ability_id", null: false, comment: "値なし特殊能力マスタID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_basic_ability_id"], name: "index_pawapuro_player_m_basic_abilities_on_m_basic_ability_id"
+    t.index ["player_id"], name: "index_pawapuro_player_m_basic_abilities_on_player_id"
+  end
+
+  create_table "pawapuro_player_m_breaking_balls", comment: "選手・変化球マスタ関連", force: :cascade do |t|
+    t.bigint "player_id", null: false, comment: "選手ID"
+    t.integer "ball_type_order", comment: "球種順序"
+    t.bigint "m_breaking_ball_id", null: false, comment: "変化球マスタID"
+    t.integer "movement", comment: "変化量"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_breaking_ball_id"], name: "index_pawapuro_player_m_breaking_balls_on_m_breaking_ball_id"
+    t.index ["player_id"], name: "index_pawapuro_player_m_breaking_balls_on_player_id"
+  end
+
+  create_table "pawapuro_player_m_positions", comment: "選手・ポジションマスタ関連", force: :cascade do |t|
+    t.bigint "player_id", null: false, comment: "選手ID"
+    t.bigint "m_position_id", null: false, comment: "ポジションID"
+    t.integer "proficiency", comment: "適正レベル"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_position_id"], name: "index_pawapuro_player_m_positions_on_m_position_id"
+    t.index ["player_id"], name: "index_pawapuro_player_m_positions_on_player_id"
+  end
+
+  create_table "pawapuro_player_m_valued_abilities", comment: "選手・値あり特殊能力マスタ関連", force: :cascade do |t|
+    t.bigint "player_id", null: false, comment: "選手ID"
+    t.bigint "m_valued_ability_id", null: false, comment: "値あり特殊能力マスタID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["m_valued_ability_id"], name: "idx_on_m_valued_ability_id_69ca68d18d"
+    t.index ["player_id"], name: "index_pawapuro_player_m_valued_abilities_on_player_id"
+  end
+
   create_table "pawapuro_players", comment: "選手", force: :cascade do |t|
     t.string "last_name", limit: 5, comment: "名字"
     t.string "first_name", limit: 5, comment: "名前"
@@ -258,6 +297,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_02_123146) do
   add_foreign_key "mhxx_times", "mhxx_m_quests", column: "m_quest_id"
   add_foreign_key "mhxx_times", "mhxx_m_weapons", column: "m_weapon_id"
   add_foreign_key "mhxx_times", "users"
+  add_foreign_key "pawapuro_player_m_basic_abilities", "pawapuro_m_basic_abilities", column: "m_basic_ability_id"
+  add_foreign_key "pawapuro_player_m_basic_abilities", "pawapuro_players", column: "player_id"
+  add_foreign_key "pawapuro_player_m_breaking_balls", "pawapuro_m_breaking_balls", column: "m_breaking_ball_id"
+  add_foreign_key "pawapuro_player_m_breaking_balls", "pawapuro_players", column: "player_id"
+  add_foreign_key "pawapuro_player_m_positions", "pawapuro_m_positions", column: "m_position_id"
+  add_foreign_key "pawapuro_player_m_positions", "pawapuro_players", column: "player_id"
+  add_foreign_key "pawapuro_player_m_valued_abilities", "pawapuro_m_valued_abilities", column: "m_valued_ability_id"
+  add_foreign_key "pawapuro_player_m_valued_abilities", "pawapuro_players", column: "player_id"
   add_foreign_key "pawapuro_players", "pawapuro_m_positions", column: "main_position_id"
   add_foreign_key "pawapuro_players", "users"
 end

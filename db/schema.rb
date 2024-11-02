@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_23_042845) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_02_123146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -138,96 +138,65 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_042845) do
     t.index ["user_id"], name: "index_mhxx_times_on_user_id"
   end
 
-  create_table "pawapuro_fielders", force: :cascade do |t|
-    t.integer "trajectory"
-    t.integer "meat"
-    t.integer "power"
-    t.integer "running"
-    t.integer "arm_strength"
-    t.integer "defense"
-    t.integer "catching"
-    t.integer "chance"
-    t.integer "taihidaritousyu"
-    t.integer "catcher"
-    t.integer "tourui"
-    t.integer "sourui"
-    t.integer "soukyuu"
-    t.string "other_special_abilities"
-    t.string "created_by"
-    t.string "updated_by"
+  create_table "pawapuro_m_basic_abilities", comment: "値なし特殊能力マスタ", force: :cascade do |t|
+    t.string "name", comment: "特殊能力名"
+    t.integer "good_bad_division", comment: "青赤区分"
+    t.integer "pitcher_fielder_division", comment: "投手野手区分"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "pawapuro_player_id", null: false
-    t.index ["pawapuro_player_id"], name: "index_pawapuro_fielders_on_pawapuro_player_id"
   end
 
-  create_table "pawapuro_pitchers", force: :cascade do |t|
-    t.integer "pace"
-    t.integer "control"
-    t.integer "stamina"
-    t.string "fastball_type"
-    t.string "second_fastball_type"
-    t.string "slider_type_pitch"
-    t.integer "slider_type_movement"
-    t.string "second_slider_type_pitch"
-    t.integer "second_slider_type_movement"
-    t.string "curveball_type_pitch"
-    t.integer "curveball_type_movement"
-    t.string "second_curveball_type_pitch"
-    t.integer "second_curveball_type_movement"
-    t.string "shootball_type_pitch"
-    t.integer "shootball_type_movement"
-    t.string "second_shootball_type_pitch"
-    t.integer "second_shootball_type_movement"
-    t.string "sinker_type_pitch"
-    t.integer "sinker_type_movement"
-    t.string "second_sinker_type_pitch"
-    t.integer "second_sinker_type_movement"
-    t.string "forkball_type_pitch"
-    t.integer "forkball_type_movement"
-    t.string "second_forkball_type_pitch"
-    t.integer "second_forkball_type_movement"
-    t.string "original_pitch"
-    t.integer "taipinch"
-    t.integer "taihidaridasya"
-    t.integer "utarezuyosa"
-    t.integer "nobi"
-    t.integer "quick"
-    t.string "other_special_abilities"
-    t.string "created_by"
-    t.string "updated_by"
+  create_table "pawapuro_m_breaking_balls", comment: "変化球マスタ", force: :cascade do |t|
+    t.string "name", comment: "変化球名"
+    t.integer "breaking_ball_division", comment: "変化方向区分"
+    t.boolean "is_original", comment: "オリジナルフラグ"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "pawapuro_player_id", null: false
-    t.index ["pawapuro_player_id"], name: "index_pawapuro_pitchers_on_pawapuro_player_id"
   end
 
-  create_table "pawapuro_players", force: :cascade do |t|
-    t.string "last_name"
-    t.string "first_name"
-    t.string "player_name"
-    t.string "back_name"
-    t.date "birthday"
-    t.integer "main_position"
-    t.integer "p11_proper"
-    t.integer "p12_proper"
-    t.integer "p13_proper"
-    t.integer "p2_proper"
-    t.integer "p3_proper"
-    t.integer "p4_proper"
-    t.integer "p5_proper"
-    t.integer "p6_proper"
-    t.integer "p7_proper"
-    t.string "throws"
-    t.string "bats"
-    t.integer "kaifuku"
-    t.integer "kegasinikusa"
-    t.string "other_special_abilities"
-    t.text "note"
-    t.string "created_by"
-    t.string "updated_by"
+  create_table "pawapuro_m_positions", comment: "ポジションマスタ", force: :cascade do |t|
+    t.string "name", comment: "ポジション名"
+    t.string "abbreviation", comment: "略称"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pawapuro_m_valued_abilities", comment: "値あり特殊能力マスタ", force: :cascade do |t|
+    t.string "name", comment: "特殊能力名"
+    t.integer "min_level", comment: "最小レベル"
+    t.integer "max_level", comment: "最大レベル"
+    t.string "level_display_name", comment: "表示名"
+    t.integer "pitcher_fielder_division", comment: "投手野手区分"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pawapuro_players", comment: "選手", force: :cascade do |t|
+    t.string "last_name", limit: 5, comment: "名字"
+    t.string "first_name", limit: 5, comment: "名前"
+    t.string "player_name", limit: 10, null: false, comment: "登録名"
+    t.string "back_name", limit: 13, comment: "背ネーム"
+    t.date "birthday", comment: "生年月日"
+    t.bigint "main_position_id", null: false, comment: "メインポジション"
+    t.integer "throwing", comment: "利き投げ"
+    t.integer "batting", comment: "利き打ち"
+    t.integer "pace", comment: "球速"
+    t.integer "control", comment: "コントロール"
+    t.integer "stamina", comment: "スタミナ"
+    t.string "original_breaking_ball_name", comment: "オリジナル球種名"
+    t.integer "trajectory", comment: "弾道"
+    t.integer "meat", comment: "ミート"
+    t.integer "power", comment: "パワー"
+    t.integer "running", comment: "走力"
+    t.integer "arm", comment: "肩力"
+    t.integer "fielding", comment: "守備力"
+    t.integer "catching", comment: "捕球"
+    t.string "note", limit: 100, comment: "備考"
+    t.bigint "user_id", null: false, comment: "ユーザID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["main_position_id"], name: "index_pawapuro_players_on_main_position_id"
+    t.index ["user_id"], name: "index_pawapuro_players_on_user_id"
   end
 
   create_table "pokemon_emerald_factory_participants", force: :cascade do |t|
@@ -289,6 +258,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_042845) do
   add_foreign_key "mhxx_times", "mhxx_m_quests", column: "m_quest_id"
   add_foreign_key "mhxx_times", "mhxx_m_weapons", column: "m_weapon_id"
   add_foreign_key "mhxx_times", "users"
-  add_foreign_key "pawapuro_fielders", "pawapuro_players"
-  add_foreign_key "pawapuro_pitchers", "pawapuro_players"
+  add_foreign_key "pawapuro_players", "pawapuro_m_positions", column: "main_position_id"
+  add_foreign_key "pawapuro_players", "users"
 end

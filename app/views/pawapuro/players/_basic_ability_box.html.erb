@@ -1,0 +1,20 @@
+<%# 基本能力の１box %>
+<div class="row p-1 mb-1 pawa-main-box align-items-center">
+  <div class="col-12 col-sm-5 p-0 d-flex justify-content-center justify-content-sm-start">
+    <div class="pawa-ability-label-no-value"><%= label %></div>
+  </div>
+  <div class="col-12 col-sm-7 d-flex justify-content-center justify-content-sm-start px-3">
+    <% if label == "弾道" %>
+      <span class="pawa-text-a fs-5 fw-bold me-1 me-sm-2"><%= display_trajectory(ability_value) %></span>
+      <span class="fs-5 fw-bold"><%= ability_value %></span>
+    <% elsif label == "球速" %>
+      <div class="d-flex flex-column flex-sm-row align-items-center">
+        <span class="fs-5 fw-bold me-1"><%= ability_value %></span>
+        <span class="mt-sm-1">km/h</span>
+      </div>
+    <% else %>
+      <span class="pawa-text-a fs-5 fw-bold me-1 me-sm-2"><%= display_alphabet(ability_value) %></span>
+      <span class="fs-5 fw-bold"><%= ability_value %></span>
+    <% end %>
+  </div>
+</div>

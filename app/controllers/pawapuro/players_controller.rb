@@ -1,5 +1,14 @@
 class Pawapuro::PlayersController < ApplicationController
-  def index; end
+  before_action :ensure_currect_user, { only: [:edit, :update, :destroy] }
+
+  def index
+    if current_user.present?
+      # 自分で作った選手のみ取得
+      @players = Pawapuro::Player.where(user: current_user).order(id: :desc)
+    else
+      redirect_to new_user_session_path
+    end
+  end
 
   def details; end
 
@@ -12,4 +21,12 @@ class Pawapuro::PlayersController < ApplicationController
   def update; end
 
   def destroy; end
+
+  private
+
+  # 権限確認
+  def ensure_currect_user
+    @player = Pawapuro::Player.find(params[:id])
+    redirect_to pawapuro_index_path, notice: "権限がありません" if @player.user != current_user
+  end
 end

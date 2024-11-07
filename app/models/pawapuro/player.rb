@@ -3,6 +3,8 @@ class Pawapuro::Player < ApplicationRecord
   belongs_to :main_position, class_name: "Pawapuro::MPosition", foreign_key: "main_position_id", optional: true
   has_many :player_m_positions
   has_many :m_positions, through: :player_m_positions
+  has_many :player_m_breaking_balls
+  has_many :m_breaking_balls, through: :player_m_breaking_balls
 
   # 守備適正を持つポジションを全て取得し、メインポジションを先頭にする
   def formatted_position_abbreviations
@@ -19,5 +21,15 @@ class Pawapuro::Player < ApplicationRecord
     end
 
     positions
+  end
+
+  # 変化球の変化量を取得するメソッド
+  def breaking_ball_movement(breaking_ball_division, ball_type_order)
+    player_m_breaking_balls
+      .joins(:m_breaking_ball)
+      .merge(Pawapuro::MBreakingBall.where(breaking_ball_division:))
+      .where(ball_type_order:)
+      .pluck(:movement)
+      .first
   end
 end

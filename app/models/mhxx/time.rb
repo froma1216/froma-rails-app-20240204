@@ -8,7 +8,7 @@ class Mhxx::Time < ApplicationRecord
   belongs_to :m_weapon, optional: true
 
   has_many :time_skills, dependent: :destroy
-  has_many :m_skills, through: :time_skills, class_name: "Mhxx::MSkill"
+  has_many :m_skills, through: :time_skills
 
   validates :clear_time, presence: true, numericality: { only_integer: true },
                          format: { with: /\A\d{6}\z/, message: :clear_time_invalid }

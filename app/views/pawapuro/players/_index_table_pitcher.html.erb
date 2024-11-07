@@ -1,7 +1,35 @@
-<%= render partial: 'basic_ability_table_box', locals: { label:"球速", ability_value: player.pace, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"コントロール", ability_value: player.control, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"スタミナ", ability_value: player.stamina, width: "w-30 w-sm-10" } %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"球速",
+  ability_value: player.pace,
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"コントロール",
+  ability_value: player.control,
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"スタミナ",
+  ability_value: player.stamina,
+  width: "w-30 w-sm-10"
+} %>
+<!-- 変化球 -->
+<%# TODO: 右投げか左投げかで矢印の向きを変える（順番を変える） %>
 <!-- PC -->
-<%#= render partial: 'index_table_pitcher_movement', locals: { player: } %>
+<% breaking_ball_types_pc.each do |type| %>
+  <%= render partial: 'basic_ability_table_box', locals: {
+    label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down", style: "transform: rotate(#{type[:rotation]}deg);"),
+    ability_value: player.breaking_ball_movement(type[:division], 1) || 0,
+    ability_value2: player.breaking_ball_movement(type[:division], 2),
+    width: "w-10 d-none d-sm-block"
+  } %>
+<% end %>
 <!-- モバイル -->
-<%#= render partial: 'index_table_pitcher_movement_mobile', locals: { player: } %>
+<% breaking_ball_types_mobile.each do |type| %>
+  <%= render partial: 'basic_ability_table_box', locals: {
+    label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down", style: "transform: rotate(#{type[:rotation]}deg);"),
+    ability_value: player.breaking_ball_movement(type[:division], 1) || 0,
+    ability_value2: player.breaking_ball_movement(type[:division], 2),
+    width: "w-30 d-block d-sm-none"
+  } %>
+<% end %>

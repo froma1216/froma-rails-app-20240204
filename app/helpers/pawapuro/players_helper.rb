@@ -140,6 +140,7 @@ module Pawapuro::PlayersHelper
     content_tag(:i, "", class: "fa fa-solid fa-arrow-right #{text_color}", style: "transform: rotate(#{angle});")
   end
 
+  # TODO: アルファベットはenumで
   # 能力値（弾道以外）をアルファベットに変換＋文字色変更
   def display_alphabet(val)
     case val
@@ -174,5 +175,29 @@ module Pawapuro::PlayersHelper
         pos[:abbreviation]
       end
     end.join("・").html_safe
+  end
+
+  # 変化球タイプ（PC）
+  def breaking_ball_types_pc
+    [
+      { division: 100, rotation: 180, label: "ストレート系" },
+      { division: 230, rotation: 90, label: "シュート系" },
+      { division: 240, rotation: 45, label: "シンカー系" },
+      { division: 250, rotation: 0, label: "フォーク系" },
+      { division: 220, rotation: -45, label: "カーブ系" },
+      { division: 210, rotation: -90, label: "スライダー系" }
+    ]
+  end
+
+  # 変化球タイプ（PC）
+  def breaking_ball_types_mobile
+    [
+      { division: 230, rotation: 90, label: "シュート系" },
+      { division: 100, rotation: 180, label: "ストレート系" },
+      { division: 210, rotation: -90, label: "スライダー系" },
+      { division: 240, rotation: 45, label: "シンカー系" },
+      { division: 250, rotation: 0, label: "フォーク系" },
+      { division: 220, rotation: -45, label: "カーブ系" }
+    ]
   end
 end

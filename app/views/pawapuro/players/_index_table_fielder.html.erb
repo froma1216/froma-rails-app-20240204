@@ -1,8 +1,42 @@
-<%= render partial: 'basic_ability_table_box', locals: { label:"弾道", ability_value: player.trajectory, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"ミート", ability_value: player.meat, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"パワー", ability_value: player.power, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"走力", ability_value: player.running, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"肩力", ability_value: player.arm, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"守備力", ability_value: player.fielding, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"捕球", ability_value: player.catching, width: "w-30 w-sm-10" } %>
-<%= render partial: 'basic_ability_table_box', locals: { label:"守備位置", ability_value: display_position_abbreviations(player.formatted_position_abbreviations, player.main_position.id), width: "w-66 w-sm-20" } %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"弾道",
+  ability_value: ability_value_trajectory(player.trajectory),
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"ミート",
+  ability_value: ability_value_basic(player.meat),
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"パワー",
+  ability_value: ability_value_basic(player.power),
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"走力",
+  ability_value: ability_value_basic(player.running),
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"肩力",
+  ability_value: ability_value_basic(player.arm),
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"守備力",
+  ability_value: ability_value_basic(player.fielding),
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"捕球",
+  ability_value: ability_value_basic(player.catching),
+  width: "w-30 w-sm-10"
+} %>
+<%= render partial: 'basic_ability_table_box', locals: {
+  label:"守備位置",
+  ability_value: display_position_abbreviations(
+      player.formatted_position_abbreviations, player.main_position.id
+    ),
+  width: "w-66 w-sm-20"
+} %>

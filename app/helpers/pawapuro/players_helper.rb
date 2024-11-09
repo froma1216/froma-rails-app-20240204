@@ -143,27 +143,27 @@ module Pawapuro::PlayersHelper
   # TODO: アルファベットはenumで
   # 能力値（弾道以外）をアルファベットに変換＋文字色変更
   def display_alphabet(val)
-    case val
-    when 1..19
-      content_tag(:span, "G ", class: "pawa-text-g")
-    when 20..39
-      content_tag(:span, "F ", class: "pawa-text-f")
-    when 40..49
-      content_tag(:span, "E ", class: "pawa-text-e")
-    when 50..59
-      content_tag(:span, "D ", class: "pawa-text-d")
-    when 60..69
-      content_tag(:span, "C ", class: "pawa-text-c")
-    when 70..79
-      content_tag(:span, "B ", class: "pawa-text-b")
-    when 80..89
-      content_tag(:span, "A ", class: "pawa-text-a")
-    when 90..100
-      content_tag(:span, "S ", class: "pawa-text-s")
-    else
-      # エラーケース
-      content_tag(:span, "", class: "")
-    end
+    text, text_color = case val
+                       when 1..19
+                         ["G", "pawa-text-g"]
+                       when 20..39
+                         ["F", "pawa-text-f"]
+                       when 40..49
+                         ["E", "pawa-text-e"]
+                       when 50..59
+                         ["D", "pawa-text-d"]
+                       when 60..69
+                         ["C", "pawa-text-c"]
+                       when 70..79
+                         ["B", "pawa-text-b"]
+                       when 80..89
+                         ["A", "pawa-text-a"]
+                       when 90..100
+                         ["S", "pawa-text-s"]
+                       else
+                         ["", ""]
+                       end
+    content_tag(:span, "#{text} ", class: text_color)
   end
 
   # ポジション適正を「・」区切りで表示
@@ -199,5 +199,37 @@ module Pawapuro::PlayersHelper
       { division: 250, rotation: 0, label: "フォーク系" },
       { division: 220, rotation: -45, label: "カーブ系" }
     ]
+  end
+
+  # 一覧BOXの値（変化球）
+  def ability_value_movements(ability_value, ability_value2)
+    content_tag(:div, class: "d-flex justify-content-between") do
+      content_tag(:span, ability_value) +
+        content_tag(:span, ability_value2.presence || "")
+    end
+  end
+
+  # 一覧BOXの値（球速）
+  def ability_value_pace(ability_value)
+    content_tag(:span, ability_value) +
+      content_tag(:span) do
+        content_tag(:small, "km/h")
+      end
+  end
+
+  # 一覧BOXの値（弾道）
+  def ability_value_trajectory(ability_value)
+    content_tag(:span) do
+      concat display_trajectory(ability_value)
+    end +
+      content_tag(:span, ability_value)
+  end
+
+  # 一覧BOXの値（アルファベット＋数値）
+  def ability_value_basic(ability_value)
+    content_tag(:span) do
+      concat display_alphabet(ability_value)
+    end +
+      content_tag(:span, ability_value)
   end
 end

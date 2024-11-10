@@ -14,6 +14,10 @@ class Pawapuro::Player < ApplicationRecord
   has_many :player_m_basic_abilities
   has_many :m_basic_abilities, through: :player_m_basic_abilities
 
+  extend Enumerize
+  enumerize :throwing, in: Enums.dominant_hand
+  enumerize :batting, in: Enums.dominant_hand
+
   # 守備適正を持つポジションを全て取得し、メインポジションを先頭にする
   def formatted_position_abbreviations
     positions = player_m_positions.includes(:m_position).map do |pm_position|

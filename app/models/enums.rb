@@ -19,6 +19,11 @@ class Enums
     def skill_division
       YAML.load_file(Rails.root.join("config", "mhxx", "skill_division.yml"))["skill_division"]
     end
+
+    # スキル区分
+    def dominant_hand
+      YAML.load_file(Rails.root.join("config", "pawapuro", "dominant_hand.yml"))["dominant_hand"]
+    end
     # 以下に追加
   end
 end

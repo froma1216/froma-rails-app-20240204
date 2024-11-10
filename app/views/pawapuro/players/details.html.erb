@@ -45,8 +45,11 @@
                   <div class="pawa-ability-label-no-value">投打</div>
                 </div>
                 <span class="ms-1" id="responsive-font-size">
-                  <!-- TODO: enumで変換 -->
-                  <strong><%= "#{@player.throwing}投#{@player.batting}打" %></strong>
+                  <% throwing_text = I18n.t("enums.pawapuro.dominant_hand.#{@player.throwing}") %>
+                  <% batting_text = I18n.t("enums.pawapuro.dominant_hand.#{@player.batting}") %>
+                  <strong>
+                    <%= "#{throwing_text}投#{batting_text}打" %>
+                  </strong>
                 </span>
               </div>
             </div>

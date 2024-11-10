@@ -1,0 +1,58 @@
+<%# 野手能力 %>
+<div class="row p-2">
+  <%# 基礎能力部 %>
+  <div class="col-3 pe-4 pawa-text-main">
+    <%= render partial: 'fielder_basic_ability_wrap' %>
+  </div>
+  <%# 特殊能力部 %>
+  <div class="col-9 bg-light border border-3 border-white rounded">
+    <%# 値あり %>
+    <div class="row">
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name:"チャンス",
+        ability_value: @player.m_valued_ability_value(8)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name:"対左投手",
+        ability_value: @player.m_valued_ability_value(9)
+      } %>
+      <%# TODO: キャッチャー適正があるときのみ表示 %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name:"キャッチャー",
+        ability_value: @player.m_valued_ability_value(10)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name:"ケガしにくさ",
+        ability_value: @player.m_valued_ability_value(2)
+      } %>
+    </div>
+    <div class="row">
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name:"盗塁",
+        ability_value: @player.m_valued_ability_value(11)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name:"走塁",
+        ability_value: @player.m_valued_ability_value(12)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name:"送球",
+        ability_value: @player.m_valued_ability_value(13)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name:"回復",
+        ability_value: @player.m_valued_ability_value(1)
+      } %>
+    </div>
+    <%# 値なし %>
+    <%# FIXME: 部分テンプレートに切り出し %>
+    <% abilities_array = @player.other_special_ability_names %>
+    <% 6.times do |row| %>
+      <div class="row">
+        <% (row*4...row*4+4).each do |index| %>
+          <%= render partial: 'special_ability_no_value_box', locals: { ability: abilities_array[index] || '' } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

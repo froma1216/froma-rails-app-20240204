@@ -30,15 +30,15 @@ module PawapuroHelper
     content_tag(:span, abilities[val] || "")
   end
 
-  # 投打の値を右・左・両に変換
-  def display_left_and_right(val)
-    throws_bats = {
-      "right" => "右",
-      "left" => "左",
-      "both" => "両"
-    }
-    content_tag(:span, throws_bats[val] || "")
-  end
+  # # 投打の値を右・左・両に変換
+  # def display_left_and_right(val)
+  #   throws_bats = {
+  #     "right" => "右",
+  #     "left" => "左",
+  #     "both" => "両"
+  #   }
+  #   content_tag(:span, throws_bats[val] || "")
+  # end
 
   # # 能力値（弾道）によって文字色、→の角度を変更
   # def display_trajectory(trajectory)
@@ -269,37 +269,37 @@ module PawapuroHelper
     end
   end
 
-  # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
-  def ability_no_value_color_classes(ability)
-    abilities = PAWAPURO_ABILITIES
-    if abilities["good"].include?(ability)
-      ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
-    elsif abilities["bad"].include?(ability)
-      ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
-    elsif abilities["good_and_bad"].include?(ability)
-      ["pawa-bg-sa-gb1", "pawa-bg-sa-gb2", "pawa-text-good"]
-    elsif abilities["special"].include?(ability)
-      ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-special"]
-    elsif abilities["sub"].include?(ability)
-      ["pawa-bg-sa-sb1", "pawa-bg-sa-sb2", "pawa-text-sub"]
-    else
-      ["pawa-bg-sa-n1 d-none d-sm-block", "pawa-bg-sa-n2", "pawa-text-neutral"]
-    end
-  end
+  # # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
+  # def ability_no_value_color_classes(ability)
+  #   abilities = PAWAPURO_ABILITIES
+  #   if abilities["good"].include?(ability)
+  #     ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
+  #   elsif abilities["bad"].include?(ability)
+  #     ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
+  #   elsif abilities["good_and_bad"].include?(ability)
+  #     ["pawa-bg-sa-gb1", "pawa-bg-sa-gb2", "pawa-text-good"]
+  #   elsif abilities["special"].include?(ability)
+  #     ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-special"]
+  #   elsif abilities["sub"].include?(ability)
+  #     ["pawa-bg-sa-sb1", "pawa-bg-sa-sb2", "pawa-text-sub"]
+  #   else
+  #     ["pawa-bg-sa-n1 d-none d-sm-block", "pawa-bg-sa-n2", "pawa-text-neutral"]
+  #   end
+  # end
 
-  # 特殊能力（値あり）ボックスの背景色、文字色クラスを返す
-  def ability_value_color_classes(ability_value)
-    case ability_value
-    when 2..3
-      ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
-    when -4..-2
-      ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
-    when 4
-      ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-special"]
-    else
-      ["pawa-bg-sa-n1", "pawa-bg-sa-n2", "pawa-text-neutral"]
-    end
-  end
+  # # 特殊能力（値あり）ボックスの背景色、文字色クラスを返す
+  # def ability_value_color_classes(ability_value)
+  #   case ability_value
+  #   when 2..3
+  #     ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
+  #   when -4..-2
+  #     ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
+  #   when 4
+  #     ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-special"]
+  #   else
+  #     ["pawa-bg-sa-n1", "pawa-bg-sa-n2", "pawa-text-neutral"]
+  #   end
+  # end
 
   # 特殊能力（値あり）の金特、超赤特の名前を返す
   def gold_or_very_red_ability_name(ability_name, ability_value)

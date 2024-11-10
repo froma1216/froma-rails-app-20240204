@@ -1,0 +1,22 @@
+<%# 特殊能力（値あり）の１box %>
+<% bg_class_1, bg_class_2, text_class = ability_value_color_classes(ability_value) %>
+
+<% if (-3..3).include?(ability_value) %>
+  <%# 一般特殊能力の場合 %>
+  <div class="col-12 col-sm-3 fs-3 <%= bg_class_1 %> rounded">
+    <div class="row pt-1 pb-1 ps-1 text-center">
+      <span class="col-10 rounded px-3 <%= "#{bg_class_2} #{text_class}" %>"><%= raw(ability_name.presence || '&nbsp;') %></span>
+      <span class="col-2 ps-2 text-light"><%= display_special_ability_alphabet(ability_value) %></span>
+    </div>
+  </div>
+<% else %>
+  <%# 金特、超赤特の場合 %>
+  <%# HACK: 共通化 %>
+  <div class="col-12 col-sm-3 fs-3 <%= bg_class_1 %> rounded d-flex pawa-ability-box">
+    <div class="row p-1 text-center flex-fill">
+      <span class="col rounded d-flex justify-content-center align-items-center <%= "#{bg_class_2} #{text_class}" %>">
+        <%= raw(gold_or_very_red_ability_name(ability_name, ability_value)) %>
+      </span>
+    </div>
+  </div>
+<% end %>

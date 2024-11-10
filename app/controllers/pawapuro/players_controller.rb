@@ -10,7 +10,15 @@ class Pawapuro::PlayersController < ApplicationController
     end
   end
 
-  def details; end
+  def details
+    if current_user.present?
+      #  自分で作成した選手と、テストデータのみ表示する
+      @player = Pawapuro::Player.where(user: current_user).find(params[:id])
+    else
+      redirect_to pawapuro_index_path,
+                  notice: "権限がありません"
+    end
+  end
 
   def new; end
 

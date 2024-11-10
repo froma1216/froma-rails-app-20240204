@@ -1,0 +1,61 @@
+<%# プロフィール %>
+<div class="row p-2">
+  <%# 基礎能力部 %>
+  <div class="col-3 pe-4 pawa-text-main">
+    <%# メインポジションが投手か野手かによって、表示を分ける %>
+    <% if @player.main_position == 11..13 %>
+      <%= render partial: 'pitcher_basic_ability_wrap' %>
+    <% else %>
+      <%= render partial: 'fielder_basic_ability_wrap' %>
+    <% end %>
+  </div>
+  <%# プロフィール部 %>
+  <div class="col-9 pawa-text-main">
+    <div class="row">
+      <div class="col-12 col-sm-7 d-flex justify-content-start p-1 mb-1 pawa-main-box">
+        <div class="p-0">
+          <div class="pawa-ability-label-no-value">氏名</div>
+        </div>
+        <div class="ps-3 py-2">
+          <span class="h5"><%= "#{@player.last_name}　#{@player.first_name}" %></span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-5 d-flex justify-content-start p-1 mb-1 pawa-main-box">
+        <div class="p-0">
+          <div class="pawa-ability-label-no-value">背ネーム</div>
+        </div>
+        <div class="ps-3 py-2">
+          <span class="h5"><%= @player.back_name %></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-7 d-flex justify-content-start p-1 mb-1 pawa-main-box">
+        <div class="p-0">
+          <div class="pawa-ability-label-no-value">誕生日</div>
+        </div>
+        <div class="ps-3 py-2">
+          <span class="h5"><%= @player.birthday&.strftime('%Y年 %-m月%-d日') %></span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-5 d-flex justify-content-start p-1 mb-1 pawa-main-box">
+        <div class="p-0">
+          <div class="pawa-ability-label-no-value">年齢</div>
+        </div>
+        <div class="ps-3 py-2">
+          <span class="h5"><%= calculate_age(@player.birthday) || " - " %>歳</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-start p-1 mb-1 pawa-main-box">
+        <div class="p-0">
+          <div class="pawa-ability-label-no-value">備考</div>
+        </div>
+        <div class="ps-3 py-2">
+          <span class="h5"><%= @player.note %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

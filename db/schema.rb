@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_02_153550) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_10_044148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -206,6 +206,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_02_153550) do
     t.bigint "m_valued_ability_id", null: false, comment: "値あり特殊能力マスタID"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "value", comment: "値"
     t.index ["m_valued_ability_id"], name: "idx_on_m_valued_ability_id_69ca68d18d"
     t.index ["player_id"], name: "index_pawapuro_player_m_valued_abilities_on_player_id"
   end

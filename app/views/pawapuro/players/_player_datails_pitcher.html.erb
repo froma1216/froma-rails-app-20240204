@@ -1,0 +1,56 @@
+<%# 投手能力 %>
+<div class="row p-2">
+  <%# 基礎能力部 %>
+  <div class="col-3 pe-4 pawa-text-main">
+    <%= render partial: 'pitcher_basic_ability_wrap' %>
+  </div>
+  <%# 特殊能力部 %>
+  <div class="col-9 bg-light border border-3 border-white rounded">
+    <div class="row">
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name: "対ピンチ",
+        ability_value: @player.m_valued_ability_value(3)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name: "対左打者",
+        ability_value: @player.m_valued_ability_value(4)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name: "打たれ強さ",
+        ability_value: @player.m_valued_ability_value(5)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name: "ケガしにくさ",
+        ability_value: @player.m_valued_ability_value(2)
+      } %>
+    </div>
+    <div class="row">
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name: "ノビ",
+        ability_value: @player.m_valued_ability_value(6)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name: "クイック",
+        ability_value: @player.m_valued_ability_value(7)
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name: "",
+        ability_value: ""
+      } %>
+      <%= render partial: 'special_ability_value_box', locals: {
+        ability_name: "回復",
+        ability_value: @player.m_valued_ability_value(1)
+      } %>
+    </div>
+    <%# 値なし %>
+    <%# FIXME: 部分テンプレートに切り出し %>
+    <% abilities_array = @player.other_special_ability_names %>
+    <% 6.times do |row| %>
+      <div class="row">
+        <% (row*4...row*4+4).each do |index| %>
+          <%= render partial: 'special_ability_no_value_box', locals: { ability: abilities_array[index] || '' } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

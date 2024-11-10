@@ -1,4 +1,5 @@
 module Pawapuro::PlayersHelper
+  # TODO: 切り出す（画面毎？機能毎？）
   # 選手名ボックスの背景色、ボーダー色のクラスを返す
   def player_name_box_color_class(player)
     positions = player.formatted_position_abbreviations.map { |pos| pos[:id] }
@@ -231,5 +232,37 @@ module Pawapuro::PlayersHelper
       concat display_alphabet(ability_value)
     end +
       content_tag(:span, ability_value)
+  end
+
+  # 特殊能力（値あり）ボックスの背景色、文字色クラスを返す
+  def ability_value_color_classes(ability_value)
+    case ability_value
+    when 2..3
+      ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
+    when -4..-2
+      ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
+    when 4
+      ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-special"]
+    else
+      ["pawa-bg-sa-n1", "pawa-bg-sa-n2", "pawa-text-neutral"]
+    end
+  end
+
+  # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
+  def ability_no_value_color_classes(ability)
+    abilities = PAWAPURO_ABILITIES
+    if abilities["good"].include?(ability)
+      ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
+    elsif abilities["bad"].include?(ability)
+      ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
+    elsif abilities["good_and_bad"].include?(ability)
+      ["pawa-bg-sa-gb1", "pawa-bg-sa-gb2", "pawa-text-good"]
+    elsif abilities["special"].include?(ability)
+      ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-special"]
+    elsif abilities["sub"].include?(ability)
+      ["pawa-bg-sa-sb1", "pawa-bg-sa-sb2", "pawa-text-sub"]
+    else
+      ["pawa-bg-sa-n1 d-none d-sm-block", "pawa-bg-sa-n2", "pawa-text-neutral"]
+    end
   end
 end

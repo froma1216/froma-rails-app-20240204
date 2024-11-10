@@ -85,7 +85,7 @@
         </div>
         <div class="modal-footer">
           <%= link_to '編集', edit_pawapuro_player_path(@player), class: 'btn btn-primary', data: { turbo: "false" } %>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <%= link_to "閉じる", "#", class: "btn btn-secondary", data: { bs_dismiss: "modal" }, role: "button" %>
         </div>
       </div>
     </div>

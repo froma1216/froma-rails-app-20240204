@@ -12,7 +12,7 @@ class Pawapuro::PlayersController < ApplicationController
 
   def details
     if current_user.present?
-      #  自分で作成した選手と、テストデータのみ表示する
+      #  自分で作成した選手のみ表示する
       @player = Pawapuro::Player.where(user: current_user).find(params[:id])
     else
       redirect_to pawapuro_index_path,
@@ -34,6 +34,7 @@ class Pawapuro::PlayersController < ApplicationController
 
   # 権限確認
   def ensure_currect_user
+    # TODO: 以下の一行はそれぞれのメソッドで書く
     @player = Pawapuro::Player.find(params[:id])
     redirect_to pawapuro_index_path, notice: "権限がありません" if @player.user != current_user
   end

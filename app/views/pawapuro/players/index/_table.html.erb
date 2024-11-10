@@ -15,11 +15,11 @@
       <%# 投手能力表示 %>
       <%# TODO: スマホ表示時に最終行を左寄せにする %>
       <div class="col-12 col-sm-8 mb-2 mb-sm-0 d-flex justify-content-between align-items-center flex-wrap" id="pitcher-content-<%= index %>">
-        <%= render partial: 'index_table_pitcher', locals: { player: player } %>
+        <%= render partial: 'pawapuro/players/index/table_pitcher', locals: { player: player } %>
       </div>
       <%# 野手能力表示 %>
       <div class="col-12 col-sm-8 mb-2 mb-sm-0 d-flex justify-content-between align-items-center flex-wrap" id="fielder-content-<%= index %>">
-        <%= render partial: 'index_table_fielder', locals: { player: player } %>
+        <%= render partial: 'pawapuro/players/index/table_fielder', locals: { player: player } %>
       </div>
       <div class="col-12 col-sm-2 mb-2 mb-sm-0 d-flex justify-content-start justify-content-sm-evenly align-items-center">
         <div>

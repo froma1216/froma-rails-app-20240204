@@ -57,26 +57,26 @@
             <div class="tab-pane fade show active" id="playerBasic">
               <%# メインポジションが投手か野手かによって、表示を分ける %>
               <% if (11..13).include?(@player.main_position) %>
-                <%= render 'player_datails_pitcher' %>
+                <%= render 'pawapuro/players/details/pitcher' %>
               <% else %>
-                <%= render 'player_datails_fielder' %>
+                <%= render 'pawapuro/players/details/fielder' %>
               <% end %>
             </div>
             <%# 投手能力 %>
             <div class="tab-pane fade" id="playerPitcher">
-              <%= render 'player_datails_pitcher' %>
+              <%= render 'pawapuro/players/details/pitcher' %>
             </div>
             <%# 野手能力 %>
             <div class="tab-pane fade" id="playerFielder">
-              <%= render 'player_datails_fielder' %>
+              <%= render 'pawapuro/players/details/fielder' %>
             </div>
             <%# 守備・起用 %>
             <div class="tab-pane fade" id="playerPromotion">
-              <%= render 'player_datails_promotion' %>
+              <%= render 'pawapuro/players/details/promotion' %>
             </div>
             <%# プロフィール %>
             <div class="tab-pane fade" id="playerProfile">
-              <%= render 'player_datails_profile' %>
+              <%= render 'pawapuro/players/details/profile' %>
             </div>
           </div>
         </div>

@@ -2,11 +2,11 @@
 <div class="row p-2">
   <%# 基礎能力部 %>
   <div class="col-3 pe-4 pawa-text-main">
-    <%= render partial: 'basic_ability_box', locals: {
+    <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
       label: "走力",
       ability_value: @player.running
     } %>
-    <%= render partial: 'basic_ability_box', locals: {
+    <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
       label: "肩力",
       ability_value: @player.arm
     } %>
@@ -21,25 +21,25 @@
         </div>
         <!-- TODO: 要対応 -->
         <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0">
-          <%# = render partial: 'positional_appropriateness', locals: { position_name:"投" } %>
+          <%# = render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"投" } %>
         </div>
         <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0 border-end-0">
-          <%# = render partial: 'positional_appropriateness', locals: { position_name:"捕" } %>
+          <%# = render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"捕" } %>
         </div>
         <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0">
-          <%# = render partial: 'positional_appropriateness', locals: { position_name:"一" } %>
+          <%# = render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"一" } %>
         </div>
         <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0 border-end-0">
-          <%# = render partial: 'positional_appropriateness', locals: { position_name:"二" } %>
+          <%# = render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"二" } %>
         </div>
         <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0">
-          <%# = render partial: 'positional_appropriateness', locals: { position_name:"三" } %>
+          <%# = render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"三" } %>
         </div>
         <div class="col-6 ps-3 py-2 pawa-border-main border-end-0">
-          <%# = render partial: 'positional_appropriateness', locals: { position_name:"遊" } %>
+          <%# = render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"遊" } %>
         </div>
         <div class="col-6 ps-3 py-2 pawa-border-main">
-          <%# = render partial: 'positional_appropriateness', locals: { position_name:"外" } %>
+          <%# = render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"外" } %>
         </div>
       </div>
     </div>
@@ -52,29 +52,29 @@
           </div>
         </div>
         <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'positional_appropriateness', locals: { position_name:"投" } %>
+          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"投" } %>
         </div>
         <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'positional_appropriateness', locals: { position_name:"捕" } %>
+          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"捕" } %>
         </div>
         <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'positional_appropriateness', locals: { position_name:"一" } %>
+          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"一" } %>
         </div>
         <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'positional_appropriateness', locals: { position_name:"二" } %>
+          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"二" } %>
         </div>
         <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'positional_appropriateness', locals: { position_name:"三" } %>
+          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"三" } %>
         </div>
         <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'positional_appropriateness', locals: { position_name:"遊" } %>
+          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"遊" } %>
         </div>
         <div class="col-12 py-2 pawa-border-main">
-          <%= render partial: 'positional_appropriateness', locals: { position_name:"外" } %>
+          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: { position_name:"外" } %>
         </div>
       </div>
     </div>
-    <%= render partial: 'basic_ability_box', locals: {
+    <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
       label:"捕球",
       ability_value: @player.catching
     } %>
@@ -131,7 +131,7 @@
     <% 6.times do |row| %>
       <div class="row">
         <% (row*4...row*4+4).each do |index| %>
-          <%= render partial: 'special_ability_no_value_box', locals: { ability: abilities_array[index] || '' } %>
+          <%= render partial: 'pawapuro/players/details/special_ability_no_value_box', locals: { ability: abilities_array[index] || '' } %>
         <% end %>
       </div>
     <% end %>

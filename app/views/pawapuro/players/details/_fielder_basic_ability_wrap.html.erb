@@ -1,0 +1,29 @@
+<%# 野手基礎能力部 %>
+<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+  label: "弾道",
+  ability_value: @player.trajectory
+} %>
+<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+  label: "ミート",
+  ability_value: @player.meat
+} %>
+<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+  label: "パワー",
+  ability_value: @player.power
+} %>
+<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+  label: "走力",
+  ability_value: @player.running
+} %>
+<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+  label: "肩力",
+  ability_value: @player.arm
+} %>
+<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+  label: "守備力",
+  ability_value: @player.fielding
+} %>
+<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+  label: "捕球",
+  ability_value: @player.catching
+} %>

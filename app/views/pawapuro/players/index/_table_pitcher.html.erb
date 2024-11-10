@@ -1,14 +1,14 @@
-<%= render partial: 'basic_ability_table_box', locals: {
+<%= render partial: 'pawapuro/players/index/basic_ability_table_box', locals: {
   label:"球速",
   ability_value: ability_value_pace(player.pace),
   width: "w-30 w-sm-10"
 } %>
-<%= render partial: 'basic_ability_table_box', locals: {
+<%= render partial: 'pawapuro/players/index/basic_ability_table_box', locals: {
   label:"コントロール",
   ability_value: ability_value_basic(player.control),
   width: "w-30 w-sm-10"
 } %>
-<%= render partial: 'basic_ability_table_box', locals: {
+<%= render partial: 'pawapuro/players/index/basic_ability_table_box', locals: {
   label:"スタミナ",
   ability_value: ability_value_basic(player.stamina),
   width: "w-30 w-sm-10"
@@ -17,7 +17,7 @@
 <%# TODO: 右投げか左投げかで矢印の向きを変える（順番を変える） %>
 <!-- PC -->
 <% breaking_ball_types_pc.each do |type| %>
-  <%= render partial: 'basic_ability_table_box', locals: {
+  <%= render partial: 'pawapuro/players/index/basic_ability_table_box', locals: {
     label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down", style: "transform: rotate(#{type[:rotation]}deg);"),
     ability_value: ability_value_movements(player.breaking_ball_movement(type[:division], 1) || 0, player.breaking_ball_movement(type[:division], 2)),
     width: "w-10 d-none d-sm-block"
@@ -25,7 +25,7 @@
 <% end %>
 <!-- モバイル -->
 <% breaking_ball_types_mobile.each do |type| %>
-  <%= render partial: 'basic_ability_table_box', locals: {
+  <%= render partial: 'pawapuro/players/index/basic_ability_table_box', locals: {
     label: content_tag(:i, "", class: "fa fa-solid fa-arrow-down", style: "transform: rotate(#{type[:rotation]}deg);"),
     ability_value: ability_value_movements(player.breaking_ball_movement(type[:division], 1) || 0, player.breaking_ball_movement(type[:division], 2)),
     width: "w-30 d-block d-sm-none"

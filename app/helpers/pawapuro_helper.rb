@@ -256,18 +256,18 @@ module PawapuroHelper
   #   end
   # end
 
-  # 特殊能力（値なし）ボックスのフォント、文字感覚クラスを返す
-  def ability_text_classes(ability)
-    if ability.length >= 8
-      # フォントサイズを小さくし、文字間隔も狭くする
-      "small-font tighter-letter-spacing"
-    elsif ability.length >= 7
-      # 文字間隔のみ狭くする
-      "tighter-letter-spacing"
-    else
-      ""
-    end
-  end
+  # # 特殊能力（値なし）ボックスのフォント、文字感覚クラスを返す
+  # def ability_text_classes(ability)
+  #   if ability.length >= 8
+  #     # フォントサイズを小さくし、文字間隔も狭くする
+  #     "small-font tighter-letter-spacing"
+  #   elsif ability.length >= 7
+  #     # 文字間隔のみ狭くする
+  #     "tighter-letter-spacing"
+  #   else
+  #     ""
+  #   end
+  # end
 
   # # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
   # def ability_no_value_color_classes(ability)

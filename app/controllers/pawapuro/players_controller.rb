@@ -12,7 +12,7 @@ class Pawapuro::PlayersController < ApplicationController
 
   def details
     if current_user.present?
-      #  自分で作成した選手のみ表示する
+      # 自分で作成した選手のみ表示する
       @player = Pawapuro::Player.find(params[:id])
 
       # 所持している全変化球を取得

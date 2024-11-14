@@ -46,11 +46,13 @@
     </div>
     <%# 値なし %>
     <%# FIXME: 部分テンプレートに切り出し %>
-    <% abilities_array = @player.other_special_ability_names %>
+    <% abilities_array = @player.other_special_ability_names(130) %>
     <% 6.times do |row| %>
       <div class="row">
         <% (row*4...row*4+4).each do |index| %>
-          <%= render partial: 'pawapuro/players/details/special_ability_no_value_box', locals: { ability: abilities_array[index] || '' } %>
+          <%= render partial: 'pawapuro/players/details/special_ability_no_value_box', locals: {
+            ability: abilities_array[index] || ''
+          } %>
         <% end %>
       </div>
     <% end %>

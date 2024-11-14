@@ -51,11 +51,12 @@ class Pawapuro::Player < ApplicationRecord
     player_m_valued_abilities.find_by(m_valued_ability_id: ability_id)&.value
   end
 
-  # 値あり特殊能力の値を取得するメソッド
-  # TODO: 投手・野手でわける？
-  # FIXME: モデルではなく、コントローラーでインスタンス変数として持つ？
-  def other_special_ability_names
-    m_basic_abilities.pluck(:name)
+  # 値なし特殊能力名を取得するメソッド
+  def other_special_ability_names(divisions)
+    player_m_basic_abilities
+      .joins(:m_basic_ability)
+      .where(pawapuro_m_basic_abilities: { pitcher_fielder_division: divisions })
+      .pluck(:name)
   end
 
   # 所持している全変化球を取得するメソッド

@@ -3,15 +3,15 @@
 <!-- 基本能力 -->
 <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
   label:"球速",
-  ability_value: @player.pace
+  ability_value: details_ability_value_pace(@player.pace)
 } %>
 <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
   label:"コントロール",
-  ability_value: @player.control
+  ability_value: details_ability_value_basic(@player.control)
 } %>
 <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
   label:"スタミナ",
-  ability_value: @player.stamina
+  ability_value: details_ability_value_basic(@player.stamina)
 } %>
 <!-- 変化球 -->
 <div class="d-flex justify-content-start row p-0 p-sm-1 mb-1 pawa-main-box">

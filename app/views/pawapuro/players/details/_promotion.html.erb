@@ -4,11 +4,11 @@
   <div class="col-3 pe-4 pawa-text-main">
     <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
       label: "走力",
-      ability_value: @player.running
+      ability_value: details_ability_value_basic(@player.running)
     } %>
     <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
       label: "肩力",
-      ability_value: @player.arm
+      ability_value: details_ability_value_basic(@player.arm)
     } %>
     <%# 各ポジション適正 %>
     <%# PCサイズ時 %>
@@ -76,7 +76,7 @@
     </div>
     <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
       label:"捕球",
-      ability_value: @player.catching
+      ability_value: details_ability_value_basic(@player.catching)
     } %>
   </div>
   <%# 特殊能力部 %>

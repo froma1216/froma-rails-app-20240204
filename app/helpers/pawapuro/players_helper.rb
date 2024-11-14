@@ -203,35 +203,59 @@ module Pawapuro::PlayersHelper
   end
 
   # 一覧BOXの値（変化球）
-  def ability_value_movements(ability_value, ability_value2)
+  def ability_value_movements(value, value2)
     content_tag(:div, class: "d-flex justify-content-between") do
-      content_tag(:span, ability_value) +
-        content_tag(:span, ability_value2.presence || "")
+      content_tag(:span, value) +
+        content_tag(:span, value2.presence || "")
     end
   end
 
   # 一覧BOXの値（球速）
-  def ability_value_pace(ability_value)
-    content_tag(:span, ability_value) +
+  def index_ability_value_pace(value)
+    content_tag(:span, value) +
       content_tag(:span) do
         content_tag(:small, "km/h")
       end
   end
 
   # 一覧BOXの値（弾道）
-  def ability_value_trajectory(ability_value)
+  def index_ability_value_trajectory(value)
     content_tag(:span) do
-      concat display_trajectory(ability_value)
+      concat display_trajectory(value)
     end +
-      content_tag(:span, ability_value)
+      content_tag(:span, value)
   end
 
   # 一覧BOXの値（アルファベット＋数値）
-  def ability_value_basic(ability_value)
+  def index_ability_value_basic(value)
     content_tag(:span) do
-      concat display_alphabet(ability_value)
+      concat display_alphabet(value)
     end +
-      content_tag(:span, ability_value)
+      content_tag(:span, value)
+  end
+
+  # 詳細BOXの値（球速）
+  def details_ability_value_pace(value)
+    content_tag(:div, class: "d-flex flex-column flex-sm-row align-items-center") do
+      content_tag(:span, value, class: "fs-5 fw-bold me-1") +
+        content_tag(:span, "km/h", class: "mt-sm-1")
+    end
+  end
+
+  # 詳細BOXの値（弾道）
+  def details_ability_value_trajectory(value)
+    content_tag(:span, class: "pawa-text-a fs-5 fw-bold me-1 me-sm-2") do
+      concat display_trajectory(value)
+    end +
+      content_tag(:span, value, class: "fs-5 fw-bold")
+  end
+
+  # 詳細BOXの値（アルファベット＋数値）
+  def details_ability_value_basic(value)
+    content_tag(:span, class: "pawa-text-a fs-5 fw-bold me-1 me-sm-2") do
+      concat display_alphabet(value)
+    end +
+      content_tag(:span, value, class: "fs-5 fw-bold")
   end
 
   # 特殊能力（値あり）ボックスの背景色、文字色クラスを返す

@@ -1,16 +1,16 @@
 <%= render partial: 'pawapuro/players/index/basic_ability_table_box', locals: {
   label:"球速",
-  ability_value: ability_value_pace(player.pace),
+  ability_value: index_ability_value_pace(player.pace),
   width: "w-30 w-sm-10"
 } %>
 <%= render partial: 'pawapuro/players/index/basic_ability_table_box', locals: {
   label:"コントロール",
-  ability_value: ability_value_basic(player.control),
+  ability_value: index_ability_value_basic(player.control),
   width: "w-30 w-sm-10"
 } %>
 <%= render partial: 'pawapuro/players/index/basic_ability_table_box', locals: {
   label:"スタミナ",
-  ability_value: ability_value_basic(player.stamina),
+  ability_value: index_ability_value_basic(player.stamina),
   width: "w-30 w-sm-10"
 } %>
 <!-- 変化球 -->

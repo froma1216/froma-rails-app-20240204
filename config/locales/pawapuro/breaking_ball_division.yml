@@ -1,0 +1,10 @@
+ja:
+  enums:
+    pawapuro:
+      breaking_ball_division:
+        fastball: "ストレート"
+        slider: "スライダー"
+        curve: "カーブ"
+        shoot: "シュート"
+        sinker: "シンカー"
+        fork: "フォーク"

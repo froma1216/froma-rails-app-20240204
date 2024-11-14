@@ -13,7 +13,23 @@ class Pawapuro::PlayersController < ApplicationController
   def details
     if current_user.present?
       #  自分で作成した選手のみ表示する
-      @player = Pawapuro::Player.where(user: current_user).find(params[:id])
+      @player = Pawapuro::Player.find(params[:id])
+
+      # 所持している全変化球を取得
+      filtered_balls = @player.filtered_breaking_balls([100, 210..250], [1, 2])
+      # それぞれの変化球を取得
+      @breaking_ball_fastball1 = filtered_balls.dig(100, 1)
+      @breaking_ball_fastball2 = filtered_balls.dig(100, 2)
+      @breaking_ball_slider1 = filtered_balls.dig(210, 1)
+      @breaking_ball_slider2 = filtered_balls.dig(210, 2)
+      @breaking_ball_curve1 = filtered_balls.dig(220, 1)
+      @breaking_ball_curve2 = filtered_balls.dig(220, 2)
+      @breaking_ball_shoot1 = filtered_balls.dig(230, 1)
+      @breaking_ball_shoot2 = filtered_balls.dig(230, 2)
+      @breaking_ball_sinker1 = filtered_balls.dig(240, 1)
+      @breaking_ball_sinker2 = filtered_balls.dig(240, 2)
+      @breaking_ball_fork1 = filtered_balls.dig(250, 1)
+      @breaking_ball_fork2 = filtered_balls.dig(250, 2)
     else
       redirect_to pawapuro_index_path,
                   notice: "権限がありません"
@@ -34,7 +50,6 @@ class Pawapuro::PlayersController < ApplicationController
 
   # 権限確認
   def ensure_currect_user
-    # TODO: 以下の一行はそれぞれのメソッドで書く
     @player = Pawapuro::Player.find(params[:id])
     redirect_to pawapuro_index_path, notice: "権限がありません" if @player.user != current_user
   end

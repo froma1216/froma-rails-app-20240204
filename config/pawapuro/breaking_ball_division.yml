@@ -1,0 +1,7 @@
+breaking_ball_division:
+  fastball: 100 # ストレート
+  slider: 210 # スライダー
+  curve: 220 # カーブ
+  shoot: 230 # シュート
+  sinker: 240 # シンカー
+  fork: 250 # フォーク

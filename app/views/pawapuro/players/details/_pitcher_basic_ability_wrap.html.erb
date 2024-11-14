@@ -1,4 +1,6 @@
-<%# 投手基礎能力部 %>
+<!-- 投手基礎能力部 -->
+
+<!-- 基本能力 -->
 <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
   label:"球速",
   ability_value: @player.pace
@@ -11,29 +13,14 @@
   label:"スタミナ",
   ability_value: @player.stamina
 } %>
+<!-- 変化球 -->
 <div class="d-flex justify-content-start row p-0 p-sm-1 mb-1 pawa-main-box">
   <div class="ps-1 ps-sm-3 pb-2">
-    <%# ストレート系 %>
-    <%# = render partial: 'pawapuro/players/details/breaking_ball_meter', locals: { breaking_ball_type:"fastball" } %>
-    <%# スライダー系 %>
-    <%#  if @player.pawapuro_pitcher.slider_type_pitch.present? %>
-    <%# = render partial: 'pawapuro/players/details/breaking_ball_meter', locals: { breaking_ball_type:"slider" } %>
-    <%#  end %>
-    <%# カーブ系 %>
-    <%#  if @player.pawapuro_pitcher.curveball_type_pitch.present? %>
-    <%# = render partial: 'pawapuro/players/details/breaking_ball_meter', locals: { breaking_ball_type:"curveball" } %>
-    <%#  end %>
-    <%# シュート系 %>
-    <%#  if @player.pawapuro_pitcher.shootball_type_pitch.present? %>
-    <%# = render partial: 'pawapuro/players/details/breaking_ball_meter', locals: { breaking_ball_type:"shootball" } %>
-    <%#  end %>
-    <%# シンカー系 %>
-    <%#  if @player.pawapuro_pitcher.sinker_type_pitch.present? %>
-    <%# = render partial: 'pawapuro/players/details/breaking_ball_meter', locals: { breaking_ball_type:"sinker" } %>
-    <%#  end %>
-    <%# フォーク系 %>
-    <%#  if @player.pawapuro_pitcher.forkball_type_pitch.present? %>
-    <%# = render partial: 'pawapuro/players/details/breaking_ball_meter', locals: { breaking_ball_type:"forkball" } %>
-    <%#  end %>
+    <% I18n.t('enums.pawapuro.breaking_ball_division').each_key do |type| %>
+      <%= render partial: 'pawapuro/players/details/breaking_ball_meter', locals: {
+        breaking_ball1: instance_variable_get("@breaking_ball_#{type}1"),
+        breaking_ball2: instance_variable_get("@breaking_ball_#{type}2")
+      } %>
+    <% end %>
   </div>
 </div>

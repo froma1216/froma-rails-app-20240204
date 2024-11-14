@@ -1,5 +1,6 @@
 class Enums
   class << self
+    # MHXX
     # クエスト区分
     def quest_division
       YAML.load_file(Rails.root.join("config", "mhxx", "quest_division.yml"))["quest_division"]
@@ -20,9 +21,15 @@ class Enums
       YAML.load_file(Rails.root.join("config", "mhxx", "skill_division.yml"))["skill_division"]
     end
 
-    # スキル区分
+    # パワプロ
+    # 利き手
     def dominant_hand
       YAML.load_file(Rails.root.join("config", "pawapuro", "dominant_hand.yml"))["dominant_hand"]
+    end
+
+    # 変化方向区分
+    def breaking_ball_division
+      YAML.load_file(Rails.root.join("config", "pawapuro", "breaking_ball_division.yml"))["breaking_ball_division"]
     end
     # 以下に追加
   end

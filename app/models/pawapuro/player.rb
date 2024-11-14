@@ -17,6 +17,7 @@ class Pawapuro::Player < ApplicationRecord
   extend Enumerize
   enumerize :throwing, in: Enums.dominant_hand
   enumerize :batting, in: Enums.dominant_hand
+  enumerize :breaking_ball_division, in: Enums.breaking_ball_division
 
   # 守備適正を持つポジションを全て取得し、メインポジションを先頭にする
   def formatted_position_abbreviations
@@ -55,5 +56,15 @@ class Pawapuro::Player < ApplicationRecord
   # FIXME: モデルではなく、コントローラーでインスタンス変数として持つ？
   def other_special_ability_names
     m_basic_abilities.pluck(:name)
+  end
+
+  # 所持している全変化球を取得するメソッド
+  def filtered_breaking_balls(divisions, orders)
+    player_m_breaking_balls
+      .joins(:m_breaking_ball)
+      .where(pawapuro_m_breaking_balls: { breaking_ball_division: divisions })
+      .where(ball_type_order: orders)
+      .group_by { |ball| ball.m_breaking_ball.breaking_ball_division }
+      .transform_values { |balls| balls.index_by(&:ball_type_order) }
   end
 end

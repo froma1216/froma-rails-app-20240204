@@ -1,5 +1,4 @@
 module PawapuroHelper
-  # TODO: ymlに移動
   # 数値をポジション名に変換
   # def display_position_name(val)
   #   positions = {
@@ -103,28 +102,28 @@ module PawapuroHelper
   # end
 
   # 属性名から位置番号を抽出（上記のdisplay_sub_positionsで使用）
-  def position_number(attribute)
-    attribute[-1].to_i
-  end
+  # def position_number(attribute)
+  #   attribute[-1].to_i
+  # end
 
   # 変化球ブロック
   # 渡された数字分、色付きのブロックを表示する。
-  def breaking_ball_blocks(block_count)
-    Array.new(7) do |i|
-      class_name = i < block_count ? "pawa-breaking-block-exist" : "pawa-breaking-block-nil"
-      content_tag(:div, "", class: "col-1 #{class_name}")
-    end.join.html_safe
-  end
+  # def breaking_ball_blocks(block_count)
+  #   Array.new(7) do |i|
+  #     class_name = i < block_count ? "pawa-breaking-block-exist" : "pawa-breaking-block-nil"
+  #     content_tag(:div, "", class: "col-1 #{class_name}")
+  #   end.join.html_safe
+  # end
 
   # 年齢計算
-  def calculate_age(birthday)
-    now = Time.zone.today
-    if birthday.present?
-      age = now.year - birthday.year
-      age -= 1 if now.yday < birthday.yday
-      age
-    end
-  end
+  # def calculate_age(birthday)
+  #   now = Time.zone.today
+  #   if birthday.present?
+  #     age = now.year - birthday.year
+  #     age -= 1 if now.yday < birthday.yday
+  #     age
+  #   end
+  # end
 
   # other_special_abilitiesに引数の値が入っているかを確認（編集画面でチェックボックスに初期値を入れるため）
   # return: true or false

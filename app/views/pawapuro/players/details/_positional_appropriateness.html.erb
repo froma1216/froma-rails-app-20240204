@@ -1,1 +1,39 @@
-<div>aaa</div>
+<!-- ポジション適正表示 -->
+
+<% 
+case position_proficiency
+  when 3
+    coefficient, add_text_class = 1, ""
+  when 2
+    coefficient, add_text_class = 0.8, ""
+  when 1
+    coefficient, add_text_class = 0.7, ""
+  else
+    coefficient, add_text_class = 0, "pawa-text-neutral"
+  end
+
+  # 守備力から計算した適正値
+  fielding_value = (@player.fielding * coefficient).ceil
+  # 適正値が0の場合は「--」に変換
+  formatted_defense = fielding_value.to_i.nonzero? || '--'
+%>
+
+<!-- PCサイズ時 -->
+<div class="d-none d-sm-block">
+  <span class="fs-5 fw-bold me-2 <%= "#{add_text_class}" %>"><%= position_abbreviation %></span>
+  <span class="fs-5 fw-bold me-1"><%= display_alphabet(fielding_value) %></span>
+  <span class="fs-5 fw-bold <%= "#{add_text_class}" %>">
+    <%= formatted_defense %>
+  </span>
+</div>
+
+<!-- スマホサイズ時 -->
+<div class="d-block d-sm-none">
+  <span class="fs-5 fw-bold <%= "#{add_text_class}" %>"><%= position_abbreviation %></span>
+  <div class="d-flex justify-content-center">
+    <span class="fs-5 fw-bold me-1"><%= display_alphabet(fielding_value) %></span>
+    <span class="fs-5 fw-bold <%= "#{add_text_class}" %>">
+      <%= formatted_defense %>
+    </span>
+  </div>
+</div>

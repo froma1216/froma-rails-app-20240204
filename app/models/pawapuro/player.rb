@@ -21,14 +21,15 @@ class Pawapuro::Player < ApplicationRecord
 
   # 守備適正を持つポジションを全て取得し、メインポジションを先頭にする
   def formatted_position_abbreviations
-    positions = player_m_positions.includes(:m_position).map do |pm_position|
+    positions = player_m_positions.map do |pm_position|
       {
         id: pm_position.m_position.id,
-        abbreviation: pm_position.m_position.abbreviation
+        abbreviation: pm_position.m_position.abbreviation,
+        proficiency: pm_position.proficiency
       }
     end
 
-    # main_positionが存在する場合、それを先頭にして並び替え
+    # main_positionが存在する場合、それを先頭に並べ替え
     if main_position
       positions.sort_by! { |pos| pos[:id] == main_position.id ? 0 : 1 }
     end

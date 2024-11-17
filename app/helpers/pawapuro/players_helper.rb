@@ -258,6 +258,15 @@ module Pawapuro::PlayersHelper
       content_tag(:span, value, class: "fs-5 fw-bold")
   end
 
+  # 変化球ブロック
+  # 渡された数字分、色付きのブロックを表示する。
+  def breaking_ball_blocks(block_count)
+    Array.new(7) do |i|
+      class_name = i < block_count ? "pawa-breaking-block-exist" : "pawa-breaking-block-nil"
+      content_tag(:div, "", class: "col-1 #{class_name}")
+    end.join.html_safe
+  end
+
   # 特殊能力（値あり）ボックスの背景色、文字色クラスを返す
   def ability_value_color_classes(ability_value)
     case ability_value
@@ -300,6 +309,16 @@ module Pawapuro::PlayersHelper
       "tighter-letter-spacing"
     else
       ""
+    end
+  end
+
+  # 年齢計算
+  def calculate_age(birthday)
+    now = Time.zone.today
+    if birthday.present?
+      age = now.year - birthday.year
+      age -= 1 if now.yday < birthday.yday
+      age
     end
   end
 end

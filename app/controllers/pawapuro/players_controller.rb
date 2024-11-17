@@ -15,7 +15,17 @@ class Pawapuro::PlayersController < ApplicationController
       # 自分で作成した選手のみ表示する
       @player = Pawapuro::Player.find(params[:id])
 
+      # 全てのポジション適正情報を取得
+      @position_proficiencies = @player.player_m_positions.map do |pm_position|
+        {
+          id: pm_position.m_position.id,
+          abbreviation: pm_position.m_position.abbreviation,
+          proficiency: pm_position.proficiency
+        }
+      end
+
       # 所持している全変化球を取得
+      # TODO: ポジション適性と同じようにまとめて取得、管理できないか確認
       filtered_balls = @player.filtered_breaking_balls([100, 210..250], [1, 2])
       # それぞれの変化球を取得
       @breaking_ball_fastball1 = filtered_balls.dig(100, 1)

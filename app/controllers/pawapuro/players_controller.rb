@@ -1,5 +1,5 @@
 class Pawapuro::PlayersController < ApplicationController
-  before_action :ensure_currect_user, { only: [:edit, :update, :destroy] }
+  before_action :ensure_current_user, { only: [:edit, :update, :destroy] }
 
   def index
     if current_user.present?
@@ -41,12 +41,18 @@ class Pawapuro::PlayersController < ApplicationController
       @breaking_ball_fork1 = filtered_balls.dig(250, 1)
       @breaking_ball_fork2 = filtered_balls.dig(250, 2)
     else
-      redirect_to pawapuro_index_path,
+      redirect_to pawapuro_players_path,
                   notice: "権限がありません"
     end
   end
 
-  def new; end
+  def new
+    if current_user.present?
+      @player = Pawapuro::Player.new
+    else
+      redirect_to new_user_session_path
+    end
+  end
 
   def create; end
 
@@ -59,8 +65,8 @@ class Pawapuro::PlayersController < ApplicationController
   private
 
   # 権限確認
-  def ensure_currect_user
+  def ensure_current_user
     @player = Pawapuro::Player.find(params[:id])
-    redirect_to pawapuro_index_path, notice: "権限がありません" if @player.user != current_user
+    redirect_to pawapuro_players_path, notice: "権限がありません" if @player.user != current_user
   end
 end

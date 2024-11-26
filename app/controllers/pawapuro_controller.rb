@@ -1,5 +1,5 @@
 class PawapuroController < ApplicationController
-  before_action :ensure_currect_user, { only: [:edit, :update, :destroy] }
+  before_action :ensure_current_user, { only: [:edit, :update, :destroy] }
 
   # 選手一覧画面
   def index
@@ -186,7 +186,7 @@ class PawapuroController < ApplicationController
   end
 
   # 権限確認
-  def ensure_currect_user
+  def ensure_current_user
     @player = PawapuroPlayer.find(params[:id])
     redirect_to pawapuro_index_path, notice: "権限がありません" if @player.created_by != current_user.username
   end

@@ -68,8 +68,19 @@
     </div>
     <%# メイン %>
     <div class="mb-3">
+      <!-- TODO: enumを利用してセレクトを作る -->
       <%= f.label :main_position, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
-      <%= f.select :main_position, [["先発", 11], ["中継ぎ", 12], ["抑え", 13], ["捕手", 2], ["一塁手", 3], ["二塁手", 4], ["三塁手", 5], ["遊撃手", 6], ["外野手", 7]], {include_blank: "選択して下さい"}, {class: "form-select"} %>
+      <%= f.select :main_position, [
+          ["先発", 11],
+          ["中継ぎ", 12],
+          ["抑え", 13],
+          ["捕手", 2],
+          ["一塁手", 3],
+          ["二塁手", 4],
+          ["三塁手", 5],
+          ["遊撃手", 6],
+          ["外野手", 7]
+        ],  {include_blank: "選択して下さい", selected: @player.main_position&.id}, {class: "form-select"} %>
     </div>
     <%# ポジション %>
     <div class="mb-3">
@@ -168,6 +179,7 @@
         <% end %>
       </div>
     </div>
+    <!-- TODO: pitcher_fは不要であるため、整備後に全て消す -->
     <%= f.fields_for :pawapuro_pitcher do |pitcher_f| %>
       <%# 投手基本能力 %>
       <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
@@ -178,25 +190,25 @@
         <div class="mb-3">
           <div class="row">
             <div class="col-6 col-sm-4">
-              <%= pitcher_f.label :pace, "球速", class: "form-label" %>
+              <%= f.label :pace, "球速", class: "form-label" %>
               <div class="input-group">
-                <%= pitcher_f.number_field :pace, class: "form-control", min: 120, max: 170 %>
+                <%= f.number_field :pace, class: "form-control", min: 120, max: 170 %>
                 <span class="input-group-text">km/h</span>
               </div>
             </div>
             <%# スマホサイズ時のみ、球速のみ一段目になるようにダミーで設置 %>
             <div class="col-6 d-block d-sm-none"></div>
             <div class="col-6 col-sm-4">
-              <%= pitcher_f.label :control, "コントロール", class: "form-label" %>
+              <%= f.label :control, "コントロール", class: "form-label" %>
               <div class="input-group">
-                <%= pitcher_f.number_field :control, class: "form-control", id:"control-input", min: 1, max: 100 %>
+                <%= f.number_field :control, class: "form-control", id:"control-input", min: 1, max: 100 %>
                 <span class="input-group-text text-white pawa-bg-g" id="control-alphabet-display">G</span>
               </div>
             </div>
             <div class="col-6 col-sm-4">
-              <%= pitcher_f.label :stamina, "スタミナ", class: "form-label" %>
+              <%= f.label :stamina, "スタミナ", class: "form-label" %>
               <div class="input-group">
-                <%= pitcher_f.number_field :stamina, class: "form-control", id:"stamina-input", min: 1, max: 100 %>
+                <%= f.number_field :stamina, class: "form-control", id:"stamina-input", min: 1, max: 100 %>
                 <span class="input-group-text text-white pawa-bg-g" id="stamina-alphabet-display">G</span>
               </div>
             </div>
@@ -465,6 +477,7 @@
         </div>
       </div>
     <% end %>
+    <!-- TODO: fielder_fを全て消す -->
     <%= f.fields_for :pawapuro_fielder do |fielder_f| %>
       <%# 野手基本能力 %>
       <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
@@ -476,9 +489,9 @@
           <div class="mb-3">
             <div class="row">
               <div class="col-6 col-sm-2">
-                <%= fielder_f.label :trajectory, "弾道", class: "form-label" %>
+                <%= f.label :trajectory, "弾道", class: "form-label" %>
                 <div class="input-group">
-                  <%= fielder_f.number_field :trajectory, class: "form-control", id:"trajectory-input", min: 1, max: 4 %>
+                  <%= f.number_field :trajectory, class: "form-control", id:"trajectory-input", min: 1, max: 4 %>
                   <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" id="fa-icon"></i></span>
                 </div>
               </div>
@@ -487,44 +500,44 @@
               <%# スマホサイズ時、弾道のみ一段目になるようにダミーで設置 %>
               <div class="col-6 d-block d-sm-none"></div>
               <div class="col-6 col-sm-2">
-                <%= fielder_f.label :meat, "ミート", class: "form-label" %>
+                <%= f.label :meat, "ミート", class: "form-label" %>
                 <div class="input-group">
-                  <%= fielder_f.number_field :meat, class: "form-control", id:"meat-input", min: 1, max: 100 %>
+                  <%= f.number_field :meat, class: "form-control", id:"meat-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="meat-alphabet-display">G</span>
                 </div>
               </div>
               <div class="col-6 col-sm-2">
-                <%= fielder_f.label :power, "パワー", class: "form-label" %>
+                <%= f.label :power, "パワー", class: "form-label" %>
                 <div class="input-group">
-                  <%= fielder_f.number_field :power, class: "form-control", id:"power-input", min: 1, max: 100 %>
+                  <%= f.number_field :power, class: "form-control", id:"power-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="power-alphabet-display">G</span>
                 </div>
               </div>
               <div class="col-6 col-sm-2">
-                <%= fielder_f.label :running, "走力", class: "form-label" %>
+                <%= f.label :running, "走力", class: "form-label" %>
                 <div class="input-group">
-                  <%= fielder_f.number_field :running, class: "form-control", id:"running-input", min: 1, max: 100 %>
+                  <%= f.number_field :running, class: "form-control", id:"running-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="running-alphabet-display">G</span>
                 </div>
               </div>
               <div class="col-6 col-sm-2">
-                <%= fielder_f.label :arm_strength, "肩力", class: "form-label" %>
+                <%= f.label :arm, "肩力", class: "form-label" %>
                 <div class="input-group">
-                  <%= fielder_f.number_field :arm_strength, class: "form-control", id:"arm_strength-input", min: 1, max: 100 %>
-                  <span class="input-group-text text-white pawa-bg-g" id="arm_strength-alphabet-display">G</span>
+                  <%= f.number_field :arm, class: "form-control", id:"arm-input", min: 1, max: 100 %>
+                  <span class="input-group-text text-white pawa-bg-g" id="arm-alphabet-display">G</span>
                 </div>
               </div>
               <div class="col-6 col-sm-2">
-                <%= fielder_f.label :defense, "守備力", class: "form-label" %>
+                <%= f.label :fielding, "守備力", class: "form-label" %>
                 <div class="input-group">
-                  <%= fielder_f.number_field :defense, class: "form-control", id:"defense-input", min: 1, max: 100 %>
-                  <span class="input-group-text text-white pawa-bg-g" id="defense-alphabet-display">G</span>
+                  <%= f.number_field :fielding, class: "form-control", id:"fielding-input", min: 1, max: 100 %>
+                  <span class="input-group-text text-white pawa-bg-g" id="fielding-alphabet-display">G</span>
                 </div>
               </div>
               <div class="col-6 col-sm-2">
-                <%= fielder_f.label :catching, "捕球", class: "form-label" %>
+                <%= f.label :catching, "捕球", class: "form-label" %>
                 <div class="input-group">
-                  <%= fielder_f.number_field :catching, class: "form-control", id:"catching-input", min: 1, max: 100 %>
+                  <%= f.number_field :catching, class: "form-control", id:"catching-input", min: 1, max: 100 %>
                   <span class="input-group-text text-white pawa-bg-g" id="catching-alphabet-display">G</span>
                 </div>
               </div>

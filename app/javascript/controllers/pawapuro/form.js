@@ -121,9 +121,9 @@ document.addEventListener("turbo:load", function () {
   // 走力
   setupInputField("running-input", "running-alphabet-display");
   // 肩力
-  setupInputField("arm_strength-input", "arm_strength-alphabet-display");
+  setupInputField("arm-input", "arm-alphabet-display");
   // 守備力
-  setupInputField("defense-input", "defense-alphabet-display");
+  setupInputField("fielding-input", "fielding-alphabet-display");
   // 捕球
   setupInputField("catching-input", "catching-alphabet-display");
 

@@ -87,45 +87,31 @@
       <label class="form-label">各ポジション適正</label>
       <%# 投手 %>
       <div class="row">
-        <div class="col-4">
-          <%= f.label :p11_proper, "先発", class: "form-label small" %>
-          <%= f.number_field :p11_proper, class: "form-control", min: 0, max: 2 %>
-        </div>
-        <div class="col-4">
-          <%= f.label :p12_proper, "中継ぎ", class: "form-label small" %>
-          <%= f.number_field :p12_proper, class: "form-control", min: 0, max: 2 %>
-        </div>
-        <div class="col-4">
-          <%= f.label :p13_proper, "抑え", class: "form-label small" %>
-          <%= f.number_field :p13_proper, class: "form-control", min: 0, max: 2 %>
-        </div>
+        <% @position_proficiencies_pitcher.each do |position| %>
+          <div class="col-4">
+            <% player_position = @player.player_m_positions.find { |pa| pa.m_position_id == position[:id] } || @player.player_m_positions.build(m_position_id: position[:id]) %>
+            <%= f.fields_for :player_m_positions, player_position do |pa| %>
+              <!-- TODO: 以下hiddenの受け渡す値を見直し -->
+              <%= pa.hidden_field :m_position_id, value: position[:id] %>
+              <%= pa.label :"m_position_#{position[:id]}", position[:name], class: "form-label small mb-0" %>
+              <%= pa.number_field :value, { class: "form-control", min: 0, max: 2, value: player_position.proficiency || 0 } %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <%# 野手 %>
       <div class="row">
-        <div class="col-4 col-sm-2">
-          <%= f.label :p2_proper, "捕手", class: "form-label small" %>
-          <%= f.number_field :p2_proper, class: "form-control", min: 0, max: 3 %>
-        </div>
-        <div class="col-4 col-sm-2">
-          <%= f.label :p3_proper, "一塁手", class: "form-label small" %>
-          <%= f.number_field :p3_proper, class: "form-control", min: 0, max: 3 %>
-        </div>
-        <div class="col-4 col-sm-2">
-          <%= f.label :p4_proper, "二塁手", class: "form-label small" %>
-          <%= f.number_field :p4_proper, class: "form-control", min: 0, max: 3 %>
-        </div>
-        <div class="col-4 col-sm-2">
-          <%= f.label :p5_proper, "三塁手", class: "form-label small" %>
-          <%= f.number_field :p5_proper, class: "form-control", min: 0, max: 3 %>
-        </div>
-        <div class="col-4 col-sm-2">
-          <%= f.label :p6_proper, "遊撃手", class: "form-label small" %>
-          <%= f.number_field :p6_proper, class: "form-control", min: 0, max: 3 %>
-        </div>
-        <div class="col-4 col-sm-2">
-          <%= f.label :p7_proper, "外野手", class: "form-label small" %>
-          <%= f.number_field :p7_proper, class: "form-control", min: 0, max: 3 %>
-        </div>
+        <% @position_proficiencies_fielder.each do |position| %>
+          <div class="col-4 col-sm-2">
+            <% player_position = @player.player_m_positions.find { |pa| pa.m_position_id == position[:id] } || @player.player_m_positions.build(m_position_id: position[:id]) %>
+            <%= f.fields_for :player_m_positions, player_position do |pa| %>
+              <!-- TODO: 以下hiddenの受け渡す値を見直し -->
+              <%= pa.hidden_field :m_position_id, value: position[:id] %>
+              <%= pa.label :"m_position_#{position[:id]}", position[:name], class: "form-label small mb-0" %>
+              <%= pa.number_field :value, { class: "form-control", min: 0, max: 2, value: player_position.proficiency || 0 } %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
     <%# 共通特殊能力 %>
@@ -139,6 +125,7 @@
           <div class="col-6 col-sm-4">
             <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
             <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+              <!-- TODO: 以下hiddenの受け渡す値を見直し -->
               <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
               <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
               <%= pa.select :value,

@@ -14,6 +14,8 @@ class Pawapuro::Player < ApplicationRecord
   has_many :player_m_basic_abilities
   has_many :m_basic_abilities, through: :player_m_basic_abilities
 
+  # ネストされた属性の許可
+  accepts_nested_attributes_for :player_m_positions, allow_destroy: true
   accepts_nested_attributes_for :player_m_valued_abilities, allow_destroy: true
 
   extend Enumerize

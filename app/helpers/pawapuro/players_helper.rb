@@ -7,6 +7,8 @@ module Pawapuro::PlayersHelper
     is_starter = positions.include?(10)
     is_relief = positions.include?(11) || positions.include?(12)
     is_catcher = positions.include?(2)
+    # TODO: 以下のモデル内で、定数で管理
+    # app/models/pawapuro/m_position.rb
     is_infielder = positions.any? { |pos| [3, 4, 5, 6].include?(pos) }
     is_outfielder = positions.include?(13)
 

@@ -12,7 +12,6 @@ class Pawapuro::PlayersController < ApplicationController
 
   def details
     if current_user.present?
-      # 自分で作成した選手のみ表示する
       @player = Pawapuro::Player.find(params[:id])
 
       # 全てのポジション適正情報を取得
@@ -49,6 +48,22 @@ class Pawapuro::PlayersController < ApplicationController
   def new
     if current_user.present?
       @player = Pawapuro::Player.new
+      # ポジション適正
+      @position_proficiencies_pitcher = Pawapuro::MPosition.where(id: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS).map do |pm_position|
+        {
+          id: pm_position.id,
+          name: pm_position.name,
+          abbreviation: pm_position.abbreviation
+        }
+      end
+      # ポジション適正
+      @position_proficiencies_fielder = Pawapuro::MPosition.where(id: Pawapuro::MPosition::PAWAPURO_FIELDER_IDS).map do |pm_position|
+        {
+          id: pm_position.id,
+          name: pm_position.name,
+          abbreviation: pm_position.abbreviation
+        }
+      end
       # 値あり特殊能力：共通
       @valued_abilities_options_common = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 110).map do |ability|
         levels = JSON.parse(ability.level_display_name)
@@ -69,6 +84,22 @@ class Pawapuro::PlayersController < ApplicationController
   def create; end
 
   def edit
+    # ポジション適正：投手
+    @position_proficiencies_pitcher = Pawapuro::MPosition.where(id: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS).map do |pm_position|
+      {
+        id: pm_position.id,
+        name: pm_position.name,
+        abbreviation: pm_position.abbreviation
+      }
+    end
+    # ポジション適正：野手
+    @position_proficiencies_fielder = Pawapuro::MPosition.where(id: Pawapuro::MPosition::PAWAPURO_FIELDER_IDS).map do |pm_position|
+      {
+        id: pm_position.id,
+        name: pm_position.name,
+        abbreviation: pm_position.abbreviation
+      }
+    end
     # 値あり特殊能力：共通
     @valued_abilities_options_common = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 110).map do |ability|
       levels = JSON.parse(ability.level_display_name)

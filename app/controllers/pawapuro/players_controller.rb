@@ -49,6 +49,18 @@ class Pawapuro::PlayersController < ApplicationController
   def new
     if current_user.present?
       @player = Pawapuro::Player.new
+      # 値あり特殊能力：共通
+      @valued_abilities_options_common = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 110).map do |ability|
+        levels = JSON.parse(ability.level_display_name)
+        {
+          id: ability.id,
+          name: ability.name,
+          options: levels.map { |key, value| [value, key.to_i] }
+        }
+      end
+      @valued_abilities_options_common.each do |ability|
+        @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id])
+      end
     else
       redirect_to new_user_session_path
     end
@@ -56,13 +68,30 @@ class Pawapuro::PlayersController < ApplicationController
 
   def create; end
 
-  def edit; end
+  def edit
+    # 値あり特殊能力：共通
+    @valued_abilities_options_common = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 110).map do |ability|
+      levels = JSON.parse(ability.level_display_name)
+      {
+        id: ability.id,
+        name: ability.name,
+        options: levels.map { |key, value| [value, key.to_i] }
+      }
+    end
+  end
 
   def update; end
 
   def destroy; end
 
   private
+
+  def player_params
+    params.require(:player).permit(
+      :name,
+      player_m_valued_abilities_attributes: [:id, :m_valued_ability_id, :value, :_destroy]
+    )
+  end
 
   # 権限確認
   def ensure_current_user

@@ -68,24 +68,23 @@
     </div>
     <%# メイン %>
     <div class="mb-3">
-      <!-- TODO: enumを利用してセレクトを作る -->
+      <!-- TODO: m_positionテーブルを利用してセレクトを作る -->
       <%= f.label :main_position, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
       <%= f.select :main_position, [
-          ["先発", 11],
-          ["中継ぎ", 12],
-          ["抑え", 13],
+          ["先発", 10],
+          ["中継ぎ", 11],
+          ["抑え", 12],
           ["捕手", 2],
           ["一塁手", 3],
           ["二塁手", 4],
           ["三塁手", 5],
           ["遊撃手", 6],
-          ["外野手", 7]
+          ["外野手", 13]
         ],  {include_blank: "選択して下さい", selected: @player.main_position&.id}, {class: "form-select"} %>
     </div>
     <%# ポジション %>
     <div class="mb-3">
       <label class="form-label">各ポジション適正</label>
-      <%# FIXME: メインポジションで選択しているポジションは、自動で3を入力 %>
       <%# 投手 %>
       <div class="row">
         <div class="col-4">
@@ -134,40 +133,23 @@
       共通特殊能力
     </div>
     <div class="mb-3">
+      <!-- 値あり特殊能力 -->
       <div class="row mb-3">
-        <div class="col-6 col-sm-4">
-          <%= f.label :kaifuku, "回復", class: "form-label small mb-0" %>
-          <%# = f.select :kaifuku,
-            options_for_select([
-                ["ガソリンタンク", 4, {class: "pawa-bg-sa-sp2"}],
-                ["A", 3, {class: "pawa-bg-sa-g2"}],
-                ["B", 2, {class: "pawa-bg-sa-g2"}],
-                ["C", 1, {class: "bg-white"}],
-                ["D", 0, {class: "bg-white"}],
-                ["E", -1, {class: "bg-white"}],
-                ["F", -2, {class: "pawa-bg-sa-b2"}],
-                ["G", -3, {class: "pawa-bg-sa-b2"}]
-            ], @player.new_record? ? 0 : @player.kaifuku),
-            {},
-            { class: "form-select", id: "kaifuku-select" } %>
-        </div>
-        <div class="col-6 col-sm-4">
-          <%= f.label :kegasinikusa, "ケガしにくさ", class: "form-label small mb-0" %>
-          <%# = f.select :kegasinikusa,
-            options_for_select([
-                ["鉄人", 4, {class: "pawa-bg-sa-sp2"}],
-                ["A", 3, {class: "pawa-bg-sa-g2"}],
-                ["B", 2, {class: "pawa-bg-sa-g2"}],
-                ["C", 1, {class: "bg-white"}],
-                ["D", 0, {class: "bg-white"}],
-                ["E", -1, {class: "bg-white"}],
-                ["F", -2, {class: "pawa-bg-sa-b2"}],
-                ["G", -3, {class: "pawa-bg-sa-b2"}]
-            ], @player.new_record? ? 0 : @player.kegasinikusa),
-            {},
-            { class: "form-select", id: "kegasinikusa-select" } %>
-        </div>
+        <% @valued_abilities_options_common.each do |ability| %>
+          <div class="col-6 col-sm-4">
+            <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
+            <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+              <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
+              <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
+              <%= pa.select :value,
+                      options_for_select(ability[:options], player_ability.value || 0),
+                      {},
+                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
+      <!-- 値なし特殊能力 -->
       <div class="row mb-2">
         <% common_special_abilities.each do |ability| %>
           <div class="col-4 col-sm-2">

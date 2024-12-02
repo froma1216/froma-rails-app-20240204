@@ -31,6 +31,11 @@ class Enums
     def breaking_ball_division
       YAML.load_file(Rails.root.join("config", "pawapuro", "breaking_ball_division.yml"))["breaking_ball_division"]
     end
+
+    # 青赤区分
+    def good_bad_division
+      YAML.load_file(Rails.root.join("config", "pawapuro", "good_bad_division.yml"))["good_bad_division"]
+    end
     # 以下に追加
   end
 end

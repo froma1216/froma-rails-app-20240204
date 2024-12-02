@@ -62,11 +62,11 @@
         </div>
       </div>
     </div>
-    <%# ポジション %>
+    <!-- ポジション -->
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       ポジション
     </div>
-    <%# メイン %>
+    <!-- メインポジション -->
     <div class="mb-3">
       <!-- TODO: m_positionテーブルを利用してセレクトを作る -->
       <%= f.label :main_position, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
@@ -82,10 +82,10 @@
           ["外野手", 13]
         ],  {include_blank: "選択して下さい", selected: @player.main_position&.id}, {class: "form-select"} %>
     </div>
-    <%# ポジション %>
+    <!-- 各ポジション適正 -->
     <div class="mb-3">
       <label class="form-label">各ポジション適正</label>
-      <%# 投手 %>
+      <!-- 投手 -->
       <div class="row">
         <% @position_proficiencies_pitcher.each do |position| %>
           <div class="col-4">
@@ -99,7 +99,7 @@
           </div>
         <% end %>
       </div>
-      <%# 野手 %>
+      <!-- 野手 -->
       <div class="row">
         <% @position_proficiencies_fielder.each do |position| %>
           <div class="col-4 col-sm-2">
@@ -114,7 +114,7 @@
         <% end %>
       </div>
     </div>
-    <%# 共通特殊能力 %>
+    <!-- 共通特殊能力 -->
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       共通特殊能力
     </div>
@@ -138,11 +138,15 @@
       </div>
       <!-- 値なし特殊能力 -->
       <div class="row mb-2">
-        <% common_special_abilities.each do |ability| %>
+        <% @basic_abilities_common.each do |ability| %>
           <div class="col-4 col-sm-2">
             <div class="form-check">
-              <%#= f.check_box :other_special_abilities, { multiple: true, class: "form-check-input #{ability[:css_class]}", id: ability[:id], checked: ability_checked?(@player, ability[:label]) }, ability[:label], nil %>
-              <%# = f.label :other_special_abilities, ability[:label], class: "form-check-label #{ability[:text_class]} fw-bold", for: ability[:id] %>
+              <% player_ability = @player.player_m_basic_abilities.find { |pa| pa.m_basic_ability_id == ability[:id] } || @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id]) %>
+              <%= f.fields_for :player_m_basic_abilities, player_ability do |pa| %>
+                <%= pa.hidden_field :m_basic_ability_id, value: ability[:id] %>
+                <%= pa.check_box :_destroy, { class: "form-check-input #{ability[:check_input_class]}", id: "ability-#{ability[:id]}", checked: ability[:selected] }, nil, false %>
+                <%= pa.label :_destroy, ability[:name], class: "form-check-label #{ability[:check_label_class]} fw-bold", for: "ability-#{ability[:id]}" %>
+              <% end %>
             </div>
           </div>
         <% end %>

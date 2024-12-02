@@ -60,19 +60,18 @@
 .pawa-text-special {
   @include pawa-text($special-text-color);
 }
-
 .pawa-text-good {
   @include pawa-text($good-text-color);
 }
-
 .pawa-text-bad {
   @include pawa-text($bad-text-color);
 }
-
+.pawa-text-combined {
+  @include pawa-text($good-text-color);
+}
 .pawa-text-sub {
   @include pawa-text($sub-text-color);
 }
-
 .pawa-text-neutral {
   @include pawa-text($neutral-text-color);
 }
@@ -497,7 +496,7 @@
 }
 
 // 特能チェックボックス
-@mixin pawa-checkbox($border-color, $background-color) {
+@mixin pawa-check-input($border-color, $background-color) {
   border: 2px solid $border-color !important;
 
   &:checked {
@@ -505,25 +504,25 @@
   }
 }
 
-.pawa-checkbox-sp {
-  @include pawa-checkbox($special-border-dark-color, $special-border-dark-color);
+.pawa-check-input-special {
+  @include pawa-check-input($special-border-dark-color, $special-border-dark-color);
 }
 
-.pawa-checkbox-g {
-  @include pawa-checkbox($good-border-dark-color, $good-border-dark-color);
+.pawa-check-input-good {
+  @include pawa-check-input($good-border-dark-color, $good-border-dark-color);
 }
 
-.pawa-checkbox-b {
-  @include pawa-checkbox($bad-border-dark-color, $bad-border-dark-color);
+.pawa-check-input-bad {
+  @include pawa-check-input($bad-border-dark-color, $bad-border-dark-color);
 }
 
-.pawa-checkbox-gb {
+.pawa-check-input-combined {
   // FIXME: 上下で色を分けたい
-  @include pawa-checkbox($bad-border-dark-color, $good-border-dark-color);
+  @include pawa-check-input($bad-border-dark-color, $good-border-dark-color);
 }
 
-.pawa-checkbox-sb {
-  @include pawa-checkbox($sub-border-dark-color, $sub-border-dark-color);
+.pawa-check-input-sub {
+  @include pawa-check-input($sub-border-dark-color, $sub-border-dark-color);
 }
 
 // 選手詳細モーダル

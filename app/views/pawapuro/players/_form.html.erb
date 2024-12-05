@@ -87,28 +87,32 @@
       <label class="form-label">各ポジション適正</label>
       <!-- 投手 -->
       <div class="row">
-        <% @position_proficiencies_pitcher.each do |position| %>
+        <% @position_proficiencies[:pitcher].each do |position| %>
           <div class="col-4">
-            <% player_position = @player.player_m_positions.find { |pa| pa.m_position_id == position[:id] } || @player.player_m_positions.build(m_position_id: position[:id]) %>
-            <%= f.fields_for :player_m_positions, player_position do |pa| %>
-              <!-- TODO: 以下hiddenの受け渡す値を見直し -->
+            <%= f.fields_for :player_m_positions, position[:player_position] do |pa| %>
               <%= pa.hidden_field :m_position_id, value: position[:id] %>
               <%= pa.label :"m_position_#{position[:id]}", position[:name], class: "form-label small mb-0" %>
-              <%= pa.number_field :value, { class: "form-control", min: 0, max: 2, value: player_position.proficiency || 0 } %>
+              <%= pa.number_field :value,
+                                  class: "form-control",
+                                  min: 0,
+                                  max: 2,
+                                  value: position[:player_position].proficiency || 0 %>
             <% end %>
           </div>
         <% end %>
       </div>
       <!-- 野手 -->
       <div class="row">
-        <% @position_proficiencies_fielder.each do |position| %>
+        <% @position_proficiencies[:fielder].each do |position| %>
           <div class="col-4 col-sm-2">
-            <% player_position = @player.player_m_positions.find { |pa| pa.m_position_id == position[:id] } || @player.player_m_positions.build(m_position_id: position[:id]) %>
-            <%= f.fields_for :player_m_positions, player_position do |pa| %>
-              <!-- TODO: 以下hiddenの受け渡す値を見直し -->
+            <%= f.fields_for :player_m_positions, position[:player_position] do |pa| %>
               <%= pa.hidden_field :m_position_id, value: position[:id] %>
               <%= pa.label :"m_position_#{position[:id]}", position[:name], class: "form-label small mb-0" %>
-              <%= pa.number_field :value, { class: "form-control", min: 0, max: 2, value: player_position.proficiency || 0 } %>
+              <%= pa.number_field :value,
+                                  class: "form-control",
+                                  min: 0,
+                                  max: 2,
+                                  value: position[:player_position].proficiency || 0 %>
             <% end %>
           </div>
         <% end %>

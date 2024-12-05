@@ -48,22 +48,11 @@ class Pawapuro::PlayersController < ApplicationController
   def new
     if current_user.present?
       @player = Pawapuro::Player.new
-      # ポジション適正：投手
-      @position_proficiencies_pitcher = Pawapuro::MPosition.where(id: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS).map do |pm_position|
-        {
-          id: pm_position.id,
-          name: pm_position.name,
-          abbreviation: pm_position.abbreviation
-        }
-      end
-      # ポジション適正：野手
-      @position_proficiencies_fielder = Pawapuro::MPosition.where(id: Pawapuro::MPosition::PAWAPURO_FIELDER_IDS).map do |pm_position|
-        {
-          id: pm_position.id,
-          name: pm_position.name,
-          abbreviation: pm_position.abbreviation
-        }
-      end
+      # ポジション適正
+      @position_proficiencies = {
+        pitcher: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_PITCHER_IDS),
+        fielder: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
+      }
       # 値あり特殊能力
       @valued_abilities_options = {
         common: fetch_valued_abilities(@player, 110),
@@ -98,22 +87,11 @@ class Pawapuro::PlayersController < ApplicationController
   def create; end
 
   def edit
-    # ポジション適正：投手
-    @position_proficiencies_pitcher = Pawapuro::MPosition.where(id: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS).map do |pm_position|
-      {
-        id: pm_position.id,
-        name: pm_position.name,
-        abbreviation: pm_position.abbreviation
-      }
-    end
-    # ポジション適正：野手
-    @position_proficiencies_fielder = Pawapuro::MPosition.where(id: Pawapuro::MPosition::PAWAPURO_FIELDER_IDS).map do |pm_position|
-      {
-        id: pm_position.id,
-        name: pm_position.name,
-        abbreviation: pm_position.abbreviation
-      }
-    end
+    # ポジション適正
+    @position_proficiencies = {
+      pitcher: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_PITCHER_IDS),
+      fielder: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
+    }
     # 値あり特殊能力
     @valued_abilities_options = {
       common: fetch_valued_abilities(@player, 110),
@@ -161,6 +139,22 @@ class Pawapuro::PlayersController < ApplicationController
   def ensure_current_user
     @player = Pawapuro::Player.find(params[:id])
     redirect_to pawapuro_players_path, notice: "権限がありません" if @player.user != current_user
+  end
+
+  # ポジション適正を取得する
+  def fetch_positions(player, position_ids)
+    positions = Pawapuro::MPosition.where(id: position_ids)
+    positions.map do |position|
+      # 既存データがある場合はそのまま、ない場合は新規作成
+      player_position = player.player_m_positions.find_or_initialize_by(m_position_id: position.id)
+
+      {
+        id: position.id,
+        name: position.name,
+        abbreviation: position.abbreviation,
+        player_position: # フォーム用に渡す
+      }
+    end
   end
 
   # 値あり特殊能力を取得する

@@ -1,34 +1,34 @@
 <%# NOTE: https://qiita.com/snskOgata/items/44d32a06045e6a52d11c %>
 <%= form_with model: @player, url: @player.new_record? ? pawapuro_players_path : pawapuro_players_path(@player), local: true do |f| %>
   <form>
-    <%# プロフィール %>
+    <!-- プロフィール -->
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       プロフィール
     </div>
-    <%# 選手名 %>
+    <!-- 選手名 -->
     <div>
       <%= f.label :player_name, "選手名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
       <%= f.text_field :player_name, class: "form-control", placeholder: "佐藤太", autocomplete: "name", maxlength: 10 %>
     </div>
     <div class="row">
-      <%# 名字 %>
+      <!-- 名字 -->
       <div class="col-6">
         <%= f.label :last_name, "姓", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
         <%= f.text_field :last_name, class: "form-control", placeholder: "佐藤", autocomplete: "name", maxlength: 10 %>
       </div>
-      <%# 名前 %>
+      <!-- 名前 -->
       <div class="col-6">
         <%= f.label :first_name, "名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
         <%= f.text_field :first_name, class: "form-control", placeholder: "太郎", autocomplete: "name", maxlength: 10 %>
       </div>
     </div>
     <div class="row">
-      <%# 背ネーム %>
+      <!-- 背ネーム -->
       <div class="col-6">
         <%= f.label :back_name, "背ネーム", class: "form-label" %>
         <%= f.text_field :back_name, class: "form-control", placeholder: "SATO", autocomplete: "name" %>
       </div>
-      <%# 生年月日 %>
+      <!-- 生年月日 -->
       <div class="col-6">
         <%= f.label :birthday, "生年月日", class: "pt-2 pr-2" %>
         <%= f.date_field :birthday, class: "form-control" %>
@@ -152,12 +152,12 @@
         <% end %>
       </div>
     </div>
-    <%# 投手基本能力 %>
+    <!-- 投手基本能力 -->
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       投手基本能力
     </div>
     <div class="mb-3">
-      <%# 基本能力 %>
+      <!-- 基本能力 -->
       <div class="mb-3">
         <div class="row">
           <div class="col-6 col-sm-4">
@@ -167,7 +167,7 @@
               <span class="input-group-text">km/h</span>
             </div>
           </div>
-          <%# スマホサイズ時のみ、球速のみ一段目になるようにダミーで設置 %>
+          <!-- スマホサイズ時のみ、球速のみ一段目になるようにダミーで設置 -->
           <div class="col-6 d-block d-sm-none"></div>
           <div class="col-6 col-sm-4">
             <%= f.label :control, "コントロール", class: "form-label" %>
@@ -185,12 +185,11 @@
           </div>
         </div>
       </div>
-      <%# 変化球 %>
+      <!-- 変化球 -->
       <div>
         <% @breaking_balls.each do |type, orders| %>
           <div class="row mb-2">
             <% orders.each do |order, breaking_ball| %>
-              <%#  options = breaking_ball_options(type, @breaking_ball_options) %>
               <% options = [["なし", nil]] + (@breaking_ball_options[type.to_s] || []).map { |ball| [ball.name, ball.id] } %>
               <div class="col-12 col-sm-6">
                 <label class="form-label small mb-0">
@@ -258,13 +257,13 @@
         <% end %>
       </div>
     </div>
-    <%# 野手基本能力 %>
+    <!-- 野手基本能力 -->
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       野手基本能力
     </div>
     <div class="mb-3">
       <div class="mb-3">
-        <%# 基本能力 %>
+        <!-- 基本能力 -->
         <div class="mb-3">
           <div class="row">
             <div class="col-6 col-sm-2">
@@ -274,9 +273,9 @@
                 <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" id="fa-icon"></i></span>
               </div>
             </div>
-            <%# PCサイズ時、弾道のみ一段目になるようにダミーで設置 %>
+            <!-- PCサイズ時、弾道のみ一段目になるようにダミーで設置 -->
             <div class="col-10 d-none d-sm-block"></div>
-            <%# スマホサイズ時、弾道のみ一段目になるようにダミーで設置 %>
+            <!-- スマホサイズ時、弾道のみ一段目になるようにダミーで設置 -->
             <div class="col-6 d-block d-sm-none"></div>
             <div class="col-6 col-sm-2">
               <%= f.label :meat, "ミート", class: "form-label" %>

@@ -223,97 +223,28 @@
           <% end %>
         </div>
       </div>
-      <%# 投手特殊能力 %>
+      <!-- 投手特殊能力 -->
       <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
         投手特殊能力
       </div>
       <div class="mb-3">
-        <%# 数値あり %>
+        <!-- 数値あり -->
         <div class="row mb-3">
-          <div class="col-6 col-sm-4">
-            <%= pitcher_f.label :taipinch, "対ピンチ", class: "form-label small mb-0" %>
-            <%# = pitcher_f.select :taipinch,
-              options_for_select([
-                  ["強心臓", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-                  ["ノミの心臓", -4, {class: "pawa-bg-sa-b2"}]
-              ], @player.new_record? ? 0 : @player.pawapuro_pitcher.taipinch),
-              {},
-              { class: "form-select", id: "taipinch-select" } %>
-          </div>
-          <div class="col-6 col-sm-4">
-            <%= pitcher_f.label :taihidaridasya, "対左打者", class: "form-label small mb-0" %>
-            <%# = pitcher_f.select :taihidaridasya,
-              options_for_select([
-                  ["左キラー", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_pitcher.taihidaridasya),
-              {},
-              { class: "form-select", id: "taihidaridasya-select" } %>
-          </div>
-          <div class="col-6 col-sm-4">
-            <%= pitcher_f.label :utarezuyosa, "打たれ強さ", class: "form-label small mb-0" %>
-            <%# = pitcher_f.select :utarezuyosa,
-              options_for_select([
-                  ["不屈の魂", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-                  ["ガラスのハート", -4, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_pitcher.utarezuyosa),
-              {},
-              { class: "form-select", id: "utarezuyosa-select" } %>
-          </div>
-          <div class="col-6 col-sm-4">
-            <%= pitcher_f.label :nobi, "ノビ", class: "form-label small mb-0" %>
-            <%# = pitcher_f.select :nobi,
-              options_for_select([
-                  ["怪童", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_pitcher.nobi),
-              {},
-              { class: "form-select", id: "nobi-select" } %>
-          </div>
-          <div class="col-6 col-sm-4">
-            <%= pitcher_f.label :quick, "クイック", class: "form-label small mb-0" %>
-            <%# = pitcher_f.select :quick,
-              options_for_select([
-                  ["走者釘付", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_pitcher.quick),
-              {},
-              { class: "form-select", id: "quick-select" } %>
-          </div>
+          <% @valued_abilities_options_pitcher.each do |ability| %>
+            <div class="col-6 col-sm-4">
+              <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
+              <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+                <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
+                <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
+                <%= pa.select :value,
+                      options_for_select(ability[:options], player_ability.value || 0),
+                      {},
+                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
-        <%# 数値なし %>
+        <!-- 数値なし -->
         <div class="mb-3">
           <div class="row">
             <% pitcher_special_abilities.each do |ability| %>
@@ -400,112 +331,28 @@
           </div>
         </div>
       </div>
-      <%# 野手特殊能力 %>
+      <!-- 野手特殊能力 -->
       <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
         野手特殊能力
       </div>
       <div class="mb-3">
-        <%# 数値あり %>
+        <!-- 数値あり -->
         <div class="row mb-3">
-          <div class="col-6 col-sm-4">
-            <%= fielder_f.label :chance, "チャンス", class: "form-label small mb-0" %>
-            <%# = fielder_f.select :chance,
-              options_for_select([
-                  ["勝負師", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_fielder.chance),
-              {},
-              { class: "form-select", id: "chance-select" } %>
-          </div>
-          <div class="col-6 col-sm-4">
-            <%= fielder_f.label :taihidaritousyu, "対左投手", class: "form-label small mb-0" %>
-            <%# = fielder_f.select :taihidaritousyu,
-              options_for_select([
-                  ["左腕キラー", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_fielder.taihidaritousyu),
-              {},
-              { class: "form-select", id: "taihidaritousyu-select" } %>
-          </div>
-          <%# TODO: ポジション（サブポジ含む）にキャッチャーがない場合は非活性 %>
-          <div class="col-6 col-sm-4">
-            <%= fielder_f.label :catcher, "キャッチャー", class: "form-label small mb-0" %>
-            <%# = fielder_f.select :catcher,
-              options_for_select([
-                  ["球界の頭脳", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_fielder.catcher),
-              {},
-              { class: "form-select", id: "catcher-select" } %>
-          </div>
-          <div class="col-6 col-sm-4">
-            <%= fielder_f.label :tourui, "盗塁", class: "form-label small mb-0" %>
-            <%# = fielder_f.select :tourui,
-              options_for_select([
-                  ["電光石火", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_fielder.tourui),
-              {},
-              { class: "form-select", id: "tourui-select" } %>
-          </div>
-          <div class="col-6 col-sm-4">
-            <%= fielder_f.label :sourui, "走塁", class: "form-label small mb-0" %>
-            <%# = fielder_f.select :sourui,
-              options_for_select([
-                  ["高速ベースラン", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_fielder.sourui),
-              {},
-              { class: "form-select", id: "sourui-select" } %>
-          </div>
-          <div class="col-6 col-sm-4">
-            <%= fielder_f.label :soukyuu, "送球", class: "form-label small mb-0" %>
-            <%# = fielder_f.select :soukyuu,
-              options_for_select([
-                  ["ストライク送球", 4, {class: "pawa-bg-sa-sp2"}],
-                  ["A", 3, {class: "pawa-bg-sa-g2"}],
-                  ["B", 2, {class: "pawa-bg-sa-g2"}],
-                  ["C", 1, {class: "bg-white"}],
-                  ["D", 0, {class: "bg-white"}],
-                  ["E", -1, {class: "bg-white"}],
-                  ["F", -2, {class: "pawa-bg-sa-b2"}],
-                  ["G", -3, {class: "pawa-bg-sa-b2"}],
-              ], @player.new_record? ? 0 : @player.pawapuro_fielder.soukyuu),
-              {},
-              { class: "form-select", id: "soukyuu-select" } %>
-          </div>
+          <% @valued_abilities_options_fielder.each do |ability| %>
+            <div class="col-6 col-sm-4">
+              <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
+              <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+                <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
+                <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
+                <%= pa.select :value,
+                      options_for_select(ability[:options], player_ability.value || 0),
+                      {},
+                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
-        <%# 数値なし %>
+        <!-- 数値なし -->
         <div class="mb-3">
           <div class="row">
             <% fielder_special_abilities.each do |ability| %>

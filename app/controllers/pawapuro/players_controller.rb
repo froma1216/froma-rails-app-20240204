@@ -24,8 +24,8 @@ class Pawapuro::PlayersController < ApplicationController
       end
 
       # 所持している全変化球を取得
-      # TODO: ポジション適性と同じようにまとめて取得、管理できないか確認
-      filtered_balls = @player.filtered_breaking_balls([100, 210..250], [1, 2])
+      # TODO: newやeditと同じようにまとめて取得
+      filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
       # それぞれの変化球を取得
       @breaking_ball_fastball1 = filtered_balls.dig(100, 1)
       @breaking_ball_fastball2 = filtered_balls.dig(100, 2)
@@ -90,6 +90,19 @@ class Pawapuro::PlayersController < ApplicationController
       @basic_abilities_common.each do |ability|
         @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id])
       end
+      # 変化球
+      @breaking_balls = {
+        fastball: { 1 => nil, 2 => nil },
+        slider: { 1 => nil, 2 => nil },
+        curve: { 1 => nil, 2 => nil },
+        shoot: { 1 => nil, 2 => nil },
+        sinker: { 1 => nil, 2 => nil },
+        fork: { 1 => nil, 2 => nil }
+      }
+      # 変化球セレクト
+      @breaking_ball_options = Pawapuro::MBreakingBall
+        .where(breaking_ball_division: Enums.breaking_ball_division.values)
+        .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
     else
       redirect_to new_user_session_path
     end
@@ -133,6 +146,20 @@ class Pawapuro::PlayersController < ApplicationController
         selected: @player.m_basic_abilities.exists?(id: ability.id) # 選択済みかどうか
       }
     end
+    # 変化球
+    filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
+    @breaking_balls = {
+      fastball: { 1 => filtered_balls.dig(100, 1), 2 => filtered_balls.dig(100, 2) },
+      slider: { 1 => filtered_balls.dig(210, 1), 2 => filtered_balls.dig(210, 2) },
+      curve: { 1 => filtered_balls.dig(220, 1), 2 => filtered_balls.dig(220, 2) },
+      shoot: { 1 => filtered_balls.dig(230, 1), 2 => filtered_balls.dig(230, 2) },
+      sinker: { 1 => filtered_balls.dig(240, 1), 2 => filtered_balls.dig(240, 2) },
+      fork: { 1 => filtered_balls.dig(250, 1), 2 => filtered_balls.dig(250, 2) }
+    }
+    # 変化球セレクト
+    @breaking_ball_options = Pawapuro::MBreakingBall
+      .where(breaking_ball_division: Enums.breaking_ball_division.values)
+      .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
   end
 
   def update; end

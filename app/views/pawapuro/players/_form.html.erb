@@ -152,246 +152,234 @@
         <% end %>
       </div>
     </div>
-    <!-- TODO: pitcher_fは不要であるため、整備後に全て消す -->
-    <%= f.fields_for :pawapuro_pitcher do |pitcher_f| %>
-      <%# 投手基本能力 %>
-      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-        投手基本能力
-      </div>
+    <%# 投手基本能力 %>
+    <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+      投手基本能力
+    </div>
+    <div class="mb-3">
+      <%# 基本能力 %>
       <div class="mb-3">
-        <%# 基本能力 %>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-6 col-sm-4">
-              <%= f.label :pace, "球速", class: "form-label" %>
-              <div class="input-group">
-                <%= f.number_field :pace, class: "form-control", min: 120, max: 170 %>
-                <span class="input-group-text">km/h</span>
-              </div>
+        <div class="row">
+          <div class="col-6 col-sm-4">
+            <%= f.label :pace, "球速", class: "form-label" %>
+            <div class="input-group">
+              <%= f.number_field :pace, class: "form-control", min: 120, max: 170 %>
+              <span class="input-group-text">km/h</span>
             </div>
-            <%# スマホサイズ時のみ、球速のみ一段目になるようにダミーで設置 %>
-            <div class="col-6 d-block d-sm-none"></div>
-            <div class="col-6 col-sm-4">
-              <%= f.label :control, "コントロール", class: "form-label" %>
-              <div class="input-group">
-                <%= f.number_field :control, class: "form-control", id:"control-input", min: 1, max: 100 %>
-                <span class="input-group-text text-white pawa-bg-g" id="control-alphabet-display">G</span>
-              </div>
+          </div>
+          <%# スマホサイズ時のみ、球速のみ一段目になるようにダミーで設置 %>
+          <div class="col-6 d-block d-sm-none"></div>
+          <div class="col-6 col-sm-4">
+            <%= f.label :control, "コントロール", class: "form-label" %>
+            <div class="input-group">
+              <%= f.number_field :control, class: "form-control", id:"control-input", min: 1, max: 100 %>
+              <span class="input-group-text text-white pawa-bg-g" id="control-alphabet-display">G</span>
             </div>
-            <div class="col-6 col-sm-4">
-              <%= f.label :stamina, "スタミナ", class: "form-label" %>
-              <div class="input-group">
-                <%= f.number_field :stamina, class: "form-control", id:"stamina-input", min: 1, max: 100 %>
-                <span class="input-group-text text-white pawa-bg-g" id="stamina-alphabet-display">G</span>
-              </div>
+          </div>
+          <div class="col-6 col-sm-4">
+            <%= f.label :stamina, "スタミナ", class: "form-label" %>
+            <div class="input-group">
+              <%= f.number_field :stamina, class: "form-control", id:"stamina-input", min: 1, max: 100 %>
+              <span class="input-group-text text-white pawa-bg-g" id="stamina-alphabet-display">G</span>
             </div>
           </div>
         </div>
-        <%# 変化球 %>
-        <div>
-          <% @breaking_balls.each do |type, orders| %>
-            <div class="row mb-2">
-              <% orders.each do |order, breaking_ball| %>
-                <%#  options = breaking_ball_options(type, @breaking_ball_options) %>
-                <% options = [["なし", nil]] + (@breaking_ball_options[type.to_s] || []).map { |ball| [ball.name, ball.id] } %>
-                <div class="col-12 col-sm-6">
-                  <label class="form-label small mb-0">
-                    <%= "#{order == 1 ? '第一' : '第二'} #{t("enums.pawapuro.breaking_ball_division.#{type}")}系" %>
-                  </label>
-                  <div class="row">
-                    <div class="col-9">
-                      <%= f.fields_for :player_m_breaking_balls, (breaking_ball || @player.player_m_breaking_balls.build(ball_type_order: order, m_breaking_ball_id: nil, movement: 0)) do |bb| %>
-                        <%= bb.select :m_breaking_ball_id,
+      </div>
+      <%# 変化球 %>
+      <div>
+        <% @breaking_balls.each do |type, orders| %>
+          <div class="row mb-2">
+            <% orders.each do |order, breaking_ball| %>
+              <%#  options = breaking_ball_options(type, @breaking_ball_options) %>
+              <% options = [["なし", nil]] + (@breaking_ball_options[type.to_s] || []).map { |ball| [ball.name, ball.id] } %>
+              <div class="col-12 col-sm-6">
+                <label class="form-label small mb-0">
+                  <%= "#{order == 1 ? '第一' : '第二'} #{t("enums.pawapuro.breaking_ball_division.#{type}")}系" %>
+                </label>
+                <div class="row">
+                  <div class="col-9">
+                    <%= f.fields_for :player_m_breaking_balls, (breaking_ball || @player.player_m_breaking_balls.build(ball_type_order: order, m_breaking_ball_id: nil, movement: 0)) do |bb| %>
+                      <%= bb.select :m_breaking_ball_id,
                               options_for_select(options, selected: breaking_ball&.m_breaking_ball_id),
                               {},
                               { class: order == 1 ? 'form-select' : 'form-select form-select-sm' } %>
-                      <% end %>
-                    </div>
-                    <div class="col-3">
-                      <%= f.fields_for :player_m_breaking_balls, (breaking_ball || @player.player_m_breaking_balls.build(ball_type_order: order, m_breaking_ball_id: nil, movement: 0)) do |bb| %>
-                        <%= bb.number_field :movement,
+                    <% end %>
+                  </div>
+                  <div class="col-3">
+                    <%= f.fields_for :player_m_breaking_balls, (breaking_ball || @player.player_m_breaking_balls.build(ball_type_order: order, m_breaking_ball_id: nil, movement: 0)) do |bb| %>
+                      <%= bb.number_field :movement,
                                     class: order == 1 ? 'form-control' : 'form-control form-control-sm',
                                     min: 0,
                                     max: 7,
                                     value: breaking_ball&.movement || 0 %>
-                      <% end %>
-                    </div>
+                    <% end %>
                   </div>
                 </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <!-- 投手特殊能力 -->
-      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-        投手特殊能力
-      </div>
-      <div class="mb-3">
-        <!-- 数値あり -->
-        <div class="row mb-3">
-          <% @valued_abilities_options_pitcher.each do |ability| %>
-            <div class="col-6 col-sm-4">
-              <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
-              <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
-                <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
-                <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
-                <%= pa.select :value,
-                      options_for_select(ability[:options], player_ability.value || 0),
-                      {},
-                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <!-- 数値なし -->
-        <div class="mb-3">
-          <div class="row">
-            <% pitcher_special_abilities.each do |ability| %>
-              <div class="col-4 col-sm-2">
-                <div class="form-check">
-                  <%# = pitcher_f.check_box :other_special_abilities,
-                    { multiple: true, class: "form-check-input #{ability[:css_class]}", id: ability[:id],
-                      checked: ability_checked?(@player.pawapuro_pitcher, ability[:label]) },
-                    ability[:label], nil %>
-                  <%# = pitcher_f.label :other_special_abilities, ability[:label],
-                    class: "form-check-label #{ability[:text_class]} fw-bold", for: ability[:id] %>
-                </div>
               </div>
             <% end %>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
-    <!-- TODO: fielder_fを全て消す -->
-    <%= f.fields_for :pawapuro_fielder do |fielder_f| %>
-      <%# 野手基本能力 %>
-      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-        野手基本能力
-      </div>
-      <div class="mb-3">
-        <div class="mb-3">
-          <%# 基本能力 %>
-          <div class="mb-3">
-            <div class="row">
-              <div class="col-6 col-sm-2">
-                <%= f.label :trajectory, "弾道", class: "form-label" %>
-                <div class="input-group">
-                  <%= f.number_field :trajectory, class: "form-control", id:"trajectory-input", min: 1, max: 4 %>
-                  <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" id="fa-icon"></i></span>
-                </div>
-              </div>
-              <%# PCサイズ時、弾道のみ一段目になるようにダミーで設置 %>
-              <div class="col-10 d-none d-sm-block"></div>
-              <%# スマホサイズ時、弾道のみ一段目になるようにダミーで設置 %>
-              <div class="col-6 d-block d-sm-none"></div>
-              <div class="col-6 col-sm-2">
-                <%= f.label :meat, "ミート", class: "form-label" %>
-                <div class="input-group">
-                  <%= f.number_field :meat, class: "form-control", id:"meat-input", min: 1, max: 100 %>
-                  <span class="input-group-text text-white pawa-bg-g" id="meat-alphabet-display">G</span>
-                </div>
-              </div>
-              <div class="col-6 col-sm-2">
-                <%= f.label :power, "パワー", class: "form-label" %>
-                <div class="input-group">
-                  <%= f.number_field :power, class: "form-control", id:"power-input", min: 1, max: 100 %>
-                  <span class="input-group-text text-white pawa-bg-g" id="power-alphabet-display">G</span>
-                </div>
-              </div>
-              <div class="col-6 col-sm-2">
-                <%= f.label :running, "走力", class: "form-label" %>
-                <div class="input-group">
-                  <%= f.number_field :running, class: "form-control", id:"running-input", min: 1, max: 100 %>
-                  <span class="input-group-text text-white pawa-bg-g" id="running-alphabet-display">G</span>
-                </div>
-              </div>
-              <div class="col-6 col-sm-2">
-                <%= f.label :arm, "肩力", class: "form-label" %>
-                <div class="input-group">
-                  <%= f.number_field :arm, class: "form-control", id:"arm-input", min: 1, max: 100 %>
-                  <span class="input-group-text text-white pawa-bg-g" id="arm-alphabet-display">G</span>
-                </div>
-              </div>
-              <div class="col-6 col-sm-2">
-                <%= f.label :fielding, "守備力", class: "form-label" %>
-                <div class="input-group">
-                  <%= f.number_field :fielding, class: "form-control", id:"fielding-input", min: 1, max: 100 %>
-                  <span class="input-group-text text-white pawa-bg-g" id="fielding-alphabet-display">G</span>
-                </div>
-              </div>
-              <div class="col-6 col-sm-2">
-                <%= f.label :catching, "捕球", class: "form-label" %>
-                <div class="input-group">
-                  <%= f.number_field :catching, class: "form-control", id:"catching-input", min: 1, max: 100 %>
-                  <span class="input-group-text text-white pawa-bg-g" id="catching-alphabet-display">G</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- 野手特殊能力 -->
-      <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-        野手特殊能力
-      </div>
-      <div class="mb-3">
-        <!-- 数値あり -->
-        <div class="row mb-3">
-          <% @valued_abilities_options_fielder.each do |ability| %>
-            <div class="col-6 col-sm-4">
-              <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
-              <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
-                <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
-                <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
-                <%= pa.select :value,
-                      options_for_select(ability[:options], player_ability.value || 0),
-                      {},
-                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <!-- 数値なし -->
-        <div class="mb-3">
-          <div class="row">
-            <% fielder_special_abilities.each do |ability| %>
-              <div class="col-4 col-sm-2">
-                <div class="form-check">
-                  <%# = fielder_f.check_box :other_special_abilities,
-                  { multiple: true, class: "form-check-input #{ability[:css_class]}", id: ability[:id],
-                    checked: ability_checked?(@player.pawapuro_fielder, ability[:label]) },
-                  ability[:label], nil %>
-                  <%# = fielder_f.label :other_special_abilities, ability[:label],
-                    class: "form-check-label #{ability[:text_class]} fw-bold", for: ability[:id] %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <%# COM操作起用法特殊能力 %>
+    </div>
+    <!-- 投手特殊能力 -->
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-      COM操作起用法特殊能力
+      投手特殊能力
     </div>
     <div class="mb-3">
-      <div class="row">
-        <% other_special_abilities.each do |ability| %>
+      <!-- 数値あり -->
+      <div class="row mb-3">
+        <% @valued_abilities_options_pitcher.each do |ability| %>
+          <div class="col-6 col-sm-4">
+            <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
+            <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+              <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
+              <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
+              <%= pa.select :value,
+                      options_for_select(ability[:options], player_ability.value || 0),
+                      {},
+                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <!-- 数値なし -->
+      <div class="row mb-2">
+        <% @basic_abilities_pitcher.each do |ability| %>
           <div class="col-4 col-sm-2">
             <div class="form-check">
-              <%# = f.check_box :other_special_abilities,
-                { multiple: true, class: "form-check-input #{ability[:css_class]}", id: ability[:id],
-                  checked: ability_checked?(@player,
-                ability[:label]) }, ability[:label], nil %>
-              <%# = f.label :other_special_abilities, ability[:label],
-                class: "form-check-label #{ability[:text_class]} fw-bold", for: ability[:id] %>
+              <% player_ability = @player.player_m_basic_abilities.find { |pa| pa.m_basic_ability_id == ability[:id] } || @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id]) %>
+              <%= f.fields_for :player_m_basic_abilities, player_ability do |pa| %>
+                <%= pa.hidden_field :m_basic_ability_id, value: ability[:id] %>
+                <%= pa.check_box :_destroy, { class: "form-check-input #{ability[:check_input_class]}", id: "ability-#{ability[:id]}", checked: ability[:selected] }, nil, false %>
+                <%= pa.label :_destroy, ability[:name], class: "form-check-label #{ability[:check_label_class]} fw-bold", for: "ability-#{ability[:id]}" %>
+              <% end %>
             </div>
           </div>
         <% end %>
       </div>
     </div>
-    <%# その他 %>
+    <%# 野手基本能力 %>
+    <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+      野手基本能力
+    </div>
+    <div class="mb-3">
+      <div class="mb-3">
+        <%# 基本能力 %>
+        <div class="mb-3">
+          <div class="row">
+            <div class="col-6 col-sm-2">
+              <%= f.label :trajectory, "弾道", class: "form-label" %>
+              <div class="input-group">
+                <%= f.number_field :trajectory, class: "form-control", id:"trajectory-input", min: 1, max: 4 %>
+                <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" id="fa-icon"></i></span>
+              </div>
+            </div>
+            <%# PCサイズ時、弾道のみ一段目になるようにダミーで設置 %>
+            <div class="col-10 d-none d-sm-block"></div>
+            <%# スマホサイズ時、弾道のみ一段目になるようにダミーで設置 %>
+            <div class="col-6 d-block d-sm-none"></div>
+            <div class="col-6 col-sm-2">
+              <%= f.label :meat, "ミート", class: "form-label" %>
+              <div class="input-group">
+                <%= f.number_field :meat, class: "form-control", id:"meat-input", min: 1, max: 100 %>
+                <span class="input-group-text text-white pawa-bg-g" id="meat-alphabet-display">G</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-2">
+              <%= f.label :power, "パワー", class: "form-label" %>
+              <div class="input-group">
+                <%= f.number_field :power, class: "form-control", id:"power-input", min: 1, max: 100 %>
+                <span class="input-group-text text-white pawa-bg-g" id="power-alphabet-display">G</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-2">
+              <%= f.label :running, "走力", class: "form-label" %>
+              <div class="input-group">
+                <%= f.number_field :running, class: "form-control", id:"running-input", min: 1, max: 100 %>
+                <span class="input-group-text text-white pawa-bg-g" id="running-alphabet-display">G</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-2">
+              <%= f.label :arm, "肩力", class: "form-label" %>
+              <div class="input-group">
+                <%= f.number_field :arm, class: "form-control", id:"arm-input", min: 1, max: 100 %>
+                <span class="input-group-text text-white pawa-bg-g" id="arm-alphabet-display">G</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-2">
+              <%= f.label :fielding, "守備力", class: "form-label" %>
+              <div class="input-group">
+                <%= f.number_field :fielding, class: "form-control", id:"fielding-input", min: 1, max: 100 %>
+                <span class="input-group-text text-white pawa-bg-g" id="fielding-alphabet-display">G</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-2">
+              <%= f.label :catching, "捕球", class: "form-label" %>
+              <div class="input-group">
+                <%= f.number_field :catching, class: "form-control", id:"catching-input", min: 1, max: 100 %>
+                <span class="input-group-text text-white pawa-bg-g" id="catching-alphabet-display">G</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 野手特殊能力 -->
+    <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+      野手特殊能力
+    </div>
+    <div class="mb-3">
+      <!-- 数値あり -->
+      <div class="row mb-3">
+        <% @valued_abilities_options_fielder.each do |ability| %>
+          <div class="col-6 col-sm-4">
+            <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
+            <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+              <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
+              <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
+              <%= pa.select :value,
+                      options_for_select(ability[:options], player_ability.value || 0),
+                      {},
+                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <!-- 数値なし -->
+      <div class="row mb-2">
+        <% @basic_abilities_fielder.each do |ability| %>
+          <div class="col-4 col-sm-2">
+            <div class="form-check">
+              <% player_ability = @player.player_m_basic_abilities.find { |pa| pa.m_basic_ability_id == ability[:id] } || @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id]) %>
+              <%= f.fields_for :player_m_basic_abilities, player_ability do |pa| %>
+                <%= pa.hidden_field :m_basic_ability_id, value: ability[:id] %>
+                <%= pa.check_box :_destroy, { class: "form-check-input #{ability[:check_input_class]}", id: "ability-#{ability[:id]}", checked: ability[:selected] }, nil, false %>
+                <%= pa.label :_destroy, ability[:name], class: "form-check-label #{ability[:check_label_class]} fw-bold", for: "ability-#{ability[:id]}" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <!-- COM操作起用法特殊能力 -->
+    <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
+      COM操作起用法特殊能力
+    </div>
+    <div class="row mb-2">
+      <% @basic_abilities_sub.each do |ability| %>
+        <div class="col-4 col-sm-2">
+          <div class="form-check">
+            <% player_ability = @player.player_m_basic_abilities.find { |pa| pa.m_basic_ability_id == ability[:id] } || @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id]) %>
+            <%= f.fields_for :player_m_basic_abilities, player_ability do |pa| %>
+              <%= pa.hidden_field :m_basic_ability_id, value: ability[:id] %>
+              <%= pa.check_box :_destroy, { class: "form-check-input #{ability[:check_input_class]}", id: "ability-#{ability[:id]}", checked: ability[:selected] }, nil, false %>
+              <%= pa.label :_destroy, ability[:name], class: "form-check-label #{ability[:check_label_class]} fw-bold", for: "ability-#{ability[:id]}" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <!-- その他 -->
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       その他
     </div>
@@ -399,8 +387,8 @@
       <%= f.label :note, '備考', class: 'form-label' %>
       <%= f.text_area :note, rows: 3, class: 'form-control', id: 'bikou' %>
     </div>
-    <%# ボタンエリア %>
-    <%# TODO: それぞれ確認モーダルを表示する %>
+    <!-- ボタンエリア -->
+    <!-- TODO: それぞれ確認モーダルを表示する -->
     <%= f.submit '登録する', class: "btn btn-primary" %>
     <%= link_to 'キャンセル', pawapuro_players_path, class: 'btn btn-secondary' %>
   </form>

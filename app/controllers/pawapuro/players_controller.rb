@@ -110,8 +110,46 @@ class Pawapuro::PlayersController < ApplicationController
           selected: false # 新規作成時はすべて未選択
         }
       end
-      # 各特殊能力を`player_m_basic_abilities`にビルド
       @basic_abilities_common.each do |ability|
+        @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id])
+      end
+      # 値なし特殊能力：投手
+      @basic_abilities_pitcher = Pawapuro::MBasicAbility.where(pitcher_fielder_division: 120).map do |ability|
+        {
+          id: ability.id,
+          name: ability.name,
+          check_input_class: "pawa-check-input-#{ability.good_bad_division}",
+          check_label_class: "pawa-text-#{ability.good_bad_division}",
+          selected: false
+        }
+      end
+      @basic_abilities_pitcher.each do |ability|
+        @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id])
+      end
+      # 値なし特殊能力：野手
+      @basic_abilities_fielder = Pawapuro::MBasicAbility.where(pitcher_fielder_division: 130).map do |ability|
+        {
+          id: ability.id,
+          name: ability.name,
+          check_input_class: "pawa-check-input-#{ability.good_bad_division}",
+          check_label_class: "pawa-text-#{ability.good_bad_division}",
+          selected: false
+        }
+      end
+      @basic_abilities_fielder.each do |ability|
+        @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id])
+      end
+      # 値なし特殊能力：起用
+      @basic_abilities_sub = Pawapuro::MBasicAbility.where(pitcher_fielder_division: 140).map do |ability|
+        {
+          id: ability.id,
+          name: ability.name,
+          check_input_class: "pawa-check-input-#{ability.good_bad_division}",
+          check_label_class: "pawa-text-#{ability.good_bad_division}",
+          selected: false
+        }
+      end
+      @basic_abilities_sub.each do |ability|
         @player.player_m_basic_abilities.build(m_basic_ability_id: ability[:id])
       end
       # 変化球
@@ -186,6 +224,36 @@ class Pawapuro::PlayersController < ApplicationController
         check_input_class: "pawa-check-input-#{ability.good_bad_division}", # チェックボックス：ボックスのクラス
         check_label_class: "pawa-text-#{ability.good_bad_division}", # チェックボックス：ラベルのクラス
         selected: @player.m_basic_abilities.exists?(id: ability.id) # 選択済みかどうか
+      }
+    end
+    # 値なし特殊能力：投手
+    @basic_abilities_pitcher = Pawapuro::MBasicAbility.where(pitcher_fielder_division: 120).map do |ability|
+      {
+        id: ability.id,
+        name: ability.name,
+        check_input_class: "pawa-check-input-#{ability.good_bad_division}",
+        check_label_class: "pawa-text-#{ability.good_bad_division}",
+        selected: @player.m_basic_abilities.exists?(id: ability.id)
+      }
+    end
+    # 値なし特殊能力：野手
+    @basic_abilities_fielder = Pawapuro::MBasicAbility.where(pitcher_fielder_division: 130).map do |ability|
+      {
+        id: ability.id,
+        name: ability.name,
+        check_input_class: "pawa-check-input-#{ability.good_bad_division}",
+        check_label_class: "pawa-text-#{ability.good_bad_division}",
+        selected: @player.m_basic_abilities.exists?(id: ability.id)
+      }
+    end
+    # 値なし特殊能力：起用
+    @basic_abilities_sub = Pawapuro::MBasicAbility.where(pitcher_fielder_division: 140).map do |ability|
+      {
+        id: ability.id,
+        name: ability.name,
+        check_input_class: "pawa-check-input-#{ability.good_bad_division}",
+        check_label_class: "pawa-text-#{ability.good_bad_division}",
+        selected: @player.m_basic_abilities.exists?(id: ability.id)
       }
     end
     # 変化球

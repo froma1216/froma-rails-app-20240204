@@ -16,18 +16,18 @@ module PawapuroHelper
   # end
 
   # 特能数値をアルファベットに変換
-  def display_special_ability_alphabet(val)
-    abilities = {
-      -3 => "G",
-      -2 => "F",
-      -1 => "E",
-      0 => "D",
-      1 => "C",
-      2 => "B",
-      3 => "A"
-    }
-    content_tag(:span, abilities[val] || "")
-  end
+  # def display_special_ability_alphabet(val)
+  #   abilities = {
+  #     -3 => "G",
+  #     -2 => "F",
+  #     -1 => "E",
+  #     0 => "D",
+  #     1 => "C",
+  #     2 => "B",
+  #     3 => "A"
+  #   }
+  #   content_tag(:span, abilities[val] || "")
+  # end
 
   # # 投打の値を右・左・両に変換
   # def display_left_and_right(val)
@@ -127,9 +127,9 @@ module PawapuroHelper
 
   # other_special_abilitiesに引数の値が入っているかを確認（編集画面でチェックボックスに初期値を入れるため）
   # return: true or false
-  def ability_checked?(player, ability)
-    player.other_special_abilities.to_s.split(",").include?(ability)
-  end
+  # def ability_checked?(player, ability)
+  #   player.other_special_abilities.to_s.split(",").include?(ability)
+  # end
 
   # # ポジションボックスの背景色、ボーダー色のクラスを返す
   # def main_position_box_color_class(main_position)
@@ -301,7 +301,7 @@ module PawapuroHelper
   # end
 
   # 特殊能力（値あり）の金特、超赤特の名前を返す
-  def gold_or_very_red_ability_name(ability_name, ability_value)
-    PAWAPURO_GOLD_OR_VERY_RED_ABILITIES.dig(ability_name, ability_value) || ability_name
-  end
+  # def gold_or_very_red_ability_name(ability_name, ability_value)
+  #   PAWAPURO_GOLD_OR_VERY_RED_ABILITIES.dig(ability_name, ability_value) || ability_name
+  # end
 end

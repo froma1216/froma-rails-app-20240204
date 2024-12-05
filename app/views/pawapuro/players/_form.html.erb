@@ -163,7 +163,7 @@
           <div class="col-6 col-sm-4">
             <%= f.label :pace, "球速", class: "form-label" %>
             <div class="input-group">
-              <%= f.number_field :pace, class: "form-control", min: 120, max: 170 %>
+              <%= f.number_field :pace, class: "form-control", min: 120, max: 170, value: @player.pace || 120 %>
               <span class="input-group-text">km/h</span>
             </div>
           </div>
@@ -172,14 +172,14 @@
           <div class="col-6 col-sm-4">
             <%= f.label :control, "コントロール", class: "form-label" %>
             <div class="input-group">
-              <%= f.number_field :control, class: "form-control", id:"control-input", min: 1, max: 100 %>
+              <%= f.number_field :control, class: "form-control", id:"control-input", min: 1, max: 100, value: @player.control || 1 %>
               <span class="input-group-text text-white pawa-bg-g" id="control-alphabet-display">G</span>
             </div>
           </div>
           <div class="col-6 col-sm-4">
             <%= f.label :stamina, "スタミナ", class: "form-label" %>
             <div class="input-group">
-              <%= f.number_field :stamina, class: "form-control", id:"stamina-input", min: 1, max: 100 %>
+              <%= f.number_field :stamina, class: "form-control", id:"stamina-input", min: 1, max: 100, value: @player.stamina || 1 %>
               <span class="input-group-text text-white pawa-bg-g" id="stamina-alphabet-display">G</span>
             </div>
           </div>
@@ -269,7 +269,7 @@
             <div class="col-6 col-sm-2">
               <%= f.label :trajectory, "弾道", class: "form-label" %>
               <div class="input-group">
-                <%= f.number_field :trajectory, class: "form-control", id:"trajectory-input", min: 1, max: 4 %>
+                <%= f.number_field :trajectory, class: "form-control", id:"trajectory-input", min: 1, max: 4, value: @player.trajectory || 1 %>
                 <span class="input-group-text text-white pawa-bg-d" id="trajectory-alphabet-display"><i class="fa fa-solid fa-arrow-right" id="fa-icon"></i></span>
               </div>
             </div>
@@ -280,42 +280,42 @@
             <div class="col-6 col-sm-2">
               <%= f.label :meat, "ミート", class: "form-label" %>
               <div class="input-group">
-                <%= f.number_field :meat, class: "form-control", id:"meat-input", min: 1, max: 100 %>
+                <%= f.number_field :meat, class: "form-control", id:"meat-input", min: 1, max: 100, value: @player.meat || 1 %>
                 <span class="input-group-text text-white pawa-bg-g" id="meat-alphabet-display">G</span>
               </div>
             </div>
             <div class="col-6 col-sm-2">
               <%= f.label :power, "パワー", class: "form-label" %>
               <div class="input-group">
-                <%= f.number_field :power, class: "form-control", id:"power-input", min: 1, max: 100 %>
+                <%= f.number_field :power, class: "form-control", id:"power-input", min: 1, max: 100, value: @player.power || 1 %>
                 <span class="input-group-text text-white pawa-bg-g" id="power-alphabet-display">G</span>
               </div>
             </div>
             <div class="col-6 col-sm-2">
               <%= f.label :running, "走力", class: "form-label" %>
               <div class="input-group">
-                <%= f.number_field :running, class: "form-control", id:"running-input", min: 1, max: 100 %>
+                <%= f.number_field :running, class: "form-control", id:"running-input", min: 1, max: 100, value: @player.running || 1 %>
                 <span class="input-group-text text-white pawa-bg-g" id="running-alphabet-display">G</span>
               </div>
             </div>
             <div class="col-6 col-sm-2">
               <%= f.label :arm, "肩力", class: "form-label" %>
               <div class="input-group">
-                <%= f.number_field :arm, class: "form-control", id:"arm-input", min: 1, max: 100 %>
+                <%= f.number_field :arm, class: "form-control", id:"arm-input", min: 1, max: 100, value: @player.arm || 1 %>
                 <span class="input-group-text text-white pawa-bg-g" id="arm-alphabet-display">G</span>
               </div>
             </div>
             <div class="col-6 col-sm-2">
               <%= f.label :fielding, "守備力", class: "form-label" %>
               <div class="input-group">
-                <%= f.number_field :fielding, class: "form-control", id:"fielding-input", min: 1, max: 100 %>
+                <%= f.number_field :fielding, class: "form-control", id:"fielding-input", min: 1, max: 100, value: @player.fielding || 1 %>
                 <span class="input-group-text text-white pawa-bg-g" id="fielding-alphabet-display">G</span>
               </div>
             </div>
             <div class="col-6 col-sm-2">
               <%= f.label :catching, "捕球", class: "form-label" %>
               <div class="input-group">
-                <%= f.number_field :catching, class: "form-control", id:"catching-input", min: 1, max: 100 %>
+                <%= f.number_field :catching, class: "form-control", id:"catching-input", min: 1, max: 100, value: @player.catching || 1 %>
                 <span class="input-group-text text-white pawa-bg-g" id="catching-alphabet-display">G</span>
               </div>
             </div>

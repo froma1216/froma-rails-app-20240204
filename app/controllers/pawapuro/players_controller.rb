@@ -64,42 +64,12 @@ class Pawapuro::PlayersController < ApplicationController
           abbreviation: pm_position.abbreviation
         }
       end
-      # 値あり特殊能力：共通
-      @valued_abilities_options_common = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 110).map do |ability|
-        levels = JSON.parse(ability.level_display_name)
-        {
-          id: ability.id,
-          name: ability.name,
-          options: levels.map { |key, value| [value, key.to_i] }
-        }
-      end
-      @valued_abilities_options_common.each do |ability|
-        @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id])
-      end
-      # 値あり特殊能力：投手
-      @valued_abilities_options_pitcher = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 120).map do |ability|
-        levels = JSON.parse(ability.level_display_name)
-        {
-          id: ability.id,
-          name: ability.name,
-          options: levels.map { |key, value| [value, key.to_i] }
-        }
-      end
-      @valued_abilities_options_pitcher.each do |ability|
-        @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id])
-      end
-      # 値あり特殊能力：野手
-      @valued_abilities_options_fielder = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 130).map do |ability|
-        levels = JSON.parse(ability.level_display_name)
-        {
-          id: ability.id,
-          name: ability.name,
-          options: levels.map { |key, value| [value, key.to_i] }
-        }
-      end
-      @valued_abilities_options_fielder.each do |ability|
-        @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id])
-      end
+      # 値あり特殊能力
+      @valued_abilities_options = {
+        common: fetch_valued_abilities(@player, 110),
+        pitcher: fetch_valued_abilities(@player, 120),
+        fielder: fetch_valued_abilities(@player, 130)
+      }
       # 値なし特殊能力：共通
       @basic_abilities_common = Pawapuro::MBasicAbility.where(pitcher_fielder_division: 110).map do |ability|
         {
@@ -189,33 +159,12 @@ class Pawapuro::PlayersController < ApplicationController
         abbreviation: pm_position.abbreviation
       }
     end
-    # 値あり特殊能力：共通
-    @valued_abilities_options_common = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 110).map do |ability|
-      levels = JSON.parse(ability.level_display_name)
-      {
-        id: ability.id,
-        name: ability.name,
-        options: levels.map { |key, value| [value, key.to_i] }
-      }
-    end
-    # 値あり特殊能力：投手
-    @valued_abilities_options_pitcher = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 120).map do |ability|
-      levels = JSON.parse(ability.level_display_name)
-      {
-        id: ability.id,
-        name: ability.name,
-        options: levels.map { |key, value| [value, key.to_i] }
-      }
-    end
-    # 値あり特殊能力：投手
-    @valued_abilities_options_fielder = Pawapuro::MValuedAbility.where(pitcher_fielder_division: 130).map do |ability|
-      levels = JSON.parse(ability.level_display_name)
-      {
-        id: ability.id,
-        name: ability.name,
-        options: levels.map { |key, value| [value, key.to_i] }
-      }
-    end
+    # 値あり特殊能力
+    @valued_abilities_options = {
+      common: fetch_valued_abilities(@player, 110),
+      pitcher: fetch_valued_abilities(@player, 120),
+      fielder: fetch_valued_abilities(@player, 130)
+    }
     # 値なし特殊能力：共通
     @basic_abilities_common = Pawapuro::MBasicAbility.where(pitcher_fielder_division: 110).map do |ability|
       {
@@ -290,5 +239,22 @@ class Pawapuro::PlayersController < ApplicationController
   def ensure_current_user
     @player = Pawapuro::Player.find(params[:id])
     redirect_to pawapuro_players_path, notice: "権限がありません" if @player.user != current_user
+  end
+
+  # 値あり特殊能力をハッシュで返す
+  def fetch_valued_abilities(player, division)
+    abilities = Pawapuro::MValuedAbility.where(pitcher_fielder_division: division)
+    abilities.map do |ability|
+      # プレイヤーに関連付けられたデータを取得（または新規作成）
+      player_ability = player.player_m_valued_abilities.find_or_initialize_by(m_valued_ability_id: ability.id)
+
+      levels = JSON.parse(ability.level_display_name)
+      {
+        id: ability.id,
+        name: ability.name,
+        options: levels.map { |key, value| [value, key.to_i] },
+        player_ability: # フォームで利用するために渡す
+      }
+    end
   end
 end

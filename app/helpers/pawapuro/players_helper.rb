@@ -128,6 +128,20 @@ module Pawapuro::PlayersHelper
     end
   end
 
+  # 特能数値をアルファベットに変換
+  def display_special_ability_alphabet(val)
+    abilities = {
+      -3 => "G",
+      -2 => "F",
+      -1 => "E",
+      0 => "D",
+      1 => "C",
+      2 => "B",
+      3 => "A"
+    }
+    content_tag(:span, abilities[val] || "")
+  end
+
   # 能力値（弾道）によって文字色、→の角度を変更
   def display_trajectory(trajectory)
     text_color, angle = case trajectory
@@ -312,6 +326,11 @@ module Pawapuro::PlayersHelper
     else
       ""
     end
+  end
+
+  # 特殊能力（値あり）の金特、超赤特の名前を返す
+  def gold_or_very_red_ability_name(ability_name, ability_value)
+    PAWAPURO_GOLD_OR_VERY_RED_ABILITIES.dig(ability_name, ability_value) || ability_name
   end
 
   # 年齢計算

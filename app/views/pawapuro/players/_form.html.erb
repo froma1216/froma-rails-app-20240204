@@ -121,15 +121,13 @@
     <div class="mb-3">
       <!-- 値あり特殊能力 -->
       <div class="row mb-3">
-        <% @valued_abilities_options_common.each do |ability| %>
+        <% @valued_abilities_options[:common].each do |ability| %>
           <div class="col-6 col-sm-4">
-            <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
-            <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
-              <!-- TODO: 以下hiddenの受け渡す値を見直し -->
+            <%= f.fields_for :player_m_valued_abilities, ability[:player_ability] do |pa| %>
               <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
               <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
               <%= pa.select :value,
-                      options_for_select(ability[:options], player_ability.value || 0),
+                      options_for_select(ability[:options], ability[:player_ability].value || 0),
                       {},
                       { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
             <% end %>
@@ -227,14 +225,13 @@
     <div class="mb-3">
       <!-- 数値あり -->
       <div class="row mb-3">
-        <% @valued_abilities_options_pitcher.each do |ability| %>
+        <% @valued_abilities_options[:pitcher].each do |ability| %>
           <div class="col-6 col-sm-4">
-            <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
-            <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+            <%= f.fields_for :player_m_valued_abilities, ability[:player_ability] do |pa| %>
               <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
               <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
               <%= pa.select :value,
-                      options_for_select(ability[:options], player_ability.value || 0),
+                      options_for_select(ability[:options], ability[:player_ability].value || 0),
                       {},
                       { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
             <% end %>
@@ -330,14 +327,13 @@
     <div class="mb-3">
       <!-- 数値あり -->
       <div class="row mb-3">
-        <% @valued_abilities_options_fielder.each do |ability| %>
+        <% @valued_abilities_options[:fielder].each do |ability| %>
           <div class="col-6 col-sm-4">
-            <% player_ability = @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability[:id] } || @player.player_m_valued_abilities.build(m_valued_ability_id: ability[:id]) %>
-            <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+            <%= f.fields_for :player_m_valued_abilities, ability[:player_ability] do |pa| %>
               <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
               <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
               <%= pa.select :value,
-                      options_for_select(ability[:options], player_ability.value || 0),
+                      options_for_select(ability[:options], ability[:player_ability].value || 0),
                       {},
                       { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
             <% end %>

@@ -2,16 +2,16 @@ class Pawapuro::Player < ApplicationRecord
   belongs_to :user
   belongs_to :main_position, class_name: "Pawapuro::MPosition", foreign_key: "main_position_id", optional: true
   # ポジション適正
-  has_many :player_m_positions
+  has_many :player_m_positions, dependent: :destroy
   has_many :m_positions, through: :player_m_positions
   # 変化球
-  has_many :player_m_breaking_balls
+  has_many :player_m_breaking_balls, dependent: :destroy
   has_many :m_breaking_balls, through: :player_m_breaking_balls
   # 値あり特殊能力
-  has_many :player_m_valued_abilities
+  has_many :player_m_valued_abilities, dependent: :destroy
   has_many :m_valued_abilities, through: :player_m_valued_abilities
   # 値なし特殊能力
-  has_many :player_m_basic_abilities
+  has_many :player_m_basic_abilities, dependent: :destroy
   has_many :m_basic_abilities, through: :player_m_basic_abilities
 
   # ネストされた属性の許可

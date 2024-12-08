@@ -104,7 +104,16 @@ class Pawapuro::PlayersController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    @player = Pawapuro::Player.find(params[:id])
+    ensure_current_user # 権限がなければリダイレクト
+
+    if @player.destroy
+      redirect_to pawapuro_players_path, notice: "選手を削除しました。"
+    else
+      redirect_to pawapuro_players_path, alert: "選手の削除に失敗しました。"
+    end
+  end
 
   private
 

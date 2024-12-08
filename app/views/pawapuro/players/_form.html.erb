@@ -1,6 +1,6 @@
 <%# NOTE: https://qiita.com/snskOgata/items/44d32a06045e6a52d11c %>
-<%= form_with model: @player, url: @player.new_record? ? pawapuro_players_path : pawapuro_players_path(@player), local: true do |f| %>
-  <form>
+<%#= form_with model: @player, url: @player.new_record? ? pawapuro_players_path : pawapuro_players_path(@player), local: true do |f| %>
+  <%= form_with model: @player, local: true do |f| %>
     <!-- プロフィール -->
     <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
       プロフィール
@@ -69,8 +69,8 @@
     <!-- メインポジション -->
     <div class="mb-3">
       <!-- TODO: m_positionテーブルを利用してセレクトを作る -->
-      <%= f.label :main_position, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
-      <%= f.select :main_position, [
+      <%= f.label :main_position_id, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
+      <%= f.select :main_position_id, [
           ["先発", 10],
           ["中継ぎ", 11],
           ["抑え", 12],
@@ -152,8 +152,8 @@
                         id: "ability-#{ability[:id]}",
                         checked: ability[:selected]
                       },
-                      nil,
-                      false
+                      false,
+                      true
                 ) %>
                 <%= pa.label(
                       :_destroy,
@@ -271,8 +271,9 @@
                         id: "ability-#{ability[:id]}",
                         checked: ability[:selected]
                       },
-                      nil,
-                      false
+                      false,
+                      true
+
                 ) %>
                 <%= pa.label(
                       :_destroy,
@@ -388,8 +389,8 @@
                         id: "ability-#{ability[:id]}",
                         checked: ability[:selected]
                       },
-                      nil,
-                      false
+                      false,
+                      true
                 ) %>
                 <%= pa.label(
                       :_destroy,
@@ -422,8 +423,8 @@
                       id: "ability-#{ability[:id]}",
                       checked: ability[:selected]
                     },
-                    nil,
-                    false
+                    false,
+                    true
                 ) %>
               <%= pa.label(
                     :_destroy,
@@ -450,5 +451,4 @@
     <!-- TODO: それぞれ確認モーダルを表示する -->
     <%= f.submit '登録する', class: "btn btn-primary" %>
     <%= link_to 'キャンセル', pawapuro_players_path, class: 'btn btn-secondary' %>
-  </form>
-<% end %>
+  <% end %>

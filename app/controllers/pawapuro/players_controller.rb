@@ -48,43 +48,24 @@ class Pawapuro::PlayersController < ApplicationController
   def new
     if current_user.present?
       @player = Pawapuro::Player.new
-      # ポジション適正
-      @position_proficiencies = {
-        pitcher: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_PITCHER_IDS),
-        fielder: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
-      }
-      # 値あり特殊能力
-      @valued_abilities_options = {
-        common: fetch_valued_abilities(@player, 110),
-        pitcher: fetch_valued_abilities(@player, 120),
-        fielder: fetch_valued_abilities(@player, 130)
-      }
-      # 値なし特殊能力
-      @basic_abilities_options = {
-        common: fetch_basic_abilities(@player, 110),
-        pitcher: fetch_basic_abilities(@player, 120),
-        fielder: fetch_basic_abilities(@player, 130),
-        sub: fetch_basic_abilities(@player, 140)
-      }
-      # 変化球
-      @breaking_balls = {
-        fastball: { 1 => nil, 2 => nil },
-        slider: { 1 => nil, 2 => nil },
-        curve: { 1 => nil, 2 => nil },
-        shoot: { 1 => nil, 2 => nil },
-        sinker: { 1 => nil, 2 => nil },
-        fork: { 1 => nil, 2 => nil }
-      }
-      # 変化球セレクト
-      @breaking_ball_options = Pawapuro::MBreakingBall
-        .where(breaking_ball_division: Enums.breaking_ball_division.values)
-        .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
+      prepare_new_player_data(@player)
     else
       redirect_to new_user_session_path
     end
   end
 
-  def create; end
+  def create
+    @player = Pawapuro::Player.new(player_params)
+    @player.user = current_user # 現在ログイン中のユーザーを設定
+
+    if @player.save
+      redirect_to pawapuro_players_path, notice: "選手を作成しました。"
+    else
+      # 新規作成時に必要なデータを再生成
+      prepare_new_player_data(@player)
+      render :new, status: :unprocessable_entity
+    end
+  end
 
   def edit
     # ポジション適正
@@ -128,10 +109,30 @@ class Pawapuro::PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(
-      :name,
+    params.require(:pawapuro_player).permit(
+      :player_name,
+      :last_name,
+      :first_name,
+      :back_name,
+      :birthday,
+      :throwing,
+      :batting,
+      :main_position_id,
+      :pace,
+      :control,
+      :stamina,
+      :trajectory,
+      :meat,
+      :power,
+      :running,
+      :arm,
+      :fielding,
+      :catching,
+      :note,
+      player_m_positions_attributes: [:id, :m_position_id, :proficiency, :_destroy],
       player_m_valued_abilities_attributes: [:id, :m_valued_ability_id, :value, :_destroy],
-      player_m_basic_abilities_attributes: [:id, :m_basic_ability_id, :_destroy]
+      player_m_basic_abilities_attributes: [:id, :m_basic_ability_id, :_destroy],
+      player_m_breaking_balls_attributes: [:id, :ball_type_order, :m_breaking_ball_id, :movement, :_destroy]
     )
   end
 
@@ -190,5 +191,40 @@ class Pawapuro::PlayersController < ApplicationController
         selected: player_ability.persisted? # 編集時：登録済みかどうか、新規時：false
       }
     end
+  end
+
+  # 新規作成用のデータをセット
+  def prepare_new_player_data(player)
+    # ポジション適正
+    @position_proficiencies = {
+      pitcher: fetch_positions(player, Pawapuro::MPosition::PAWAPURO_PITCHER_IDS),
+      fielder: fetch_positions(player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
+    }
+    # 値あり特殊能力
+    @valued_abilities_options = {
+      common: fetch_valued_abilities(player, 110),
+      pitcher: fetch_valued_abilities(player, 120),
+      fielder: fetch_valued_abilities(player, 130)
+    }
+    # 値なし特殊能力
+    @basic_abilities_options = {
+      common: fetch_basic_abilities(player, 110),
+      pitcher: fetch_basic_abilities(player, 120),
+      fielder: fetch_basic_abilities(player, 130),
+      sub: fetch_basic_abilities(player, 140)
+    }
+    # 変化球
+    @breaking_balls = {
+      fastball: { 1 => nil, 2 => nil },
+      slider: { 1 => nil, 2 => nil },
+      curve: { 1 => nil, 2 => nil },
+      shoot: { 1 => nil, 2 => nil },
+      sinker: { 1 => nil, 2 => nil },
+      fork: { 1 => nil, 2 => nil }
+    }
+    # 変化球セレクト
+    @breaking_ball_options = Pawapuro::MBreakingBall
+      .where(breaking_ball_division: Enums.breaking_ball_division.values)
+      .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
   end
 end

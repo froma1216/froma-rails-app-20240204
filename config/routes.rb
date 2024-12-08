@@ -27,10 +27,8 @@ Rails.application.routes.draw do
 
   # 【パワプロ】選手作成メモ
   namespace :pawapuro do
+    # `show` アクションの代わりに `details` を利用
     resources :players, except: [:show] do
-      # collection do
-      #   get "confirm", to: "pawapuro#confirm" # 選手作成確認画面
-      # end
       # idを含むパス
       member do
         get "details", to: "players#details" # 選手詳細モーダル

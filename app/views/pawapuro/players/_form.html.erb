@@ -92,7 +92,7 @@
             <%= f.fields_for :player_m_positions, position[:player_position] do |pa| %>
               <%= pa.hidden_field :m_position_id, value: position[:id] %>
               <%= pa.label :"m_position_#{position[:id]}", position[:name], class: "form-label small mb-0" %>
-              <%= pa.number_field :value,
+              <%= pa.number_field :proficiency,
                                   class: "form-control",
                                   min: 0,
                                   max: 2,
@@ -108,10 +108,10 @@
             <%= f.fields_for :player_m_positions, position[:player_position] do |pa| %>
               <%= pa.hidden_field :m_position_id, value: position[:id] %>
               <%= pa.label :"m_position_#{position[:id]}", position[:name], class: "form-label small mb-0" %>
-              <%= pa.number_field :value,
+              <%= pa.number_field :proficiency,
                                   class: "form-control",
                                   min: 0,
-                                  max: 2,
+                                  max: 3,
                                   value: position[:player_position].proficiency || 0 %>
             <% end %>
           </div>

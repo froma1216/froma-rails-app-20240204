@@ -142,7 +142,18 @@ class Pawapuro::PlayersController < ApplicationController
       player_m_valued_abilities_attributes: [:id, :m_valued_ability_id, :value, :_destroy],
       player_m_basic_abilities_attributes: [:id, :m_basic_ability_id, :_destroy],
       player_m_breaking_balls_attributes: [:id, :ball_type_order, :m_breaking_ball_id, :movement, :_destroy]
-    )
+    ).tap do |whitelisted|
+      # 値が0を除外
+      whitelisted[:player_m_positions_attributes]&.reject! do |_key, attributes|
+        attributes[:proficiency].to_i.zero?
+      end
+      whitelisted[:player_m_valued_abilities_attributes]&.reject! do |_key, attributes|
+        attributes[:proficiency].to_i.zero?
+      end
+      whitelisted[:player_m_breaking_balls_attributes]&.reject! do |_key, attributes|
+        attributes[:proficiency].to_i.zero?
+      end
+    end
   end
 
   # 権限確認

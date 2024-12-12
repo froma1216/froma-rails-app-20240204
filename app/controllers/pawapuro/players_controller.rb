@@ -59,7 +59,7 @@ class Pawapuro::PlayersController < ApplicationController
     @player.user = current_user # 現在ログイン中のユーザーを設定
 
     if @player.save
-      redirect_to pawapuro_players_path, notice: "選手を作成しました。"
+      redirect_to pawapuro_players_path, notice: "「選手名：#{@player.player_name}」を作成しました"
     else
       # 新規作成時に必要なデータを再生成
       prepare_new_player_data(@player)
@@ -102,16 +102,27 @@ class Pawapuro::PlayersController < ApplicationController
       .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
   end
 
-  def update; end
+  def update
+    @player = Pawapuro::Player.find(params[:id])
+    ensure_current_user # 権限がなければリダイレクト
+
+    if @player.update(player_params)
+      redirect_to pawapuro_players_path, notice: "「選手名：#{@player.player_name}」を更新しました。"
+    else
+      # 更新時に必要なデータを再生成
+      prepare_new_player_data(@player)
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def destroy
     @player = Pawapuro::Player.find(params[:id])
     ensure_current_user # 権限がなければリダイレクト
 
     if @player.destroy
-      redirect_to pawapuro_players_path, notice: "選手を削除しました。"
+      redirect_to pawapuro_players_path, notice: "「選手名：#{@player.player_name}」を削除しました。"
     else
-      redirect_to pawapuro_players_path, alert: "選手の削除に失敗しました。"
+      redirect_to pawapuro_players_path, alert: "「選手名：#{@player.player_name}」の削除に失敗しました。"
     end
   end
 
@@ -148,10 +159,10 @@ class Pawapuro::PlayersController < ApplicationController
         attributes[:proficiency].to_i.zero?
       end
       whitelisted[:player_m_valued_abilities_attributes]&.reject! do |_key, attributes|
-        attributes[:proficiency].to_i.zero?
+        attributes[:value].to_i.zero?
       end
-      whitelisted[:player_m_breaking_balls_attributes]&.reject! do |_key, attributes|
-        attributes[:proficiency].to_i.zero?
+      whitelisted[:player_m_breaking_balls_attributes]&.each_value do |attributes|
+        attributes[:_destroy] = "1" if attributes[:movement].to_i.zero? || attributes[:m_breaking_ball_id].blank?
       end
     end
   end

@@ -1,4 +1,15 @@
 <%# NOTE: https://qiita.com/snskOgata/items/44d32a06045e6a52d11c %>
+<% if @player.errors.any? %>
+  <div class="alert alert-danger">
+    <h2>以下のエラーが発生しました:</h2>
+    <ul>
+      <% @player.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%#= form_with model: @player, url: @player.new_record? ? pawapuro_players_path : pawapuro_players_path(@player), local: true do |f| %>
   <%= form_with model: @player, local: true do |f| %>
     <!-- プロフィール -->
@@ -204,6 +215,7 @@
       </div>
       <!-- 変化球 -->
       <div>
+        <!-- TODO: ストレートは数値入力しない。 -->
         <% @breaking_balls.each do |type, orders| %>
           <div class="row mb-2">
             <% orders.each do |order, breaking_ball| %>
@@ -213,23 +225,24 @@
                   <%= "#{order == 1 ? '第一' : '第二'} #{t("enums.pawapuro.breaking_ball_division.#{type}")}系" %>
                 </label>
                 <div class="row">
-                  <div class="col-9">
-                    <%= f.fields_for :player_m_breaking_balls, (breaking_ball || @player.player_m_breaking_balls.build(ball_type_order: order, m_breaking_ball_id: nil, movement: 0)) do |bb| %>
+                  <%= f.fields_for :player_m_breaking_balls, breaking_ball || @player.player_m_breaking_balls.build(ball_type_order: order) do |bb| %>
+                    <div class="col-9">
+                      <%= bb.hidden_field :id %> <!-- 既存のIDがある場合送信 -->
+                      <%= bb.hidden_field :ball_type_order, value: order %>
                       <%= bb.select :m_breaking_ball_id,
-                              options_for_select(options, selected: breaking_ball&.m_breaking_ball_id),
-                              {},
-                              { class: order == 1 ? 'form-select' : 'form-select form-select-sm' } %>
-                    <% end %>
-                  </div>
-                  <div class="col-3">
-                    <%= f.fields_for :player_m_breaking_balls, (breaking_ball || @player.player_m_breaking_balls.build(ball_type_order: order, m_breaking_ball_id: nil, movement: 0)) do |bb| %>
+                            options_for_select(options, selected: breaking_ball&.m_breaking_ball_id),
+                            {},
+                            { class: order == 1 ? 'form-select' : 'form-select form-select-sm' } %>
+                      <%= bb.hidden_field :_destroy %> <!-- 削除フラグを送信 -->
+                    </div>
+                    <div class="col-3">
                       <%= bb.number_field :movement,
-                                    class: order == 1 ? 'form-control' : 'form-control form-control-sm',
-                                    min: 0,
-                                    max: 7,
-                                    value: breaking_ball&.movement || 0 %>
-                    <% end %>
-                  </div>
+                                  class: order == 1 ? 'form-control' : 'form-control form-control-sm',
+                                  min: 0,
+                                  max: 7,
+                                  value: breaking_ball&.movement || 0 %>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             <% end %>

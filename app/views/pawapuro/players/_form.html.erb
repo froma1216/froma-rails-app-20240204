@@ -142,7 +142,7 @@
               <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
               <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
               <%= pa.select :value,
-                      options_for_select(ability[:options], ability[:player_ability].value || 0),
+                      options_for_select(ability[:options].reverse, ability[:player_ability].value || 0),
                       {},
                       { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
             <% end %>
@@ -263,7 +263,7 @@
               <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
               <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
               <%= pa.select :value,
-                      options_for_select(ability[:options], ability[:player_ability].value || 0),
+                      options_for_select(ability[:options].reverse, ability[:player_ability].value || 0),
                       {},
                       { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
             <% end %>
@@ -381,7 +381,7 @@
               <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
               <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
               <%= pa.select :value,
-                      options_for_select(ability[:options], ability[:player_ability].value || 0),
+                      options_for_select(ability[:options].reverse, ability[:player_ability].value || 0),
                       {},
                       { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
             <% end %>

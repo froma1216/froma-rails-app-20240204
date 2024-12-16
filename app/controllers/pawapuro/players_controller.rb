@@ -245,13 +245,14 @@ class Pawapuro::PlayersController < ApplicationController
       sub: fetch_basic_abilities(player, 140)
     }
     # 変化球
+    filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
     @breaking_balls = {
-      fastball: { 1 => nil, 2 => nil },
-      slider: { 1 => nil, 2 => nil },
-      curve: { 1 => nil, 2 => nil },
-      shoot: { 1 => nil, 2 => nil },
-      sinker: { 1 => nil, 2 => nil },
-      fork: { 1 => nil, 2 => nil }
+      fastball: { 1 => filtered_balls.dig(100, 1), 2 => filtered_balls.dig(100, 2) },
+      slider: { 1 => filtered_balls.dig(210, 1), 2 => filtered_balls.dig(210, 2) },
+      curve: { 1 => filtered_balls.dig(220, 1), 2 => filtered_balls.dig(220, 2) },
+      shoot: { 1 => filtered_balls.dig(230, 1), 2 => filtered_balls.dig(230, 2) },
+      sinker: { 1 => filtered_balls.dig(240, 1), 2 => filtered_balls.dig(240, 2) },
+      fork: { 1 => filtered_balls.dig(250, 1), 2 => filtered_balls.dig(250, 2) }
     }
     # 変化球セレクト
     @breaking_ball_options = Pawapuro::MBreakingBall

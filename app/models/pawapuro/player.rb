@@ -25,9 +25,9 @@ class Pawapuro::Player < ApplicationRecord
   enumerize :batting, in: Enums.dominant_hand
   enumerize :breaking_ball_division, in: Enums.breaking_ball_division
 
+  validates :player_name, presence: true, length: { maximum: 10 }
   validates :last_name, presence: true, length: { maximum: 10 }
   validates :first_name, presence: true, length: { maximum: 10 }
-  validates :player_name, presence: true, length: { maximum: 10 }
   validates :main_position, presence: true
 
   # 守備適正を持つポジションを全て取得し、メインポジションを先頭にする

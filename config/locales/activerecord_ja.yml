@@ -1,7 +1,14 @@
 ja:
   activerecord:
+    # モデル
     models:
       'mhxx/time': "タイム"
+    # カラム
     attributes:
       'mhxx/time':
         clear_time: "クリアタイム"
+      'pawapuro/player':
+        player_name: "選手名"
+        last_name: "姓"
+        first_name: "名"
+        main_position: "メインポジション"

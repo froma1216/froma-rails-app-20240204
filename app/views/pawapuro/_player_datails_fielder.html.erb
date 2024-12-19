@@ -30,7 +30,7 @@
     <% 6.times do |row| %>
       <div class="row">
         <% (row*4...row*4+4).each do |index| %>
-          <%= render partial: 'special_ability_no_value_box', locals: { ability: abilities_array[index] || '' } %>
+          <%= render partial: 'basic_ability_box', locals: { ability: abilities_array[index] || '' } %>
         <% end %>
       </div>
     <% end %>

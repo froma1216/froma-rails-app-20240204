@@ -63,12 +63,13 @@ class Pawapuro::Player < ApplicationRecord
     player_m_valued_abilities.find_by(m_valued_ability_id: ability_id)&.value
   end
 
-  # 値なし特殊能力名を取得するメソッド
-  def other_special_ability_names(divisions)
+  # 値なし特殊能力を取得するメソッド
+  # TODO: メソッド名見直し
+  def other_special_abilities(divisions)
     player_m_basic_abilities
       .joins(:m_basic_ability)
       .where(pawapuro_m_basic_abilities: { pitcher_fielder_division: divisions })
-      .pluck(:name)
+      .pluck(:name, :good_bad_division)
   end
 
   # 所持している全変化球を取得するメソッド

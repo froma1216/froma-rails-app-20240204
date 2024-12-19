@@ -106,51 +106,51 @@
   background: conic-gradient($bad-light-color 0%, $bad-light-color 25%, $bad-dark-color 25%, $bad-dark-color 50%, $good-dark-color 50%, $good-dark-color 75%, $good-light-color 75%, $good-light-color 100%);
 }
 
-.pawa-bg-sa-g1 {
+.pawa-bg-sa-good1 {
   @include pawa-bg-2color($good-border-light-color, $good-border-dark-color);
 }
 
-.pawa-bg-sa-g2 {
+.pawa-bg-sa-good2 {
   @include pawa-bg-2color($good-background-light-color, $good-background-dark-color);
 }
 
-.pawa-bg-sa-b1 {
+.pawa-bg-sa-bad1 {
   @include pawa-bg-2color($bad-border-light-color, $bad-border-dark-color);
 }
 
-.pawa-bg-sa-b2 {
+.pawa-bg-sa-bad2 {
   @include pawa-bg-2color($bad-background-light-color, $bad-background-dark-color);
 }
 
-.pawa-bg-sa-gb1 {
+.pawa-bg-sa-good_and_bad1 {
   @include pawa-bg-4color($good-border-light-color, $good-border-dark-color, $bad-border-light-color, $bad-border-dark-color);
 }
 
-.pawa-bg-sa-gb2 {
+.pawa-bg-sa-good_and_bad2 {
   @include pawa-bg-4color($good-background-light-color, $good-background-dark-color, $bad-background-light-color, $bad-background-dark-color);
 }
 
-.pawa-bg-sa-sp1 {
+.pawa-bg-sa-special1 {
   @include pawa-bg-2color($special-border-light-color, $special-border-dark-color);
 }
 
-.pawa-bg-sa-sp2 {
+.pawa-bg-sa-special2 {
   @include pawa-bg-2color($special-background-light-color, $special-background-dark-color);
 }
 
-.pawa-bg-sa-sb1 {
+.pawa-bg-sa-sub1 {
   @include pawa-bg-2color($sub-border-light-color, $sub-border-dark-color);
 }
 
-.pawa-bg-sa-sb2 {
+.pawa-bg-sa-sub2 {
   @include pawa-bg-2color($sub-background-light-color, $sub-background-dark-color);
 }
 
-.pawa-bg-sa-n1 {
+.pawa-bg-sa-neutral1 {
   @include pawa-bg-2color($neutral-border-light-color, $neutral-border-dark-color);
 }
 
-.pawa-bg-sa-n2 {
+.pawa-bg-sa-neutral2 {
   @include pawa-bg-2color($neutral-background-light-color, $neutral-background-dark-color);
 }
 

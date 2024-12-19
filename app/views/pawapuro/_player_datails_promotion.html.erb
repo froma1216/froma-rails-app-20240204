@@ -2,8 +2,8 @@
 <div class="row p-2">
   <%# 基礎能力部 %>
   <div class="col-3 pe-4 pawa-text-main">
-    <%= render partial: 'basic_ability_box', locals: { label:"走力", ability_value: @player.pawapuro_fielder.running } %>
-    <%= render partial: 'basic_ability_box', locals: { label:"肩力", ability_value: @player.pawapuro_fielder.arm_strength } %>
+    <%= render partial: 'foundation_ability_box', locals: { label:"走力", ability_value: @player.pawapuro_fielder.running } %>
+    <%= render partial: 'foundation_ability_box', locals: { label:"肩力", ability_value: @player.pawapuro_fielder.arm_strength } %>
     <%# 各ポジション適正 %>
     <%# PCサイズ時 %>
     <div class="d-none d-sm-block">
@@ -67,7 +67,7 @@
         </div>
       </div>
     </div>
-    <%= render partial: 'basic_ability_box', locals: { label:"捕球", ability_value: @player.pawapuro_fielder.catching } %>
+    <%= render partial: 'foundation_ability_box', locals: { label:"捕球", ability_value: @player.pawapuro_fielder.catching } %>
   </div>
   <%# 特殊能力部 %>
   <div class="col-9 bg-light border border-3 border-white rounded">
@@ -77,41 +77,41 @@
           <span class="col-12 ps-2 pawa-text-main">起用</span>
         </div>
       </div>
-      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
         <div class="row p-1 text-center">
-          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
         </div>
       </div>
-      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
         <div class="row p-1 text-center">
-          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
         </div>
       </div>
-      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
         <div class="row p-1 text-center">
-          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
         <div class="row p-1 text-center">
-          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
         </div>
       </div>
-      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
         <div class="row p-1 text-center">
-          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
         </div>
       </div>
-      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
         <div class="row p-1 text-center">
-          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
         </div>
       </div>
-      <div class="col fs-3 pawa-bg-sa-n1 rounded">
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
         <div class="row p-1 text-center">
-          <span class="col-12 pawa-bg-sa-n2 rounded pawa-text-neutral">&nbsp;</span>
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@
     <% 6.times do |row| %>
       <div class="row">
         <% (row*4...row*4+4).each do |index| %>
-          <%= render partial: 'special_ability_no_value_box', locals: { ability: abilities_array[index] || '' } %>
+          <%= render partial: 'basic_ability_box', locals: { ability: abilities_array[index] || '' } %>
         <% end %>
       </div>
     <% end %>

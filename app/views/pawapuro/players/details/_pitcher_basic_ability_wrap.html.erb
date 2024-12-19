@@ -1,15 +1,15 @@
 <!-- 投手基礎能力部 -->
 
 <!-- 基本能力 -->
-<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+<%= render partial: 'pawapuro/players/details/foundation_ability_box', locals: {
   label:"球速",
   ability_value: details_ability_value_pace(@player.pace)
 } %>
-<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+<%= render partial: 'pawapuro/players/details/foundation_ability_box', locals: {
   label:"コントロール",
   ability_value: details_ability_value_basic(@player.control)
 } %>
-<%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+<%= render partial: 'pawapuro/players/details/foundation_ability_box', locals: {
   label:"スタミナ",
   ability_value: details_ability_value_basic(@player.stamina)
 } %>

@@ -1,5 +1,6 @@
 module Pawapuro::PlayersHelper
   # TODO: 切り出す（画面毎？機能毎？）
+  # TODO: 使っていないメソッドがないか確認
   # 選手名ボックスの背景色、ボーダー色のクラスを返す
   def player_name_box_color_class(player)
     positions = player.formatted_position_abbreviations.map { |pos| pos[:id] }
@@ -287,44 +288,54 @@ module Pawapuro::PlayersHelper
   def ability_value_color_classes(ability_value)
     case ability_value
     when 2..3
-      ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
+      ["pawa-bg-sa-good1", "pawa-bg-sa-good2", "pawa-text-good"]
     when -4..-2
-      ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
+      ["pawa-bg-sa-bad1", "pawa-bg-sa-bad2", "pawa-text-bad"]
     when 4
-      ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-special"]
+      ["pawa-bg-sa-special1", "pawa-bg-sa-special2", "pawa-text-special"]
     else
-      ["pawa-bg-sa-n1", "pawa-bg-sa-n2", "pawa-text-neutral"]
+      ["pawa-bg-sa-neutral1", "pawa-bg-sa-neutral2", "pawa-text-neutral"]
     end
   end
 
+  # 特殊能力（値なし）ボックスのクラスをまとめて返す
+  def basic_ability_box_styles(ability_name, ability_good_bad_division)
+    # 外側のコンテナクラスを決定
+    bg_class_1, bg_class_2, text_class = basic_ability_box_color_styles(ability_good_bad_division)
+    text_adjust_class = adjust_text_style(ability_name)
+
+    {
+      container_class: bg_class_1,
+      inner_class: "#{bg_class_2} #{text_class} #{text_adjust_class}"
+    }
+  end
+
   # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
-  def ability_no_value_color_classes(ability)
-    abilities = PAWAPURO_ABILITIES
-    if abilities["good"].include?(ability)
-      ["pawa-bg-sa-g1", "pawa-bg-sa-g2", "pawa-text-good"]
-    elsif abilities["bad"].include?(ability)
-      ["pawa-bg-sa-b1", "pawa-bg-sa-b2", "pawa-text-bad"]
-    elsif abilities["good_and_bad"].include?(ability)
-      ["pawa-bg-sa-gb1", "pawa-bg-sa-gb2", "pawa-text-good"]
-    elsif abilities["special"].include?(ability)
-      ["pawa-bg-sa-sp1", "pawa-bg-sa-sp2", "pawa-text-special"]
-    elsif abilities["sub"].include?(ability)
-      ["pawa-bg-sa-sb1", "pawa-bg-sa-sb2", "pawa-text-sub"]
+  def basic_ability_box_color_styles(ability_good_bad_division)
+    case ability_good_bad_division
+    when "good"
+      ["pawa-bg-sa-good1", "pawa-bg-sa-good2", "pawa-text-good"]
+    when "bad"
+      ["pawa-bg-sa-bad1", "pawa-bg-sa-bad2", "pawa-text-bad"]
+    when "good_and_bad"
+      ["pawa-bg-sa-good_and_bad1", "pawa-bg-sa-good_and_bad2", "pawa-text-good"]
+    when "special"
+      ["pawa-bg-sa-special1", "pawa-bg-sa-special2", "pawa-text-special"]
+    when "sub"
+      ["pawa-bg-sa-sub1", "pawa-bg-sa-sub2", "pawa-text-sub"]
     else
-      ["pawa-bg-sa-n1 d-none d-sm-block", "pawa-bg-sa-n2", "pawa-text-neutral"]
+      ["pawa-bg-sa-neutral1 d-none d-sm-block", "pawa-bg-sa-neutral2", "pawa-text-neutral"]
     end
   end
 
   # 特殊能力（値なし）ボックスのフォント、文字感覚クラスを返す
-  def ability_text_classes(ability)
-    if ability.length >= 8
-      # フォントサイズを小さくし、文字間隔も狭くする
-      "small-font tighter-letter-spacing"
-    elsif ability.length >= 7
-      # 文字間隔のみ狭くする
-      "tighter-letter-spacing"
-    else
-      ""
+  def adjust_text_style(ability)
+    case ability&.length
+    # フォントサイズを小さくし、文字間隔も狭くする
+    when 8.. then "small-font tighter-letter-spacing"
+    # 文字間隔のみ狭くする
+    when 7 then "tighter-letter-spacing"
+    else ""
     end
   end
 

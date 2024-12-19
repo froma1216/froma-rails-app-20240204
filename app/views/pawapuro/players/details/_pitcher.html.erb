@@ -7,37 +7,37 @@
   <%# 特殊能力部 %>
   <div class="col-9 bg-light border border-3 border-white rounded">
     <div class="row">
-      <%= render partial: 'pawapuro/players/details/special_ability_value_box', locals: {
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
         ability_name: "対ピンチ",
         ability_value: @player.m_valued_ability_value(3)
       } %>
-      <%= render partial: 'pawapuro/players/details/special_ability_value_box', locals: {
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
         ability_name: "対左打者",
         ability_value: @player.m_valued_ability_value(4)
       } %>
-      <%= render partial: 'pawapuro/players/details/special_ability_value_box', locals: {
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
         ability_name: "打たれ強さ",
         ability_value: @player.m_valued_ability_value(5)
       } %>
-      <%= render partial: 'pawapuro/players/details/special_ability_value_box', locals: {
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
         ability_name: "ケガしにくさ",
         ability_value: @player.m_valued_ability_value(2)
       } %>
     </div>
     <div class="row">
-      <%= render partial: 'pawapuro/players/details/special_ability_value_box', locals: {
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
         ability_name: "ノビ",
         ability_value: @player.m_valued_ability_value(6)
       } %>
-      <%= render partial: 'pawapuro/players/details/special_ability_value_box', locals: {
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
         ability_name: "クイック",
         ability_value: @player.m_valued_ability_value(7)
       } %>
-      <%= render partial: 'pawapuro/players/details/special_ability_value_box', locals: {
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
         ability_name: "",
         ability_value: ""
       } %>
-      <%= render partial: 'pawapuro/players/details/special_ability_value_box', locals: {
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
         ability_name: "回復",
         ability_value: @player.m_valued_ability_value(1)
       } %>

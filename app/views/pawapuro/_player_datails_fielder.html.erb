@@ -8,21 +8,21 @@
   <div class="col-9 bg-light border border-3 border-white rounded">
     <%# 値あり %>
     <div class="row">
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"チャンス", ability_value: @player.pawapuro_fielder.chance } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"対左投手", ability_value: @player.pawapuro_fielder.taihidaritousyu } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"チャンス", ability_value: @player.pawapuro_fielder.chance } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"対左投手", ability_value: @player.pawapuro_fielder.taihidaritousyu } %>
       <%# キャッチャー適正があるときのみ表示 %>
       <% if @player.p2_proper >= 1 %>
-        <%= render partial: 'special_ability_value_box', locals: { ability_name:"キャッチャー", ability_value: @player.pawapuro_fielder.catcher } %>
+        <%= render partial: 'valued_ability_box', locals: { ability_name:"キャッチャー", ability_value: @player.pawapuro_fielder.catcher } %>
       <% else %>
-        <%= render partial: 'special_ability_value_box', locals: { ability_name:"", ability_value: "" } %>
+        <%= render partial: 'valued_ability_box', locals: { ability_name:"", ability_value: "" } %>
       <% end %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"ケガしにくさ", ability_value: @player.kegasinikusa } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"ケガしにくさ", ability_value: @player.kegasinikusa } %>
     </div>
     <div class="row">
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"盗塁", ability_value: @player.pawapuro_fielder.tourui } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"走塁", ability_value: @player.pawapuro_fielder.sourui } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"送球", ability_value: @player.pawapuro_fielder.soukyuu } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"回復", ability_value: @player.kaifuku } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"盗塁", ability_value: @player.pawapuro_fielder.tourui } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"走塁", ability_value: @player.pawapuro_fielder.sourui } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"送球", ability_value: @player.pawapuro_fielder.soukyuu } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"回復", ability_value: @player.kaifuku } %>
     </div>
     <%# 値なし %>
     <%# FIXME: 部分テンプレートに切り出し %>

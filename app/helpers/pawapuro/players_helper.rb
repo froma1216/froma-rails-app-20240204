@@ -129,20 +129,6 @@ module Pawapuro::PlayersHelper
     end
   end
 
-  # 特能数値をアルファベットに変換
-  def display_special_ability_alphabet(val)
-    abilities = {
-      -3 => "G",
-      -2 => "F",
-      -1 => "E",
-      0 => "D",
-      1 => "C",
-      2 => "B",
-      3 => "A"
-    }
-    content_tag(:span, abilities[val] || "")
-  end
-
   # 能力値（弾道）によって文字色、→の角度を変更
   def display_trajectory(trajectory)
     text_color, angle = case trajectory
@@ -284,24 +270,10 @@ module Pawapuro::PlayersHelper
     end.join.html_safe
   end
 
-  # 特殊能力（値あり）ボックスの背景色、文字色クラスを返す
-  def ability_value_color_classes(ability_value)
-    case ability_value
-    when 2..3
-      ["pawa-bg-sa-good1", "pawa-bg-sa-good2", "pawa-text-good"]
-    when -4..-2
-      ["pawa-bg-sa-bad1", "pawa-bg-sa-bad2", "pawa-text-bad"]
-    when 4
-      ["pawa-bg-sa-special1", "pawa-bg-sa-special2", "pawa-text-special"]
-    else
-      ["pawa-bg-sa-neutral1", "pawa-bg-sa-neutral2", "pawa-text-neutral"]
-    end
-  end
-
-  # 特殊能力（値なし）ボックスのクラスをまとめて返す
-  def basic_ability_box_styles(ability_name, ability_good_bad_division)
+  # 特殊能力ボックスのクラスをまとめて返す
+  def special_ability_box_styles(ability_name, ability_good_bad_division)
     # 外側のコンテナクラスを決定
-    bg_class_1, bg_class_2, text_class = basic_ability_box_color_styles(ability_good_bad_division)
+    bg_class_1, bg_class_2, text_class = special_ability_box_color_styles(ability_good_bad_division)
     text_adjust_class = adjust_text_style(ability_name)
 
     {
@@ -310,8 +282,8 @@ module Pawapuro::PlayersHelper
     }
   end
 
-  # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
-  def basic_ability_box_color_styles(ability_good_bad_division)
+  # 特殊能力ボックスの背景色、文字色クラスを返す
+  def special_ability_box_color_styles(ability_good_bad_division)
     case ability_good_bad_division
     when "good"
       ["pawa-bg-sa-good1", "pawa-bg-sa-good2", "pawa-text-good"]
@@ -328,9 +300,9 @@ module Pawapuro::PlayersHelper
     end
   end
 
-  # 特殊能力（値なし）ボックスのフォント、文字感覚クラスを返す
-  def adjust_text_style(ability)
-    case ability&.length
+  # 特殊能力ボックスのフォント、文字感覚クラスを返す
+  def adjust_text_style(ability_name)
+    case ability_name&.length
     # フォントサイズを小さくし、文字間隔も狭くする
     when 8.. then "small-font tighter-letter-spacing"
     # 文字間隔のみ狭くする
@@ -339,9 +311,37 @@ module Pawapuro::PlayersHelper
     end
   end
 
+  # 特殊能力（値あり）の数値をアルファベットに変換
+  def display_special_ability_alphabet(val)
+    abilities = {
+      -3 => "G",
+      -2 => "F",
+      -1 => "E",
+      0 => "D",
+      1 => "C",
+      2 => "B",
+      3 => "A"
+    }
+    abilities[val] || "D"
+  end
+
   # 特殊能力（値あり）の金特、超赤特の名前を返す
   def gold_or_very_red_ability_name(ability_name, ability_value)
     PAWAPURO_GOLD_OR_VERY_RED_ABILITIES.dig(ability_name, ability_value) || ability_name
+  end
+
+  # 特殊能力（値あり）の青赤区分を返す
+  def valued_ability_good_bad_division(ability_value)
+    case ability_value
+    when ..-2
+      "bad"
+    when 2..3
+      "good"
+    when 4
+      "special"
+    else
+      "neutral" # 想定外の値が渡された場合のデフォルト値
+    end
   end
 
   # 年齢計算

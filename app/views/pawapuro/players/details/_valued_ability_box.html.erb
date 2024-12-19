@@ -1,0 +1,19 @@
+<!-- 特殊能力（値あり）の１box -->
+<% ability_good_bad_division =valued_ability_good_bad_division(ability_value) %>
+<% classes = special_ability_box_styles(ability_name, ability_good_bad_division) %>
+
+<% if (-3..3).include?(ability_value) || ability_value.nil? %>
+  <!-- 一般特殊能力の場合 -->
+  <div class="col-12 col-sm-3 fs-3 rounded <%= classes[:container_class] %>">
+    <div class="row pt-1 pb-1 ps-1 text-center">
+      <span class="col-10 rounded px-3 <%= classes[:inner_class] %>"><%= raw(ability_name.presence || '&nbsp;') %></span>
+      <span class="col-2 ps-2 text-light"><%= display_special_ability_alphabet(ability_value) %></span>
+    </div>
+  </div>
+<% else %>
+  <!-- 金特、超赤特の場合 -->
+  <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+    ability_name: raw(gold_or_very_red_ability_name(ability_name, ability_value)),
+    ability_good_bad_division: valued_ability_good_bad_division(ability_value)
+  } %>
+<% end %>

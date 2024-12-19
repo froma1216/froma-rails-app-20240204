@@ -269,7 +269,7 @@ module PawapuroHelper
   # end
 
   # # 特殊能力（値なし）ボックスの背景色、文字色クラスを返す
-  # def basic_ability_box_color_styles(ability)
+  # def special_ability_box_color_styles(ability)
   #   abilities = PAWAPURO_ABILITIES
   #   if abilities["good"].include?(ability)
   #     ["pawa-bg-sa-good1", "pawa-bg-sa-good2", "pawa-text-good"]

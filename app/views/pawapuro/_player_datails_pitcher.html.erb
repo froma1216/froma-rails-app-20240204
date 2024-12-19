@@ -7,16 +7,16 @@
   <%# 特殊能力部 %>
   <div class="col-9 bg-light border border-3 border-white rounded">
     <div class="row">
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"対ピンチ", ability_value: @player.pawapuro_pitcher.taipinch } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"対左打者", ability_value: @player.pawapuro_pitcher.taihidaridasya } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"打たれ強さ", ability_value: @player.pawapuro_pitcher.utarezuyosa } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"ケガしにくさ", ability_value: @player.kegasinikusa } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"対ピンチ", ability_value: @player.pawapuro_pitcher.taipinch } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"対左打者", ability_value: @player.pawapuro_pitcher.taihidaridasya } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"打たれ強さ", ability_value: @player.pawapuro_pitcher.utarezuyosa } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"ケガしにくさ", ability_value: @player.kegasinikusa } %>
     </div>
     <div class="row">
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"ノビ", ability_value: @player.pawapuro_pitcher.nobi } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"クイック", ability_value: @player.pawapuro_pitcher.quick } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"", ability_value: "" } %>
-      <%= render partial: 'special_ability_value_box', locals: { ability_name:"回復", ability_value: @player.kaifuku } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"ノビ", ability_value: @player.pawapuro_pitcher.nobi } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"クイック", ability_value: @player.pawapuro_pitcher.quick } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"", ability_value: "" } %>
+      <%= render partial: 'valued_ability_box', locals: { ability_name:"回復", ability_value: @player.kaifuku } %>
     </div>
     <%# 値なし %>
     <%# FIXME: 部分テンプレートに切り出し %>

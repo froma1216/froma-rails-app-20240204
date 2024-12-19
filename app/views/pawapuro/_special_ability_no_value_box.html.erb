@@ -1,6 +1,6 @@
 <%# 特殊能力（値なし）の１box %>
 <% ability_classes = adjust_text_style(ability) %>
-<% bg_class_1, bg_class_2, text_class = basic_ability_box_color_styles(ability) %>
+<% bg_class_1, bg_class_2, text_class = special_ability_box_color_styles(ability) %>
 <div class="col-12 col-sm-3 fs-3 <%= bg_class_1 %> rounded d-flex">
   <div class="row p-1 text-center flex-fill">
     <span class="col rounded d-flex justify-content-center align-items-center <%= "#{bg_class_2} #{text_class} #{ability_classes}" %>">

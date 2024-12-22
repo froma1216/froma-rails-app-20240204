@@ -13,32 +13,32 @@ class Pawapuro::PlayersController < ApplicationController
   def details
     if current_user.present?
       @player = Pawapuro::Player.find(params[:id])
+      prepare_new_player_data(@player)
+      # # 全てのポジション適正情報を取得
+      # @position_proficiencies = @player.player_m_positions.map do |pm_position|
+      #   {
+      #     id: pm_position.m_position.id,
+      #     abbreviation: pm_position.m_position.abbreviation,
+      #     proficiency: pm_position.proficiency
+      #   }
+      # end
 
-      # 全てのポジション適正情報を取得
-      @position_proficiencies = @player.player_m_positions.map do |pm_position|
-        {
-          id: pm_position.m_position.id,
-          abbreviation: pm_position.m_position.abbreviation,
-          proficiency: pm_position.proficiency
-        }
-      end
-
-      # 所持している全変化球を取得
-      # TODO: newやeditと同じようにまとめて取得
-      filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
-      # それぞれの変化球を取得
-      @breaking_ball_fastball1 = filtered_balls.dig(100, 1)
-      @breaking_ball_fastball2 = filtered_balls.dig(100, 2)
-      @breaking_ball_slider1 = filtered_balls.dig(210, 1)
-      @breaking_ball_slider2 = filtered_balls.dig(210, 2)
-      @breaking_ball_curve1 = filtered_balls.dig(220, 1)
-      @breaking_ball_curve2 = filtered_balls.dig(220, 2)
-      @breaking_ball_shoot1 = filtered_balls.dig(230, 1)
-      @breaking_ball_shoot2 = filtered_balls.dig(230, 2)
-      @breaking_ball_sinker1 = filtered_balls.dig(240, 1)
-      @breaking_ball_sinker2 = filtered_balls.dig(240, 2)
-      @breaking_ball_fork1 = filtered_balls.dig(250, 1)
-      @breaking_ball_fork2 = filtered_balls.dig(250, 2)
+      # # 所持している全変化球を取得
+      # # TODO: newやeditと同じようにまとめて取得
+      # filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
+      # # それぞれの変化球を取得
+      # @breaking_ball_fastball1 = filtered_balls.dig(100, 1)
+      # @breaking_ball_fastball2 = filtered_balls.dig(100, 2)
+      # @breaking_ball_slider1 = filtered_balls.dig(210, 1)
+      # @breaking_ball_slider2 = filtered_balls.dig(210, 2)
+      # @breaking_ball_curve1 = filtered_balls.dig(220, 1)
+      # @breaking_ball_curve2 = filtered_balls.dig(220, 2)
+      # @breaking_ball_shoot1 = filtered_balls.dig(230, 1)
+      # @breaking_ball_shoot2 = filtered_balls.dig(230, 2)
+      # @breaking_ball_sinker1 = filtered_balls.dig(240, 1)
+      # @breaking_ball_sinker2 = filtered_balls.dig(240, 2)
+      # @breaking_ball_fork1 = filtered_balls.dig(250, 1)
+      # @breaking_ball_fork2 = filtered_balls.dig(250, 2)
     else
       redirect_to pawapuro_players_path,
                   notice: "権限がありません"
@@ -254,7 +254,7 @@ class Pawapuro::PlayersController < ApplicationController
       sinker: { 1 => filtered_balls.dig(240, 1), 2 => filtered_balls.dig(240, 2) },
       fork: { 1 => filtered_balls.dig(250, 1), 2 => filtered_balls.dig(250, 2) }
     }
-    # 変化球セレクト
+    # 変化球セレクトオプション
     @breaking_ball_options = Pawapuro::MBreakingBall
       .where(breaking_ball_division: Enums.breaking_ball_division.values)
       .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }

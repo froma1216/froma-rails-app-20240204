@@ -13,115 +13,39 @@
     } %>
 
     <!-- 各ポジション適正 -->
-    <!-- PCサイズ時 -->
-    <div class="d-none d-sm-block">
-      <div class="d-flex justify-content-start row p-1 mb-1 pawa-main-box">
-        <div class="col-6 d-flex align-items-center p-0">
-          <div class="col-5 p-0">
-            <div class="pawa-ability-label-no-value">守備力</div>
-          </div>
-        </div>
-        <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "投",
-            position_proficiency: @position_proficiencies
-                                    .select { |pos| [10, 11, 12].include?(pos[:id]) }
-                                    .map { |pos| pos[:proficiency] }
-                                    .max || nil
-          } %>
-        </div>
-        <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0 border-end-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "捕",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 2 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "一",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 3 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0 border-end-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "二",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 4 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-6 ps-3 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "三",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 5 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-6 ps-3 py-2 pawa-border-main border-end-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "遊",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 6 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-6 ps-3 py-2 pawa-border-main">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "外",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 13 }&.dig(:proficiency) || nil
-          } %>
+    <div class="d-flex justify-content-start row p-1 mb-1 pawa-main-box">
+      <div class="col-6 d-flex align-items-center p-0">
+        <div class="col-5 p-0 mb-1 mb-sm-0">
+          <div class="pawa-ability-label-no-value">守備力</div>
         </div>
       </div>
-    </div>
-    <!-- スマホサイズ時 -->
-    <div class="d-block d-sm-none">
-      <div class="d-flex justify-content-start row p-1 mb-1 pawa-main-box">
-        <div class="col-6 d-flex align-items-center p-0">
-          <div class="col-5 p-0 mb-1">
-            <div class="pawa-ability-label-no-value">守備力</div>
-          </div>
-        </div>
-        <div class="col-12 py-2 pawa-border-main border-bottom-0">
+      <% positions = [
+          { abbreviation: "投", ids: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS, category: :pitcher },
+          { abbreviation: "捕", id: 2, category: :fielder },
+          { abbreviation: "一", id: 3, category: :fielder },
+          { abbreviation: "二", id: 4, category: :fielder },
+          { abbreviation: "三", id: 5, category: :fielder },
+          { abbreviation: "遊", id: 6, category: :fielder },
+          { abbreviation: "外", id: 13, category: :fielder }
+        ] %>
+
+      <% positions.each_with_index do |position, index| %>
+        <div class="col-12 col-sm-6 py-2 ps-3">
           <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "投",
-            position_proficiency: @position_proficiencies
-                                    .select { |pos| [10, 11, 12].include?(pos[:id]) }
-                                    .map { |pos| pos[:proficiency] }
-                                    .max || nil
-          } %>
+              position_abbreviation: position[:abbreviation],
+              position_proficiency: if position.key?(:ids)
+                                      @position_proficiencies[position[:category]]
+                                        .select { |pos| position[:ids].include?(pos[:id]) }
+                                        .map { |pos| pos[:player_position]&.proficiency }
+                                        .compact
+                                        .max
+                                    else
+                                      @position_proficiencies[position[:category]]
+                                        .find { |pos| pos[:id] == position[:id] }&.[](:player_position)&.proficiency
+                                    end
+            } %>
         </div>
-        <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "捕",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 2 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "一",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 3 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "二",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 4 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "三",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 5 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-12 py-2 pawa-border-main border-bottom-0">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "遊",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 6 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-        <div class="col-12 py-2 pawa-border-main">
-          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-            position_abbreviation: "外",
-            position_proficiency: @position_proficiencies.find { |pos| pos[:id] == 13 }&.dig(:proficiency) || nil
-          } %>
-        </div>
-      </div>
+      <% end %>
     </div>
     <%= render partial: 'pawapuro/players/details/foundation_ability_box', locals: {
       label:"捕球",

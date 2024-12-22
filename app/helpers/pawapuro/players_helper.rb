@@ -2,9 +2,7 @@ module Pawapuro::PlayersHelper
   # TODO: 切り出す（画面毎？機能毎？）
   # TODO: 使っていないメソッドがないか確認
   # 選手名ボックスの背景色、ボーダー色のクラスを返す
-  def player_name_box_color_class(player)
-    positions = player.formatted_position_abbreviations.map { |pos| pos[:id] }
-
+  def player_name_box_color_class(positions, main_position)
     is_starter = positions.include?(10)
     is_relief = positions.include?(11) || positions.include?(12)
     is_catcher = positions.include?(2)
@@ -13,7 +11,7 @@ module Pawapuro::PlayersHelper
     is_infielder = positions.any? { |pos| [3, 4, 5, 6].include?(pos) }
     is_outfielder = positions.include?(13)
 
-    case player.main_position.id
+    case main_position
     when 10
       if is_relief
         if is_catcher

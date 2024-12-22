@@ -1,4 +1,4 @@
-<%# 選手詳細モーダル %>
+<!-- 選手詳細モーダル -->
 <%= turbo_frame_tag "pawapuro_details_modal" do %>
   <div class="modal fade" tabindex="-1" aria-hidden="true" data-controller="pawapuro-details-modal">
     <div class="modal-dialog modal-xl">
@@ -24,11 +24,13 @@
         <div class="modal-body">
           <div class="container">
             <div class="row mb-1">
-              <%# 選手名 %>
-              <div class="col-12 col-sm-4 h3 mb-sm-0 <%= player_name_box_color_class(@player) %>">
+              <!-- 選手名 -->
+              <div class="col-12 col-sm-4 h3 mb-sm-0
+                <%= player_name_box_color_class(@player.formatted_position_abbreviations.pluck(:id), @player.main_position.id) %>
+                <%= 'tighter-letter-spacing' if @player.player_name.length > 5 %>">
                 <%= @player.player_name %>
               </div>
-              <%# 守備位置 %>
+              <!-- 守備位置 -->
               <div class="col-7 col-sm-4 d-flex justify-content-start justify-content-sm-center align-items-center pawa-text-main ps-0">
                 <div class="p-0">
                   <div class="pawa-ability-label-variable">守備位置</div>
@@ -39,7 +41,7 @@
                   ) %>
                 </span>
               </div>
-              <%# 投打 %>
+              <!-- 投打 -->
               <div class="col-5 col-sm-4 d-flex justify-content-end align-items-center pawa-text-main pe-0">
                 <div class="p-0">
                   <div class="pawa-ability-label-no-value">投打</div>
@@ -54,35 +56,36 @@
               </div>
             </div>
           </div>
-          <%# 能力部 %>
+          <!-- 能力部 -->
           <div class="tab-content container pawa-sub-box rounded">
-            <%# 選手能力 %>
+            <!-- 選手能力 -->
             <div class="tab-pane fade show active" id="playerBasic">
-              <%# メインポジションが投手か野手かによって、表示を分ける %>
-              <% if (11..13).include?(@player.main_position) %>
+              <!-- メインポジションが投手か野手かによって、表示を分ける -->
+              <% if Pawapuro::MPosition::PAWAPURO_PITCHER_IDS.include?(@player.main_position.id) %>
                 <%= render 'pawapuro/players/details/pitcher' %>
               <% else %>
                 <%= render 'pawapuro/players/details/fielder' %>
               <% end %>
             </div>
-            <%# 投手能力 %>
+            <!-- 投手能力 -->
             <div class="tab-pane fade" id="playerPitcher">
               <%= render 'pawapuro/players/details/pitcher' %>
             </div>
-            <%# 野手能力 %>
+            <!-- 野手能力 -->
             <div class="tab-pane fade" id="playerFielder">
               <%= render 'pawapuro/players/details/fielder' %>
             </div>
-            <%# 守備・起用 %>
+            <!-- 守備・起用 -->
             <div class="tab-pane fade" id="playerPromotion">
               <%= render 'pawapuro/players/details/promotion' %>
             </div>
-            <%# プロフィール %>
+            <!-- プロフィール -->
             <div class="tab-pane fade" id="playerProfile">
               <%= render 'pawapuro/players/details/profile' %>
             </div>
           </div>
         </div>
+        <!-- ボタンエリア -->
         <div class="modal-footer">
           <%= link_to '編集', edit_pawapuro_player_path(@player), class: 'btn btn-primary', data: { turbo: "false" } %>
           <%= link_to "閉じる", "#", class: "btn btn-secondary", data: { bs_dismiss: "modal" }, role: "button" %>

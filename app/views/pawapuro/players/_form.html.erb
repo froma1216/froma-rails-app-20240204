@@ -134,15 +134,21 @@
   <div class="mb-3">
     <!-- 値あり特殊能力 -->
     <div class="row mb-3">
-      <% @valued_abilities_options[:common].each do |ability| %>
+      <% @valued_abilities.where(pitcher_fielder_division: 110).each do |ability| %>
         <div class="col-6 col-sm-4">
-          <%= f.fields_for :player_m_valued_abilities, ability[:player_ability] do |pa| %>
-            <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
-            <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
+          <% player_ability =
+            @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability.id } ||
+            @player.player_m_valued_abilities.build(m_valued_ability_id: ability.id) %>
+          <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+            <%= pa.hidden_field :m_valued_ability_id, value: ability.id %>
+            <%= pa.label :"m_valued_ability_#{ability.id}", ability.name, class: "form-label small mb-0" %>
             <%= pa.select :value,
-                      options_for_select(ability[:options].reverse, ability[:player_ability].value || 0),
-                      {},
-                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
+              options_for_select(
+                JSON.parse(ability.level_display_name).map { |key, value| [value, key.to_i] }.reverse,
+                pa.object.value || 0
+              ),
+              {},
+              { class: "form-select", id: "valued-ability-#{ability.id}" } %>
           <% end %>
         </div>
       <% end %>
@@ -255,15 +261,21 @@
   <div class="mb-3">
     <!-- 値あり -->
     <div class="row mb-3">
-      <% @valued_abilities_options[:pitcher].each do |ability| %>
+      <% @valued_abilities.where(pitcher_fielder_division: 120).each do |ability| %>
         <div class="col-6 col-sm-4">
-          <%= f.fields_for :player_m_valued_abilities, ability[:player_ability] do |pa| %>
-            <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
-            <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
+          <% player_ability =
+            @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability.id } ||
+            @player.player_m_valued_abilities.build(m_valued_ability_id: ability.id) %>
+          <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+            <%= pa.hidden_field :m_valued_ability_id, value: ability.id %>
+            <%= pa.label :"m_valued_ability_#{ability.id}", ability.name, class: "form-label small mb-0" %>
             <%= pa.select :value,
-                      options_for_select(ability[:options].reverse, ability[:player_ability].value || 0),
-                      {},
-                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
+              options_for_select(
+                JSON.parse(ability.level_display_name).map { |key, value| [value, key.to_i] }.reverse,
+                pa.object.value || 0
+              ),
+              {},
+              { class: "form-select", id: "valued-ability-#{ability.id}" } %>
           <% end %>
         </div>
       <% end %>
@@ -373,15 +385,21 @@
   <div class="mb-3">
     <!-- 値あり -->
     <div class="row mb-3">
-      <% @valued_abilities_options[:fielder].each do |ability| %>
+      <% @valued_abilities.where(pitcher_fielder_division: 130).each do |ability| %>
         <div class="col-6 col-sm-4">
-          <%= f.fields_for :player_m_valued_abilities, ability[:player_ability] do |pa| %>
-            <%= pa.hidden_field :m_valued_ability_id, value: ability[:id] %>
-            <%= pa.label :"m_valued_ability_#{ability[:id]}", ability[:name], class: "form-label small mb-0" %>
+          <% player_ability =
+            @player.player_m_valued_abilities.find { |pa| pa.m_valued_ability_id == ability.id } ||
+            @player.player_m_valued_abilities.build(m_valued_ability_id: ability.id) %>
+          <%= f.fields_for :player_m_valued_abilities, player_ability do |pa| %>
+            <%= pa.hidden_field :m_valued_ability_id, value: ability.id %>
+            <%= pa.label :"m_valued_ability_#{ability.id}", ability.name, class: "form-label small mb-0" %>
             <%= pa.select :value,
-                      options_for_select(ability[:options].reverse, ability[:player_ability].value || 0),
-                      {},
-                      { class: "form-select", id: "valued-ability-#{ability[:id]}" } %>
+              options_for_select(
+                JSON.parse(ability.level_display_name).map { |key, value| [value, key.to_i] }.reverse,
+                pa.object.value || 0
+              ),
+              {},
+              { class: "form-select", id: "valued-ability-#{ability.id}" } %>
           <% end %>
         </div>
       <% end %>
@@ -456,7 +474,7 @@
   </div>
   <div class="mb-3">
     <%= f.label :note, '備考', class: 'form-label' %>
-    <%= f.text_area :note, rows: 3, class: 'form-control', id: 'bikou' %>
+    <%= f.text_area :note, rows: 3, class: 'form-control' %>
   </div>
   <!-- ボタンエリア -->
   <!-- TODO: それぞれ確認モーダルを表示する -->

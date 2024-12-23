@@ -48,6 +48,7 @@ class Pawapuro::PlayersController < ApplicationController
   def new
     if current_user.present?
       @player = Pawapuro::Player.new
+      @valued_abilities = Pawapuro::MValuedAbility.all
       prepare_new_player_data(@player)
     else
       redirect_to new_user_session_path
@@ -62,6 +63,8 @@ class Pawapuro::PlayersController < ApplicationController
       redirect_to pawapuro_players_path, notice: "「選手名：#{@player.player_name}」を作成しました"
     else
       # 新規作成時に必要なデータを再生成
+      @player.assign_attributes(player_params)
+      @valued_abilities = Pawapuro::MValuedAbility.all
       prepare_new_player_data(@player)
       render :new, status: :unprocessable_entity
     end
@@ -74,11 +77,12 @@ class Pawapuro::PlayersController < ApplicationController
       fielder: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
     }
     # 値あり特殊能力
-    @valued_abilities_options = {
-      common: fetch_valued_abilities(@player, 110),
-      pitcher: fetch_valued_abilities(@player, 120),
-      fielder: fetch_valued_abilities(@player, 130)
-    }
+    @valued_abilities = Pawapuro::MValuedAbility.all
+    # @valued_abilities_options = {
+    #   common: fetch_valued_abilities(@player, 110),
+    #   pitcher: fetch_valued_abilities(@player, 120),
+    #   fielder: fetch_valued_abilities(@player, 130)
+    # }
     # 値なし特殊能力
     @basic_abilities_options = {
       common: fetch_basic_abilities(@player, 110),
@@ -110,6 +114,8 @@ class Pawapuro::PlayersController < ApplicationController
       redirect_to pawapuro_players_path, notice: "「選手名：#{@player.player_name}」を更新しました。"
     else
       # 更新時に必要なデータを再生成
+      @player.assign_attributes(player_params)
+      @valued_abilities = Pawapuro::MValuedAbility.all
       prepare_new_player_data(@player)
       render :edit, status: :unprocessable_entity
     end

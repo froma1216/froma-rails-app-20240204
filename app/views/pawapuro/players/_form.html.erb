@@ -161,30 +161,18 @@
     </div>
     <!-- 値なし特殊能力 -->
     <div class="row mb-2">
-      <% @basic_abilities_options[:common].each do |ability| %>
+      <% @basic_abilities.where(pitcher_fielder_division: 110).each do |ability| %>
         <div class="col-4 col-sm-2">
           <div class="form-check">
-            <%= f.fields_for :player_m_basic_abilities, ability[:player_ability] do |pa| %>
-              <%= pa.hidden_field :m_basic_ability_id, value: ability[:id] %>
-              <%= pa.check_box(
-                      :_destroy,
-                      {
-                        class: "form-check-input #{ability[:check_input_class]}",
-                        id: "ability-#{ability[:id]}",
-                        checked: ability[:selected]
-                      },
-                      false,
-                      true
-                ) %>
-              <%= pa.label(
-                      :_destroy,
-                      ability[:name],
-                      {
-                        class: "form-check-label #{ability[:check_label_class]} fw-bold",
-                        for: "ability-#{ability[:id]}"
-                      }
-                ) %>
-            <% end %>
+            <%= check_box_tag(
+              "pawapuro_player[m_basic_ability_ids][]", ability.id, @player.m_basic_abilities.include?(ability),
+              id: "ability_#{ability.id}",
+              class: "form-check-input pawa-check-input-#{ability.good_bad_division}"
+            ) %>
+            <%= label_tag(
+              "ability_#{ability.id}", ability.name,
+              class: "form-check-label pawa-text-#{ability.good_bad_division} fw-bold"
+            ) %>
           </div>
         </div>
       <% end %>
@@ -288,31 +276,18 @@
     </div>
     <!-- 値なし -->
     <div class="row mb-2">
-      <% @basic_abilities_options[:pitcher].each do |ability| %>
+      <% @basic_abilities.where(pitcher_fielder_division: 120).each do |ability| %>
         <div class="col-4 col-sm-2">
           <div class="form-check">
-            <%= f.fields_for :player_m_basic_abilities, ability[:player_ability] do |pa| %>
-              <%= pa.hidden_field :m_basic_ability_id, value: ability[:id] %>
-              <%= pa.check_box(
-                      :_destroy,
-                      {
-                        class: "form-check-input #{ability[:check_input_class]}",
-                        id: "ability-#{ability[:id]}",
-                        checked: ability[:selected]
-                      },
-                      false,
-                      true
-
-                ) %>
-              <%= pa.label(
-                      :_destroy,
-                      ability[:name],
-                      {
-                        class: "form-check-label #{ability[:check_label_class]} fw-bold",
-                        for: "ability-#{ability[:id]}"
-                      }
-                ) %>
-            <% end %>
+            <%= check_box_tag(
+              "pawapuro_player[m_basic_ability_ids][]", ability.id, @player.m_basic_abilities.include?(ability),
+              id: "ability_#{ability.id}",
+              class: "form-check-input pawa-check-input-#{ability.good_bad_division}"
+            ) %>
+            <%= label_tag(
+              "ability_#{ability.id}", ability.name,
+              class: "form-check-label pawa-text-#{ability.good_bad_division} fw-bold"
+            ) %>
           </div>
         </div>
       <% end %>
@@ -412,30 +387,18 @@
     </div>
     <!-- 値なし -->
     <div class="row mb-2">
-      <% @basic_abilities_options[:fielder].each do |ability| %>
+      <% @basic_abilities.where(pitcher_fielder_division: 130).each do |ability| %>
         <div class="col-4 col-sm-2">
           <div class="form-check">
-            <%= f.fields_for :player_m_basic_abilities, ability[:player_ability] do |pa| %>
-              <%= pa.hidden_field :m_basic_ability_id, value: ability[:id] %>
-              <%= pa.check_box(
-                      :_destroy,
-                      {
-                        class: "form-check-input #{ability[:check_input_class]}",
-                        id: "ability-#{ability[:id]}",
-                        checked: ability[:selected]
-                      },
-                      false,
-                      true
-                ) %>
-              <%= pa.label(
-                      :_destroy,
-                      ability[:name],
-                      {
-                        class: "form-check-label #{ability[:check_label_class]} fw-bold",
-                        for: "ability-#{ability[:id]}"
-                      }
-                ) %>
-            <% end %>
+            <%= check_box_tag(
+              "pawapuro_player[m_basic_ability_ids][]", ability.id, @player.m_basic_abilities.include?(ability),
+              id: "ability_#{ability.id}",
+              class: "form-check-input pawa-check-input-#{ability.good_bad_division}"
+            ) %>
+            <%= label_tag(
+              "ability_#{ability.id}", ability.name,
+              class: "form-check-label pawa-text-#{ability.good_bad_division} fw-bold"
+            ) %>
           </div>
         </div>
       <% end %>
@@ -446,30 +409,18 @@
     COM操作起用法特殊能力
   </div>
   <div class="row mb-2">
-    <% @basic_abilities_options[:sub].each do |ability| %>
+    <% @basic_abilities.where(pitcher_fielder_division: 140).each do |ability| %>
       <div class="col-4 col-sm-2">
         <div class="form-check">
-          <%= f.fields_for :player_m_basic_abilities, ability[:player_ability] do |pa| %>
-            <%= pa.hidden_field :m_basic_ability_id, value: ability[:id] %>
-            <%= pa.check_box(
-                    :_destroy,
-                    {
-                      class: "form-check-input #{ability[:check_input_class]}",
-                      id: "ability-#{ability[:id]}",
-                      checked: ability[:selected]
-                    },
-                    false,
-                    true
-                ) %>
-            <%= pa.label(
-                    :_destroy,
-                    ability[:name],
-                    {
-                      class: "form-check-label #{ability[:check_label_class]} fw-bold",
-                      for: "ability-#{ability[:id]}"
-                    }
-                ) %>
-          <% end %>
+          <%= check_box_tag(
+              "pawapuro_player[m_basic_ability_ids][]", ability.id, @player.m_basic_abilities.include?(ability),
+              id: "ability_#{ability.id}",
+              class: "form-check-input pawa-check-input-#{ability.good_bad_division}"
+            ) %>
+          <%= label_tag(
+              "ability_#{ability.id}", ability.name,
+              class: "form-check-label pawa-text-#{ability.good_bad_division} fw-bold"
+            ) %>
         </div>
       </div>
     <% end %>

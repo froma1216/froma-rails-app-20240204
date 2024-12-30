@@ -18,7 +18,6 @@ class Pawapuro::Player < ApplicationRecord
   accepts_nested_attributes_for :player_m_positions, allow_destroy: true
   accepts_nested_attributes_for :player_m_breaking_balls, allow_destroy: true
   accepts_nested_attributes_for :player_m_valued_abilities, allow_destroy: true
-  accepts_nested_attributes_for :player_m_basic_abilities, allow_destroy: true
 
   extend Enumerize
   enumerize :throwing, in: Enums.dominant_hand

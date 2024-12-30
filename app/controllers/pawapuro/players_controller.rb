@@ -50,6 +50,7 @@ class Pawapuro::PlayersController < ApplicationController
       @player = Pawapuro::Player.new
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
+      @basic_abilities = Pawapuro::MBasicAbility.all
       prepare_new_player_data(@player)
     else
       redirect_to new_user_session_path
@@ -67,6 +68,7 @@ class Pawapuro::PlayersController < ApplicationController
       @player.assign_attributes(player_params)
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
+      @basic_abilities = Pawapuro::MBasicAbility.all
       prepare_new_player_data(@player)
       render :new, status: :unprocessable_entity
     end
@@ -87,12 +89,13 @@ class Pawapuro::PlayersController < ApplicationController
     #   fielder: fetch_valued_abilities(@player, 130)
     # }
     # 値なし特殊能力
-    @basic_abilities_options = {
-      common: fetch_basic_abilities(@player, 110),
-      pitcher: fetch_basic_abilities(@player, 120),
-      fielder: fetch_basic_abilities(@player, 130),
-      sub: fetch_basic_abilities(@player, 140)
-    }
+    @basic_abilities = Pawapuro::MBasicAbility.all
+    # @basic_abilities_options = {
+    #   common: fetch_basic_abilities(@player, 110),
+    #   pitcher: fetch_basic_abilities(@player, 120),
+    #   fielder: fetch_basic_abilities(@player, 130),
+    #   sub: fetch_basic_abilities(@player, 140)
+    # }
     # 変化球
     filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
     @breaking_balls = {
@@ -120,6 +123,7 @@ class Pawapuro::PlayersController < ApplicationController
       @player.assign_attributes(player_params)
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
+      @basic_abilities = Pawapuro::MBasicAbility.all
       prepare_new_player_data(@player)
       render :edit, status: :unprocessable_entity
     end
@@ -161,7 +165,7 @@ class Pawapuro::PlayersController < ApplicationController
       :note,
       player_m_positions_attributes: [:id, :m_position_id, :proficiency, :_destroy],
       player_m_valued_abilities_attributes: [:id, :m_valued_ability_id, :value, :_destroy],
-      player_m_basic_abilities_attributes: [:id, :m_basic_ability_id, :_destroy],
+      m_basic_ability_ids: [], # 値なし特殊能力のIDを配列で受け取る
       player_m_breaking_balls_attributes: [:id, :ball_type_order, :m_breaking_ball_id, :movement, :_destroy]
     ).tap do |whitelisted|
       # 値が0を除外

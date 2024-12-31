@@ -164,11 +164,11 @@ class Pawapuro::PlayersController < ApplicationController
       player_m_breaking_balls_attributes: [:id, :ball_type_order, :m_breaking_ball_id, :movement, :_destroy]
     ).tap do |whitelisted|
       # 値が0を除外
-      whitelisted[:player_m_positions_attributes]&.reject! do |_key, attributes|
-        attributes[:proficiency].to_i.zero?
+      whitelisted[:player_m_positions_attributes]&.each_value do |attributes|
+        attributes[:_destroy] = "1" if attributes[:proficiency].to_i.zero?
       end
-      whitelisted[:player_m_valued_abilities_attributes]&.reject! do |_key, attributes|
-        attributes[:value].to_i.zero?
+      whitelisted[:player_m_valued_abilities_attributes]&.each_value do |attributes|
+        attributes[:_destroy] = "1" if attributes[:value].to_i.zero?
       end
       whitelisted[:player_m_breaking_balls_attributes]&.each_value do |attributes|
         attributes[:_destroy] = "1" if attributes[:movement].to_i.zero? || attributes[:m_breaking_ball_id].blank?

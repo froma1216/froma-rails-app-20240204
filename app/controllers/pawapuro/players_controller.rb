@@ -51,7 +51,14 @@ class Pawapuro::PlayersController < ApplicationController
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
       @basic_abilities = Pawapuro::MBasicAbility.all
-      prepare_new_player_data(@player)
+      # prepare_new_player_data(@player)
+      @breaking_balls = Enums.breaking_ball_division.keys.index_with do |_type|
+        { 1 => nil, 2 => nil }
+      end
+      # 変化球セレクト
+      @breaking_ball_options = Pawapuro::MBreakingBall
+        .where(breaking_ball_division: Enums.breaking_ball_division.values)
+        .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
     else
       redirect_to new_user_session_path
     end
@@ -69,7 +76,14 @@ class Pawapuro::PlayersController < ApplicationController
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
       @basic_abilities = Pawapuro::MBasicAbility.all
-      prepare_new_player_data(@player)
+      # prepare_new_player_data(@player)
+      @breaking_balls = Enums.breaking_ball_division.keys.index_with do |_type|
+        { 1 => nil, 2 => nil }
+      end
+
+      @breaking_ball_options = Pawapuro::MBreakingBall
+        .where(breaking_ball_division: Enums.breaking_ball_division.values)
+        .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
       render :new, status: :unprocessable_entity
     end
   end

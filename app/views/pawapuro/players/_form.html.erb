@@ -214,31 +214,37 @@
     <!-- 変化球 -->
     <div>
       <!-- TODO: ストレートは数値入力しない。 -->
-      <% @breaking_balls.each do |type, orders| %>
+      <% @breaking_balls.each do |division, orders| %>
         <div class="row mb-2">
-          <% orders.each do |order, breaking_ball| %>
-            <% options = [["なし", nil]] + (@breaking_ball_options[type.to_s] || []).map { |ball| [ball.name, ball.id] } %>
+          <% orders.each_key do |order| %>
+            <% options = [["なし", nil]] + (@breaking_ball_options[division.to_s] || []).map { |ball| [ball.name, ball.id] } %>
+            <% player_breaking_ball =
+                @player.player_m_breaking_balls.find { |bb| bb.ball_type_order == order && bb.m_breaking_ball&.breaking_ball_division == division } ||
+                @player.player_m_breaking_balls.build(ball_type_order: order) %>
             <div class="col-12 col-sm-6">
               <label class="form-label small mb-0">
-                <%= "#{order == 1 ? '第一' : '第二'} #{t("enums.pawapuro.breaking_ball_division.#{type}")}系" %>
+                <%= "#{order == 1 ? '第一' : '第二'} #{t("enums.pawapuro.breaking_ball_division.#{division}")}系" %>
               </label>
               <div class="row">
-                <%= f.fields_for :player_m_breaking_balls, breaking_ball || @player.player_m_breaking_balls.build(ball_type_order: order) do |bb| %>
+                <%= f.fields_for :player_m_breaking_balls, player_breaking_ball do |bb| %>
                   <div class="col-9">
-                    <%= bb.hidden_field :id %> <!-- 既存のIDがある場合送信 -->
+                    <%= bb.hidden_field :id %>
                     <%= bb.hidden_field :ball_type_order, value: order %>
                     <%= bb.select :m_breaking_ball_id,
-                            options_for_select(options, selected: breaking_ball&.m_breaking_ball_id),
-                            {},
-                            { class: order == 1 ? 'form-select' : 'form-select form-select-sm' } %>
-                    <%= bb.hidden_field :_destroy %> <!-- 削除フラグを送信 -->
+                          options_for_select(
+                            options,
+                            bb.object.m_breaking_ball_id
+                          ),
+                          {},
+                          { class: order == 1 ? 'form-select' : 'form-select form-select-sm' } %>
+                    <%= bb.hidden_field :_destroy %>
                   </div>
                   <div class="col-3">
                     <%= bb.number_field :movement,
-                                  class: order == 1 ? 'form-control' : 'form-control form-control-sm',
-                                  min: 0,
-                                  max: 7,
-                                  value: breaking_ball&.movement || 0 %>
+                          class: order == 1 ? 'form-control' : 'form-control form-control-sm',
+                          min: 0,
+                          max: 7,
+                          value: bb.object.movement || 0 %>
                   </div>
                 <% end %>
               </div>

@@ -77,35 +77,23 @@ class Pawapuro::PlayersController < ApplicationController
   def edit
     # ポジション適正
     @positions = Pawapuro::MPosition.all
-    # @position_proficiencies = {
-    #   pitcher: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_PITCHER_IDS),
-    #   fielder: fetch_positions(@player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
-    # }
     # 値あり特殊能力
     @valued_abilities = Pawapuro::MValuedAbility.all
-    # @valued_abilities_options = {
-    #   common: fetch_valued_abilities(@player, 110),
-    #   pitcher: fetch_valued_abilities(@player, 120),
-    #   fielder: fetch_valued_abilities(@player, 130)
-    # }
     # 値なし特殊能力
     @basic_abilities = Pawapuro::MBasicAbility.all
-    # @basic_abilities_options = {
-    #   common: fetch_basic_abilities(@player, 110),
-    #   pitcher: fetch_basic_abilities(@player, 120),
-    #   fielder: fetch_basic_abilities(@player, 130),
-    #   sub: fetch_basic_abilities(@player, 140)
-    # }
     # 変化球
-    filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
-    @breaking_balls = {
-      fastball: { 1 => filtered_balls.dig(100, 1), 2 => filtered_balls.dig(100, 2) },
-      slider: { 1 => filtered_balls.dig(210, 1), 2 => filtered_balls.dig(210, 2) },
-      curve: { 1 => filtered_balls.dig(220, 1), 2 => filtered_balls.dig(220, 2) },
-      shoot: { 1 => filtered_balls.dig(230, 1), 2 => filtered_balls.dig(230, 2) },
-      sinker: { 1 => filtered_balls.dig(240, 1), 2 => filtered_balls.dig(240, 2) },
-      fork: { 1 => filtered_balls.dig(250, 1), 2 => filtered_balls.dig(250, 2) }
-    }
+    # 作成されるデータイメージ
+    # {
+    #   "fastball" => { 1 => nil, 2 => nil },
+    #   "slider"   => { 1 => nil, 2 => nil },
+    #   "curve"    => { 1 => nil, 2 => nil },
+    #   "shoot"    => { 1 => nil, 2 => nil },
+    #   "sinker"   => { 1 => nil, 2 => nil },
+    #   "fork"     => { 1 => nil, 2 => nil }
+    # }
+    @breaking_balls = Enums.breaking_ball_division.keys.index_with do |_type|
+      { 1 => nil, 2 => nil }
+    end
     # 変化球セレクト
     @breaking_ball_options = Pawapuro::MBreakingBall
       .where(breaking_ball_division: Enums.breaking_ball_division.values)
@@ -124,7 +112,14 @@ class Pawapuro::PlayersController < ApplicationController
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
       @basic_abilities = Pawapuro::MBasicAbility.all
-      prepare_new_player_data(@player)
+      # prepare_new_player_data(@player)
+      @breaking_balls = Enums.breaking_ball_division.keys.index_with do |_type|
+        { 1 => nil, 2 => nil }
+      end
+
+      @breaking_ball_options = Pawapuro::MBreakingBall
+        .where(breaking_ball_division: Enums.breaking_ball_division.values)
+        .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
       render :edit, status: :unprocessable_entity
     end
   end

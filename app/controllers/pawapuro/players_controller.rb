@@ -13,7 +13,6 @@ class Pawapuro::PlayersController < ApplicationController
   def details
     if current_user.present?
       @player = Pawapuro::Player.find(params[:id])
-      # prepare_new_player_data(@player)
       # ポジション適正
       @position_proficiencies = fetch_position_proficiencies(@player)
       # 変化球
@@ -208,76 +207,5 @@ class Pawapuro::PlayersController < ApplicationController
       sinker: { 1 => filtered_balls.dig("sinker", 1), 2 => filtered_balls.dig("sinker", 2) },
       fork: { 1 => filtered_balls.dig("fork", 1), 2 => filtered_balls.dig("fork", 2) }
     }
-  end
-
-  # 値あり特殊能力を取得する
-  # def fetch_valued_abilities(player, division)
-  #   abilities = Pawapuro::MValuedAbility.where(pitcher_fielder_division: division)
-  #   abilities.map do |ability|
-  #     # 既存データがある場合はそのまま、ない場合は新規作成
-  #     player_ability = player.player_m_valued_abilities.find_or_initialize_by(m_valued_ability_id: ability.id)
-
-  #     levels = JSON.parse(ability.level_display_name)
-  #     {
-  #       id: ability.id,
-  #       name: ability.name,
-  #       options: levels.map { |key, value| [value, key.to_i] },
-  #       player_ability: # フォーム用に渡す
-  #     }
-  #   end
-  # end
-
-  # 値なし特殊能力を取得する
-  # def fetch_basic_abilities(player, division)
-  #   abilities = Pawapuro::MBasicAbility.where(pitcher_fielder_division: division)
-  #   abilities.map do |ability|
-  #     # 既存データがある場合はそのまま、ない場合は新規作成
-  #     player_ability = player.player_m_basic_abilities.find_or_initialize_by(m_basic_ability_id: ability.id)
-
-  #     {
-  #       id: ability.id,
-  #       name: ability.name,
-  #       check_input_class: "pawa-check-input-#{ability.good_bad_division}",
-  #       check_label_class: "pawa-text-#{ability.good_bad_division}",
-  #       player_ability:, # フォーム用に渡す
-  #       selected: player_ability.persisted? # 編集時：登録済みかどうか、新規時：false
-  #     }
-  #   end
-  # end
-
-  # 新規作成用のデータをセット
-  def prepare_new_player_data(player)
-    # ポジション適正
-    # @position_proficiencies = {
-    #   pitcher: fetch_positions(player, Pawapuro::MPosition::PAWAPURO_PITCHER_IDS),
-    #   fielder: fetch_positions(player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
-    # }
-    # 値あり特殊能力
-    @valued_abilities_options = {
-      common: fetch_valued_abilities(player, 110),
-      pitcher: fetch_valued_abilities(player, 120),
-      fielder: fetch_valued_abilities(player, 130)
-    }
-    # 値なし特殊能力
-    @basic_abilities_options = {
-      common: fetch_basic_abilities(player, 110),
-      pitcher: fetch_basic_abilities(player, 120),
-      fielder: fetch_basic_abilities(player, 130),
-      sub: fetch_basic_abilities(player, 140)
-    }
-    # 変化球
-    filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
-    @breaking_balls = {
-      fastball: { 1 => filtered_balls.dig(100, 1), 2 => filtered_balls.dig(100, 2) },
-      slider: { 1 => filtered_balls.dig(210, 1), 2 => filtered_balls.dig(210, 2) },
-      curve: { 1 => filtered_balls.dig(220, 1), 2 => filtered_balls.dig(220, 2) },
-      shoot: { 1 => filtered_balls.dig(230, 1), 2 => filtered_balls.dig(230, 2) },
-      sinker: { 1 => filtered_balls.dig(240, 1), 2 => filtered_balls.dig(240, 2) },
-      fork: { 1 => filtered_balls.dig(250, 1), 2 => filtered_balls.dig(250, 2) }
-    }
-    # 変化球セレクトオプション
-    @breaking_ball_options = Pawapuro::MBreakingBall
-      .where(breaking_ball_division: Enums.breaking_ball_division.values)
-      .group_by { |ball| Enums.breaking_ball_division.key(ball.breaking_ball_division) }
   end
 end

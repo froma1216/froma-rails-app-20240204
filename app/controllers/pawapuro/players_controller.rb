@@ -1,35 +1,24 @@
 class Pawapuro::PlayersController < ApplicationController
-  before_action :ensure_current_user, { only: [:edit, :update, :destroy] }
+  # ログイン確認
+  before_action :ensure_current_user, only: [:index, :new, :create]
+  # プレイヤー確認 + 権限チェック
+  before_action :set_player_and_authorize, only: [:details, :edit, :update, :destroy]
 
   def index
-    if current_user.present?
-      # 自分で作った選手のみ取得
-      @players = Pawapuro::Player.where(user: current_user).order(id: :desc)
-    else
-      redirect_to new_user_session_path
-    end
+    # 自分で作った選手のみ取得
+    @players = Pawapuro::Player.where(user: current_user).order(id: :desc)
   end
 
   def details
-    if current_user.present?
-      @player = Pawapuro::Player.find(params[:id])
-      # ポジション適正
-      @position_proficiencies = fetch_position_proficiencies(@player)
-      # 変化球
-      @breaking_balls = fetch_breaking_balls(@player)
-    else
-      redirect_to pawapuro_players_path,
-                  notice: "権限がありません"
-    end
+    # ポジション適正
+    @position_proficiencies = fetch_position_proficiencies(@player)
+    # 変化球
+    @breaking_balls = fetch_breaking_balls(@player)
   end
 
   def new
-    if current_user.present?
-      @player = Pawapuro::Player.new
-      prepare_player_resources
-    else
-      redirect_to new_user_session_path
-    end
+    @player = Pawapuro::Player.new
+    prepare_player_resources
   end
 
   def create
@@ -45,14 +34,10 @@ class Pawapuro::PlayersController < ApplicationController
   end
 
   def edit
-    @player = Pawapuro::Player.find(params[:id])
     prepare_player_resources
   end
 
   def update
-    @player = Pawapuro::Player.find(params[:id])
-    ensure_current_user # 権限がなければリダイレクト
-
     if @player.update(player_params)
       redirect_to pawapuro_players_path, notice: "「選手名：#{@player.player_name}」を更新しました。"
     else
@@ -62,9 +47,6 @@ class Pawapuro::PlayersController < ApplicationController
   end
 
   def destroy
-    @player = Pawapuro::Player.find(params[:id])
-    ensure_current_user # 権限がなければリダイレクト
-
     if @player.destroy
       redirect_to pawapuro_players_path, notice: "「選手名：#{@player.player_name}」を削除しました。"
     else
@@ -74,10 +56,15 @@ class Pawapuro::PlayersController < ApplicationController
 
   private
 
-  # 権限確認
+  # ユーザーがログインしていることを確認
   def ensure_current_user
+    redirect_to new_user_session_path unless current_user.present?
+  end
+
+  # @playerの設定と権限チェックを行う
+  def set_player_and_authorize
     @player = Pawapuro::Player.find(params[:id])
-    redirect_to pawapuro_players_path, notice: "権限がありません" if @player.user != current_user
+    redirect_to pawapuro_players_path, notice: "権限がありません" unless @player.user == current_user
   end
 
   # ストロングパラメータ

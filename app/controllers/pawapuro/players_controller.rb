@@ -16,23 +16,8 @@ class Pawapuro::PlayersController < ApplicationController
       # prepare_new_player_data(@player)
       # ポジション適正
       @position_proficiencies = fetch_position_proficiencies(@player)
-
-      # # 所持している全変化球を取得
-      # # TODO: newやeditと同じようにまとめて取得
-      # filtered_balls = @player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
-      # # それぞれの変化球を取得
-      # @breaking_ball_fastball1 = filtered_balls.dig(100, 1)
-      # @breaking_ball_fastball2 = filtered_balls.dig(100, 2)
-      # @breaking_ball_slider1 = filtered_balls.dig(210, 1)
-      # @breaking_ball_slider2 = filtered_balls.dig(210, 2)
-      # @breaking_ball_curve1 = filtered_balls.dig(220, 1)
-      # @breaking_ball_curve2 = filtered_balls.dig(220, 2)
-      # @breaking_ball_shoot1 = filtered_balls.dig(230, 1)
-      # @breaking_ball_shoot2 = filtered_balls.dig(230, 2)
-      # @breaking_ball_sinker1 = filtered_balls.dig(240, 1)
-      # @breaking_ball_sinker2 = filtered_balls.dig(240, 2)
-      # @breaking_ball_fork1 = filtered_balls.dig(250, 1)
-      # @breaking_ball_fork2 = filtered_balls.dig(250, 2)
+      # 変化球
+      @breaking_balls = fetch_breaking_balls(@player)
     else
       redirect_to pawapuro_players_path,
                   notice: "権限がありません"
@@ -212,40 +197,53 @@ class Pawapuro::PlayersController < ApplicationController
     end
   end
 
-  # 値あり特殊能力を取得する
-  def fetch_valued_abilities(player, division)
-    abilities = Pawapuro::MValuedAbility.where(pitcher_fielder_division: division)
-    abilities.map do |ability|
-      # 既存データがある場合はそのまま、ない場合は新規作成
-      player_ability = player.player_m_valued_abilities.find_or_initialize_by(m_valued_ability_id: ability.id)
-
-      levels = JSON.parse(ability.level_display_name)
-      {
-        id: ability.id,
-        name: ability.name,
-        options: levels.map { |key, value| [value, key.to_i] },
-        player_ability: # フォーム用に渡す
-      }
-    end
+  # 変化球を取得する
+  def fetch_breaking_balls(player)
+    filtered_balls = player.filtered_breaking_balls(Enums.breaking_ball_division.values, [1, 2])
+    {
+      fastball: { 1 => filtered_balls.dig("fastball", 1), 2 => filtered_balls.dig("fastball", 2) },
+      slider: { 1 => filtered_balls.dig("slider", 1), 2 => filtered_balls.dig("slider", 2) },
+      curve: { 1 => filtered_balls.dig("curve", 1), 2 => filtered_balls.dig("curve", 2) },
+      shoot: { 1 => filtered_balls.dig("shoot", 1), 2 => filtered_balls.dig("shoot", 2) },
+      sinker: { 1 => filtered_balls.dig("sinker", 1), 2 => filtered_balls.dig("sinker", 2) },
+      fork: { 1 => filtered_balls.dig("fork", 1), 2 => filtered_balls.dig("fork", 2) }
+    }
   end
+
+  # 値あり特殊能力を取得する
+  # def fetch_valued_abilities(player, division)
+  #   abilities = Pawapuro::MValuedAbility.where(pitcher_fielder_division: division)
+  #   abilities.map do |ability|
+  #     # 既存データがある場合はそのまま、ない場合は新規作成
+  #     player_ability = player.player_m_valued_abilities.find_or_initialize_by(m_valued_ability_id: ability.id)
+
+  #     levels = JSON.parse(ability.level_display_name)
+  #     {
+  #       id: ability.id,
+  #       name: ability.name,
+  #       options: levels.map { |key, value| [value, key.to_i] },
+  #       player_ability: # フォーム用に渡す
+  #     }
+  #   end
+  # end
 
   # 値なし特殊能力を取得する
-  def fetch_basic_abilities(player, division)
-    abilities = Pawapuro::MBasicAbility.where(pitcher_fielder_division: division)
-    abilities.map do |ability|
-      # 既存データがある場合はそのまま、ない場合は新規作成
-      player_ability = player.player_m_basic_abilities.find_or_initialize_by(m_basic_ability_id: ability.id)
+  # def fetch_basic_abilities(player, division)
+  #   abilities = Pawapuro::MBasicAbility.where(pitcher_fielder_division: division)
+  #   abilities.map do |ability|
+  #     # 既存データがある場合はそのまま、ない場合は新規作成
+  #     player_ability = player.player_m_basic_abilities.find_or_initialize_by(m_basic_ability_id: ability.id)
 
-      {
-        id: ability.id,
-        name: ability.name,
-        check_input_class: "pawa-check-input-#{ability.good_bad_division}",
-        check_label_class: "pawa-text-#{ability.good_bad_division}",
-        player_ability:, # フォーム用に渡す
-        selected: player_ability.persisted? # 編集時：登録済みかどうか、新規時：false
-      }
-    end
-  end
+  #     {
+  #       id: ability.id,
+  #       name: ability.name,
+  #       check_input_class: "pawa-check-input-#{ability.good_bad_division}",
+  #       check_label_class: "pawa-text-#{ability.good_bad_division}",
+  #       player_ability:, # フォーム用に渡す
+  #       selected: player_ability.persisted? # 編集時：登録済みかどうか、新規時：false
+  #     }
+  #   end
+  # end
 
   # 新規作成用のデータをセット
   def prepare_new_player_data(player)

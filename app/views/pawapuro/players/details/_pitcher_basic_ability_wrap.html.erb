@@ -16,10 +16,10 @@
 <!-- 変化球 -->
 <div class="d-flex justify-content-start row p-0 p-sm-1 mb-1 pawa-main-box">
   <div class="ps-1 ps-sm-3 pb-2">
-    <% I18n.t('enums.pawapuro.breaking_ball_division').each_key do |type| %>
+    <% @breaking_balls.values.each do |orders| %>
       <%= render partial: 'pawapuro/players/details/breaking_ball_meter', locals: {
-        breaking_ball1: instance_variable_get("@breaking_ball_#{type}1"),
-        breaking_ball2: instance_variable_get("@breaking_ball_#{type}2")
+        breaking_ball1: orders[1],
+        breaking_ball2: orders[2]
       } %>
     <% end %>
   </div>

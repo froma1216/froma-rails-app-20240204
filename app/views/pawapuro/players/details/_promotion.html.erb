@@ -19,31 +19,12 @@
           <div class="pawa-ability-label-no-value">守備力</div>
         </div>
       </div>
-      <% positions = [
-          { abbreviation: "投", ids: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS, category: :pitcher },
-          { abbreviation: "捕", id: 2, category: :fielder },
-          { abbreviation: "一", id: 3, category: :fielder },
-          { abbreviation: "二", id: 4, category: :fielder },
-          { abbreviation: "三", id: 5, category: :fielder },
-          { abbreviation: "遊", id: 6, category: :fielder },
-          { abbreviation: "外", id: 13, category: :fielder }
-        ] %>
-
-      <% positions.each_with_index do |position, index| %>
+      <% @position_proficiencies.each do |position| %>
         <div class="col-12 col-sm-6 py-2 ps-3">
           <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
-              position_abbreviation: position[:abbreviation],
-              position_proficiency: if position.key?(:ids)
-                                      @position_proficiencies[position[:category]]
-                                        .select { |pos| position[:ids].include?(pos[:id]) }
-                                        .map { |pos| pos[:player_position]&.proficiency }
-                                        .compact
-                                        .max
-                                    else
-                                      @position_proficiencies[position[:category]]
-                                        .find { |pos| pos[:id] == position[:id] }&.[](:player_position)&.proficiency
-                                    end
-            } %>
+            position_abbreviation: position[:abbreviation],
+            proficiency_value: calculate_proficiency_value(@player.fielding, position[:proficiency])
+          } %>
         </div>
       <% end %>
     </div>

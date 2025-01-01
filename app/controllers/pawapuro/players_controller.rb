@@ -13,15 +13,9 @@ class Pawapuro::PlayersController < ApplicationController
   def details
     if current_user.present?
       @player = Pawapuro::Player.find(params[:id])
-      prepare_new_player_data(@player)
-      # # 全てのポジション適正情報を取得
-      # @position_proficiencies = @player.player_m_positions.map do |pm_position|
-      #   {
-      #     id: pm_position.m_position.id,
-      #     abbreviation: pm_position.m_position.abbreviation,
-      #     proficiency: pm_position.proficiency
-      #   }
-      # end
+      # prepare_new_player_data(@player)
+      # ポジション適正
+      @position_proficiencies = fetch_position_proficiencies(@player)
 
       # # 所持している全変化球を取得
       # # TODO: newやeditと同じようにまとめて取得
@@ -51,7 +45,6 @@ class Pawapuro::PlayersController < ApplicationController
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
       @basic_abilities = Pawapuro::MBasicAbility.all
-      # prepare_new_player_data(@player)
       @breaking_balls = Enums.breaking_ball_division.keys.index_with do |_type|
         { 1 => nil, 2 => nil }
       end
@@ -76,7 +69,6 @@ class Pawapuro::PlayersController < ApplicationController
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
       @basic_abilities = Pawapuro::MBasicAbility.all
-      # prepare_new_player_data(@player)
       @breaking_balls = Enums.breaking_ball_division.keys.index_with do |_type|
         { 1 => nil, 2 => nil }
       end
@@ -126,7 +118,6 @@ class Pawapuro::PlayersController < ApplicationController
       @positions = Pawapuro::MPosition.all
       @valued_abilities = Pawapuro::MValuedAbility.all
       @basic_abilities = Pawapuro::MBasicAbility.all
-      # prepare_new_player_data(@player)
       @breaking_balls = Enums.breaking_ball_division.keys.index_with do |_type|
         { 1 => nil, 2 => nil }
       end
@@ -197,18 +188,27 @@ class Pawapuro::PlayersController < ApplicationController
   end
 
   # ポジション適正を取得する
-  def fetch_positions(player, position_ids)
-    positions = Pawapuro::MPosition.where(id: position_ids)
-    positions.map do |position|
-      # 既存データがある場合はそのまま、ない場合は新規作成
-      player_position = player.player_m_positions.find_or_initialize_by(m_position_id: position.id)
+  def fetch_position_proficiencies(player)
+    positions = [
+      { abbreviation: "投", ids: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS, category: :pitcher },
+      { abbreviation: "捕", id: 2, category: :fielder },
+      { abbreviation: "一", id: 3, category: :fielder },
+      { abbreviation: "二", id: 4, category: :fielder },
+      { abbreviation: "三", id: 5, category: :fielder },
+      { abbreviation: "遊", id: 6, category: :fielder },
+      { abbreviation: "外", id: 13, category: :fielder }
+    ]
 
-      {
-        id: position.id,
-        name: position.name,
-        abbreviation: position.abbreviation,
-        player_position: # フォーム用に渡す
-      }
+    positions.map do |position|
+      if position[:ids]
+        # 投手の場合
+        proficiency = player.player_m_positions.where(m_position_id: position[:ids]).maximum(:proficiency)
+        { abbreviation: position[:abbreviation], proficiency: proficiency || 0 }
+      else
+        # 野手の場合
+        proficiency = player.player_m_positions.find_by(m_position_id: position[:id])&.proficiency || 0
+        { abbreviation: position[:abbreviation], proficiency: }
+      end
     end
   end
 
@@ -250,10 +250,10 @@ class Pawapuro::PlayersController < ApplicationController
   # 新規作成用のデータをセット
   def prepare_new_player_data(player)
     # ポジション適正
-    @position_proficiencies = {
-      pitcher: fetch_positions(player, Pawapuro::MPosition::PAWAPURO_PITCHER_IDS),
-      fielder: fetch_positions(player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
-    }
+    # @position_proficiencies = {
+    #   pitcher: fetch_positions(player, Pawapuro::MPosition::PAWAPURO_PITCHER_IDS),
+    #   fielder: fetch_positions(player, Pawapuro::MPosition::PAWAPURO_FIELDER_IDS)
+    # }
     # 値あり特殊能力
     @valued_abilities_options = {
       common: fetch_valued_abilities(player, 110),

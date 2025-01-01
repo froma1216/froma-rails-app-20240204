@@ -351,4 +351,20 @@ module Pawapuro::PlayersHelper
       age
     end
   end
+
+  # 守備力を基に適正値を計算
+  def calculate_proficiency_value(player_fielding, proficiency)
+    coefficient = case proficiency
+                  when 3
+                    1
+                  when 2
+                    0.8
+                  when 1
+                    0.7
+                  else
+                    0
+                  end
+
+    (player_fielding * coefficient).ceil
+  end
 end

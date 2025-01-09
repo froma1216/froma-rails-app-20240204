@@ -28,6 +28,7 @@ class Pawapuro::Player < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 10 }
   validates :first_name, presence: true, length: { maximum: 10 }
   validates :main_position, presence: true
+  validates :note, length: { maximum: 100 }
 
   # 守備適正を持つポジションを全て取得し、メインポジションを先頭にする
   def formatted_position_abbreviations

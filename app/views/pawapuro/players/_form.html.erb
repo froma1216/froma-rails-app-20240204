@@ -10,10 +10,7 @@
 <% end %>
 
 <%= form_with model: @player, local: true do |f| %>
-  <!-- プロフィール -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    プロフィール
-  </div>
+  <h2>プロフィール</h2>
   <!-- 選手名 -->
   <div>
     <%= f.label :player_name, "選手名", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
@@ -71,10 +68,8 @@
       </div>
     </div>
   </div>
-  <!-- ポジション -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    ポジション
-  </div>
+
+  <h2>ポジション</h2>
   <!-- メインポジション -->
   <div class="mb-3">
     <!-- TODO: m_positionテーブルを利用してセレクトを作る -->
@@ -133,10 +128,8 @@
       <% end %>
     </div>
   </div>
-  <!-- 共通特殊能力 -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    共通特殊能力
-  </div>
+
+  <h2>共通特殊能力</h2>
   <div class="mb-3">
     <!-- 値あり特殊能力 -->
     <div class="row mb-3">
@@ -178,10 +171,8 @@
       <% end %>
     </div>
   </div>
-  <!-- 投手基本能力 -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    投手基本能力
-  </div>
+
+  <h2>投手基本能力</h2>
   <div class="mb-3">
     <!-- 基本能力 -->
     <div class="mb-3">
@@ -260,10 +251,8 @@
       </div>
     <% end %>
   </div>
-  <!-- 投手特殊能力 -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    投手特殊能力
-  </div>
+
+  <h2>投手特殊能力</h2>
   <div class="mb-3">
     <!-- 値あり -->
     <div class="row mb-3">
@@ -305,10 +294,8 @@
       <% end %>
     </div>
   </div>
-  <!-- 野手基本能力 -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    野手基本能力
-  </div>
+
+  <h2>野手基本能力</h2>
   <div class="mb-3">
     <div class="mb-3">
       <!-- 基本能力 -->
@@ -371,10 +358,8 @@
       </div>
     </div>
   </div>
-  <!-- 野手特殊能力 -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    野手特殊能力
-  </div>
+
+  <h2>野手特殊能力</h2>
   <div class="mb-3">
     <!-- 値あり -->
     <div class="row mb-3">
@@ -416,10 +401,8 @@
       <% end %>
     </div>
   </div>
-  <!-- COM操作起用法特殊能力 -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    COM操作起用法特殊能力
-  </div>
+
+  <h2>COM操作起用法特殊能力</h2>
   <div class="row mb-2">
     <% @basic_abilities.where(pitcher_fielder_division: 140).each do |ability| %>
       <div class="col-4 col-sm-2">

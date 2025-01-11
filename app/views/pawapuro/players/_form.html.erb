@@ -212,47 +212,53 @@
       </div>
     </div>
     <!-- 変化球 -->
-    <div>
-      <!-- TODO: ストレートは数値入力しない。 -->
-      <% @breaking_balls.each do |division, orders| %>
-        <div class="row mb-2">
-          <% orders.each_key do |order| %>
-            <% options = [["なし", nil]] + (@breaking_ball_options[division.to_s] || []).map { |ball| [ball.name, ball.id] } %>
-            <% player_breaking_ball =
-                @player.player_m_breaking_balls.find { |bb| bb.ball_type_order == order && bb.m_breaking_ball&.breaking_ball_division == division } ||
-                @player.player_m_breaking_balls.build(ball_type_order: order) %>
-            <div class="col-12 col-sm-6">
-              <label class="form-label small mb-0">
-                <%= "#{order == 1 ? '第一' : '第二'} #{t("enums.pawapuro.breaking_ball_division.#{division}")}系" %>
-              </label>
-              <div class="row">
-                <%= f.fields_for :player_m_breaking_balls, player_breaking_ball do |bb| %>
-                  <div class="col-9">
-                    <%= bb.hidden_field :id %>
-                    <%= bb.hidden_field :ball_type_order, value: order %>
-                    <%= bb.select :m_breaking_ball_id,
-                          options_for_select(
-                            options,
-                            bb.object.m_breaking_ball_id
-                          ),
-                          {},
-                          { class: order == 1 ? 'form-select' : 'form-select form-select-sm' } %>
-                    <%= bb.hidden_field :_destroy %>
-                  </div>
-                  <div class="col-3">
-                    <%= bb.number_field :movement,
-                          class: order == 1 ? 'form-control' : 'form-control form-control-sm',
-                          min: 0,
-                          max: 7,
-                          value: bb.object.movement || 0 %>
-                  </div>
-                <% end %>
-              </div>
+    <% @breaking_balls.each do |division, orders| %>
+      <div class="row mb-2">
+        <% orders.each_key do |order| %>
+          <% options = (@breaking_ball_options[division.to_s] || []).map { |ball| [ball.name, ball.id] } %>
+          <!-- 第一ストレート以外は「なし」を追加 -->
+          <% options.unshift(["なし", nil]) unless division == "fastball" && order == 1 %>
+          <% player_breaking_ball =
+              @player.player_m_breaking_balls.find { |bb| bb.ball_type_order == order && bb.m_breaking_ball&.breaking_ball_division == division } ||
+              @player.player_m_breaking_balls.build(ball_type_order: order) %>
+          <div class="col-12 col-sm-6">
+            <label class="form-label small mb-0">
+              <%= "#{order == 1 ? '第一' : '第二'} #{t("enums.pawapuro.breaking_ball_division.#{division}")}系" %>
+            </label>
+            <div class="row">
+              <%= f.fields_for :player_m_breaking_balls, player_breaking_ball do |bb| %>
+                <div class="col-9">
+                  <%= bb.hidden_field :id %>
+                  <%= bb.hidden_field :ball_type_order, value: order %>
+                  <!-- 球種セレクト -->
+                  <%= bb.select :m_breaking_ball_id,
+                        options_for_select(
+                          options,
+                          bb.object.m_breaking_ball_id
+                        ),
+                        {},
+                        { id: "breaking-ball-#{division}-#{order}-select",
+                          class: order == 1 ? 'form-select' : 'form-select form-select-sm' 
+                        } %>
+                  <%= bb.hidden_field :_destroy %>
+                </div>
+                <!-- 変化量入力 -->
+                <!-- ストレート系のときは入力不可 -->
+                <div class="col-3">
+                  <%= bb.number_field :movement,
+                        id: "breaking-ball-#{division}-#{order}-movement",
+                        class: order == 1 ? 'form-control' : 'form-control form-control-sm',
+                        min: 0,
+                        max: 7,
+                        value: division == "fastball" && order == 1 ? 1 : (bb.object.movement || 0),
+                        readonly: (division == "fastball") %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <!-- 投手特殊能力 -->
   <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">

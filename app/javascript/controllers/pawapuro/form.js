@@ -105,6 +105,30 @@ function setupInputFieldTrajectory(inputFieldId, displaySpanId) {
   document.getElementById(inputFieldId).addEventListener("input", updateSpan);
 }
 
+// ストレート系のセレクト変更時にmovementフィールドを更新
+function setupFastballSelectBox(selectBoxId, movementFieldId) {
+  const selectBox = document.getElementById(selectBoxId);
+  const movementField = document.getElementById(movementFieldId);
+
+  // セレクトボックスの変更時にmovementフィールドを更新する関数
+  const updateMovementField = () => {
+    const selectedValue = selectBox.value; // 現在の選択値
+    if (selectedValue === "") {
+      // 「なし」が選択された場合
+      movementField.value = 0;
+    } else {
+      // その他の選択肢が選択された場合
+      movementField.value = 1;
+    }
+  };
+
+  // changeイベントで動作するように設定
+  selectBox.addEventListener("change", updateMovementField);
+
+  // ページ読み込み時にも初期値を適用
+  updateMovementField();
+}
+
 // ページが読み込まれたときに関数を実行
 // TODO: 一個コケると全部死ぬ。mhxx.jsを参考に切り分ける
 document.addEventListener("turbo:load", function () {
@@ -126,6 +150,11 @@ document.addEventListener("turbo:load", function () {
   setupInputField("fielding-input", "fielding-alphabet-display");
   // 捕球
   setupInputField("catching-input", "catching-alphabet-display");
+  // 第二ストレート系
+  setupFastballSelectBox(
+    "breaking-ball-fastball-2-select",
+    "breaking-ball-fastball-2-movement"
+  );
 
   // 回復
   setupSelectBox("kaifuku-select");

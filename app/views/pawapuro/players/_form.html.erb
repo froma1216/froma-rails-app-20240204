@@ -89,6 +89,7 @@
   <!-- 各ポジション適正 -->
   <div class="mb-3">
     <label class="form-label">各ポジション適正</label>
+    <small class="form-text text-muted ms-1">※ ポジションごとの適正値を入力してください。投手は0〜2、野手は0〜3の範囲で指定可能です。</small>
     <!-- 投手 -->
     <div class="row">
       <% @positions.where(id: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS).each do |position| %>
@@ -420,10 +421,8 @@
       </div>
     <% end %>
   </div>
-  <!-- その他 -->
-  <div class="h4 pb-2 mb-2 text-primary border-bottom border-primary">
-    その他
-  </div>
+
+  <h2>その他</h2>
   <div class="mb-3">
     <%= f.label :note, '備考', class: 'form-label' %>
     <%= f.text_area :note, rows: 3, class: 'form-control' %>

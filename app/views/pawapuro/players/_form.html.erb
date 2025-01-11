@@ -87,6 +87,7 @@
         ],  {include_blank: "選択して下さい", selected: @player.main_position&.id}, {class: "form-select"} %>
   </div>
   <!-- 各ポジション適正 -->
+  <!-- TODO: メインポジションの値が0の場合はバリデーション -->
   <div class="mb-3">
     <label class="form-label">各ポジション適正</label>
     <small class="form-text text-muted ms-1">※ ポジションごとの適正値を入力してください。投手は0〜2、野手は0〜3の範囲で指定可能です。</small>

@@ -72,7 +72,6 @@
   <h2>ポジション</h2>
   <!-- メインポジション -->
   <div class="mb-3">
-    <!-- TODO: m_positionテーブルを利用してセレクトを作る -->
     <%= f.label :main_position_id, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
     <%= f.select :main_position_id,
                  options_for_select(position_options_for_select, @player.main_position_id),

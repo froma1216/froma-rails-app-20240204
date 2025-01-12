@@ -1,18 +1,14 @@
 module Pawapuro::PlayersHelper
-  # TODO: 切り出す（画面毎？機能毎？）
-  # TODO: 使っていないメソッドがないか確認
   # 選手名ボックスの背景色、ボーダー色のクラスを返す
   def player_name_box_color_class(positions, main_position)
-    is_starter = positions.include?(10)
-    is_relief = positions.include?(11) || positions.include?(12)
-    is_catcher = positions.include?(2)
-    # TODO: 以下のモデル内で、定数で管理
-    # app/models/pawapuro/m_position.rb
-    is_infielder = positions.any? { |pos| [3, 4, 5, 6].include?(pos) }
-    is_outfielder = positions.include?(13)
+    is_starter = positions.include?(Pawapuro::MPosition::STARTER_ID)
+    is_relief = positions.any? { |pos| Pawapuro::MPosition::RELIEF_IDS.include?(pos) }
+    is_catcher = positions.include?(Pawapuro::MPosition::CATCHER_ID)
+    is_infielder = positions.any? { |pos| Pawapuro::MPosition::INFIELDER_IDS.include?(pos) }
+    is_outfielder = positions.include?(Pawapuro::MPosition::OUTFIELDER_ID)
 
     case main_position
-    when 10
+    when Pawapuro::MPosition::STARTER_ID
       if is_relief
         if is_catcher
           "pawa-player-name-box-src"
@@ -42,7 +38,7 @@ module Pawapuro::PlayersHelper
       else
         "pawa-player-name-box-s"
       end
-    when 12..13
+    when *Pawapuro::MPosition::RELIEF_IDS
       if is_starter
         if is_catcher
           "pawa-player-name-box-rsc"
@@ -72,7 +68,7 @@ module Pawapuro::PlayersHelper
       else
         "pawa-player-name-box-r"
       end
-    when 2
+    when Pawapuro::MPosition::CATCHER_ID
       if is_infielder
         if is_outfielder
           "pawa-player-name-box-cio"
@@ -84,7 +80,7 @@ module Pawapuro::PlayersHelper
       else
         "pawa-player-name-box-c"
       end
-    when 3..6
+    when *Pawapuro::MPosition::INFIELDER_IDS
       if is_catcher
         if is_outfielder
           "pawa-player-name-box-ico"
@@ -114,13 +110,13 @@ module Pawapuro::PlayersHelper
   # ポジションボックスの背景色、ボーダー色のクラスを返す
   def main_position_box_color_class(main_position)
     case main_position
-    when 10, 1
+    when Pawapuro::MPosition::STARTER_ID
       "pawa-position-box--s"
-    when 11..12
+    when *Pawapuro::MPosition::RELIEF_IDS
       "pawa-position-box--r"
-    when 2
+    when Pawapuro::MPosition::CATCHER_ID
       "pawa-position-box--c"
-    when 3..6
+    when *Pawapuro::MPosition::INFIELDER_IDS
       "pawa-position-box--i"
     else
       "pawa-position-box--o"
@@ -142,7 +138,6 @@ module Pawapuro::PlayersHelper
     content_tag(:i, "", class: "fa fa-solid fa-arrow-right #{text_color}", style: "transform: rotate(#{angle});")
   end
 
-  # TODO: アルファベットはenumで
   # 能力値（弾道以外）をアルファベットに変換＋文字色変更
   def display_alphabet(val)
     text, text_color = case val

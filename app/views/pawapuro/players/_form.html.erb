@@ -93,7 +93,7 @@
     <small class="form-text text-muted ms-1">※ ポジションごとの適正値を入力してください。投手は0〜2、野手は0〜3の範囲で指定可能です。</small>
     <!-- 投手 -->
     <div class="row">
-      <% @positions.where(id: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS).each do |position| %>
+      <% @positions.where(id: Pawapuro::MPosition::PITCHER_IDS).each do |position| %>
         <div class="col-4">
           <% player_position =
             @player.player_m_positions.find { |pa| pa.m_position_id == position.id } ||
@@ -112,7 +112,7 @@
     </div>
     <!-- 野手 -->
     <div class="row">
-      <% @positions.where(id: Pawapuro::MPosition::PAWAPURO_FIELDER_IDS).each do |position| %>
+      <% @positions.where(id: Pawapuro::MPosition::FIELDER_IDS).each do |position| %>
         <div class="col-4 col-sm-2">
           <% player_position =
             @player.player_m_positions.find { |pa| pa.m_position_id == position.id } ||

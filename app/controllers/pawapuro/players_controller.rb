@@ -97,7 +97,7 @@ class Pawapuro::PlayersController < ApplicationController
   # ポジション適正を取得
   def fetch_position_proficiencies(player)
     positions = [
-      { abbreviation: "投", ids: Pawapuro::MPosition::PAWAPURO_PITCHER_IDS, category: :pitcher },
+      { abbreviation: "投", ids: Pawapuro::MPosition::PITCHER_IDS, category: :pitcher },
       { abbreviation: "捕", id: 2, category: :fielder },
       { abbreviation: "一", id: 3, category: :fielder },
       { abbreviation: "二", id: 4, category: :fielder },

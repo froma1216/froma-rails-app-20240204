@@ -61,7 +61,7 @@
             <!-- 選手能力 -->
             <div class="tab-pane fade show active" id="playerBasic">
               <!-- メインポジションが投手か野手かによって、表示を分ける -->
-              <% if Pawapuro::MPosition::PAWAPURO_PITCHER_IDS.include?(@player.main_position.id) %>
+              <% if Pawapuro::MPosition::PITCHER_IDS.include?(@player.main_position.id) %>
                 <%= render 'pawapuro/players/details/pitcher' %>
               <% else %>
                 <%= render 'pawapuro/players/details/fielder' %>

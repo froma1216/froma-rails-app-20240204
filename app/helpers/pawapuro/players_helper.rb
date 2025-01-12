@@ -337,6 +337,16 @@ module Pawapuro::PlayersHelper
     end
   end
 
+  # ポジションセレクトのオプションを作成
+  def position_options_for_select
+    # 定数から対象のレコード一覧を取得
+    positions = Pawapuro::MPosition.where(id: Pawapuro::MPosition::ALL_POSITION_IDS)
+    # 定数の通りの順序にソート
+    sorted_positions = positions.sort_by { |position| Pawapuro::MPosition::ALL_POSITION_IDS.index(position.id) }
+    # 配列にして返す
+    sorted_positions.map { |position| [position.name, position.id] }
+  end
+
   # 年齢計算
   def calculate_age(birthday)
     now = Time.zone.today

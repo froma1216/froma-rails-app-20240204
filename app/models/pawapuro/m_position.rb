@@ -17,4 +17,7 @@ class Pawapuro::MPosition < ApplicationRecord
   PITCHER_IDS = [STARTER_ID, *RELIEF_IDS].freeze
   # 野手
   FIELDER_IDS = [CATCHER_ID, *INFIELDER_IDS, OUTFIELDER_ID].freeze
+
+  # 全ポジション
+  ALL_POSITION_IDS = (PITCHER_IDS + FIELDER_IDS).freeze
 end

@@ -74,17 +74,10 @@
   <div class="mb-3">
     <!-- TODO: m_positionテーブルを利用してセレクトを作る -->
     <%= f.label :main_position_id, "メインポジション", class: "form-label" %><span class="badge bg-danger ms-1">必須</span>
-    <%= f.select :main_position_id, [
-          ["先発", 10],
-          ["中継ぎ", 11],
-          ["抑え", 12],
-          ["捕手", 2],
-          ["一塁手", 3],
-          ["二塁手", 4],
-          ["三塁手", 5],
-          ["遊撃手", 6],
-          ["外野手", 13]
-        ],  {include_blank: "選択して下さい", selected: @player.main_position&.id}, {class: "form-select"} %>
+    <%= f.select :main_position_id,
+                 options_for_select(position_options_for_select, @player.main_position_id),
+                 {include_blank: "選択して下さい", selected: @player.main_position&.id},
+                 {class: "form-select"} %>
   </div>
   <!-- 各ポジション適正 -->
   <!-- TODO: メインポジションの値が0の場合はバリデーション -->

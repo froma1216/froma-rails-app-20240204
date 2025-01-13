@@ -1,20 +1,20 @@
 // 特殊能力セレクト（選択した要素と同様の背景色をセレクトボックスに適用）
-function setupSelectBox(selectBoxId) {
-  var selectBox = document.getElementById(selectBoxId);
+// function setupSelectBox(selectBoxId) {
+//   var selectBox = document.getElementById(selectBoxId);
 
-  // セレクトボックスの現在の選択肢に基づいて背景色を更新する関数
-  const updateSelectBoxBackground = () => {
-    var selectedOptionClass =
-      selectBox.options[selectBox.selectedIndex].className;
-    selectBox.className = "form-select " + selectedOptionClass;
-  };
+//   // セレクトボックスの現在の選択肢に基づいて背景色を更新する関数
+//   const updateSelectBoxBackground = () => {
+//     var selectedOptionClass =
+//       selectBox.options[selectBox.selectedIndex].className;
+//     selectBox.className = "form-select " + selectedOptionClass;
+//   };
 
-  // changeイベントに反応して背景色を更新
-  selectBox.addEventListener("change", updateSelectBoxBackground);
+//   // changeイベントに反応して背景色を更新
+//   selectBox.addEventListener("change", updateSelectBoxBackground);
 
-  // ページ読み込み時にも背景色を適用
-  updateSelectBoxBackground();
-}
+//   // ページ読み込み時にも背景色を適用
+//   updateSelectBoxBackground();
+// }
 
 // FIXME: 関数名見直し
 // 基礎能力入力（入力値でアルファベット＋背景色を変更）
@@ -156,30 +156,30 @@ document.addEventListener("turbo:load", function () {
     "breaking-ball-fastball-2-movement"
   );
 
-  // 回復
-  setupSelectBox("kaifuku-select");
-  // ケガしにくさ
-  setupSelectBox("kegasinikusa-select");
-  // 対ピンチ
-  setupSelectBox("taipinch-select");
-  // 対左打者
-  setupSelectBox("taihidaridasya-select");
-  // 打たれ強さ
-  setupSelectBox("utarezuyosa-select");
-  // ノビ
-  setupSelectBox("nobi-select");
-  // クイック
-  setupSelectBox("quick-select");
-  // チャンス
-  setupSelectBox("chance-select");
-  // 対左投手
-  setupSelectBox("taihidaritousyu-select");
-  // キャッチャー
-  setupSelectBox("catcher-select");
-  // 盗塁
-  setupSelectBox("tourui-select");
-  // 走塁
-  setupSelectBox("sourui-select");
-  // 送球
-  setupSelectBox("soukyuu-select");
+  // // 回復
+  // setupSelectBox("kaifuku-select");
+  // // ケガしにくさ
+  // setupSelectBox("kegasinikusa-select");
+  // // 対ピンチ
+  // setupSelectBox("taipinch-select");
+  // // 対左打者
+  // setupSelectBox("taihidaridasya-select");
+  // // 打たれ強さ
+  // setupSelectBox("utarezuyosa-select");
+  // // ノビ
+  // setupSelectBox("nobi-select");
+  // // クイック
+  // setupSelectBox("quick-select");
+  // // チャンス
+  // setupSelectBox("chance-select");
+  // // 対左投手
+  // setupSelectBox("taihidaritousyu-select");
+  // // キャッチャー
+  // setupSelectBox("catcher-select");
+  // // 盗塁
+  // setupSelectBox("tourui-select");
+  // // 走塁
+  // setupSelectBox("sourui-select");
+  // // 送球
+  // setupSelectBox("soukyuu-select");
 });

@@ -1,13 +1,14 @@
 <%# プロフィール %>
+
 <div class="row p-2">
   <%# 基礎能力部 %>
   <div class="col-3 pe-4 pawa-text-main">
     <%# メインポジションが投手か野手かによって、表示を分ける %>
     <!-- TODO: 投手か野手かを変数として保持 -->
     <% if @player.main_position == 10..12 %>
-      <%= render partial: 'pawapuro/players/details/pitcher_basic_ability_wrap' %>
+      <%= render partial: 'pawapuro/players/details/pitcher_foundation_ability_wrap' %>
     <% else %>
-      <%= render partial: 'pawapuro/players/details/fielder_basic_ability_wrap' %>
+      <%= render partial: 'pawapuro/players/details/fielder_foundation_ability_wrap' %>
     <% end %>
   </div>
   <%# プロフィール部 %>

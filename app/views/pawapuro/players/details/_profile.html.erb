@@ -1,17 +1,16 @@
-<%# プロフィール %>
+<!-- プロフィール -->
 
 <div class="row p-2">
-  <%# 基礎能力部 %>
+  <!-- 基礎能力部 -->
   <div class="col-3 pe-4 pawa-text-main">
-    <%# メインポジションが投手か野手かによって、表示を分ける %>
-    <!-- TODO: 投手か野手かを変数として保持 -->
-    <% if @player.main_position == 10..12 %>
+    <!-- メインポジションが投手か野手かによって、表示を分ける -->
+    <% if Pawapuro::MPosition::PITCHER_IDS.include?(@player.main_position.id) %>
       <%= render partial: 'pawapuro/players/details/pitcher_foundation_ability_wrap' %>
     <% else %>
       <%= render partial: 'pawapuro/players/details/fielder_foundation_ability_wrap' %>
     <% end %>
   </div>
-  <%# プロフィール部 %>
+  <!-- プロフィール部 -->
   <div class="col-9 pawa-text-main">
     <div class="row">
       <div class="col-12 col-sm-7 d-flex justify-content-start p-1 mb-1 pawa-main-box">

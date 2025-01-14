@@ -1,11 +1,11 @@
-<%# 投手能力 %>
+<!-- 投手能力 -->
 
 <div class="row p-2">
-  <%# 基礎能力部 %>
+  <!-- 基礎能力部 -->
   <div class="col-3 pe-4 pawa-text-main">
     <%= render partial: 'pawapuro/players/details/pitcher_foundation_ability_wrap' %>
   </div>
-  <%# 特殊能力部 %>
+  <!-- 特殊能力部 -->
   <div class="col-9 bg-light border border-3 border-white rounded">
     <div class="row">
       <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
@@ -43,8 +43,8 @@
         ability_value: @player.m_valued_ability_value(1)
       } %>
     </div>
-    <%# 値なし %>
-    <%# FIXME: 部分テンプレートに切り出し %>
+    <!-- 値なし -->
+    <!-- FIXME: 部分テンプレートに切り出し -->
     <% abilities_array = @player.other_special_abilities(120) %>
     <% 6.times do |row| %>
       <div class="row">

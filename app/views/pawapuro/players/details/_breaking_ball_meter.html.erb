@@ -1,0 +1,53 @@
+<!-- 変化球１方向部 -->
+
+<!-- PCサイズ時 -->
+<div class="d-none d-sm-block">
+  <!-- 変化球名 -->
+  <div class="pawa-breaking-font">
+    <% if breaking_ball1.present? %>
+      <%= breaking_ball1.m_breaking_ball.name %>
+    <% end %>
+    <% if breaking_ball2.present? %>
+      ・<%= breaking_ball2.m_breaking_ball.name %>
+    <% end %>
+  </div>
+  <!-- 変化球ブロック -->
+  <div class="ms-3">
+    <!-- 第一球種 -->
+    <% if breaking_ball1.present? %>
+      <div class="row">
+        <%= breaking_ball_blocks(breaking_ball1.movement) %>
+      </div>
+    <% end %>
+    <!-- 第二球種 -->
+    <% if breaking_ball2.present? %>
+      <div class="row">
+        <%= breaking_ball_blocks(breaking_ball2.movement) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- スマホサイズ時 -->
+<div class="d-block d-sm-none mb-1">
+  <div class="pawa-breaking-font">
+    <!-- 第一球種 -->
+    <% if breaking_ball1.present? %>
+      <div>
+        <%= breaking_ball1.m_breaking_ball.name %>
+        <span class="fw-bold">
+          <%= breaking_ball1.movement %>
+        </span>
+      </div>
+    <% end %>
+    <!-- 第二球種 -->
+    <% if breaking_ball2.present? %>
+      <div>
+        <%= breaking_ball2.m_breaking_ball.name %>
+        <span class="fw-bold">
+          <%= breaking_ball2.movement %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<!-- 守備・起用 -->
+
+<div class="row p-2">
+  <!-- 基礎能力部 -->
+  <div class="col-3 pe-4 pawa-text-main">
+    <%= render partial: 'pawapuro/players/details/foundation_ability_box', locals: {
+      label: "走力",
+      ability_value: details_ability_value_basic(@player.running)
+    } %>
+    <%= render partial: 'pawapuro/players/details/foundation_ability_box', locals: {
+      label: "肩力",
+      ability_value: details_ability_value_basic(@player.arm)
+    } %>
+
+    <!-- 各ポジション適正 -->
+    <div class="d-flex justify-content-start row p-1 mb-1 pawa-main-box">
+      <div class="col-6 d-flex align-items-center p-0">
+        <div class="col-5 p-0 mb-1 mb-sm-0">
+          <div class="pawa-ability-label-no-value">守備力</div>
+        </div>
+      </div>
+      <% @position_proficiencies.each do |position| %>
+        <div class="col-12 col-sm-6 py-2 ps-3">
+          <%= render partial: 'pawapuro/players/details/positional_appropriateness', locals: {
+            position_abbreviation: position[:abbreviation],
+            proficiency_value: calculate_proficiency_value(@player.fielding, position[:proficiency])
+          } %>
+        </div>
+      <% end %>
+    </div>
+    <%= render partial: 'pawapuro/players/details/foundation_ability_box', locals: {
+      label:"捕球",
+      ability_value: details_ability_value_basic(@player.catching)
+    } %>
+  </div>
+
+  <!-- 特殊能力部 -->
+  <div class="col-9 bg-light border border-3 border-white rounded">
+    <div class="row">
+      <div class="col fs-3 bg-white pawa-border-main-in rounded">
+        <div class="row pt-1 pb-1 ps-1 text-center">
+          <span class="col-12 ps-2 pawa-text-main">起用</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+      <div class="col fs-3 pawa-bg-sa-neutral1 rounded">
+        <div class="row p-1 text-center">
+          <span class="col-12 pawa-bg-sa-neutral2 rounded pawa-text-neutral">&nbsp;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 値なし -->
+    <!-- TODO: 部分テンプレートに切り出し -->
+    <% abilities_array = @player.other_special_abilities(110).concat(@player.other_special_abilities(140)) %>
+    <% 6.times do |row| %>
+      <div class="row">
+        <% (row*4...row*4+4).each do |index| %>
+          <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+            ability_name: abilities_array[index]&.first,
+            ability_good_bad_division: abilities_array[index]&.second
+          } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

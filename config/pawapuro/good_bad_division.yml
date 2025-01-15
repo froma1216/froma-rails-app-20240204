@@ -1,0 +1,6 @@
+good_bad_division:
+  good: 110 # 青特
+  bad: 120 # 赤特
+  combined: 130 # 青赤特
+  special: 140 # 金特
+  sub: 150 # 緑特

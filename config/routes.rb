@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   # 管理
   namespace :admin do
-    resources :pawapuro_fielders
-    resources :pawapuro_pitchers
-    resources :pawapuro_players
+    # resources :pawapuro_fielders
+    # resources :pawapuro_pitchers
+    # resources :pawapuro_players
+    namespace :pawapuro do
+      resources :players
+    end
     resources :pokemon_emerald_factory_participants
     resources :users
 
-    root to: "pawapuro_players#index"
+    root to: "pokemon_emerald_factory_participants#index"
   end
   # ルーティング
   root to: "home#index"
@@ -26,13 +29,13 @@ Rails.application.routes.draw do
   }
 
   # 【パワプロ】選手作成メモ
-  resources :pawapuro, except: [:show] do
-    collection do
-      get "confirm", to: "pawapuro#confirm" # 選手作成確認画面
-    end
-    #  idを含むパス
-    member do
-      get "details", to: "pawapuro#details" # 選手詳細モーダル
+  namespace :pawapuro do
+    # `show` アクションの代わりに `details` を利用
+    resources :players, except: [:show] do
+      # idを含むパス
+      member do
+        get "details", to: "players#details" # 選手詳細モーダル
+      end
     end
   end
 

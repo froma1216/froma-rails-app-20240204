@@ -1,0 +1,62 @@
+<!-- 野手能力 -->
+
+<div class="row p-2">
+  <!-- 基礎能力部 -->
+  <div class="col-3 pe-4 pawa-text-main">
+    <%= render partial: 'pawapuro/players/details/fielder_foundation_ability_wrap' %>
+  </div>
+  <!-- 特殊能力部 -->
+  <div class="col-9 bg-light border border-3 border-white rounded">
+    <!-- 値あり -->
+    <div class="row">
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
+        ability_name:"チャンス",
+        ability_value: @player.m_valued_ability_value(8)
+      } %>
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
+        ability_name:"対左投手",
+        ability_value: @player.m_valued_ability_value(9)
+      } %>
+      <%# TODO: キャッチャー適正があるときのみ表示 %>
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
+        ability_name:"キャッチャー",
+        ability_value: @player.m_valued_ability_value(10)
+      } %>
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
+        ability_name:"ケガしにくさ",
+        ability_value: @player.m_valued_ability_value(2)
+      } %>
+    </div>
+    <div class="row">
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
+        ability_name:"盗塁",
+        ability_value: @player.m_valued_ability_value(11)
+      } %>
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
+        ability_name:"走塁",
+        ability_value: @player.m_valued_ability_value(12)
+      } %>
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
+        ability_name:"送球",
+        ability_value: @player.m_valued_ability_value(13)
+      } %>
+      <%= render partial: 'pawapuro/players/details/valued_ability_box', locals: {
+        ability_name:"回復",
+        ability_value: @player.m_valued_ability_value(1)
+      } %>
+    </div>
+    <!-- 値なし -->
+    <!-- FIXME: 部分テンプレートに切り出し -->
+    <% abilities_array = @player.other_special_abilities(130) %>
+    <% 6.times do |row| %>
+      <div class="row">
+        <% (row*4...row*4+4).each do |index| %>
+          <%= render partial: 'pawapuro/players/details/basic_ability_box', locals: {
+            ability_name: abilities_array[index]&.first,
+            ability_good_bad_division: abilities_array[index]&.second
+          } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

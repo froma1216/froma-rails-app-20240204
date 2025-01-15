@@ -1,0 +1,7 @@
+ja:
+  enums:
+    pawapuro:
+      dominant_hand:
+        right: "右"
+        left: "左"
+        both: "両"

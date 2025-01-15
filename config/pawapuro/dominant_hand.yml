@@ -1,0 +1,4 @@
+dominant_hand:
+  right: 110 # 右
+  left: 120 # 左
+  both: 200 # 両

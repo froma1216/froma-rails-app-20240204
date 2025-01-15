@@ -1,0 +1,22 @@
+<h1>【パワプロ】作成選手一覧</h1>
+<%# 選手作成 %>
+<%= link_to '新規選手作成', new_pawapuro_player_path, class: 'btn btn-primary mb-2' %>
+<%# 投/野能力表示切り替えラジオ %>
+<div>
+  <label class="form-label">表示能力</label>
+  <div class="mb-3">
+    <div class="form-check form-check-inline">
+      <%= radio_button_tag 'display_ability_radio', 'pitcher', true, class: 'form-check-input', id: 'form-radio-pitcher' %>
+      <%= label_tag 'display_ability_radio_pitcher', '投手', class: 'form-check-label', for: 'form-radio-pitcher' %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= radio_button_tag 'display_ability_radio', 'fielder', false, class: 'form-check-input', id: 'form-radio-fielder' %>
+      <%= label_tag 'display_ability_radio_fielder', '野手', class: 'form-check-label', for: 'form-radio-fielder' %>
+    </div>
+  </div>
+</div>
+
+<%# TODO: 検索機能 %>
+
+<%# 一覧表示部 %>
+<%= render partial: 'pawapuro/players/index/table' %>

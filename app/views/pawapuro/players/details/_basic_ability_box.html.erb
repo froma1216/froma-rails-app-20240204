@@ -1,0 +1,10 @@
+<!-- 特殊能力（値なし）の１box -->
+<% classes = special_ability_box_styles(ability_name, ability_good_bad_division) %>
+
+<div class="col-12 col-sm-3 fs-3 rounded d-flex <%= classes[:container_class] %>">
+  <div class="row p-1 text-center flex-fill">
+    <span class="col rounded d-flex justify-content-center align-items-center <%= classes[:inner_class] %>">
+      <%= raw(ability_name.presence || '&nbsp;') %>
+    </span>
+  </div>
+</div>

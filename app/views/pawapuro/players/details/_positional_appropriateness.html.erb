@@ -1,0 +1,18 @@
+<!-- ポジション適正表示 -->
+
+<div class="d-flex flex-column flex-sm-row align-items-center">
+  <!-- ポジション略称 -->
+  <span class="fs-5 fw-bold me-2 <%= "pawa-text-neutral" if proficiency_value.zero? %>">
+    <%= position_abbreviation %>
+  </span>
+  <div class="d-flex align-items-center">
+    <!-- アルファベット -->
+    <span class="fs-5 fw-bold me-1">
+      <%= display_alphabet(proficiency_value) %>
+    </span>
+    <!-- 適正値 -->
+    <span class="fs-5 fw-bold <%= "pawa-text-neutral" if proficiency_value.zero? %>">
+      <%= proficiency_value.nonzero? || '--' %>
+    </span>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 class Mhxx::TimesController < ApplicationController
-  before_action :ensure_currect_user, only: [:edit, :update, :destroy]
+  before_action :ensure_current_user, only: [:edit, :update, :destroy]
   before_action :set_weapon_and_hunter_art_data, only: [:new, :edit, :create, :update]
 
   def new
@@ -110,7 +110,7 @@ class Mhxx::TimesController < ApplicationController
   end
 
   # 権限確認
-  def ensure_currect_user
+  def ensure_current_user
     @time = Mhxx::Time.find(params[:id])
     redirect_to mhxx_quests_path, notice: "権限がありません" if @time.user != current_user
   end

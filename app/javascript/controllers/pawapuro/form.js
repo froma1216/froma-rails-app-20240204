@@ -1,20 +1,20 @@
 // 特殊能力セレクト（選択した要素と同様の背景色をセレクトボックスに適用）
-function setupSelectBox(selectBoxId) {
-  var selectBox = document.getElementById(selectBoxId);
+// function setupSelectBox(selectBoxId) {
+//   var selectBox = document.getElementById(selectBoxId);
 
-  // セレクトボックスの現在の選択肢に基づいて背景色を更新する関数
-  const updateSelectBoxBackground = () => {
-    var selectedOptionClass =
-      selectBox.options[selectBox.selectedIndex].className;
-    selectBox.className = "form-select " + selectedOptionClass;
-  };
+//   // セレクトボックスの現在の選択肢に基づいて背景色を更新する関数
+//   const updateSelectBoxBackground = () => {
+//     var selectedOptionClass =
+//       selectBox.options[selectBox.selectedIndex].className;
+//     selectBox.className = "form-select " + selectedOptionClass;
+//   };
 
-  // changeイベントに反応して背景色を更新
-  selectBox.addEventListener("change", updateSelectBoxBackground);
+//   // changeイベントに反応して背景色を更新
+//   selectBox.addEventListener("change", updateSelectBoxBackground);
 
-  // ページ読み込み時にも背景色を適用
-  updateSelectBoxBackground();
-}
+//   // ページ読み込み時にも背景色を適用
+//   updateSelectBoxBackground();
+// }
 
 // FIXME: 関数名見直し
 // 基礎能力入力（入力値でアルファベット＋背景色を変更）
@@ -105,6 +105,30 @@ function setupInputFieldTrajectory(inputFieldId, displaySpanId) {
   document.getElementById(inputFieldId).addEventListener("input", updateSpan);
 }
 
+// ストレート系のセレクト変更時にmovementフィールドを更新
+function setupFastballSelectBox(selectBoxId, movementFieldId) {
+  const selectBox = document.getElementById(selectBoxId);
+  const movementField = document.getElementById(movementFieldId);
+
+  // セレクトボックスの変更時にmovementフィールドを更新する関数
+  const updateMovementField = () => {
+    const selectedValue = selectBox.value; // 現在の選択値
+    if (selectedValue === "") {
+      // 「なし」が選択された場合
+      movementField.value = 0;
+    } else {
+      // その他の選択肢が選択された場合
+      movementField.value = 1;
+    }
+  };
+
+  // changeイベントで動作するように設定
+  selectBox.addEventListener("change", updateMovementField);
+
+  // ページ読み込み時にも初期値を適用
+  updateMovementField();
+}
+
 // ページが読み込まれたときに関数を実行
 // TODO: 一個コケると全部死ぬ。mhxx.jsを参考に切り分ける
 document.addEventListener("turbo:load", function () {
@@ -121,36 +145,41 @@ document.addEventListener("turbo:load", function () {
   // 走力
   setupInputField("running-input", "running-alphabet-display");
   // 肩力
-  setupInputField("arm_strength-input", "arm_strength-alphabet-display");
+  setupInputField("arm-input", "arm-alphabet-display");
   // 守備力
-  setupInputField("defense-input", "defense-alphabet-display");
+  setupInputField("fielding-input", "fielding-alphabet-display");
   // 捕球
   setupInputField("catching-input", "catching-alphabet-display");
+  // 第二ストレート系
+  setupFastballSelectBox(
+    "breaking-ball-fastball-2-select",
+    "breaking-ball-fastball-2-movement"
+  );
 
-  // 回復
-  setupSelectBox("kaifuku-select");
-  // ケガしにくさ
-  setupSelectBox("kegasinikusa-select");
-  // 対ピンチ
-  setupSelectBox("taipinch-select");
-  // 対左打者
-  setupSelectBox("taihidaridasya-select");
-  // 打たれ強さ
-  setupSelectBox("utarezuyosa-select");
-  // ノビ
-  setupSelectBox("nobi-select");
-  // クイック
-  setupSelectBox("quick-select");
-  // チャンス
-  setupSelectBox("chance-select");
-  // 対左投手
-  setupSelectBox("taihidaritousyu-select");
-  // キャッチャー
-  setupSelectBox("catcher-select");
-  // 盗塁
-  setupSelectBox("tourui-select");
-  // 走塁
-  setupSelectBox("sourui-select");
-  // 送球
-  setupSelectBox("soukyuu-select");
+  // // 回復
+  // setupSelectBox("kaifuku-select");
+  // // ケガしにくさ
+  // setupSelectBox("kegasinikusa-select");
+  // // 対ピンチ
+  // setupSelectBox("taipinch-select");
+  // // 対左打者
+  // setupSelectBox("taihidaridasya-select");
+  // // 打たれ強さ
+  // setupSelectBox("utarezuyosa-select");
+  // // ノビ
+  // setupSelectBox("nobi-select");
+  // // クイック
+  // setupSelectBox("quick-select");
+  // // チャンス
+  // setupSelectBox("chance-select");
+  // // 対左投手
+  // setupSelectBox("taihidaritousyu-select");
+  // // キャッチャー
+  // setupSelectBox("catcher-select");
+  // // 盗塁
+  // setupSelectBox("tourui-select");
+  // // 走塁
+  // setupSelectBox("sourui-select");
+  // // 送球
+  // setupSelectBox("soukyuu-select");
 });

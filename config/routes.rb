@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   # 管理
   namespace :admin do
-    resources :pawapuro_fielders
-    resources :pawapuro_pitchers
-    resources :pawapuro_players
+    # resources :pawapuro_fielders
+    # resources :pawapuro_pitchers
+    # resources :pawapuro_players
+    namespace :pawapuro do
+      resources :players
+    end
     resources :pokemon_emerald_factory_participants
     resources :users
 
-    root to: "pawapuro_players#index"
+    root to: "pokemon_emerald_factory_participants#index"
   end
   # ルーティング
   root to: "home#index"

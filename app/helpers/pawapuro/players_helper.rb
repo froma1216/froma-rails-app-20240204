@@ -282,8 +282,8 @@ module Pawapuro::PlayersHelper
       ["pawa-bg-sa-good1", "pawa-bg-sa-good2", "pawa-text-good"]
     when "bad"
       ["pawa-bg-sa-bad1", "pawa-bg-sa-bad2", "pawa-text-bad"]
-    when "good_and_bad"
-      ["pawa-bg-sa-good_and_bad1", "pawa-bg-sa-good_and_bad2", "pawa-text-good"]
+    when "combined"
+      ["pawa-bg-sa-combined1", "pawa-bg-sa-combined2", "pawa-text-good"]
     when "special"
       ["pawa-bg-sa-special1", "pawa-bg-sa-special2", "pawa-text-special"]
     when "sub"

@@ -122,11 +122,11 @@
   @include pawa-bg-2color($bad-background-light-color, $bad-background-dark-color);
 }
 
-.pawa-bg-sa-good_and_bad1 {
+.pawa-bg-sa-combined1 {
   @include pawa-bg-4color($good-border-light-color, $good-border-dark-color, $bad-border-light-color, $bad-border-dark-color);
 }
 
-.pawa-bg-sa-good_and_bad2 {
+.pawa-bg-sa-combined2 {
   @include pawa-bg-4color($good-background-light-color, $good-background-dark-color, $bad-background-light-color, $bad-background-dark-color);
 }
 

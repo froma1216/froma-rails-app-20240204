@@ -77,7 +77,7 @@
 }
 
 // 上下2色
-.pawa-text-good-bad {
+.pawa-text-combined {
   background: linear-gradient(to bottom, $good-text-color 50%, $bad-text-color 50%);
   -webkit-background-clip: text;
   /* Safari用 */
